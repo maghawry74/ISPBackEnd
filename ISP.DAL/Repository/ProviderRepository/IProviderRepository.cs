@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace ISP.DAL
 {
-    public class Phone
+    public interface IProviderRepository:IGenericRepository<Provider>
     {
-        public int Id { get; set; }
-        public string PhoneNumber { get; set; } = string.Empty;
     }
 }

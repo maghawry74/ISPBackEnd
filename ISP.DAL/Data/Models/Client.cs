@@ -32,7 +32,11 @@ namespace ISP.DAL
 
         public DateTime Contractdate { get; set; }
 
-        public ICollection<Mobile> Mobiles = new HashSet<Mobile>();
+        [RegularExpression(@"^01[012][0-9]{11}$")]
+        public string Mobile1 { get; set; } = string.Empty;
+
+        [RegularExpression(@"^01[012][0-9]{11}$")]
+        public  string Mobile2 { get; set; } = string.Empty;
 
         public string LineOwner { get; set; } = string.Empty;
 

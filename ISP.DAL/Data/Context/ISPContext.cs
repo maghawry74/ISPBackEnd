@@ -47,6 +47,13 @@ namespace ISP.DAL
                   builder.Entity<Branch>()
                          .HasAlternateKey(e => e.Mobile2);
 
+            builder.Entity<Governarate>()
+                         .HasAlternateKey(e => e.Name);
+
+           builder.Entity<Client>()
+            .HasIndex(o => new { o.Mobile1, o.Mobile2 })
+            .IsUnique();
+
             // builder.Entity<Branch>().HasMany(p => p.Phones).WithOne().HasForeignKey(a => a.Id);
             // builder.Entity<Branch>().HasMany(p => p.Mobiles).WithOne().HasForeignKey(a => a.Id);
 

@@ -1,12 +1,11 @@
 ﻿using ISP.BL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace ISP.API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class BranchController : ControllerBase
+    public class BranchController : CustomControllerBase
     {
         private readonly IBranchService branchService;
 
@@ -16,6 +15,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpGet]
+        [ResponseCache(Duration = 60)]
         public async Task<ActionResult<List<ReadBranchDTO>>> GetAll()
         {
             var BranchList = await branchService.GetAll();
@@ -25,6 +25,7 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("{id}")]
+        [ResponseCache(Duration = 60)]
         public async Task<ActionResult<ReadBranchDTO> >GetById(int id)
         {
             var Branch = await branchService.GetById(id);
@@ -37,8 +38,12 @@ namespace ISP.API.Controllers
 
         [HttpPost]
      
-        public async Task<ActionResult<ReadBranchDTO>> Add(WriteBranchDTO writeBranchDTO)
+        public async Task<ActionResult<ReadBranchDTO>> Add( [Required] WriteBranchDTO writeBranchDTO)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             return  await branchService.AddBranch(writeBranchDTO);
         }
 

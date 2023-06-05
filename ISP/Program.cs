@@ -1,6 +1,8 @@
+using Ecommerce.API.MiddleWare;
 using ISP.BL;
 using ISP.DAL;
 using ISP.DAL.Repository.BranchRepository;
+using ISP.DAL.Repository.CentralRepository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +18,18 @@ builder.Services.AddSwaggerGen();
 
 #endregion
 
+
+#region Configure CORS
+builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+{
+    builder
+         .AllowAnyOrigin()
+         .AllowAnyMethod()
+         .AllowAnyHeader();
+
+}));
+
+#endregion
 
 #region Database configuration
 
@@ -34,6 +48,9 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 #region Repos
 builder.Services.AddScoped<IBranchRepository, BranchRepository>();
+builder.Services.AddScoped<IGovernarateRepository , GovernarateRepository>();
+builder.Services.AddScoped<ICentralRepository , CentralRepository >();
+builder.Services.AddScoped<IProviderRepository , ProviderRepository >();
 
 #endregion
 
@@ -41,6 +58,9 @@ builder.Services.AddScoped<IBranchRepository, BranchRepository>();
 #region Services
 
 builder.Services.AddScoped<IBranchService, BranchService>();
+builder.Services.AddScoped<IGovernarateService , GovernarateService>();
+builder.Services.AddScoped<ICentalService  , CentalService>();
+builder.Services.AddScoped<IProviderService , ProviderService>();
 #endregion
 
 
@@ -52,6 +72,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+else
+{
+    app.UseExceptionHandlingMiddleware();
+}
+
+app.UseCors("MyPolicy");
  
 app.UseHttpsRedirection();
 

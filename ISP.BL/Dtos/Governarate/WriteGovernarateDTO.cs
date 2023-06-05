@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace ISP.BL
 {
-    public class WriteMobileDto
+   public class WriteGovernarateDTO
     {
-            public string MobileNumber { get; set; } = string.Empty;
+        public required int Code { get; set; }
+        public required string Name { get; set; }
     }
 }

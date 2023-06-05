@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ISP.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -29,13 +29,13 @@ namespace ISP.DAL.Migrations
                 name: "Governarates",
                 columns: table => new
                 {
-                    Code = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Code = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Governarates", x => x.Code);
+                    table.UniqueConstraint("AK_Governarates_Name", x => x.Name);
                 });
 
             migrationBuilder.CreateTable(
@@ -44,7 +44,7 @@ namespace ISP.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -97,8 +97,8 @@ namespace ISP.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GovernarateCode = table.Column<int>(type: "int", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    GovernarateCode = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -107,7 +107,8 @@ namespace ISP.DAL.Migrations
                         name: "FK_Centrals_Governarates_GovernarateCode",
                         column: x => x.GovernarateCode,
                         principalTable: "Governarates",
-                        principalColumn: "Code");
+                        principalColumn: "Code",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -160,6 +161,30 @@ namespace ISP.DAL.Migrations
                         column: x => x.ProviderId,
                         principalTable: "Providers",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CentralProvider",
+                columns: table => new
+                {
+                    CentralsId = table.Column<int>(type: "int", nullable: false),
+                    ProvidersId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CentralProvider", x => new { x.CentralsId, x.ProvidersId });
+                    table.ForeignKey(
+                        name: "FK_CentralProvider_Centrals_CentralsId",
+                        column: x => x.CentralsId,
+                        principalTable: "Centrals",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CentralProvider_Providers_ProvidersId",
+                        column: x => x.ProvidersId,
+                        principalTable: "Providers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -270,8 +295,8 @@ namespace ISP.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Fax = table.Column<int>(type: "int", nullable: true),
                     ManagerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Phone1 = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -337,6 +362,8 @@ namespace ISP.DAL.Migrations
                     CentralId = table.Column<int>(type: "int", nullable: true),
                     IpPackage = table.Column<int>(type: "int", nullable: false),
                     Contractdate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Mobile1 = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Mobile2 = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     LineOwner = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Note = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BranchId = table.Column<int>(type: "int", nullable: true),
@@ -431,6 +458,11 @@ namespace ISP.DAL.Migrations
                 filter: "[ManagerId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CentralProvider_ProvidersId",
+                table: "CentralProvider",
+                column: "ProvidersId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Centrals_GovernarateCode",
                 table: "Centrals",
                 column: "GovernarateCode");
@@ -449,6 +481,12 @@ namespace ISP.DAL.Migrations
                 name: "IX_Clients_GovernarateCode",
                 table: "Clients",
                 column: "GovernarateCode");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Clients_Mobile1_Mobile2",
+                table: "Clients",
+                columns: new[] { "Mobile1", "Mobile2" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Clients_OfferId",
@@ -552,6 +590,9 @@ namespace ISP.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "CentralProvider");
 
             migrationBuilder.DropTable(
                 name: "UserClaims");
