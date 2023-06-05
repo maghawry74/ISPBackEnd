@@ -1,6 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISP", "ISP\ISP.csproj", "{C50FCF83-3281-474A-80DF-9294CC421024}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISP.API", "ISP\ISP.API.csproj", "{C50FCF83-3281-474A-80DF-9294CC421024}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISP.BL", "ISP.BL\ISP.BL.csproj", "{1497022D-69BB-4E9B-933D-7F032EC3EE57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISP.DAL", "ISP.DAL\ISP.DAL.csproj", "{E88A1837-A9B3-4923-AB05-75100ED9FB7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +19,19 @@ Global
 		{C50FCF83-3281-474A-80DF-9294CC421024}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C50FCF83-3281-474A-80DF-9294CC421024}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C50FCF83-3281-474A-80DF-9294CC421024}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1497022D-69BB-4E9B-933D-7F032EC3EE57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1497022D-69BB-4E9B-933D-7F032EC3EE57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1497022D-69BB-4E9B-933D-7F032EC3EE57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1497022D-69BB-4E9B-933D-7F032EC3EE57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E88A1837-A9B3-4923-AB05-75100ED9FB7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E88A1837-A9B3-4923-AB05-75100ED9FB7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E88A1837-A9B3-4923-AB05-75100ED9FB7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E88A1837-A9B3-4923-AB05-75100ED9FB7B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F095B633-2F98-4739-BE31-C80C8C792543}
 	EndGlobalSection
 EndGlobal
