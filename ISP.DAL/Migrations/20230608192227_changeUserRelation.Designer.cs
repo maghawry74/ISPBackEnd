@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ISP.DAL.Migrations
 {
     [DbContext(typeof(ISPContext))]
-    [Migration("20230605221905_Initial")]
-    partial class Initial
+    [Migration("20230608192227_changeUserRelation")]
+    partial class changeUserRelation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -129,9 +129,7 @@ namespace ISP.DAL.Migrations
 
                     b.HasIndex("GovernarateCode");
 
-                    b.HasIndex("ManagerId")
-                        .IsUnique()
-                        .HasFilter("[ManagerId] IS NOT NULL");
+                    b.HasIndex("ManagerId");
 
                     b.ToTable("Branches");
                 });
@@ -461,6 +459,9 @@ namespace ISP.DAL.Migrations
                     b.Property<int?>("BillId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("BranchId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -514,6 +515,8 @@ namespace ISP.DAL.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BillId");
+
+                    b.HasIndex("BranchId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -692,8 +695,8 @@ namespace ISP.DAL.Migrations
                         .HasForeignKey("GovernarateCode");
 
                     b.HasOne("ISP.DAL.User", "Manager")
-                        .WithOne("Branch")
-                        .HasForeignKey("ISP.DAL.Branch", "ManagerId");
+                        .WithMany()
+                        .HasForeignKey("ManagerId");
 
                     b.Navigation("Governarate");
 
@@ -774,11 +777,17 @@ namespace ISP.DAL.Migrations
                         .WithMany("Users")
                         .HasForeignKey("BillId");
 
+                    b.HasOne("ISP.DAL.Branch", "Branch")
+                        .WithMany()
+                        .HasForeignKey("BranchId");
+
                     b.HasOne("ISP.DAL.Role", "Role")
-                        .WithMany("Users")
+                        .WithMany()
                         .HasForeignKey("RoleId");
 
                     b.Navigation("Bill");
+
+                    b.Navigation("Branch");
 
                     b.Navigation("Role");
                 });
@@ -875,16 +884,6 @@ namespace ISP.DAL.Migrations
                     b.Navigation("Packages");
 
                     b.Navigation("offers");
-                });
-
-            modelBuilder.Entity("ISP.DAL.Role", b =>
-                {
-                    b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("ISP.DAL.User", b =>
-                {
-                    b.Navigation("Branch");
                 });
 #pragma warning restore 612, 618
         }

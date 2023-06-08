@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ISP.BL.Dtos.Role;
 using ISP.DAL;
 using System;
 using System.Collections.Generic;
@@ -32,8 +33,9 @@ namespace ISP.BL
             CreateMap<Provider , WriteProviderDTO>().ReverseMap();
             CreateMap<Provider , UpdateProviderDTO>().ReverseMap();
             CreateMap<Provider , DeleteProviderDTO>().ReverseMap();
-         
 
+            //Role
+            CreateMap<Role, ReadRoleDto>().ReverseMap();
 
 
         }
