@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ISP.BL
+namespace ISP.DAL.Repository.OfferRepository
 {
-    public class DeleteBranchDTO
+    public interface IOfferRepository: IGenericRepository<Offer>
     {
-        public int Id { get; set; }
     }
 }

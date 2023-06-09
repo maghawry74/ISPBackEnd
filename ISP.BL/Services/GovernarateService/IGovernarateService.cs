@@ -15,6 +15,6 @@ namespace ISP.BL
 
         Task<ReadGovernarateDTO> UpdateGovernarate(int Code, UpdateGovernarateDTO updateGovernarateDTO);
 
-        Task<ReadGovernarateDTO> DeleteGovernarate(DeleteGovernarateDTO deleteGovernarateDTO);
+        Task<ReadGovernarateDTO> DeleteGovernarate(ReadGovernarateDTO readGovernarateDTO);
     }
 }

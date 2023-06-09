@@ -15,6 +15,6 @@ namespace ISP.BL
 
         Task<ReadProviderDTO> Edit(int id, UpdateProviderDTO updateProviderDTO);
 
-        Task<ReadProviderDTO> Remove(DeleteProviderDTO deleteProviderDTO);
+        Task<ReadProviderDTO> Remove(ReadProviderDTO readProviderDTO);
     }
 }

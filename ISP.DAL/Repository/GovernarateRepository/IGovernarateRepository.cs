@@ -8,5 +8,6 @@ namespace ISP.DAL
 {
    public interface IGovernarateRepository:IGenericRepository<Governarate>
     {
+        public void Delete(Governarate governarate);
     }
 }

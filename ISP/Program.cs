@@ -1,11 +1,21 @@
 using Ecommerce.API.MiddleWare;
 using FluentValidation.AspNetCore;
 using ISP.BL;
+using ISP.BL.Services.OfferService;
+using ISP.BL.Services.RoleService;
 using ISP.DAL;
 using ISP.DAL.Repository.BranchRepository;
 using ISP.DAL.Repository.CentralRepository;
+using ISP.DAL.Repository.OfferRepository;
+using ISP.DAL.Repository.RoleRepository;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+<<<<<<< HEAD
 using System.Reflection;
+=======
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+>>>>>>> 1d14da1bfbbf30685b80927fde19ecf819aaf5f8
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,9 +55,44 @@ builder.Services.AddDbContext<ISPContext>(
 
 #endregion
 
+#region Identity Services
 
+builder.Services
+    .AddIdentity<User, IdentityRole>(options =>
+    {
+        options.Password.RequireUppercase = false;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireDigit = true;
+        options.Password.RequiredLength = 4;
+        options.User.RequireUniqueEmail = true;
+    })
+    .AddEntityFrameworkStores<ISPContext>();
+
+#endregion
 #region Automapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+#endregion
+
+#region Authentication 
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = "Cool";
+    options.DefaultChallengeScheme = "Cool";
+})
+.AddJwtBearer("Cool", options =>
+{
+    var secretKeyString = builder.Configuration.GetValue<string>("SecretKey");
+    var secretyKeyInBytes = Encoding.ASCII.GetBytes(secretKeyString ?? string.Empty);
+    var secretKey = new SymmetricSecurityKey(secretyKeyInBytes);
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        IssuerSigningKey = secretKey,
+        ValidateIssuer = false,
+        ValidateAudience = false,
+    };
+});
+
 #endregion
 
 
@@ -56,6 +101,8 @@ builder.Services.AddScoped<IBranchRepository, BranchRepository>();
 builder.Services.AddScoped<IGovernarateRepository , GovernarateRepository>();
 builder.Services.AddScoped<ICentralRepository , CentralRepository >();
 builder.Services.AddScoped<IProviderRepository , ProviderRepository >();
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+builder.Services.AddScoped<IOfferRepository, OfferRepository>();
 
 #endregion
 
@@ -66,6 +113,8 @@ builder.Services.AddScoped<IBranchService, BranchService>();
 builder.Services.AddScoped<IGovernarateService , GovernarateService>();
 builder.Services.AddScoped<ICentalService  , CentalService>();
 builder.Services.AddScoped<IProviderService , ProviderService>();
+builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<IOfferService, OfferService>();
 #endregion
 
 

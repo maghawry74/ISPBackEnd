@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ISP.DAL.Migrations
 {
     [DbContext(typeof(ISPContext))]
-    [Migration("20230605221905_Initial")]
-    partial class Initial
+    [Migration("20230609045630_changeCoulmns")]
+    partial class changeCoulmns
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,6 +63,9 @@ namespace ISP.DAL.Migrations
 
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("ToDate")
                         .HasColumnType("datetime2");
@@ -117,6 +120,9 @@ namespace ISP.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasAlternateKey("Mobile1");
@@ -129,9 +135,7 @@ namespace ISP.DAL.Migrations
 
                     b.HasIndex("GovernarateCode");
 
-                    b.HasIndex("ManagerId")
-                        .IsUnique()
-                        .HasFilter("[ManagerId] IS NOT NULL");
+                    b.HasIndex("ManagerId");
 
                     b.ToTable("Branches");
                 });
@@ -151,6 +155,9 @@ namespace ISP.DAL.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -258,6 +265,9 @@ namespace ISP.DAL.Migrations
                     b.Property<int>("Slotnum")
                         .HasColumnType("int");
 
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
                     b.Property<int>("VCI")
                         .HasColumnType("int");
 
@@ -300,6 +310,9 @@ namespace ISP.DAL.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.HasKey("Code");
 
@@ -347,15 +360,18 @@ namespace ISP.DAL.Migrations
                     b.Property<int>("NumOfOfferMonth")
                         .HasColumnType("int");
 
+                    b.Property<int>("ProviderId")
+                        .HasColumnType("int");
+
                     b.Property<double>("RouterPrice")
                         .HasColumnType("float");
 
-                    b.Property<int?>("providerId")
-                        .HasColumnType("int");
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("providerId");
+                    b.HasIndex("ProviderId");
 
                     b.ToTable("Offers");
                 });
@@ -445,6 +461,9 @@ namespace ISP.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
@@ -459,6 +478,9 @@ namespace ISP.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("BillId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("BranchId")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -514,6 +536,8 @@ namespace ISP.DAL.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BillId");
+
+                    b.HasIndex("BranchId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -692,8 +716,8 @@ namespace ISP.DAL.Migrations
                         .HasForeignKey("GovernarateCode");
 
                     b.HasOne("ISP.DAL.User", "Manager")
-                        .WithOne("Branch")
-                        .HasForeignKey("ISP.DAL.Branch", "ManagerId");
+                        .WithMany()
+                        .HasForeignKey("ManagerId");
 
                     b.Navigation("Governarate");
 
@@ -752,11 +776,13 @@ namespace ISP.DAL.Migrations
 
             modelBuilder.Entity("ISP.DAL.Offer", b =>
                 {
-                    b.HasOne("ISP.DAL.Provider", "provider")
+                    b.HasOne("ISP.DAL.Provider", "Provider")
                         .WithMany("offers")
-                        .HasForeignKey("providerId");
+                        .HasForeignKey("ProviderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("provider");
+                    b.Navigation("Provider");
                 });
 
             modelBuilder.Entity("ISP.DAL.Package", b =>
@@ -774,11 +800,17 @@ namespace ISP.DAL.Migrations
                         .WithMany("Users")
                         .HasForeignKey("BillId");
 
+                    b.HasOne("ISP.DAL.Branch", "Branch")
+                        .WithMany()
+                        .HasForeignKey("BranchId");
+
                     b.HasOne("ISP.DAL.Role", "Role")
-                        .WithMany("Users")
+                        .WithMany()
                         .HasForeignKey("RoleId");
 
                     b.Navigation("Bill");
+
+                    b.Navigation("Branch");
 
                     b.Navigation("Role");
                 });
@@ -875,16 +907,6 @@ namespace ISP.DAL.Migrations
                     b.Navigation("Packages");
 
                     b.Navigation("offers");
-                });
-
-            modelBuilder.Entity("ISP.DAL.Role", b =>
-                {
-                    b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("ISP.DAL.User", b =>
-                {
-                    b.Navigation("Branch");
                 });
 #pragma warning restore 612, 618
         }

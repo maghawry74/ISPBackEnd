@@ -20,6 +20,7 @@ namespace ISP.DAL
         public string Address { get; set; } = string.Empty;
 
         public int? Fax { get; set; }
+        public bool Status { get; set; }
 
         [ForeignKey("Manager")]
         public string? ManagerId { get; set; }
@@ -39,6 +40,13 @@ namespace ISP.DAL
 
         public ICollection<Client> Clients { get; set; } = new HashSet<Client>();
 
+<<<<<<< HEAD
         public Governarate? Governarate { get; set; }
+=======
+
+        [ForeignKey("Governarate")]
+        public int? GovernarateCode { get; set; }
+        public Governarate? Governarate { get; set; } 
+>>>>>>> 1d14da1bfbbf30685b80927fde19ecf819aaf5f8
     }
 }

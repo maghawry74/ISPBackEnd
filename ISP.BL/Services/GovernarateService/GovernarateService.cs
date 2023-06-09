@@ -1,12 +1,5 @@
 ﻿using AutoMapper;
 using ISP.DAL;
-using ISP.DAL.Repository.BranchRepository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace ISP.BL
 {
     public class GovernarateService : IGovernarateService
@@ -52,7 +45,8 @@ namespace ISP.BL
             var updatedGovernarate = new Governarate
             {
                 Code = updateGovernarateDTO.Code,
-                Name = updateGovernarateDTO.Name
+                Name = updateGovernarateDTO.Name,
+                Status = true
             };
 
             // Save changes
@@ -71,15 +65,23 @@ namespace ISP.BL
             // Return the updated entity
             return mapper.Map<ReadGovernarateDTO>(updatedGovernarate);
         }
-        public async Task<ReadGovernarateDTO> DeleteGovernarate(DeleteGovernarateDTO deleteGovernarateDTO)
+        public async Task<ReadGovernarateDTO> DeleteGovernarate(ReadGovernarateDTO readGovernarateDTO)
         {
+            var deleteGovernarateDTO = mapper.Map<DeleteGovernarateDTO>(readGovernarateDTO);
             var GovernarateFromDB = await governarateRepository.GetByID(deleteGovernarateDTO.Code);
             if (GovernarateFromDB == null)
             {
                 return null;
             }
-            governarateRepository.Delete(GovernarateFromDB);
-            governarateRepository.SaveChange();
+            if(GovernarateFromDB != null && GovernarateFromDB.Status == true)
+            {
+                GovernarateFromDB.Code = deleteGovernarateDTO.Code;
+                GovernarateFromDB.Name = deleteGovernarateDTO.Name;
+                GovernarateFromDB.Status = false;
+                governarateRepository.Update(GovernarateFromDB);
+                governarateRepository.SaveChange();
+            } 
+           
             return mapper.Map<ReadGovernarateDTO>(GovernarateFromDB);
         }
 
