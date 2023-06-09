@@ -14,6 +14,7 @@ namespace ISP.DAL
 
         public string Name { get; set; } = string.Empty;
         public string Phone { get; set; } = string.Empty;
+        public bool Status { get; set; }        
 
         public Governarate? Governarate { get; set; }
 

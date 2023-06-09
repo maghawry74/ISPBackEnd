@@ -14,6 +14,7 @@ namespace ISP.DAL
         public string Note { get; set; } = string.Empty;
 
         public double Fee { get; set; }
+        public bool Status { get; set; }
 
         public DateTime PaymentDate { get; set; }
 
