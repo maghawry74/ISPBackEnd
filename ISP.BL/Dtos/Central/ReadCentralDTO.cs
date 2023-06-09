@@ -13,7 +13,8 @@ namespace ISP.BL
 
         public required string Name { get; set; } = string.Empty;
        public required int GovernarateCode { get; set; }
-     
+        public required bool Status { get; set; }
+
 
     }
 }

@@ -16,7 +16,7 @@ namespace ISP.DAL
         [Required]
         [StringLength(50)]
         public string Name { get; set; } = string.Empty;
-        public bool Status { get; set; }
+        public bool Status { get; set; } = true;
 
         public ICollection<Branch> Branches { get; set; } = new HashSet<Branch>();   
         public ICollection<Central> Centrals { get; set; } = new HashSet<Central>();

@@ -2,14 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-
 namespace ISP.DAL
 {
    public class ISPContext:IdentityDbContext<User>
@@ -53,6 +45,20 @@ namespace ISP.DAL
            builder.Entity<Client>()
             .HasIndex(o => new { o.Mobile1, o.Mobile2 })
             .IsUnique();
+
+            //Global Filters
+
+            builder.Entity<Bill>().HasQueryFilter(p => p.Status == true);
+            builder.Entity<Branch>().HasQueryFilter(p => p.Status == true);
+            builder.Entity<Governarate>().HasQueryFilter(p => p.Status == true);
+            builder.Entity<Central>().HasQueryFilter(p => p.Status == true);
+            builder.Entity<Client>().HasQueryFilter(p => p.Status == true);
+            builder.Entity<Offer>().HasQueryFilter(p => p.Status == true);
+            builder.Entity<Package>().HasQueryFilter(p => p.IsActive == true);
+            builder.Entity<Provider>().HasQueryFilter(p => p.IsActive == true);
+            builder.Entity<Role>().HasQueryFilter(p => p.Status == true);
+            builder.Entity<User>().HasQueryFilter(p => p.Status == true);
+
 
             // builder.Entity<Branch>().HasMany(p => p.Phones).WithOne().HasForeignKey(a => a.Id);
             // builder.Entity<Branch>().HasMany(p => p.Mobiles).WithOne().HasForeignKey(a => a.Id);

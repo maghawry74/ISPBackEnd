@@ -11,5 +11,6 @@ namespace ISP.BL
         public required int Code { get; set; }
         
         public required string Name { get; set; }
+        public required bool Status { get; set; }
     }
 }
