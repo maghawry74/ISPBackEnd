@@ -32,10 +32,13 @@ namespace ISP.BL
             CreateMap<Provider , WriteProviderDTO>().ReverseMap();
             CreateMap<Provider , UpdateProviderDTO>().ReverseMap();
             CreateMap<Provider , DeleteProviderDTO>().ReverseMap();
-         
 
 
 
+            CreateMap<Package, ReadPackageDTO>().ReverseMap();
+            CreateMap<Package, WritePackageDTO>().ReverseMap();
+            CreateMap<Package, UpdatePackageDTO>().ReverseMap();
+            CreateMap<Package, DeletePackageDTO>().ReverseMap();
         }
 
     }

@@ -3,6 +3,7 @@ using ISP.BL;
 using ISP.DAL;
 using ISP.DAL.Repository.BranchRepository;
 using ISP.DAL.Repository.CentralRepository;
+
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -51,7 +52,7 @@ builder.Services.AddScoped<IBranchRepository, BranchRepository>();
 builder.Services.AddScoped<IGovernarateRepository , GovernarateRepository>();
 builder.Services.AddScoped<ICentralRepository , CentralRepository >();
 builder.Services.AddScoped<IProviderRepository , ProviderRepository >();
-
+builder.Services.AddScoped<IPackageReposatory,PackageReposatory>();
 #endregion
 
 
@@ -61,6 +62,7 @@ builder.Services.AddScoped<IBranchService, BranchService>();
 builder.Services.AddScoped<IGovernarateService , GovernarateService>();
 builder.Services.AddScoped<ICentalService  , CentalService>();
 builder.Services.AddScoped<IProviderService , ProviderService>();
+builder.Services.AddScoped<IPackageService, PackageService>();
 #endregion
 
 
