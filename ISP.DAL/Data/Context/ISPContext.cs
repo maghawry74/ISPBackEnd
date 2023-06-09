@@ -27,6 +27,7 @@ namespace ISP.DAL
         {                         
             base.OnModelCreating(builder);
 
+
             builder.Entity<User>().ToTable("User");
             builder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
 
@@ -42,17 +43,18 @@ namespace ISP.DAL
             builder.Entity<Governarate>()
                          .HasAlternateKey(e => e.Name);
 
+
            builder.Entity<Client>()
             .HasIndex(o => new { o.Mobile1, o.Mobile2 })
             .IsUnique();
 
-            //Global Filters
+          //Global Filters
 
             builder.Entity<Bill>().HasQueryFilter(p => p.Status == true);
             builder.Entity<Branch>().HasQueryFilter(p => p.Status == true);
             builder.Entity<Governarate>().HasQueryFilter(p => p.Status == true);
             builder.Entity<Central>().HasQueryFilter(p => p.Status == true);
-            builder.Entity<Client>().HasQueryFilter(p => p.Status == true);
+            builder.Entity<Client>().HasQueryFilter(p => p.Isactive == true);
             builder.Entity<Offer>().HasQueryFilter(p => p.Status == true);
             builder.Entity<Package>().HasQueryFilter(p => p.IsActive == true);
             builder.Entity<Provider>().HasQueryFilter(p => p.IsActive == true);
@@ -63,8 +65,10 @@ namespace ISP.DAL
             // builder.Entity<Branch>().HasMany(p => p.Phones).WithOne().HasForeignKey(a => a.Id);
             // builder.Entity<Branch>().HasMany(p => p.Mobiles).WithOne().HasForeignKey(a => a.Id);
 
+            builder.Entity<Client>()
+           .HasIndex(c=>c.Phone)
+           .IsUnique();
 
-            // builder.Entity<Client>().HasMany(p => p.Mobiles).WithOne();
         }
    }
 }

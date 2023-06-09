@@ -1,14 +1,21 @@
 using Ecommerce.API.MiddleWare;
+using FluentValidation.AspNetCore;
 using ISP.BL;
 using ISP.BL.Services.OfferService;
 using ISP.BL.Services.RoleService;
 using ISP.DAL;
 using ISP.DAL.Repository.BranchRepository;
 using ISP.DAL.Repository.CentralRepository;
+
 using ISP.DAL.Repository.OfferRepository;
 using ISP.DAL.Repository.RoleRepository;
 using Microsoft.AspNetCore.Identity;
+
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Reflection;
+using System.Text;
+
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -18,12 +25,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 #region default
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+      .AddFluentValidation(c => c.RegisterValidatorsFromAssemblyContaining<CentralWriteValidation>());
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 #endregion
+
 
 
 #region Configure CORS
@@ -61,6 +71,8 @@ builder.Services
     .AddEntityFrameworkStores<ISPContext>();
 
 #endregion
+
+
 #region Automapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 #endregion
@@ -93,8 +105,14 @@ builder.Services.AddScoped<IBranchRepository, BranchRepository>();
 builder.Services.AddScoped<IGovernarateRepository , GovernarateRepository>();
 builder.Services.AddScoped<ICentralRepository , CentralRepository >();
 builder.Services.AddScoped<IProviderRepository , ProviderRepository >();
+
+builder.Services.AddScoped<IPackageReposatory,PackageReposatory>();
+
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<IOfferRepository, OfferRepository>();
+
+builder.Services.AddScoped<IClientRepository , ClientRepository>();
+
 
 #endregion
 
@@ -105,8 +123,13 @@ builder.Services.AddScoped<IBranchService, BranchService>();
 builder.Services.AddScoped<IGovernarateService , GovernarateService>();
 builder.Services.AddScoped<ICentalService  , CentalService>();
 builder.Services.AddScoped<IProviderService , ProviderService>();
+
+builder.Services.AddScoped<IPackageService, PackageService>();
+
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IOfferService, OfferService>();
+builder.Services.AddScoped<IClientservice , ClientService>();
+
 #endregion
 
 

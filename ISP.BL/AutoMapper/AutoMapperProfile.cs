@@ -20,19 +20,30 @@ namespace ISP.BL
             CreateMap<Governarate , WriteGovernarateDTO>().ReverseMap();
             CreateMap<Governarate , UpdateGovernarateDTO>().ReverseMap();
             CreateMap<Governarate , DeleteGovernarateDTO>().ReverseMap();
-            CreateMap<ReadGovernarateDTO, DeleteGovernarateDTO>().ReverseMap();
 
             //Central
             CreateMap<Central , ReadCentralDTO>().ReverseMap();
             CreateMap<Central , WriteCentralDTO>().ReverseMap();
             CreateMap<Central , UpdateCentralDTO>().ReverseMap();
             CreateMap<Central , DeleteCentralDTO>().ReverseMap();
-            CreateMap<ReadGovernarateDTO, UpdateCentralDTO>().ReverseMap();
+            CreateMap<Central ,ReadCentralWithGovernarateDTO>().ReverseMap();
+
+ 
 
             //Provider
             CreateMap<Provider , ReadProviderDTO>().ReverseMap();
             CreateMap<Provider , WriteProviderDTO>().ReverseMap();
             CreateMap<Provider , UpdateProviderDTO>().ReverseMap();
+
+            CreateMap<Provider , DeleteProviderDTO>().ReverseMap();
+
+
+
+            CreateMap<Package, ReadPackageDTO>().ReverseMap();
+            CreateMap<Package, WritePackageDTO>().ReverseMap();
+            CreateMap<Package, UpdatePackageDTO>().ReverseMap();
+            CreateMap<Package, DeletePackageDTO>().ReverseMap();
+
             CreateMap<Provider , DeleteProviderDTO>().ReverseMap();
             CreateMap<ReadProviderDTO, UpdateProviderDTO>().ReverseMap();
 
@@ -48,6 +59,12 @@ namespace ISP.BL
 
             //Role
             CreateMap<Role, ReadRoleDto>().ReverseMap();
+
+
+            CreateMap<Client , ReadClientDTO>().ReverseMap();
+            CreateMap<Client , WriteClientDTO>().ReverseMap();
+            CreateMap<Client , UpdateClientDTO>().ReverseMap();
+
 
 
         }

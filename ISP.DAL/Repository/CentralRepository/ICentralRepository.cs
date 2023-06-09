@@ -9,5 +9,6 @@ namespace ISP.DAL.Repository.CentralRepository
     public interface ICentralRepository:IGenericRepository<Central>
     {
         Task<Central?> GetBYNameAsync(string Name);
+        Task<List<Central>> getAllCentralwithGovernarate();
     }
 }
