@@ -32,6 +32,7 @@ namespace ISP.DAL
         public string Phone1 { get; set; } = string.Empty;
 
         public string Phone2 { get; set; } = string.Empty;
+
         [RegularExpression(@"^01[012][0-9]{11}$")]
         public string Mobile1 { get; set; } = string.Empty;
 
@@ -40,13 +41,9 @@ namespace ISP.DAL
 
         public ICollection<Client> Clients { get; set; } = new HashSet<Client>();
 
-<<<<<<< HEAD
-        public Governarate? Governarate { get; set; }
-=======
-
         [ForeignKey("Governarate")]
         public int? GovernarateCode { get; set; }
         public Governarate? Governarate { get; set; } 
->>>>>>> 1d14da1bfbbf30685b80927fde19ecf819aaf5f8
+
     }
 }

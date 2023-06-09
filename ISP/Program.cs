@@ -10,12 +10,12 @@ using ISP.DAL.Repository.OfferRepository;
 using ISP.DAL.Repository.RoleRepository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-<<<<<<< HEAD
+using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
-=======
+using System.Text;
+
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
->>>>>>> 1d14da1bfbbf30685b80927fde19ecf819aaf5f8
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -69,6 +69,8 @@ builder.Services
     .AddEntityFrameworkStores<ISPContext>();
 
 #endregion
+
+
 #region Automapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 #endregion
