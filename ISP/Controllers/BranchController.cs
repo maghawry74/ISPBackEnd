@@ -67,15 +67,18 @@ namespace ISP.API.Controllers
         }
 
         [HttpDelete]
-        public async Task<ActionResult<ReadBranchDTO>> Delete(DeleteBranchDTO deleteBranchDTO)
+        [Route("{id}")]
+        public async Task<ActionResult<ReadBranchDTO>> Delete(int  id)
         {
-            var Branchtodelete = await branchService.DeleteBranch(deleteBranchDTO);
-            if (Branchtodelete == null)
+            var getBranch = await branchService.GetById(id);
+            if (getBranch == null)
             {
                 return Problem(detail: "the object dees not exsits", statusCode: 404,
                     title: "error", type: "null reference");
             }
-            return Branchtodelete;
+
+            var branchtodelete = await branchService.DeleteBranch(getBranch);
+            return branchtodelete;
         }
 
 

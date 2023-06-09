@@ -30,13 +30,7 @@ namespace ISP.DAL
         {
             await context.Set<TEntity>().AddAsync(entity);
         }
-
-        public void Delete(TEntity entity)
-        {
-            context.Set<TEntity>().Remove(entity);
-        }
-
-
+        
         public void SaveChange()
         {
             //context.Set<TEntity>().SavedChanges();

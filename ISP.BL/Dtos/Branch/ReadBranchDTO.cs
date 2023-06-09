@@ -9,7 +9,7 @@ namespace ISP.BL
 {
     public class ReadBranchDTO
     {
-
+        
         public required string Name { get; set; } = string.Empty;
         public required string Address { get; set; } = string.Empty;
 

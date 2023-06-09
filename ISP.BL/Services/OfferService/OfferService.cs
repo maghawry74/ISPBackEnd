@@ -87,7 +87,7 @@ public class OfferService : IOfferService
         offerToEdit.DiscoutAmout = updataOfferDto.DiscoutAmout;
         offerToEdit.HasRouter = updataOfferDto.HasRouter;
         offerToEdit.IsPossibleToRasieOrLower = updataOfferDto.IsPossibleToRasieOrLower;
-        offerToEdit.Status = updataOfferDto.Status;
+        offerToEdit.Status = true;
             
 
         offerRepository.Update(offerToEdit);

@@ -1,11 +1,4 @@
-﻿using ISP.DAL;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using System.ComponentModel.DataAnnotations;
 namespace ISP.BL
 {
     public class WriteBranchDTO
@@ -27,5 +20,6 @@ namespace ISP.BL
        // public required ICollection<WriteMobileDto> Mobiles { get; set; } = new HashSet<WriteMobileDto>();
         public int? Fax { get; set; }
         public required string ManagerId { get; set; } = string.Empty;
+        public int GovernarateCode { get; set; }
     }
 }

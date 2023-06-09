@@ -9,26 +9,32 @@ namespace ISP.BL
     {
         public AutoMapperProfile()
         {
+            //Branch
             CreateMap<Branch , ReadBranchDTO>().ReverseMap();
-            CreateMap<Branch , WriteBranchDTO>().ReverseMap();
-            CreateMap<Branch , DeleteBranchDTO>().ReverseMap();
+            CreateMap<Branch , WriteBranchDTO>().ReverseMap();            
             CreateMap<Branch , UpdateBranchDTO>().ReverseMap();
+            CreateMap<ReadBranchDTO, UpdateProviderDTO>().ReverseMap();
 
+            //Governarate
             CreateMap<Governarate , ReadGovernarateDTO>().ReverseMap();
             CreateMap<Governarate , WriteGovernarateDTO>().ReverseMap();
             CreateMap<Governarate , UpdateGovernarateDTO>().ReverseMap();
             CreateMap<Governarate , DeleteGovernarateDTO>().ReverseMap();
+            CreateMap<ReadGovernarateDTO, DeleteGovernarateDTO>().ReverseMap();
 
-
+            //Central
             CreateMap<Central , ReadCentralDTO>().ReverseMap();
             CreateMap<Central , WriteCentralDTO>().ReverseMap();
             CreateMap<Central , UpdateCentralDTO>().ReverseMap();
             CreateMap<Central , DeleteCentralDTO>().ReverseMap();
+            CreateMap<ReadGovernarateDTO, UpdateCentralDTO>().ReverseMap();
 
+            //Provider
             CreateMap<Provider , ReadProviderDTO>().ReverseMap();
             CreateMap<Provider , WriteProviderDTO>().ReverseMap();
             CreateMap<Provider , UpdateProviderDTO>().ReverseMap();
             CreateMap<Provider , DeleteProviderDTO>().ReverseMap();
+            CreateMap<ReadProviderDTO, UpdateProviderDTO>().ReverseMap();
 
             //Offer
             CreateMap<Offer, ReadOfferDto>()
