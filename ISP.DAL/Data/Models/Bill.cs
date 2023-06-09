@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ISP.DAL
+﻿namespace ISP.DAL
 {
     public class Bill
     {
@@ -14,7 +8,7 @@ namespace ISP.DAL
         public string Note { get; set; } = string.Empty;
 
         public double Fee { get; set; }
-        public bool Status { get; set; }
+        public bool Status { get; set; } = true;
 
         public DateTime PaymentDate { get; set; }
 

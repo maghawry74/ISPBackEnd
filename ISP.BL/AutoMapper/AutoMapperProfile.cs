@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ISP.BL.Dtos.Client;
 using ISP.BL.Dtos.Offer;
 using ISP.BL.Dtos.Role;
 using ISP.DAL;
@@ -34,18 +35,18 @@ namespace ISP.BL
             CreateMap<Provider , ReadProviderDTO>().ReverseMap();
             CreateMap<Provider , WriteProviderDTO>().ReverseMap();
             CreateMap<Provider , UpdateProviderDTO>().ReverseMap();
+            CreateMap<Provider , DeleteProviderDTO>().ReverseMap();            
+            CreateMap<ReadProviderDTO, UpdateProviderDTO>().ReverseMap();
 
-            CreateMap<Provider , DeleteProviderDTO>().ReverseMap();
 
-
-
+            //Package
             CreateMap<Package, ReadPackageDTO>().ReverseMap();
             CreateMap<Package, WritePackageDTO>().ReverseMap();
             CreateMap<Package, UpdatePackageDTO>().ReverseMap();
             CreateMap<Package, DeletePackageDTO>().ReverseMap();
 
-            CreateMap<Provider , DeleteProviderDTO>().ReverseMap();
-            CreateMap<ReadProviderDTO, UpdateProviderDTO>().ReverseMap();
+           
+            
 
             //Offer
             CreateMap<Offer, ReadOfferDto>()
@@ -59,14 +60,15 @@ namespace ISP.BL
 
             //Role
             CreateMap<Role, ReadRoleDto>().ReverseMap();
+            CreateMap<Role, WriteRoleDto>().ReverseMap();
+            CreateMap<Role, UpdateRoleDto>().ReverseMap();
+            CreateMap<Role, DeleteRoleDto>().ReverseMap();
 
-
+            //client
             CreateMap<Client , ReadClientDTO>().ReverseMap();
             CreateMap<Client , WriteClientDTO>().ReverseMap();
             CreateMap<Client , UpdateClientDTO>().ReverseMap();
-
-
-
+            CreateMap<Client, DeleteClientDto>().ReverseMap();
         }
 
     }

@@ -34,7 +34,7 @@ namespace ISP.DAL
         public bool HasRouter { get; set; }
 
         public double RouterPrice { get; set; }
-        public bool Status { get; set; } 
+        public bool Status { get; set; } = true; 
 
         [ForeignKey("provider")]
         public int ProviderId { get; set; }

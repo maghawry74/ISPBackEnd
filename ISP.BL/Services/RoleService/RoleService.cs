@@ -1,13 +1,7 @@
 ﻿using AutoMapper;
 using ISP.BL.Dtos.Role;
 using ISP.DAL;
-using ISP.DAL.Repository.BranchRepository;
 using ISP.DAL.Repository.RoleRepository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ISP.BL.Services.RoleService
 {
@@ -20,9 +14,16 @@ namespace ISP.BL.Services.RoleService
             this.roleRepository = roleRepository;
             this.mapper = mapper;
         }
+
+        public async Task<List<ReadRoleDto>> GetAll()
+        {
+            var rolesList = await roleRepository.GetAll();
+            return mapper.Map<List<ReadRoleDto>>(rolesList);
+        }
+       
         public async Task<ReadRoleDto?> GetById(int id)
         {
-            var roleDB =  roleRepository.GetByID(id);
+            var roleDB = await roleRepository.GetByID(id);
             return  mapper.Map<ReadRoleDto>(roleDB);
         }
 
@@ -31,5 +32,50 @@ namespace ISP.BL.Services.RoleService
             var role = roleRepository.GetRoleNameByID(id);
             return role;
         }
+
+        public async Task<ReadRoleDto> Insert(WriteRoleDto writeRoleDto)
+        {
+            var roleToAdd = mapper.Map<Role>(writeRoleDto);
+            await roleRepository.Add(roleToAdd);
+            roleRepository.SaveChange();
+            return  mapper.Map<ReadRoleDto>(roleToAdd);
+        }
+
+        public async Task<ReadRoleDto> Update(int Id, UpdateRoleDto updateRoleDto)
+        {
+            var roleToEdit = await roleRepository.GetByID(Id);
+            if (roleToEdit == null)
+            {
+                return null;
+            }
+
+            roleToEdit.Name = updateRoleDto.Name;
+            roleToEdit.IsClientsOrder = updateRoleDto.IsClientsOrder;
+            roleToEdit.NormalizedName = updateRoleDto.Name.ToUpper();            
+            roleToEdit.IsAddNewClient = updateRoleDto.IsAddNewClient;
+            roleToEdit.IsAdmin = updateRoleDto.IsAdmin;
+            roleToEdit.IsSearch = updateRoleDto.IsSearch;    
+            
+
+            roleRepository.SaveChange();
+
+            return mapper.Map<ReadRoleDto>(roleToEdit);
+        }
+        public async Task<ReadRoleDto> Delete(DeleteRoleDto deleteRoleDto)
+        {
+            var getRole = await roleRepository.GetByID(deleteRoleDto.Id);
+            if (getRole == null)
+            {
+                return null;
+            }
+            getRole.Status = false;
+            roleRepository.Update(getRole);            
+            roleRepository.SaveChange();
+
+            return mapper.Map<ReadRoleDto>(getRole);
+
+        }
+
+        
     }
 }

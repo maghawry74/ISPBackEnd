@@ -43,7 +43,7 @@ namespace ISP.BL
         {
             var CentalToAdd = mapper.Map<Central>(writeCentralDTO);
             await centralRepository.Add(CentalToAdd);
-           centralRepository.SaveChange();
+            centralRepository.SaveChange();
             return mapper.Map<ReadCentralDTO>(CentalToAdd);
         }
 

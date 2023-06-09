@@ -48,18 +48,26 @@ namespace ISP.DAL
             .HasIndex(o => new { o.Mobile1, o.Mobile2 })
             .IsUnique();
 
-          //Global Filters
+            //Shdow Propreties
+            //builder.Entity<User>().Property<bool>("Status");
+           
+            //builder.Entity<Provider>()
+            //    .HasQueryFilter(p => p.IsActive == true)
+            //    .Property<bool>("IsActive");                
 
-            builder.Entity<Bill>().HasQueryFilter(p => p.Status == true);
-            builder.Entity<Branch>().HasQueryFilter(p => p.Status == true);
-            builder.Entity<Governarate>().HasQueryFilter(p => p.Status == true);
-            builder.Entity<Central>().HasQueryFilter(p => p.Status == true);
-            builder.Entity<Client>().HasQueryFilter(p => p.Isactive == true);
-            builder.Entity<Offer>().HasQueryFilter(p => p.Status == true);
-            builder.Entity<Package>().HasQueryFilter(p => p.IsActive == true);
-            builder.Entity<Provider>().HasQueryFilter(p => p.IsActive == true);
-            builder.Entity<Role>().HasQueryFilter(p => p.Status == true);
-            builder.Entity<User>().HasQueryFilter(p => p.Status == true);
+
+            //Global Filters
+
+            builder.Entity<Bill>().HasQueryFilter(p => p.Status);
+            builder.Entity<Branch>().HasQueryFilter(p => p.Status );
+            builder.Entity<Governarate>().HasQueryFilter(p => p.Status);
+            builder.Entity<Central>().HasQueryFilter(p => p.Status);
+            builder.Entity<Client>().HasQueryFilter(p => p.Isactive);
+            builder.Entity<Offer>().HasQueryFilter(p => p.Status);
+            builder.Entity<Package>().HasQueryFilter(p => p.IsActive );
+            builder.Entity<Provider>().HasQueryFilter(p => p.IsActive );
+            builder.Entity<Role>().HasQueryFilter(p => p.Status );
+            builder.Entity<User>().HasQueryFilter(p => p.Status );
 
 
             // builder.Entity<Branch>().HasMany(p => p.Phones).WithOne().HasForeignKey(a => a.Id);

@@ -9,7 +9,7 @@ namespace ISP.DAL
 
         [StringLength(50)]
         public string Name { get; set; }  = string.Empty;
-        public bool Status { get; set; }
+        public bool Status { get; set; } = true;
 
         [ForeignKey("Governarate")]
         public int GovernarateCode { get; set; }

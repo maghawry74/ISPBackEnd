@@ -20,7 +20,7 @@ namespace ISP.DAL
         public string Address { get; set; } = string.Empty;
 
         public int? Fax { get; set; }
-        public bool Status { get; set; }
+        public bool Status { get; set; } = true;
 
         [ForeignKey("Manager")]
         public string? ManagerId { get; set; }
