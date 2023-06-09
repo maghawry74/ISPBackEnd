@@ -13,10 +13,11 @@ namespace ISP.DAL
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Code { get; set; }
+
         [Required]
         [StringLength(50)]
         public string Name { get; set; } = string.Empty;
-        public bool Status { get; set; }
+        public bool Status { get; set; }                 
 
         public ICollection<Branch> Branches { get; set; } = new HashSet<Branch>();   
         public ICollection<Central> Centrals { get; set; } = new HashSet<Central>();

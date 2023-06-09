@@ -35,6 +35,7 @@ namespace ISP.DAL
         {                         
             base.OnModelCreating(builder);
 
+
             builder.Entity<User>().ToTable("User");
             builder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
 

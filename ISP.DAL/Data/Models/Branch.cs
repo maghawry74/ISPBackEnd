@@ -28,22 +28,22 @@ namespace ISP.DAL
         // Navigation property
         public User? Manager { get; set; }
 
-
+        [StringLength(14)]
         public string Phone1 { get; set; } = string.Empty;
-
+        [StringLength(14)]
         public string Phone2 { get; set; } = string.Empty;
 
-        [RegularExpression(@"^01[012][0-9]{11}$")]
+        [StringLength(14)]
         public string Mobile1 { get; set; } = string.Empty;
 
-        [RegularExpression(@"^01[012][0-9]{11}$")]
+        [StringLength(14)]
         public string Mobile2 { get; set; } = string.Empty;
 
-        public ICollection<Client> Clients { get; set; } = new HashSet<Client>();
 
         [ForeignKey("Governarate")]
         public int? GovernarateCode { get; set; }
         public Governarate? Governarate { get; set; } 
+        public ICollection<Client> Clients { get; set; } = new HashSet<Client>();
 
     }
 }

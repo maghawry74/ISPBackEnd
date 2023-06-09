@@ -10,6 +10,8 @@ namespace ISP.DAL
         [StringLength(50)]
         [Required]
         public string Name { get; set; } = string.Empty;
+
+        [Required]
         public bool IsActive { get; set; } = true;
         public ICollection<Central> Centrals { get; set; } = new HashSet<Central>();
         public ICollection<Package> Packages { get; set; } = new HashSet<Package>();
