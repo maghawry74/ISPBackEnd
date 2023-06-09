@@ -1,9 +1,11 @@
 using Ecommerce.API.MiddleWare;
+using FluentValidation.AspNetCore;
 using ISP.BL;
 using ISP.DAL;
 using ISP.DAL.Repository.BranchRepository;
 using ISP.DAL.Repository.CentralRepository;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,12 +13,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 #region default
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+      .AddFluentValidation(c => c.RegisterValidatorsFromAssemblyContaining<CentralWriteValidation>());
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 #endregion
+
 
 
 #region Configure CORS

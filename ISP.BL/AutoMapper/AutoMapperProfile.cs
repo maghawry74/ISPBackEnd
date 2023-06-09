@@ -27,6 +27,7 @@ namespace ISP.BL
             CreateMap<Central , WriteCentralDTO>().ReverseMap();
             CreateMap<Central , UpdateCentralDTO>().ReverseMap();
             CreateMap<Central , DeleteCentralDTO>().ReverseMap();
+            CreateMap<Central ,ReadCentralWithGovernarateDTO>().ReverseMap();
 
             CreateMap<Provider , ReadProviderDTO>().ReverseMap();
             CreateMap<Provider , WriteProviderDTO>().ReverseMap();

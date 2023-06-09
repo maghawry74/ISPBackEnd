@@ -86,5 +86,13 @@ namespace ISP.BL
             return mapper.Map<ReadCentralDTO>(CentalFromDB);
 
         }
+
+        public async Task<List<ReadCentralWithGovernarateDTO>> GetAllWithGov()
+        {
+              var cenfromdb =   await centralRepository.getAllCentralwithGovernarate();
+
+            return mapper.Map<List<ReadCentralWithGovernarateDTO>>(cenfromdb);
+                
+        }
     }
 }

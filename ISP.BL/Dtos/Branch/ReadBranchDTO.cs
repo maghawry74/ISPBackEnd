@@ -22,8 +22,6 @@ namespace ISP.BL
 
         public string Mobile2 { get; set; } = string.Empty;
 
-      //  public required ICollection<Phone> Phones { get; set; } = new HashSet<Phone>();
-      //  public required ICollection<Mobile> Mobiles { get; set; } = new HashSet<Mobile>();
         public int? Fax { get; set; }
         public required string ManagerId { get; set; } = string.Empty;
 
