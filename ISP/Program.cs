@@ -1,9 +1,11 @@
 using Ecommerce.API.MiddleWare;
 using ISP.BL;
+using ISP.BL.Services.OfferService;
 using ISP.BL.Services.RoleService;
 using ISP.DAL;
 using ISP.DAL.Repository.BranchRepository;
 using ISP.DAL.Repository.CentralRepository;
+using ISP.DAL.Repository.OfferRepository;
 using ISP.DAL.Repository.RoleRepository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -92,6 +94,7 @@ builder.Services.AddScoped<IGovernarateRepository , GovernarateRepository>();
 builder.Services.AddScoped<ICentralRepository , CentralRepository >();
 builder.Services.AddScoped<IProviderRepository , ProviderRepository >();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+builder.Services.AddScoped<IOfferRepository, OfferRepository>();
 
 #endregion
 
@@ -103,6 +106,7 @@ builder.Services.AddScoped<IGovernarateService , GovernarateService>();
 builder.Services.AddScoped<ICentalService  , CentalService>();
 builder.Services.AddScoped<IProviderService , ProviderService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<IOfferService, OfferService>();
 #endregion
 
 

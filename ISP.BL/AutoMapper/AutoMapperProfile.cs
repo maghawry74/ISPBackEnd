@@ -1,11 +1,7 @@
 ﻿using AutoMapper;
+using ISP.BL.Dtos.Offer;
 using ISP.BL.Dtos.Role;
 using ISP.DAL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ISP.BL
 {
@@ -33,6 +29,16 @@ namespace ISP.BL
             CreateMap<Provider , WriteProviderDTO>().ReverseMap();
             CreateMap<Provider , UpdateProviderDTO>().ReverseMap();
             CreateMap<Provider , DeleteProviderDTO>().ReverseMap();
+
+            //Offer
+            CreateMap<Offer, ReadOfferDto>()
+                .ForSourceMember(x => x.Clients, opt => opt.DoNotValidate())
+                .ReverseMap();
+            CreateMap<Offer, WriteOfferDto>()
+                .ForSourceMember(x => x.Clients, opt => opt.DoNotValidate())
+                .ReverseMap();
+            CreateMap<Offer, UpdataOfferDto>().ReverseMap();
+            CreateMap<Offer, DeleteOfferDto>().ReverseMap();
 
             //Role
             CreateMap<Role, ReadRoleDto>().ReverseMap();
