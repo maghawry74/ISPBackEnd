@@ -7,8 +7,5 @@ namespace ISP.API.Controllers
     public class CustomControllerBase:ControllerBase
     {
         
-
-
-
     }
 }

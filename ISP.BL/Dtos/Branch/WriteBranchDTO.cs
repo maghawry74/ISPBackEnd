@@ -8,10 +8,10 @@ namespace ISP.BL
 
         [StringLength(100 , ErrorMessage = "Address must not exceeds 50 characters")]
         public required string address { get; set; } = string.Empty;
-        [RegularExpression(@"^01[012][0-9]{11}$")]
+        [MaxLength(10)]
         public string phone1 { get; set; } = string.Empty;
 
-        [RegularExpression(@"^01[012][0-9]{11}$")]
+        [MaxLength(10)]
         public string phone2 { get; set; } = string.Empty;
 
         [RegularExpression(@"^01[012][0-9]{11}$")]

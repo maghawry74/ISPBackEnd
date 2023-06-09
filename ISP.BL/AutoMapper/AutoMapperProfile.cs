@@ -61,6 +61,12 @@ namespace ISP.BL
             CreateMap<Role, ReadRoleDto>().ReverseMap();
 
 
+            CreateMap<Client , ReadClientDTO>().ReverseMap();
+            CreateMap<Client , WriteClientDTO>().ReverseMap();
+            CreateMap<Client , UpdateClientDTO>().ReverseMap();
+
+
+
         }
 
     }

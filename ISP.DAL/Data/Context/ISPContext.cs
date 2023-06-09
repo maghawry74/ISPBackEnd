@@ -51,9 +51,15 @@ namespace ISP.DAL
             builder.Entity<Governarate>()
                          .HasAlternateKey(e => e.Name);
 
+
            builder.Entity<Client>()
             .HasIndex(o => new { o.Mobile1, o.Mobile2 })
             .IsUnique();
+
+
+            builder.Entity<Client>()
+           .HasIndex(c=>c.Phone)
+           .IsUnique();
 
         }
    }

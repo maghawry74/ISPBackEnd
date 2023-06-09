@@ -111,6 +111,8 @@ builder.Services.AddScoped<IPackageReposatory,PackageReposatory>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<IOfferRepository, OfferRepository>();
 
+builder.Services.AddScoped<IClientRepository , ClientRepository>();
+
 
 #endregion
 
@@ -126,6 +128,7 @@ builder.Services.AddScoped<IPackageService, PackageService>();
 
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IOfferService, OfferService>();
+builder.Services.AddScoped<IClientservice , ClientService>();
 
 #endregion
 

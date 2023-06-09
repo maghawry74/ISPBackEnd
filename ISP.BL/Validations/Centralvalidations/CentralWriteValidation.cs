@@ -14,5 +14,6 @@ namespace ISP.BL
         {
             RuleFor(a => a.Name).MaximumLength(5);
         }
+           
     }
 }

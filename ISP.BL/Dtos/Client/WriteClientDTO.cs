@@ -1,29 +1,33 @@
-﻿using System;
+﻿using ISP.DAL;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ISP.DAL
+namespace ISP.BL
 {
-    public class Client
+    public class WriteClientDTO
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int SSn { get; set; }
 
-        [StringLength(50)]
-        public string Name { get; set; } = string.Empty;
-        public string Phone { get; set; } = string.Empty;
+        [Required(ErrorMessage ="the client ssn must not be empty")]
+        [MaxLength(14)]
+        
+        public  int SSn { get; set; }
 
-        public bool Isactive { get; set; } = true;
-        public string Status { get; set; } = string.Empty;
+        [StringLength(50 , ErrorMessage ="client name must not exceed 50 character")]
+        public required string Name { get; set; } = string.Empty;
 
-        [ForeignKey("Governarate")]
-        public int GovernarateCode  { get; set; }
-        public Governarate? Governarate { get; set; }
+        public string Status { get; set; }
+
+        [MaxLength(10)]
+        public required string Phone { get; set; } = string.Empty;
+
+
+        public int GovernarateCode { get; set; }
+
 
         [StringLength(100)]
         public string Address { get; set; } = string.Empty;
@@ -31,20 +35,18 @@ namespace ISP.DAL
         [EmailAddress]
         public string Email { get; set; } = string.Empty;
 
-        [ForeignKey("Provider")]
+
         public int ProviderId { get; set; }
-        public Provider? Provider { get; set; }
-        [ForeignKey("Offer")]
+
         public int OfferId { get; set; }
-        public Offer? Offer { get; set; }
 
-        [ForeignKey("Package ")]
+
         public int PackageId { get; set; }
-        public Package? Package { get; set; }
 
-        [ForeignKey("Central")]
+
+
         public int CentralId { get; set; }
-        public Central? Central { get; set; }
+
 
         public int? IpPackage { get; set; }
         /// -------->
@@ -52,19 +54,19 @@ namespace ISP.DAL
 
         public DateTime Contractdate { get; set; }
 
-      
+        [RegularExpression(@"^01[012][0-9]{11}$")]
         public string Mobile1 { get; set; } = string.Empty;
 
-        public  string Mobile2 { get; set; } = string.Empty;
+        [RegularExpression(@"^01[012][0-9]{11}$")]
+        public string Mobile2 { get; set; } = string.Empty;
 
         public string LineOwner { get; set; } = string.Empty;
 
         public string Note { get; set; } = string.Empty;
 
-        [ForeignKey("Branch")]
         public int BranchId { get; set; }
-        public Branch? Branch { get; set; }
 
+        [RegularExpression(@"^[a-zA-Z0-9]+$")]
         public string RouterSerial { get; set; } = string.Empty;
 
         public int? OrderNumber { get; set; }
@@ -89,21 +91,13 @@ namespace ISP.DAL
 
         public double PrePaid { get; set; }
 
-        public double installationFee { get; set; }
-        public double ContractFee { get; set; }
+        public required double installationFee { get; set; }
+        public required double ContractFee { get; set; }
 
         public int? Slotnum { get; set; }
 
 
         public int? Blocknum { get; set; }
 
-        [ForeignKey("Distributer")]
-        public string? DisstrubtorId { get; set; }
-        public User? Distributer { get; set; }
-
-        public ICollection<Bill> Bills = new HashSet<Bill>();
-
     }
-
-
 }
