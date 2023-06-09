@@ -54,11 +54,6 @@ namespace ISP.DAL
             .HasIndex(o => new { o.Mobile1, o.Mobile2 })
             .IsUnique();
 
-            // builder.Entity<Branch>().HasMany(p => p.Phones).WithOne().HasForeignKey(a => a.Id);
-            // builder.Entity<Branch>().HasMany(p => p.Mobiles).WithOne().HasForeignKey(a => a.Id);
-
-
-            // builder.Entity<Client>().HasMany(p => p.Mobiles).WithOne();
         }
    }
 }

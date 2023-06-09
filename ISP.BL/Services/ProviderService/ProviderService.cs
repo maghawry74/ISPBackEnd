@@ -1,12 +1,5 @@
 ﻿using AutoMapper;
 using ISP.DAL;
-using ISP.DAL.Repository.CentralRepository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace ISP.BL;
 
 public class ProviderService : IProviderService
@@ -52,7 +45,7 @@ public class ProviderService : IProviderService
         }
 
         ProviderToEdit.Name = updateProviderDTO.Name;
-        ProviderToEdit.IsActive = updateProviderDTO.IsActive;
+        ProviderToEdit.IsActive = true;
 
         providerRepository.Update(ProviderToEdit);
 
@@ -64,18 +57,24 @@ public class ProviderService : IProviderService
 
 
 
-    public async Task<ReadProviderDTO> Remove(DeleteProviderDTO deleteProviderDTO)
+    public async Task<ReadProviderDTO> Remove(ReadProviderDTO readProviderDTO)
     {
+        var updateProviderDTO = mapper.Map<UpdateProviderDTO>(readProviderDTO);
 
-
-        var ProviderFromDB = await providerRepository.GetByID(deleteProviderDTO.Id);
-        if (ProviderFromDB == null)
+        var providerFromDB = await providerRepository.GetByID(updateProviderDTO.Id);
+        if (providerFromDB == null)
         {
             return null;
         }
-        providerRepository.Delete(ProviderFromDB);
-        providerRepository.SaveChange();
-        return mapper.Map<ReadProviderDTO>(ProviderFromDB);
+        if(providerFromDB != null && providerFromDB.IsActive == true)
+        {
+            providerFromDB.IsActive = false;
+            providerFromDB.Name = updateProviderDTO.Name;
+            providerRepository.Update(providerFromDB);
+            providerRepository.SaveChange();
+        }
+        
+        return mapper.Map<ReadProviderDTO>(providerFromDB);
 
     }
 }

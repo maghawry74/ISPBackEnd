@@ -68,14 +68,16 @@ namespace ISP.API.Controllers
         }
 
         [HttpDelete]
-        public async Task<ActionResult<ReadGovernarateDTO>> Delete(DeleteGovernarateDTO deleteGovernarateDTO)
+        [Route("Id")]
+        public async Task<ActionResult<ReadGovernarateDTO>> Delete(int Id)
         {
-            var Governaratetodelete = await governarateService.DeleteGovernarate(deleteGovernarateDTO);
-            if (Governaratetodelete == null)
+            var getGovernarate = await governarateService.GetById(Id);
+            if (getGovernarate == null)
             {
                 return Problem(detail: "the object does not exsits", statusCode: 404,
                     title: "error", type: "null reference");
             }
+            var Governaratetodelete = await governarateService.DeleteGovernarate(getGovernarate);
             return Governaratetodelete;
         }
 

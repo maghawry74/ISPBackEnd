@@ -9,6 +9,7 @@ namespace ISP.BL
     public interface ICentalService
     {
         Task<List<ReadCentralDTO>> GetAll();
+        Task<List<ReadCentralWithGovernarateDTO>> GetAllWithGov();
         Task<ReadCentralDTO?> GetById(int id);
         Task<ReadCentralDTO?> GetByName(string Name);
 
@@ -16,6 +17,6 @@ namespace ISP.BL
 
         Task<ReadCentralDTO> Edit(int id, UpdateCentralDTO updateCentralDTO);
 
-        Task<ReadCentralDTO> Remove(DeleteCentralDTO deleteCentralDTO);
+        Task<ReadCentralDTO> Delete(ReadCentralDTO readCentralDTO);
     }
 }

@@ -15,6 +15,6 @@ namespace ISP.BL
 
         Task<ReadBranchDTO> UpdateBranch(int id, UpdateBranchDTO updateBranchDTO);
 
-        Task<ReadBranchDTO> DeleteBranch(DeleteBranchDTO deleteBranchDTO);
+        Task<ReadBranchDTO> DeleteBranch(ReadBranchDTO readBranchDTO);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using ISP.DAL;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,8 +34,12 @@ namespace ISP.DAL
         public bool HasRouter { get; set; }
 
         public double RouterPrice { get; set; }
+        public bool Status { get; set; } 
 
-        public Provider? provider { get; set; }
+        [ForeignKey("provider")]
+        public int ProviderId { get; set; }
+
+        public Provider? Provider { get; set; }
 
       ///  public ICollection<Branch> Branches { get; set; } = new HashSet<Branch>();
 

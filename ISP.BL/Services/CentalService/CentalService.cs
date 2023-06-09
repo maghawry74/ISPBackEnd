@@ -58,7 +58,7 @@ namespace ISP.BL
 
             CentalToEdit.Name = updateCentralDTO.Name;
             CentalToEdit.GovernarateCode = updateCentralDTO.GovernarateCode;
-           
+            CentalToEdit.Status = true;         
 
 
 
@@ -68,23 +68,36 @@ namespace ISP.BL
 
             return mapper.Map<ReadCentralDTO>(CentalToEdit);
 
-        }
+        }    
 
-    
-
-        public async Task<ReadCentralDTO> Remove(DeleteCentralDTO deleteCentralDTO)
+        public async Task<ReadCentralDTO> Delete(ReadCentralDTO readCentralDTO)
         {
-
-
-            var CentalFromDB = await centralRepository.GetByID(deleteCentralDTO.Id);
-            if (CentalFromDB == null)
+            var centalToEdit = mapper.Map<UpdateCentralDTO>(readCentralDTO);            
+            var centalFromDB = await centralRepository.GetByID(centalToEdit.Id);
+            if (centalFromDB == null)
             {
                 return null;
             }
-            centralRepository.Delete(CentalFromDB);
-            centralRepository.SaveChange();
-            return mapper.Map<ReadCentralDTO>(CentalFromDB);
+            if(centalFromDB != null && centalFromDB.Status == true)
+            {
+                centalFromDB.Name = centalToEdit.Name;
+                centalFromDB.GovernarateCode = centalToEdit.GovernarateCode;
+                centalFromDB.Status = false;
 
+                centralRepository.Update(centalFromDB);
+                centralRepository.SaveChange();
+            }
+            
+            return mapper.Map<ReadCentralDTO>(centalFromDB);
+
+        }
+
+        public async Task<List<ReadCentralWithGovernarateDTO>> GetAllWithGov()
+        {
+              var cenfromdb =   await centralRepository.getAllCentralwithGovernarate();
+
+            return mapper.Map<List<ReadCentralWithGovernarateDTO>>(cenfromdb);
+                
         }
     }
 }

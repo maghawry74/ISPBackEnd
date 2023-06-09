@@ -25,6 +25,16 @@ namespace ISP.API.Controllers
 
 
         [HttpGet]
+        [Route("getallwithgov")]
+        [ResponseCache(Duration = 60)]
+        public async Task<ActionResult<List<ReadCentralWithGovernarateDTO>>> getallwithgov()
+        {
+            var CentralList = await centalService.GetAllWithGov();
+            return CentralList;
+        }
+
+
+        [HttpGet]
         [Route("{Id}")]
         [ResponseCache(Duration = 60)]
         public async Task<ActionResult<ReadCentralDTO>> GetById(int Id)
@@ -84,14 +94,16 @@ namespace ISP.API.Controllers
         }
 
         [HttpDelete]
-        public async Task<ActionResult<ReadCentralDTO>> Delete(DeleteCentralDTO deleteCentralDTO)
+        [Route("Id")]
+        public async Task<ActionResult<ReadCentralDTO>> Delete(int Id)
         {
-            var Centraltodelete = await centalService.Remove(deleteCentralDTO);
-            if (Centraltodelete == null)
+            var getCentral = await centalService.GetById(Id);            
+            if (getCentral == null)
             {
                 return Problem(detail: "the object does not exsits", statusCode: 404,
                     title: "error", type: "null reference");
             }
+            var Centraltodelete = await centalService.Delete(getCentral);
             return Centraltodelete;
         }
     }

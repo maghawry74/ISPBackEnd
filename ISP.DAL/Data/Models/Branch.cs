@@ -18,8 +18,9 @@ namespace ISP.DAL
         public string Name { get; set; } = string.Empty;
         [StringLength(100)]
         public string Address { get; set; } = string.Empty;
-        
+
         public int? Fax { get; set; }
+        public bool Status { get; set; }
 
         [ForeignKey("Manager")]
         public string? ManagerId { get; set; }
@@ -27,23 +28,22 @@ namespace ISP.DAL
         // Navigation property
         public User? Manager { get; set; }
 
-        
+
         public string Phone1 { get; set; } = string.Empty;
 
         public string Phone2 { get; set; } = string.Empty;
+
         [RegularExpression(@"^01[012][0-9]{11}$")]
         public string Mobile1 { get; set; } = string.Empty;
+
         [RegularExpression(@"^01[012][0-9]{11}$")]
         public string Mobile2 { get; set; } = string.Empty;
 
-        //  public ICollection<Phone> Phones { get; set; } = new HashSet<Phone>();
-        //  public ICollection<Mobile> Mobiles { get; set; } = new HashSet<Mobile>();
-
-
-       // public ICollection<User> Users { get; set; }  = new HashSet<User>();  
-
         public ICollection<Client> Clients { get; set; } = new HashSet<Client>();
 
+        [ForeignKey("Governarate")]
+        public int? GovernarateCode { get; set; }
         public Governarate? Governarate { get; set; } 
+
     }
 }

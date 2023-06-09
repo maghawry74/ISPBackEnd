@@ -38,15 +38,30 @@ namespace ISP.BL
             return mapper.Map<ReadBranchDTO>(BranchToAdd);
         }
 
-        public async Task<ReadBranchDTO> DeleteBranch(DeleteBranchDTO deleteBranchDTO)
+        public async Task<ReadBranchDTO> DeleteBranch(ReadBranchDTO readBranchDTO)
         {
-            var BranchFromDB = await branchRepository.GetByID(deleteBranchDTO.Id);
+            var updateBranchDTO = mapper.Map<UpdateBranchDTO>(readBranchDTO);
+            var BranchFromDB = await branchRepository.GetByID(updateBranchDTO.Id);
             if (BranchFromDB == null)
             {
                 return null;
             }
-            branchRepository.Delete(BranchFromDB);
-            branchRepository.SaveChange();
+            if(BranchFromDB != null && BranchFromDB.Status == true)
+            {
+                BranchFromDB.Name = updateBranchDTO.Name;
+                BranchFromDB.Address = updateBranchDTO.address;
+                BranchFromDB.Phone1 = updateBranchDTO.phone1;
+                BranchFromDB.Phone2 = updateBranchDTO.phone2;
+                BranchFromDB.Mobile1 = updateBranchDTO.mobile1;
+                BranchFromDB.Mobile2 = updateBranchDTO.mobile2;
+                BranchFromDB.ManagerId = updateBranchDTO.ManagerId;
+                BranchFromDB.Fax = updateBranchDTO.Fax;
+                BranchFromDB.Status = false;
+
+                branchRepository.Update(BranchFromDB);
+                branchRepository.SaveChange();
+            }
+            
             return mapper.Map<ReadBranchDTO>(BranchFromDB);
 
 
@@ -68,8 +83,7 @@ namespace ISP.BL
             BranchToEdit.Mobile2= updateBranchDTO.mobile2;
             BranchToEdit.ManagerId= updateBranchDTO.ManagerId;
             BranchToEdit.Fax= updateBranchDTO.Fax;
-
-
+            BranchToEdit.Status = true;
 
             branchRepository.Update(BranchToEdit);
 
