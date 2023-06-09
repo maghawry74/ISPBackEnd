@@ -20,7 +20,13 @@ namespace ISP.DAL
         public double Price { get; set; }
         public string Note { get; set; } = string.Empty;
 
+
         public bool IsActive { get; set; }
+
+        [ForeignKey("Provider")]
+        public int ProviderId { get; set; }
+
+       
         public Provider? Provider { get; set; }
 
         public  ICollection<Client> Clients { get; set; } = new HashSet<Client>();
