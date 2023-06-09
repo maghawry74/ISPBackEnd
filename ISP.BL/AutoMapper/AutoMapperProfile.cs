@@ -38,7 +38,7 @@ namespace ISP.BL
                 .ForSourceMember(x => x.Clients, opt => opt.DoNotValidate())
                 .ReverseMap();
             CreateMap<Offer, UpdataOfferDto>().ReverseMap();
-            CreateMap<Offer, DeleteOfferDto>().ReverseMap();
+            
 
             //Role
             CreateMap<Role, ReadRoleDto>().ReverseMap();

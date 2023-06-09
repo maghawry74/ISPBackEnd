@@ -36,7 +36,7 @@ public class OfferService : IOfferService
         return mapper.Map<ReadOfferDto>(offer);
     }
 
-    public async Task<ReadOfferDto> Delete(DeleteOfferDto deleteOfferDto)
+    public async Task<ReadOfferDto> Delete(ReadOfferDto deleteOfferDto)
     {
         var offerToEdit = await offerRepository.GetByID(deleteOfferDto.Id);
         if (offerToEdit == null)
@@ -82,8 +82,7 @@ public class OfferService : IOfferService
         offerToEdit.NumOfOfferMonth = updataOfferDto.NumOfFreeMonth;
         offerToEdit.RouterPrice = updataOfferDto.RouterPrice;
         offerToEdit.IsPercentageDiscount = updataOfferDto.IsPercentageDiscount;
-        offerToEdit.CancelFine = updataOfferDto.CancelFine;
-        offerToEdit.ProviderId = updataOfferDto.Id;
+        offerToEdit.CancelFine = updataOfferDto.CancelFine;               
         offerToEdit.Isfreefirst = updataOfferDto.Isfreefirst;
         offerToEdit.DiscoutAmout = updataOfferDto.DiscoutAmout;
         offerToEdit.HasRouter = updataOfferDto.HasRouter;
