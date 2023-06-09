@@ -1,5 +1,6 @@
 using Ecommerce.API.MiddleWare;
 using FluentValidation.AspNetCore;
+using ISP.API.RedisterDependancies;
 using ISP.BL;
 using ISP.BL.Services.OfferService;
 using ISP.BL.Services.RoleService;
@@ -16,8 +17,6 @@ using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 using System.Text;
 
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -101,35 +100,12 @@ builder.Services.AddAuthentication(options =>
 
 
 #region Repos
-builder.Services.AddScoped<IBranchRepository, BranchRepository>();
-builder.Services.AddScoped<IGovernarateRepository , GovernarateRepository>();
-builder.Services.AddScoped<ICentralRepository , CentralRepository >();
-builder.Services.AddScoped<IProviderRepository , ProviderRepository >();
-
-builder.Services.AddScoped<IPackageReposatory,PackageReposatory>();
-
-builder.Services.AddScoped<IRoleRepository, RoleRepository>();
-builder.Services.AddScoped<IOfferRepository, OfferRepository>();
-
-builder.Services.AddScoped<IClientRepository , ClientRepository>();
-
-
+builder.Services.AddRepositories();
 #endregion
 
 
 #region Services
-
-builder.Services.AddScoped<IBranchService, BranchService>();
-builder.Services.AddScoped<IGovernarateService , GovernarateService>();
-builder.Services.AddScoped<ICentalService  , CentalService>();
-builder.Services.AddScoped<IProviderService , ProviderService>();
-
-builder.Services.AddScoped<IPackageService, PackageService>();
-
-builder.Services.AddScoped<IRoleService, RoleService>();
-builder.Services.AddScoped<IOfferService, OfferService>();
-builder.Services.AddScoped<IClientservice , ClientService>();
-
+builder.Services.AddServices();
 #endregion
 
 
