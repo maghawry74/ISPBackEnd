@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using ISP.BL.Dtos.Branch;
 namespace ISP.BL
 {
     public interface IBranchService
@@ -15,6 +10,6 @@ namespace ISP.BL
 
         Task<ReadBranchDTO> UpdateBranch(int id, UpdateBranchDTO updateBranchDTO);
 
-        Task<ReadBranchDTO> DeleteBranch(ReadBranchDTO readBranchDTO);
-    }
+        Task<ReadBranchDTO> DeleteBranch(DeleteBranchDto  deleteBranchDto );
+       
 }

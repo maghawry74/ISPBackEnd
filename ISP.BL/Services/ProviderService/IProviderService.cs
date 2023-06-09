@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace ISP.BL
 {
     public interface IProviderService
@@ -15,6 +10,6 @@ namespace ISP.BL
 
         Task<ReadProviderDTO> Edit(int id, UpdateProviderDTO updateProviderDTO);
 
-        Task<ReadProviderDTO> Remove(ReadProviderDTO readProviderDTO);
+        Task<ReadProviderDTO> Remove(DeleteProviderDTO deleteProviderDTO);
     }
 }

@@ -1,7 +1,4 @@
-﻿
-using System.ComponentModel.DataAnnotations;
-
-namespace ISP.BL.Dtos.Client
+﻿namespace ISP.BL.Dtos.Client
 {
     public class DeleteClientDto
     {

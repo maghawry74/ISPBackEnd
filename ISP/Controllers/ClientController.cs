@@ -1,5 +1,7 @@
 ﻿using ISP.BL;
-using Microsoft.AspNetCore.Http;
+using ISP.BL.Dtos.Client;
+using ISP.BL.Dtos.Role;
+using ISP.BL.Services.RoleService;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
@@ -61,12 +63,29 @@ namespace ISP.API.Controllers
             }
 
             await clientservice.UpdateClient(SSn, updateClientDTO);
-            return CreatedAtAction(actionName: "GetById", routeValues: new { SSn = updateClientDTO.SSn }, value: "Updated Successfully");
+            return CreatedAtAction(actionName: "GetById", routeValues: new { SSn = updateClientDTO.SSn },
+                value: "Updated Successfully");
 
 
         }
 
-   
+
+
+        [HttpDelete]
+        public async Task<ActionResult<ReadClientDTO>> Delete(DeleteClientDto deleteClientDto)
+        {
+            var getClient = await clientservice.DeleteClient(deleteClientDto);
+
+            if (getClient == null)
+            {
+                return Problem(detail: "the object does not exsits", statusCode: 404,
+                    title: "error", type: "null reference");
+            }
+           
+            return getClient;
+        }
+
+
 
 
     }

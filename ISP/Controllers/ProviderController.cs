@@ -68,17 +68,16 @@ namespace ISP.API.Controllers
 
         }
 
-        [HttpDelete]
-        [Route("{Id}")]
-        public async Task<ActionResult<ReadProviderDTO>> Delete(int Id)
+        [HttpDelete]      
+        public async Task<ActionResult<ReadProviderDTO>> Delete(DeleteProviderDTO deleteProviderDTO)
         {
-            var getProvider = await providerService.GetById(Id);
-            if (getProvider == null)
+            var Providertodelete = await providerService.Remove(deleteProviderDTO);
+            if (Providertodelete == null)
             {
                 return Problem(detail: "the object does not exsits", statusCode: 404,
                     title: "error", type: "null reference");
             }
-            var Providertodelete = await providerService.Remove(getProvider);
+            
             return Providertodelete;
         }
 

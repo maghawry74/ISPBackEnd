@@ -12,6 +12,6 @@ namespace ISP.BL.Services.OfferService
 
         Task<ReadOfferDto> Edit(int id, UpdataOfferDto updataOfferDto);
 
-        Task<ReadOfferDto> Delete(ReadOfferDto deleteOfferDto);
+        Task<ReadOfferDto> Delete(DeleteOfferDto deleteOfferDto);
     }
 }

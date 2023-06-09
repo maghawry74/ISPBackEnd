@@ -17,6 +17,6 @@ namespace ISP.BL
 
         Task<ReadCentralDTO> Edit(int id, UpdateCentralDTO updateCentralDTO);
 
-        Task<ReadCentralDTO> Delete(ReadCentralDTO readCentralDTO);
+        Task<ReadCentralDTO> Delete(DeleteCentralDTO deleteCentralDTO);
     }
 }

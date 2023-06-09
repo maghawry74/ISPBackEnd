@@ -94,17 +94,17 @@ namespace ISP.API.Controllers
         }
 
         [HttpDelete]
-        [Route("Id")]
-        public async Task<ActionResult<ReadCentralDTO>> Delete(int Id)
+     
+        public async Task<ActionResult<ReadCentralDTO>> Delete(DeleteCentralDTO deleteCentralDTO)
         {
-            var getCentral = await centalService.GetById(Id);            
+            var getCentral = await centalService.Delete(deleteCentralDTO);            
             if (getCentral == null)
             {
                 return Problem(detail: "the object does not exsits", statusCode: 404,
                     title: "error", type: "null reference");
             }
-            var Centraltodelete = await centalService.Delete(getCentral);
-            return Centraltodelete;
+            
+            return getCentral;
         }
     }
 }

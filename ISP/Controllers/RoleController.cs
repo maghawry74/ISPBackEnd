@@ -72,14 +72,13 @@ namespace ISP.API.Controllers
         [HttpDelete]        
         public async Task<ActionResult<ReadRoleDto>> Delete( DeleteRoleDto deleteRoleDto)
         {
-           
-            if (deleteRoleDto == null)
+            var getRole = await roleService.Delete(deleteRoleDto);
+            if (getRole == null)
             {
                 return Problem(detail: "the object does not exsits", statusCode: 404,
                     title: "error", type: "null reference");
-            }
-            var roleTodelete = await roleService.Delete(deleteRoleDto);
-            return roleTodelete;
+            }            
+            return getRole;
         }
 
     }

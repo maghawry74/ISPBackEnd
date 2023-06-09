@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ISP.BL
+﻿namespace ISP.BL
 {
     public interface IGovernarateService
     {
@@ -15,6 +9,6 @@ namespace ISP.BL
 
         Task<ReadGovernarateDTO> UpdateGovernarate(int Code, UpdateGovernarateDTO updateGovernarateDTO);
 
-        Task<ReadGovernarateDTO> DeleteGovernarate(ReadGovernarateDTO readGovernarateDTO);
+        Task<ReadGovernarateDTO> DeleteGovernarate(DeleteGovernarateDTO  deleteGovernarateDTO);
     }
 }

@@ -57,22 +57,19 @@ public class ProviderService : IProviderService
 
 
 
-    public async Task<ReadProviderDTO> Remove(ReadProviderDTO readProviderDTO)
+    public async Task<ReadProviderDTO> Remove(DeleteProviderDTO deleteProviderDTO)
     {
-        var updateProviderDTO = mapper.Map<UpdateProviderDTO>(readProviderDTO);
-
-        var providerFromDB = await providerRepository.GetByID(updateProviderDTO.Id);
+        
+        var providerFromDB = await providerRepository.GetByID(deleteProviderDTO.Id);
         if (providerFromDB == null)
         {
             return null;
         }
-        if(providerFromDB != null && providerFromDB.IsActive == true)
-        {
-            providerFromDB.IsActive = false;
-            providerFromDB.Name = updateProviderDTO.Name;
+       
+            providerFromDB.IsActive = false;           
             providerRepository.Update(providerFromDB);
             providerRepository.SaveChange();
-        }
+        
         
         return mapper.Map<ReadProviderDTO>(providerFromDB);
 

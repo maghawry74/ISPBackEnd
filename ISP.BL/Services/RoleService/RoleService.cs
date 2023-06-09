@@ -54,7 +54,8 @@ namespace ISP.BL.Services.RoleService
             roleToEdit.NormalizedName = updateRoleDto.Name.ToUpper();            
             roleToEdit.IsAddNewClient = updateRoleDto.IsAddNewClient;
             roleToEdit.IsAdmin = updateRoleDto.IsAdmin;
-            roleToEdit.IsSearch = updateRoleDto.IsSearch;    
+            roleToEdit.IsSearch = updateRoleDto.IsSearch;
+            roleToEdit.Status = true;
             
 
             roleRepository.SaveChange();

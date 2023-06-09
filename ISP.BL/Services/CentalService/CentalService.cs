@@ -58,7 +58,7 @@ namespace ISP.BL
 
             CentalToEdit.Name = updateCentralDTO.Name;
             CentalToEdit.GovernarateCode = updateCentralDTO.GovernarateCode;
-            CentalToEdit.Status = true;         
+            CentalToEdit.Status = true;      
 
 
 
@@ -70,24 +70,19 @@ namespace ISP.BL
 
         }    
 
-        public async Task<ReadCentralDTO> Delete(ReadCentralDTO readCentralDTO)
+        public async Task<ReadCentralDTO> Delete(DeleteCentralDTO deleteCentralDTO)
         {
-            var centalToEdit = mapper.Map<UpdateCentralDTO>(readCentralDTO);            
-            var centalFromDB = await centralRepository.GetByID(centalToEdit.Id);
+                    
+            var centalFromDB = await centralRepository.GetByID(deleteCentralDTO.Id);
             if (centalFromDB == null)
             {
                 return null;
             }
-            if(centalFromDB != null && centalFromDB.Status == true)
-            {
-                centalFromDB.Name = centalToEdit.Name;
-                centalFromDB.GovernarateCode = centalToEdit.GovernarateCode;
+            
                 centalFromDB.Status = false;
-
                 centralRepository.Update(centalFromDB);
                 centralRepository.SaveChange();
-            }
-            
+                        
             return mapper.Map<ReadCentralDTO>(centalFromDB);
 
         }

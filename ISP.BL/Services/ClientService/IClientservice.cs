@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using ISP.BL.Dtos.Client;
 namespace ISP.BL
 {
     public interface IClientservice
@@ -14,6 +9,8 @@ namespace ISP.BL
         Task<ReadClientDTO> AddClient(WriteClientDTO writeClientDTO);
 
         Task<ReadClientDTO> UpdateClient(int SSn, UpdateClientDTO updateClientDTO);
+
+        Task<ReadClientDTO> DeleteClient( DeleteClientDto deleteClientDto);
 
 
     }

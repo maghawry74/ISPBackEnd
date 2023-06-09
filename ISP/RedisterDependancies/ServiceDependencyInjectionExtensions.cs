@@ -1,9 +1,4 @@
-﻿using ISP.DAL.Repository.BranchRepository;
-using ISP.DAL.Repository.CentralRepository;
-using ISP.DAL.Repository.OfferRepository;
-using ISP.DAL.Repository.RoleRepository;
-using ISP.DAL;
-using ISP.BL.Services.OfferService;
+﻿using ISP.BL.Services.OfferService;
 using ISP.BL.Services.RoleService;
 using ISP.BL;
 

@@ -58,23 +58,22 @@ namespace ISP.API.Controllers
                    title: "error", type: "null reference");
             }
             await offerService.Edit(Id, updataOfferDto);
-            return CreatedAtAction(actionName: "GetById", routeValues: new { Id = updataOfferDto.Id }, value: "Updated Successfully");
+            return CreatedAtAction(actionName: "GetById", routeValues: new { Id = updataOfferDto.Id }, 
+                value: "Updated Successfully");
 
         }
 
-        [HttpDelete]
-        [Route("{Id}")]
-        public async Task<ActionResult<ReadOfferDto>> Delete(int Id)
+        [HttpDelete]        
+        public async Task<ActionResult<ReadOfferDto>> Delete(DeleteOfferDto deleteOfferDto)
         {
-            var getOffer = await offerService.GetById(Id);
+            var deletedOffer = await offerService.Delete(deleteOfferDto);
 
-            if (getOffer == null)
+            if (deletedOffer == null)
             {
                 return Problem(detail: "the object does not exsits", statusCode: 404,
                     title: "error", type: "null reference");
             }
-
-            var deletedOffer = await offerService.Delete(getOffer);
+            
             return deletedOffer;
         }
 

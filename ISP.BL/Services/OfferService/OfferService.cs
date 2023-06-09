@@ -36,36 +36,21 @@ public class OfferService : IOfferService
         return mapper.Map<ReadOfferDto>(offer);
     }
 
-    public async Task<ReadOfferDto> Delete(ReadOfferDto deleteOfferDto)
+    public async Task<ReadOfferDto> Delete(DeleteOfferDto deleteOfferDto)
     {
-        var offerToEdit = await offerRepository.GetByID(deleteOfferDto.Id);
-        if (offerToEdit == null)
+        var offerTodeleted = await offerRepository.GetByID(deleteOfferDto.Id);
+        if (offerTodeleted == null)
         {
             return null;
         }
 
-        if(offerToEdit != null && offerToEdit.Status == true)
-        {
-            offerToEdit.Id = deleteOfferDto.Id;
-            offerToEdit.Name = deleteOfferDto.Name;
-            offerToEdit.NumOfOfferMonth = deleteOfferDto.NumOfOfferMonth;
-            offerToEdit.NumOfOfferMonth = deleteOfferDto.NumOfFreeMonth;
-            offerToEdit.RouterPrice = deleteOfferDto.RouterPrice;
-            offerToEdit.IsPercentageDiscount = deleteOfferDto.IsPercentageDiscount;
-            offerToEdit.CancelFine = deleteOfferDto.CancelFine;
-            offerToEdit.ProviderId = deleteOfferDto.Id;
-            offerToEdit.Isfreefirst = deleteOfferDto.Isfreefirst;
-            offerToEdit.DiscoutAmout = deleteOfferDto.DiscoutAmout;
-            offerToEdit.HasRouter = deleteOfferDto.HasRouter;
-            offerToEdit.IsPossibleToRasieOrLower = deleteOfferDto.IsPossibleToRasieOrLower;
-            offerToEdit.Status = false;
+        offerTodeleted.Status = false;
 
-            offerRepository.Update(offerToEdit);
-            offerRepository.SaveChange();
-
-        }
+        offerRepository.Update(offerTodeleted);
+        offerRepository.SaveChange();
+        
        
-        return mapper.Map<ReadOfferDto>(offerToEdit);
+        return mapper.Map<ReadOfferDto>(offerTodeleted);
     }
 
     public async Task<ReadOfferDto> Edit(int id, UpdataOfferDto updataOfferDto)
