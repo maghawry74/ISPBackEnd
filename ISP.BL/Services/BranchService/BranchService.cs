@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using ISP.BL.Dtos.Branch;
 using ISP.DAL;
 using System;
 using System.Collections.Generic;
@@ -39,9 +38,9 @@ namespace ISP.BL
             return mapper.Map<ReadBranchDTO>(BranchToAdd);
         }
 
-        public async Task<ReadBranchDTO> DeleteBranch(DeleteBranchDto deleteBranchDto)
+        public async Task<ReadBranchDTO> DeleteBranch(int id)
         {            
-            var BranchFromDB = await branchRepository.GetByID(deleteBranchDto.Id);
+            var BranchFromDB = await branchRepository.GetByID(id);
             if (BranchFromDB == null)
             {
                 return null;

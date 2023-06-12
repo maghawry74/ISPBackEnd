@@ -19,7 +19,7 @@ namespace ISP.DAL
         public int? BranchId { get; set; }
 
         [ForeignKey("Role")]
-        public int? RoleId { get; set; }
+        public string? RoleId { get; set; }
 
         [ForeignKey("Bill")]
         public int? BillId { get; set; }

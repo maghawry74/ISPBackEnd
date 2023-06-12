@@ -1,4 +1,4 @@
-﻿using ISP.BL.Dtos.Client;
+﻿
 namespace ISP.BL
 {
     public interface IClientservice
@@ -10,7 +10,7 @@ namespace ISP.BL
 
         Task<ReadClientDTO> UpdateClient(int SSn, UpdateClientDTO updateClientDTO);
 
-        Task<ReadClientDTO> DeleteClient( DeleteClientDto deleteClientDto);
+        Task<ReadClientDTO> DeleteClient(int SSn);
 
 
     }

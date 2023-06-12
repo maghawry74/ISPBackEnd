@@ -88,16 +88,17 @@ namespace ISP.API.Controllers
             }
 
             await centalService.Edit(Id, updateCentralDTO);
-            return CreatedAtAction(actionName: "GetById", routeValues: new { Id = updateCentralDTO.Id}, value: "Updated Successfully");
+
+           return NoContent();
 
 
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
      
-        public async Task<ActionResult<ReadCentralDTO>> Delete(DeleteCentralDTO deleteCentralDTO)
+        public async Task<ActionResult<ReadCentralDTO>> Delete(int id)
         {
-            var getCentral = await centalService.Delete(deleteCentralDTO);            
+            var getCentral = await centalService.Delete(id);            
             if (getCentral == null)
             {
                 return Problem(detail: "the object does not exsits", statusCode: 404,

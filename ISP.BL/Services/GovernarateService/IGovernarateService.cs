@@ -9,6 +9,7 @@
 
         Task<ReadGovernarateDTO> UpdateGovernarate(int Code, UpdateGovernarateDTO updateGovernarateDTO);
 
-        Task<ReadGovernarateDTO> DeleteGovernarate(DeleteGovernarateDTO  deleteGovernarateDTO);
+        Task<ReadGovernarateDTO> DeleteGovernarate(int code);
+        
     }
 }

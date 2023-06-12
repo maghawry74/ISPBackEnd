@@ -34,7 +34,6 @@ builder.Services.AddSwaggerGen();
 #endregion
 
 
-
 #region Configure CORS
 builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
 {

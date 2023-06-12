@@ -29,6 +29,7 @@ namespace ISP.DAL
 
 
             builder.Entity<User>().ToTable("User");
+          //  builder.Entity<Role>().ToTable("UserRole");
             builder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
 
                   builder.Entity<Branch>()

@@ -35,7 +35,7 @@ namespace ISP.API.Controllers
                 Email = adminRegisterDto.Email,
                 Status = adminRegisterDto.Status,
                 PhoneNumber = adminRegisterDto.PhoneNumber,
-                RoleId = 1,
+                RoleId = "1",
                 BranchId = adminRegisterDto.BranchId,
 
             };

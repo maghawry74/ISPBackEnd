@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using ISP.BL.Dtos.Client;
+
 using ISP.DAL;
 using System.Runtime.Intrinsics.X86;
 
@@ -55,9 +55,9 @@ namespace ISP.BL
             return mapper.Map<ReadClientDTO>(ClientToEdit);
         }
 
-        public async Task<ReadClientDTO> DeleteClient(DeleteClientDto deleteClientDto)
+        public async Task<ReadClientDTO> DeleteClient(int SSn)
         {
-            var ClientTodeleted = await clientRepository.GetByID(deleteClientDto.SSn);
+            var ClientTodeleted = await clientRepository.GetByID(SSn);
             if (ClientTodeleted == null)
             {
                 return null;

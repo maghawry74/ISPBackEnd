@@ -27,9 +27,9 @@ namespace ISP.BL
             return mapper.Map<ReadPackageDTO>(PackageToAdd);
         }
 
-        public async Task<ReadPackageDTO> DeletePackage(DeletePackageDTO deletePackageDTO)
+        public async Task<ReadPackageDTO> DeletePackage(int id)
         {
-            var PackageFromDB = await PackageRepository.GetByID(deletePackageDTO.Id);
+            var PackageFromDB = await PackageRepository.GetByID(id);
             if (PackageFromDB == null)
             {
                 return null;

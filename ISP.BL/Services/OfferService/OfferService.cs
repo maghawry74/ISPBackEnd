@@ -36,9 +36,9 @@ public class OfferService : IOfferService
         return mapper.Map<ReadOfferDto>(offer);
     }
 
-    public async Task<ReadOfferDto> Delete(DeleteOfferDto deleteOfferDto)
+    public async Task<ReadOfferDto> Delete(int id)
     {
-        var offerTodeleted = await offerRepository.GetByID(deleteOfferDto.Id);
+        var offerTodeleted = await offerRepository.GetByID(id);
         if (offerTodeleted == null)
         {
             return null;

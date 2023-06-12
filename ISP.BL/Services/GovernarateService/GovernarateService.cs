@@ -65,10 +65,10 @@ namespace ISP.BL
             // Return the updated entity
             return mapper.Map<ReadGovernarateDTO>(updatedGovernarate);
         }
-        public async Task<ReadGovernarateDTO> DeleteGovernarate(DeleteGovernarateDTO deleteGovernarateDTO)
+        public async Task<ReadGovernarateDTO> DeleteGovernarate(int code)
         {
            
-            var GovernarateFromDB = await governarateRepository.GetByID(deleteGovernarateDTO.Code);
+            var GovernarateFromDB = await governarateRepository.GetByID(code);
             if (GovernarateFromDB == null)
             {
                 return null;
@@ -81,6 +81,6 @@ namespace ISP.BL
             return mapper.Map<ReadGovernarateDTO>(GovernarateFromDB);
         }
 
-     
+       
     }
 }

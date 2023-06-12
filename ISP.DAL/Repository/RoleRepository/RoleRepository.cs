@@ -14,7 +14,7 @@ namespace ISP.DAL.Repository.RoleRepository
             this.context = Context;
         }
 
-        public string GetRoleNameByID(int id)
+        public string GetRoleNameByID(string id)
         {
            var getRole = context.Set<Role>().Find(id);          
             return getRole.Name;

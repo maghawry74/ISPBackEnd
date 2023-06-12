@@ -27,7 +27,7 @@ namespace ISP.BL.Services.RoleService
             return  mapper.Map<ReadRoleDto>(roleDB);
         }
 
-        public string GetRoleNameByID(int id)
+        public string GetRoleNameByID(string id)
         {
             var role = roleRepository.GetRoleNameByID(id);
             return role;
@@ -62,9 +62,9 @@ namespace ISP.BL.Services.RoleService
 
             return mapper.Map<ReadRoleDto>(roleToEdit);
         }
-        public async Task<ReadRoleDto> Delete(DeleteRoleDto deleteRoleDto)
+        public async Task<ReadRoleDto> Delete(int id)
         {
-            var getRole = await roleRepository.GetByID(deleteRoleDto.Id);
+            var getRole = await roleRepository.GetByID(id);
             if (getRole == null)
             {
                 return null;

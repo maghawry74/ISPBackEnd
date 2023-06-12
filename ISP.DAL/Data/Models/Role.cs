@@ -1,15 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace ISP.DAL
 {
     public class Role
     {
-        [Key]
-        public int Id { get; set; }
-        [Required]
+        public string id { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
-        public bool Status { get; set; } = true;
         public string NormalizedName { get; set; } = string.Empty;
+
+        public bool Status { get; set; } = true;
 
         public bool IsAdmin { get; set; }
         public bool IsClientsOrder { get; set; }

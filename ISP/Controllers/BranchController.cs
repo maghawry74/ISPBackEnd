@@ -1,6 +1,4 @@
 ﻿using ISP.BL;
-using ISP.BL.Dtos.Branch;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
@@ -62,16 +60,19 @@ namespace ISP.API.Controllers
             }
 
              await branchService.UpdateBranch(id, updateBranchDTO);
-             return CreatedAtAction(actionName: "GetById", routeValues: new { id = updateBranchDTO.Id }, 
-                 value: "Updated Successfully");
+
+            return NoContent(); 
+            // return CreatedAtAction(actionName: "GetById", routeValues: new { id = updateBranchDTO.Id }, 
+               //  value: "Updated Successfully");
 
 
         }
 
-        [HttpDelete]        
-        public async Task<ActionResult<ReadBranchDTO>> Delete(DeleteBranchDto deleteBranchDto)
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<ActionResult<ReadBranchDTO>> Delete(int id)
         {
-            var getBranch = await branchService.DeleteBranch(deleteBranchDto);
+            var getBranch = await branchService.DeleteBranch(id);
             if (getBranch == null)
             {
                 return Problem(detail: "the object dees not exsits", statusCode: 404,

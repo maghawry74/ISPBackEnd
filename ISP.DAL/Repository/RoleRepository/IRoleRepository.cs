@@ -3,6 +3,6 @@ namespace ISP.DAL.Repository.RoleRepository
 {
     public interface IRoleRepository : IGenericRepository<Role>
     {
-        string GetRoleNameByID(int id);
+        string GetRoleNameByID(string id);
     }
 }

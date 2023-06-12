@@ -15,6 +15,6 @@ namespace ISP.BL
 
         Task<ReadPackageDTO> UpdatePackage(int id, UpdatePackageDTO updatePackageDTO);
 
-        Task<ReadPackageDTO> DeletePackage(DeletePackageDTO deletePackageDTO);
+        Task<ReadPackageDTO> DeletePackage(int id);
     }
 }

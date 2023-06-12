@@ -1,7 +1,4 @@
 ﻿using ISP.BL;
-using ISP.BL.Dtos.Client;
-using ISP.BL.Dtos.Role;
-using ISP.BL.Services.RoleService;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
@@ -63,18 +60,16 @@ namespace ISP.API.Controllers
             }
 
             await clientservice.UpdateClient(SSn, updateClientDTO);
-            return CreatedAtAction(actionName: "GetById", routeValues: new { SSn = updateClientDTO.SSn },
-                value: "Updated Successfully");
-
+            return NoContent();
 
         }
 
 
 
-        [HttpDelete]
-        public async Task<ActionResult<ReadClientDTO>> Delete(DeleteClientDto deleteClientDto)
+        [HttpDelete("{SSn}")]
+        public async Task<ActionResult<ReadClientDTO>> Delete(int SSn)
         {
-            var getClient = await clientservice.DeleteClient(deleteClientDto);
+            var getClient = await clientservice.DeleteClient(SSn);
 
             if (getClient == null)
             {

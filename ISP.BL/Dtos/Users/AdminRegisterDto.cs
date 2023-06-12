@@ -9,7 +9,7 @@ namespace ISP.BL.Dtos.Users
         public string PhoneNumber { get; set; } = string.Empty;
         public bool Status { get; set; } = true;
         public int? BranchId { get; set; }
-        //public int RoleId { get; set; }
+      // public string RoleId { get; set; }
 
     }
 }

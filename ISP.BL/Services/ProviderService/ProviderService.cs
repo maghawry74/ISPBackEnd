@@ -25,7 +25,7 @@ public class ProviderService : IProviderService
         return mapper.Map<ReadProviderDTO>(ProviderFromDB);
     }
 
-  
+                    
 
     public async Task<ReadProviderDTO> Insert(WriteProviderDTO writeProviderDTO)
     {
@@ -56,11 +56,10 @@ public class ProviderService : IProviderService
     }
 
 
-
-    public async Task<ReadProviderDTO> Remove(DeleteProviderDTO deleteProviderDTO)
+    public async Task<ReadProviderDTO> Remove(int id)
     {
         
-        var providerFromDB = await providerRepository.GetByID(deleteProviderDTO.Id);
+        var providerFromDB = await providerRepository.GetByID(id);
         if (providerFromDB == null)
         {
             return null;
@@ -70,8 +69,8 @@ public class ProviderService : IProviderService
             providerRepository.Update(providerFromDB);
             providerRepository.SaveChange();
         
-        
         return mapper.Map<ReadProviderDTO>(providerFromDB);
 
     }
+
 }

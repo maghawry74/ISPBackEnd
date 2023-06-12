@@ -55,15 +55,15 @@ namespace ISP.API.Controllers
             }
 
             await PackageService.UpdatePackage(id, updatePackageDTO);
-            return CreatedAtAction(actionName: "GetById", routeValues: new { id = updatePackageDTO.Id }, value: "Updated Successfully");
+            return NoContent();
 
 
         }
 
-        [HttpDelete]
-        public async Task<ActionResult<ReadPackageDTO>> Delete(DeletePackageDTO deletePackageDTO)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<ReadPackageDTO>> Delete(int id)
         {
-            var Packagetodelete = await PackageService.DeletePackage(deletePackageDTO);
+            var Packagetodelete = await PackageService.DeletePackage(id);
             if (Packagetodelete == null)
             {
                 return Problem(detail: "the object dees not exsits", statusCode: 404,

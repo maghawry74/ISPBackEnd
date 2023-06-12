@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using ISP.BL.Dtos.Client;
 using ISP.BL.Dtos.Offer;
 using ISP.BL.Dtos.Role;
 using ISP.DAL;
@@ -20,13 +19,12 @@ namespace ISP.BL
             CreateMap<Governarate , ReadGovernarateDTO>().ReverseMap();
             CreateMap<Governarate , WriteGovernarateDTO>().ReverseMap();
             CreateMap<Governarate , UpdateGovernarateDTO>().ReverseMap();
-            CreateMap<Governarate , DeleteGovernarateDTO>().ReverseMap();
+   
 
             //Central
             CreateMap<Central , ReadCentralDTO>().ReverseMap();
             CreateMap<Central , WriteCentralDTO>().ReverseMap();
             CreateMap<Central , UpdateCentralDTO>().ReverseMap();
-            CreateMap<Central , DeleteCentralDTO>().ReverseMap();
             CreateMap<Central ,ReadCentralWithGovernarateDTO>().ReverseMap();
 
  
@@ -35,7 +33,7 @@ namespace ISP.BL
             CreateMap<Provider , ReadProviderDTO>().ReverseMap();
             CreateMap<Provider , WriteProviderDTO>().ReverseMap();
             CreateMap<Provider , UpdateProviderDTO>().ReverseMap();
-            CreateMap<Provider , DeleteProviderDTO>().ReverseMap();            
+          
             CreateMap<ReadProviderDTO, UpdateProviderDTO>().ReverseMap();
 
 
@@ -43,7 +41,7 @@ namespace ISP.BL
             CreateMap<Package, ReadPackageDTO>().ReverseMap();
             CreateMap<Package, WritePackageDTO>().ReverseMap();
             CreateMap<Package, UpdatePackageDTO>().ReverseMap();
-            CreateMap<Package, DeletePackageDTO>().ReverseMap();
+
 
            
             
@@ -62,13 +60,13 @@ namespace ISP.BL
             CreateMap<Role, ReadRoleDto>().ReverseMap();
             CreateMap<Role, WriteRoleDto>().ReverseMap();
             CreateMap<Role, UpdateRoleDto>().ReverseMap();
-            CreateMap<Role, DeleteRoleDto>().ReverseMap();
+
 
             //client
             CreateMap<Client , ReadClientDTO>().ReverseMap();
             CreateMap<Client , WriteClientDTO>().ReverseMap();
             CreateMap<Client , UpdateClientDTO>().ReverseMap();
-            CreateMap<Client, DeleteClientDto>().ReverseMap();
+
         }
 
     }

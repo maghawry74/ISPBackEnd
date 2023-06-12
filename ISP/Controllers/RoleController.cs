@@ -63,16 +63,15 @@ namespace ISP.API.Controllers
             }
 
             await roleService.Update(Id, updateRoleDto);
-            return CreatedAtAction(actionName: "GetById", routeValues: new { Id = updateRoleDto.Id }, 
-                value: "Updated Successfully");
+             return NoContent();
 
 
         }
 
-        [HttpDelete]        
-        public async Task<ActionResult<ReadRoleDto>> Delete( DeleteRoleDto deleteRoleDto)
+        [HttpDelete("{id}")]        
+        public async Task<ActionResult<ReadRoleDto>> Delete( int id)
         {
-            var getRole = await roleService.Delete(deleteRoleDto);
+            var getRole = await roleService.Delete(id);
             if (getRole == null)
             {
                 return Problem(detail: "the object does not exsits", statusCode: 404,

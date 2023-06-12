@@ -16,7 +16,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpGet]
-        [ResponseCache(Duration = 60)]
+        //[ResponseCache(Duration = 60)]
         public async Task<ActionResult<List<ReadGovernarateDTO>>> GetAll()
         {
             var GovernarateList = await governarateService.GetAll();
@@ -61,24 +61,28 @@ namespace ISP.API.Controllers
                    title: "error", type: "null reference");
             }
 
-            await governarateService.UpdateGovernarate(Code, updateGovernarateDTO);
-            return CreatedAtAction(actionName: "GetById", routeValues: new { Code = updateGovernarateDTO.Code }, value: "Updated Successfully");
+            var updatedGovernarate = await governarateService.UpdateGovernarate(Code, updateGovernarateDTO);
 
+            if (updatedGovernarate == null)
+            {
+                return NotFound();
+            }
 
+            return Ok(updatedGovernarate);
         }
 
-        [HttpDelete]
-       
-        public async Task<ActionResult<ReadGovernarateDTO>> Delete(DeleteGovernarateDTO deleteGovernarateDTO)
+        [HttpDelete("{code}")]
+        public async Task<ActionResult<ReadGovernarateDTO>> Delete(int code)
         {
-            var getGovernarate = await governarateService.DeleteGovernarate(deleteGovernarateDTO);
+            var getGovernarate = await governarateService.DeleteGovernarate(code);
+
             if (getGovernarate == null)
             {
                 return Problem(detail: "the object does not exsits", statusCode: 404,
                     title: "error", type: "null reference");
             }
-            
-            return getGovernarate;
+
+            return Ok(getGovernarate);
         }
 
 

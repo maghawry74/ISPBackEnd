@@ -38,7 +38,7 @@ namespace ISP.DAL
         public int OfferId { get; set; }
         public Offer? Offer { get; set; }
 
-        [ForeignKey("Package ")]
+        [ForeignKey("Package")]
         public int PackageId { get; set; }
         public Package? Package { get; set; }
 
@@ -47,12 +47,10 @@ namespace ISP.DAL
         public Central? Central { get; set; }
 
         public int? IpPackage { get; set; }
-        /// -------->
+         /// -------->
 
 
         public DateTime Contractdate { get; set; }
-
-      
         public string Mobile1 { get; set; } = string.Empty;
 
         public  string Mobile2 { get; set; } = string.Empty;
