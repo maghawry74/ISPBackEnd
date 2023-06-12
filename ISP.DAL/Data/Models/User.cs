@@ -13,7 +13,7 @@ namespace ISP.DAL
    public class User:IdentityUser
     {
         [Required]
-        public bool Status { get; set; }
+        public bool Status { get; set; } = true;
 
         [ForeignKey("Branch")]
         public int? BranchId { get; set; }
