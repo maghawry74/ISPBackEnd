@@ -13,6 +13,6 @@ namespace ISP.BL
 
         [StringLength(50 , ErrorMessage ="name of Governarate must not exceed 50 characters")]
         public required string Name { get; set; }
-        public required bool Status { get; set; } = true;
+       // public required bool Status { get; set; } = true;
     }
 }

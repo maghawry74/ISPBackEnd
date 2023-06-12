@@ -20,7 +20,7 @@ namespace ISP.BL.Dtos.Offer
         public double DiscoutAmout { get; set; }
         public bool HasRouter { get; set; }
         public double RouterPrice { get; set; }
-        public bool Status { get; set; } = true;
+       // public bool Status { get; set; } = true;
         public int providerId { get; set; }       
 
        
