@@ -1,4 +1,5 @@
-﻿using ISP.BL.Dtos.Users;
+﻿using ISP.API.Helpers;
+using ISP.BL.Dtos.Users;
 using ISP.BL.Services.RoleService;
 using ISP.DAL;
 using Microsoft.AspNetCore.Identity;
@@ -16,12 +17,15 @@ namespace ISP.API.Controllers
     {
         private readonly IConfiguration configuration;
         private readonly UserManager<User> userManager;
+        private readonly RoleManager<Role> roleManager;
         private readonly IRoleService roleService;
-        public UserController(UserManager<User> userManager, IConfiguration configuration, IRoleService roleService)
+        public UserController(UserManager<User> userManager, IConfiguration configuration,
+            IRoleService roleService, RoleManager<Role> roleManager)
         {
             this.userManager = userManager;
             this.configuration = configuration;
             this.roleService = roleService;
+            this.roleManager = roleManager;
         }
 
         #region Admin Register 
@@ -34,17 +38,25 @@ namespace ISP.API.Controllers
                 UserName = adminRegisterDto.UserName,
                 Email = adminRegisterDto.Email,
                 Status = true,
-                PhoneNumber = adminRegisterDto.PhoneNumber,
-                RoleId = null,
-                BranchId = null,
+                PhoneNumber = adminRegisterDto.PhoneNumber,          
                 EmailConfirmed = true
 
             };
-            var created = await userManager.CreateAsync(user, adminRegisterDto.Password);
+            
 
-            if (!created.Succeeded)
+            var getUser = await userManager.FindByEmailAsync(adminRegisterDto.Email);
+
+            if (getUser == null)
             {
-                return BadRequest(created.Errors);
+                var created = await userManager.CreateAsync(user, adminRegisterDto.Password);
+                if (!created.Succeeded)
+                {
+                    return BadRequest(created.Errors);
+                }
+
+                await userManager.AddToRoleAsync(user, "SuperAdmin");
+                user.RoleId = user.Role?.Id;                              
+
             }
 
             var claims = new List<Claim>
@@ -52,7 +64,7 @@ namespace ISP.API.Controllers
 
             new Claim(ClaimTypes.NameIdentifier, user.Id),
             new Claim(ClaimTypes.Name, user.UserName),
-            new Claim(ClaimTypes.Role, "SuperAdmin")
+            new Claim(ClaimTypes.Role, user.Role?.Name)
             };
 
             await userManager.AddClaimsAsync(user, claims);
