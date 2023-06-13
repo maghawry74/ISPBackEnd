@@ -34,9 +34,7 @@ namespace ISP.DAL
         [ForeignKey("Provider")]
         public int ProviderId { get; set; }
         public Provider? Provider { get; set; }
-        [ForeignKey("Offer")]
-        public int OfferId { get; set; }
-        public Offer? Offer { get; set; }
+    
 
         [ForeignKey("Package")]
         public int PackageId { get; set; }

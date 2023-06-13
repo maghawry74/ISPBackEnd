@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ISP.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class intital : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -230,11 +230,13 @@ namespace ISP.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FromDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ToDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Note = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Fee = table.Column<double>(type: "float", nullable: false),
-                    Status = table.Column<bool>(type: "bit", nullable: false),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsPaid = table.Column<bool>(type: "bit", nullable: false),
+                    Amount = table.Column<double>(type: "float", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: true),
                     PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ClientSSn = table.Column<int>(type: "int", nullable: true)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    ClientSSn = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -329,7 +331,6 @@ namespace ISP.DAL.Migrations
                     Address = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProviderId = table.Column<int>(type: "int", nullable: false),
-                    OfferId = table.Column<int>(type: "int", nullable: false),
                     PackageId = table.Column<int>(type: "int", nullable: false),
                     CentralId = table.Column<int>(type: "int", nullable: false),
                     IpPackage = table.Column<int>(type: "int", nullable: true),
@@ -376,13 +377,7 @@ namespace ISP.DAL.Migrations
                         column: x => x.GovernarateCode,
                         principalTable: "Governarates",
                         principalColumn: "Code",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_Clients_Offers_OfferId",
-                        column: x => x.OfferId,
-                        principalTable: "Offers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Clients_Packages_PackageId",
                         column: x => x.PackageId,
@@ -423,6 +418,32 @@ namespace ISP.DAL.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ClientOffers",
+                columns: table => new
+                {
+                    ClientSSn = table.Column<int>(type: "int", nullable: false),
+                    OfferId = table.Column<int>(type: "int", nullable: false),
+                    MonthsLeft = table.Column<int>(type: "int", nullable: false),
+                    FreeMonthsLeft = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClientOffers", x => new { x.ClientSSn, x.OfferId });
+                    table.ForeignKey(
+                        name: "FK_ClientOffers_Clients_ClientSSn",
+                        column: x => x.ClientSSn,
+                        principalTable: "Clients",
+                        principalColumn: "SSn",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ClientOffers_Offers_OfferId",
+                        column: x => x.OfferId,
+                        principalTable: "Offers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -444,6 +465,11 @@ namespace ISP.DAL.Migrations
                 column: "ClientSSn");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Bills_UserId",
+                table: "Bills",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Branches_GovernarateCode",
                 table: "Branches",
                 column: "GovernarateCode");
@@ -462,6 +488,11 @@ namespace ISP.DAL.Migrations
                 name: "IX_Centrals_GovernarateCode",
                 table: "Centrals",
                 column: "GovernarateCode");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ClientOffers_OfferId",
+                table: "ClientOffers",
+                column: "OfferId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Clients_BranchId",
@@ -488,11 +519,6 @@ namespace ISP.DAL.Migrations
                 table: "Clients",
                 columns: new[] { "Mobile1", "Mobile2" },
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Clients_OfferId",
-                table: "Clients",
-                column: "OfferId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Clients_PackageId",
@@ -588,7 +614,15 @@ namespace ISP.DAL.Migrations
                 table: "Bills",
                 column: "ClientSSn",
                 principalTable: "Clients",
-                principalColumn: "SSn");
+                principalColumn: "SSn",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Bills_User_UserId",
+                table: "Bills",
+                column: "UserId",
+                principalTable: "User",
+                principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Branches_User_ManagerId",
@@ -604,6 +638,10 @@ namespace ISP.DAL.Migrations
             migrationBuilder.DropForeignKey(
                 name: "FK_User_Role_RoleId",
                 table: "User");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Bills_User_UserId",
+                table: "Bills");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_Branches_User_ManagerId",
@@ -629,7 +667,13 @@ namespace ISP.DAL.Migrations
                 name: "CentralProvider");
 
             migrationBuilder.DropTable(
+                name: "ClientOffers");
+
+            migrationBuilder.DropTable(
                 name: "UserClaims");
+
+            migrationBuilder.DropTable(
+                name: "Offers");
 
             migrationBuilder.DropTable(
                 name: "Role");
@@ -648,9 +692,6 @@ namespace ISP.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "Centrals");
-
-            migrationBuilder.DropTable(
-                name: "Offers");
 
             migrationBuilder.DropTable(
                 name: "Packages");

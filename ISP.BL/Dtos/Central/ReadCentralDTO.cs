@@ -10,7 +10,7 @@ namespace ISP.BL
 {
    public class ReadCentralDTO
     {
-
+        public int Id { get; set; }
         public required string Name { get; set; } = string.Empty;
        public required int GovernarateCode { get; set; }
         public required bool Status { get; set; }

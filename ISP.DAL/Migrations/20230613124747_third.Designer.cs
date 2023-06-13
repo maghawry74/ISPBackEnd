@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ISP.DAL.Migrations
 {
     [DbContext(typeof(ISPContext))]
-    [Migration("20230612153503_init")]
-    partial class init
+    [Migration("20230613124747_third")]
+    partial class third
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,31 +48,35 @@ namespace ISP.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ClientSSn")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Fee")
+                    b.Property<double>("Amount")
                         .HasColumnType("float");
+
+                    b.Property<int>("ClientSSn")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("FromDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsPaid")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Note")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("PaymentDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Status")
+                    b.Property<bool?>("Status")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("ToDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ClientSSn");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Bills");
                 });
@@ -232,9 +236,6 @@ namespace ISP.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OfferId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("OrderNumber")
                         .HasColumnType("int");
 
@@ -302,8 +303,6 @@ namespace ISP.DAL.Migrations
 
                     b.HasIndex("GovernarateCode");
 
-                    b.HasIndex("OfferId");
-
                     b.HasIndex("PackageId");
 
                     b.HasIndex("Phone")
@@ -315,6 +314,27 @@ namespace ISP.DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Clients");
+                });
+
+            modelBuilder.Entity("ISP.DAL.ClientOffers", b =>
+                {
+                    b.Property<int>("ClientSSn")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OfferId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FreeMonthsLeft")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MonthsLeft")
+                        .HasColumnType("int");
+
+                    b.HasKey("ClientSSn", "OfferId");
+
+                    b.HasIndex("OfferId");
+
+                    b.ToTable("ClientOffers");
                 });
 
             modelBuilder.Entity("ISP.DAL.Governarate", b =>
@@ -702,9 +722,17 @@ namespace ISP.DAL.Migrations
                 {
                     b.HasOne("ISP.DAL.Client", "Client")
                         .WithMany()
-                        .HasForeignKey("ClientSSn");
+                        .HasForeignKey("ClientSSn")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ISP.DAL.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Client");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ISP.DAL.Branch", b =>
@@ -757,12 +785,6 @@ namespace ISP.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ISP.DAL.Offer", "Offer")
-                        .WithMany("Clients")
-                        .HasForeignKey("OfferId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ISP.DAL.Package", "Package")
                         .WithMany("Clients")
                         .HasForeignKey("PackageId")
@@ -783,11 +805,28 @@ namespace ISP.DAL.Migrations
 
                     b.Navigation("Governarate");
 
-                    b.Navigation("Offer");
-
                     b.Navigation("Package");
 
                     b.Navigation("Provider");
+                });
+
+            modelBuilder.Entity("ISP.DAL.ClientOffers", b =>
+                {
+                    b.HasOne("ISP.DAL.Client", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientSSn")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ISP.DAL.Offer", "Offer")
+                        .WithMany()
+                        .HasForeignKey("OfferId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Client");
+
+                    b.Navigation("Offer");
                 });
 
             modelBuilder.Entity("ISP.DAL.Offer", b =>
@@ -815,7 +854,7 @@ namespace ISP.DAL.Migrations
             modelBuilder.Entity("ISP.DAL.User", b =>
                 {
                     b.HasOne("ISP.DAL.Bill", "Bill")
-                        .WithMany("Users")
+                        .WithMany()
                         .HasForeignKey("BillId");
 
                     b.HasOne("ISP.DAL.Branch", "Branch")
@@ -884,11 +923,6 @@ namespace ISP.DAL.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ISP.DAL.Bill", b =>
-                {
-                    b.Navigation("Users");
-                });
-
             modelBuilder.Entity("ISP.DAL.Branch", b =>
                 {
                     b.Navigation("Clients");
@@ -905,11 +939,6 @@ namespace ISP.DAL.Migrations
 
                     b.Navigation("Centrals");
 
-                    b.Navigation("Clients");
-                });
-
-            modelBuilder.Entity("ISP.DAL.Offer", b =>
-                {
                     b.Navigation("Clients");
                 });
 

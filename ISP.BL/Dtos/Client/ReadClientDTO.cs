@@ -10,7 +10,7 @@ namespace ISP.BL
     public class ReadClientDTO
     {
 
-
+        public int SSn { get; set; }
         public  string Name { get; set; } = string.Empty;
 
 
