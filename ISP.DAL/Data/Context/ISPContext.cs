@@ -2,16 +2,19 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
+
 namespace ISP.DAL
 {
    public class ISPContext:IdentityDbContext<User>
-   {
+    {
+        
         public ISPContext(DbContextOptions<ISPContext> contextOptions):base(contextOptions)
         {
             
         }
 
-        public DbSet<Role> Roles =>  Set<Role>();
+       
         public DbSet<Branch> Branches =>  Set<Branch>();
         public DbSet<Governarate> Governarates =>  Set<Governarate>();
         public DbSet<Central> Centrals =>  Set<Central>();
@@ -29,7 +32,7 @@ namespace ISP.DAL
 
 
             builder.Entity<User>().ToTable("User");
-          //  builder.Entity<Role>().ToTable("UserRole");
+            builder.Entity<IdentityRole>().ToTable("Role");            
             builder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
 
                   builder.Entity<Branch>()
@@ -67,8 +70,9 @@ namespace ISP.DAL
             builder.Entity<Offer>().HasQueryFilter(p => p.Status);
             builder.Entity<Package>().HasQueryFilter(p => p.IsActive );
             builder.Entity<Provider>().HasQueryFilter(p => p.IsActive );
-            builder.Entity<Role>().HasQueryFilter(p => p.Status );
-            builder.Entity<User>().HasQueryFilter(p => p.Status );
+            builder.Entity<User>().HasQueryFilter(p => p.Status);          
+        
+       
 
 
             // builder.Entity<Branch>().HasMany(p => p.Phones).WithOne().HasForeignKey(a => a.Id);

@@ -49,14 +49,15 @@ namespace ISP.BL.Services.RoleService
                 return null;
             }
 
-            roleToEdit.Name = updateRoleDto.Name;
-            roleToEdit.IsClientsOrder = updateRoleDto.IsClientsOrder;
-            roleToEdit.NormalizedName = updateRoleDto.Name.ToUpper();            
-            roleToEdit.IsAddNewClient = updateRoleDto.IsAddNewClient;
-            roleToEdit.IsAdmin = updateRoleDto.IsAdmin;
-            roleToEdit.IsSearch = updateRoleDto.IsSearch;
+            //roleToEdit.Name = updateRoleDto.Name;
             roleToEdit.Status = true;
-            
+            //roleToEdit.IsClientsOrder = updateRoleDto.IsClientsOrder;
+            //roleToEdit.NormalizedName = updateRoleDto.Name.ToUpper();            
+            //roleToEdit.IsAddNewClient = updateRoleDto.IsAddNewClient;
+            //roleToEdit.IsAdmin = updateRoleDto.IsAdmin;
+            //roleToEdit.IsSearch = updateRoleDto.IsSearch;
+
+
 
             roleRepository.SaveChange();
 

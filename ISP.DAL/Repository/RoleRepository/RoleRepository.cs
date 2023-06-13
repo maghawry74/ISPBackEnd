@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace ISP.DAL.Repository.RoleRepository
 {
     public class RoleRepository : GenericRepository<Role> , IRoleRepository
@@ -16,9 +11,10 @@ namespace ISP.DAL.Repository.RoleRepository
 
         public string GetRoleNameByID(string id)
         {
-           var getRole = context.Set<Role>().Find(id);          
-            return getRole.Name;
-            
+            //var getRole = context.Set<Role>().Find(id);
+            //return getRole.Name;
+            return ("reem"); 
+
         }
     }
 }

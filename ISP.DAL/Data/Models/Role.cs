@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
 
 namespace ISP.DAL
 {
+<<<<<<< HEAD
     public class Role:IdentityRole
     {
         public string id { get; set; } = string.Empty;
@@ -18,6 +18,12 @@ namespace ISP.DAL
         //public ICollection<User> Users { get; set; } = new HashSet<User>(); 
 
 
+=======
+
+    public class Role : IdentityRole
+    {
+        public bool Status { get; set; } = true;       
+>>>>>>> 1449b4ba56d78d5831f9b7d224a587664e6b7586
 
     }
 }
