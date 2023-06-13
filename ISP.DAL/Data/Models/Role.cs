@@ -5,7 +5,10 @@ namespace ISP.DAL
 
     public class Role : IdentityRole
     {
-        public bool Status { get; set; } = true;       
+        public bool Status { get; set; } = true;
+
 
     }
+
+
 }

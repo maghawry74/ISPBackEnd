@@ -43,7 +43,7 @@ namespace ISP.DAL
 
       ///  public ICollection<Branch> Branches { get; set; } = new HashSet<Branch>();
 
-        public ICollection<Client> Clients { get; set; } = new HashSet<Client>();
+        //public ICollection<Client> Clients { get; set; } = new HashSet<Client>();
 
     }
 }

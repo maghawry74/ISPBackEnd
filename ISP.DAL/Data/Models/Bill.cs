@@ -1,20 +1,27 @@
-﻿namespace ISP.DAL
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ISP.DAL
 {
     public class Bill
     {
         public int Id { get; set; }
         public DateTime FromDate { get; set; }
         public DateTime ToDate { get; set; }
-        public string Note { get; set; } = string.Empty;
+        public string? Note { get; set; } = string.Empty;
+        public bool IsPaid { get; set; }
+        public double Amount { get; set; }
+        public bool? Status { get; set; } = true;
 
-        public double Fee { get; set; }
-        public bool Status { get; set; } = true;
+        // public DateTime PaymentDate { get; set; } = DateTime.Now;
 
-        public DateTime PaymentDate { get; set; }
+        [ForeignKey("User")]
+        public string? UserId { get; set; } = string.Empty;
 
-        public ICollection<User> Users { get; set; } = new HashSet<User>();
+        public User? User  { get; set; } 
 
-       public Client? Client { get; set; }
+        [ForeignKey("Client")]
+        public int ClientSSn { get; set; }
+        public Client? Client { get; set; }
 
     }
 }

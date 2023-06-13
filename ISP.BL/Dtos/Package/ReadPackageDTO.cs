@@ -11,7 +11,7 @@ namespace ISP.BL
 {
   public class ReadPackageDTO
     {
-       
+        public int Id { get; set; }
         public required string Name { get; set; } = string.Empty;
         [Required]
         public required string Type { get; set; } = string.Empty;

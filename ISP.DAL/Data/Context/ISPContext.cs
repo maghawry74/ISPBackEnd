@@ -22,6 +22,8 @@ namespace ISP.DAL
         public DbSet<Offer> Offers =>  Set<Offer>();
         public DbSet<Package> Packages => Set<Package>();
         public DbSet<Client> Clients => Set<Client>();
+        public DbSet<ClientOffers> ClientOffers => Set<ClientOffers>();
+
         public DbSet<Bill> Bills => Set<Bill>();
 
 
@@ -62,7 +64,7 @@ namespace ISP.DAL
 
             //Global Filters
 
-            builder.Entity<Bill>().HasQueryFilter(p => p.Status);
+           // builder.Entity<Bill>().HasQueryFilter(p => p.Status);
             builder.Entity<Branch>().HasQueryFilter(p => p.Status );
             builder.Entity<Governarate>().HasQueryFilter(p => p.Status);
             builder.Entity<Central>().HasQueryFilter(p => p.Status);

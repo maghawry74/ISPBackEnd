@@ -47,12 +47,13 @@ namespace ISP.BL
             
 
             //Offer
-            CreateMap<Offer, ReadOfferDto>()
-                .ForSourceMember(x => x.Clients, opt => opt.DoNotValidate())
-                .ReverseMap();
-            CreateMap<Offer, WriteOfferDto>()
-                .ForSourceMember(x => x.Clients, opt => opt.DoNotValidate())
-                .ReverseMap();
+            //CreateMap<Offer, ReadOfferDto>()
+            //    .ForSourceMember(x => x.Clients, opt => opt.DoNotValidate())
+            //    .ReverseMap();
+            //CreateMap<Offer, WriteOfferDto>()
+            //    .ForSourceMember(x => x.Clients, opt => opt.DoNotValidate())
+            //    .ReverseMap();
+
             CreateMap<Offer, UpdataOfferDto>().ReverseMap();
             
 
