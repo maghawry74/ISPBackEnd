@@ -88,7 +88,7 @@ namespace ISPBackEnd.Tests.Controller
         public async Task GovernarateController_Add_ReturnsOk()
         {
             // Arrange
-            var writeGovernarateDTO = new WriteGovernarateDTO { Code = 1 , Name = "Governarate 1", Status = true };
+            var writeGovernarateDTO = new WriteGovernarateDTO { Code = 1 , Name = "Governarate 1" };
             var expectedGovernarate = new ReadGovernarateDTO { Code = 1, Name = "Governarate 1", Status = true };
             var fakeGovernarateService = A.Fake<IGovernarateService>();
             A.CallTo(() => fakeGovernarateService.AddGovernarate(writeGovernarateDTO)).Returns(expectedGovernarate);
@@ -109,7 +109,7 @@ namespace ISPBackEnd.Tests.Controller
         public async Task GovernarateController_Add_ReturnsBadRequest()
         {
             // Arrange
-            var writeGovernarateDTO = new WriteGovernarateDTO {  Code= 55 ,Name = "", Status = true };
+            var writeGovernarateDTO = new WriteGovernarateDTO {  Code= 55 ,Name = "" };
             var fakeGovernarateService = A.Fake<IGovernarateService>();
             var controller = new GovernarateController(fakeGovernarateService);
             controller.ModelState.AddModelError("Name", "The Name field is required.");
