@@ -18,6 +18,7 @@ namespace ISP.API.RedisterDependancies
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IOfferRepository, OfferRepository>();
             services.AddScoped<IClientRepository, ClientRepository>();
+            services.AddScoped<IBillRepository , BillRepository>();
         }
     }
 }

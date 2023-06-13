@@ -16,7 +16,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpGet]
-        //[ResponseCache(Duration = 60)]
+        // [ResponseCache(Duration = 60)]
         public async Task<ActionResult<List<ReadGovernarateDTO>>> GetAll()
         {
             var GovernarateList = await governarateService.GetAll();
@@ -58,7 +58,7 @@ namespace ISP.API.Controllers
             if (Code != updateGovernarateDTO.Code)
             {
                 return Problem(detail: "the object To Edit dees not exsits", statusCode: 404,
-                   title: "error", type: "null reference");
+                   title: "error", type: "null reference");   
             }
 
             var updatedGovernarate = await governarateService.UpdateGovernarate(Code, updateGovernarateDTO);

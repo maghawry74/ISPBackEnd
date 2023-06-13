@@ -1,6 +1,8 @@
 ﻿using ISP.BL.Services.OfferService;
 using ISP.BL.Services.RoleService;
 using ISP.BL;
+using Hangfire;
+using ISP.DAL;
 
 namespace ISP.API.RedisterDependancies
 {
@@ -20,7 +22,18 @@ namespace ISP.API.RedisterDependancies
            services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IOfferService, OfferService>();
             services.AddScoped<IClientservice, ClientService>();
+            services.AddScoped<IBillService , BillService>();
+
+
+
         }
+
+        //public static void AddHangfire(this WebApplicationBuilder builder)
+        //{
+        //    builder.Services.AddScoped<IBillService , BillService>();
+        //    builder.Services.AddHangfire(x => x.UseSqlServerStorage(builder.Configuration.GetConnectionString("connction_string")));
+        //    builder.Services.AddHangfireServer();
+        //}
 
     }
 }

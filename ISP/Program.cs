@@ -1,5 +1,6 @@
 using Ecommerce.API.MiddleWare;
 using FluentValidation.AspNetCore;
+using Hangfire;
 using ISP.API.RedisterDependancies;
 
 using ISP.BL;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 
@@ -26,6 +28,11 @@ builder.Services.AddSwaggerGen();
 
 #endregion
 
+#region HangFire confg
+builder.Services.AddHangfire(x => x.UseSqlServerStorage(builder.Configuration.GetConnectionString("connction_string")));
+builder.Services.AddHangfireServer();
+
+#endregion
 
 #region Configure CORS
 builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
@@ -119,6 +126,13 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.UseHangfireDashboard("/dash");  //
+
+//app.UseHangfireServer();
 app.MapControllers();
 
+
 app.Run();
+
+
+
