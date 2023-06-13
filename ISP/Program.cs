@@ -1,20 +1,13 @@
 using Ecommerce.API.MiddleWare;
 using FluentValidation.AspNetCore;
 using ISP.API.RedisterDependancies;
-using ISP.BL;
-using ISP.BL.Services.OfferService;
-using ISP.BL.Services.RoleService;
-using ISP.DAL;
-using ISP.DAL.Repository.BranchRepository;
-using ISP.DAL.Repository.CentralRepository;
 
-using ISP.DAL.Repository.OfferRepository;
-using ISP.DAL.Repository.RoleRepository;
+using ISP.BL;
+using ISP.DAL;
 using Microsoft.AspNetCore.Identity;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Reflection;
 using System.Text;
 
 
@@ -69,7 +62,6 @@ builder.Services
     .AddEntityFrameworkStores<ISPContext>();
 
 #endregion
-
 
 #region Automapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

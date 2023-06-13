@@ -33,10 +33,11 @@ namespace ISP.API.Controllers
             {
                 UserName = adminRegisterDto.UserName,
                 Email = adminRegisterDto.Email,
-                Status = adminRegisterDto.Status,
+                Status = true,
                 PhoneNumber = adminRegisterDto.PhoneNumber,
-                RoleId = "1",
-                BranchId = adminRegisterDto.BranchId,
+                RoleId = null,
+                BranchId = null,
+                EmailConfirmed = true
 
             };
             var created = await userManager.CreateAsync(user, adminRegisterDto.Password);
@@ -51,7 +52,7 @@ namespace ISP.API.Controllers
 
             new Claim(ClaimTypes.NameIdentifier, user.Id),
             new Claim(ClaimTypes.Name, user.UserName),
-            new Claim(ClaimTypes.Role, "Admin")
+            new Claim(ClaimTypes.Role, "SuperAdmin")
             };
 
             await userManager.AddClaimsAsync(user, claims);
@@ -111,10 +112,11 @@ namespace ISP.API.Controllers
             {
                 UserName = registerDto.UserName,
                 Email = registerDto.Email,
-                Status = registerDto.Status,
+                Status =true,
                 PhoneNumber = registerDto.PhoneNumber,
                 BranchId = registerDto.BranchId,
                 RoleId = registerDto.RoleId,
+                EmailConfirmed = true
             };
             var created = await userManager.CreateAsync(user, registerDto.Password);
 
