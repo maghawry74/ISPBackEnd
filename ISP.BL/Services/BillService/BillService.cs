@@ -21,7 +21,6 @@ namespace ISP.BL
             
             return billRepository.BillGenerationSP();
 
-
         }
     }
 }

@@ -59,7 +59,7 @@ namespace ISPBackEnd.Tests.Controller
 
         [Fact]
 
-        public async void GovernaratesController_GetGovernaratesByID_ReturnsOk()
+        public async Task GovernaratesController_GetGovernaratesByID_ReturnsOk()
         {
 
             // Arrange
@@ -89,6 +89,7 @@ namespace ISPBackEnd.Tests.Controller
         {
             // Arrange
             var writeGovernarateDTO = new WriteGovernarateDTO { Code = 1 , Name = "Governarate 1" };
+
             var expectedGovernarate = new ReadGovernarateDTO { Code = 1, Name = "Governarate 1", Status = true };
             var fakeGovernarateService = A.Fake<IGovernarateService>();
             A.CallTo(() => fakeGovernarateService.AddGovernarate(writeGovernarateDTO)).Returns(expectedGovernarate);
@@ -110,6 +111,7 @@ namespace ISPBackEnd.Tests.Controller
         {
             // Arrange
             var writeGovernarateDTO = new WriteGovernarateDTO {  Code= 55 ,Name = "" };
+
             var fakeGovernarateService = A.Fake<IGovernarateService>();
             var controller = new GovernarateController(fakeGovernarateService);
             controller.ModelState.AddModelError("Name", "The Name field is required.");
@@ -129,6 +131,7 @@ namespace ISPBackEnd.Tests.Controller
             // Arrange
             int code = 1;
             var updateGovernarateDTO = new UpdateGovernarateDTO { Code = 1, Name = "Governarate 1" };
+
             var expectedReadGovernarateDTO = new ReadGovernarateDTO { Code = 1, Name = "Governarate 1", Status = true };
             var fakeGovernarateService = A.Fake<IGovernarateService>();
             A.CallTo(() => fakeGovernarateService.UpdateGovernarate(code, updateGovernarateDTO)).Returns(expectedReadGovernarateDTO);
@@ -140,9 +143,11 @@ namespace ISPBackEnd.Tests.Controller
 
             // Assert
             var okObjectResult = Assert.IsType<OkObjectResult>(result.Result);
+
             var readGovernarateDTO = Assert.IsType<ReadGovernarateDTO>(okObjectResult.Value);
-            Assert.Equal(expectedReadGovernarateDTO.Code, readGovernarateDTO.Code);
-            Assert.Equal(expectedReadGovernarateDTO.Name, readGovernarateDTO.Name);
+
+            Assert.Equal(expectedReadGovernarateDTO.Code, updateGovernarateDTO.Code);
+            Assert.Equal(expectedReadGovernarateDTO.Name, updateGovernarateDTO.Name);
             Assert.Equal(expectedReadGovernarateDTO.Status, readGovernarateDTO.Status);
         }
 

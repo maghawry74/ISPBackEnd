@@ -15,12 +15,12 @@ namespace ISP.API.Controllers
             this.billService = billService;
         }
 
-        [HttpPost]
-        public IActionResult ScheduleJob()
-        {
-            RecurringJob.AddOrUpdate("MyJob", () => billService.BillGenerationSP(), "35 18 * * *");
-            return Ok();
-        }
+        //[HttpPost]
+        //public IActionResult ScheduleJob()
+        //{
+          
+        //    return Ok();
+        //}
 
 
     }

@@ -128,9 +128,9 @@ app.UseAuthorization();
 
 app.UseHangfireDashboard("/dash");  //
 
-//app.UseHangfireServer();
 app.MapControllers();
 
+RecurringJob.AddOrUpdate<IBillService>("MyJob", s=>s.BillGenerationSP() , "35 18 * * *");
 
 app.Run();
 
