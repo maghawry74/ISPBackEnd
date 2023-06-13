@@ -28,12 +28,7 @@ namespace ISP.API.RedisterDependancies
 
         }
 
-        //public static void AddHangfire(this WebApplicationBuilder builder)
-        //{
-        //    builder.Services.AddScoped<IBillService , BillService>();
-        //    builder.Services.AddHangfire(x => x.UseSqlServerStorage(builder.Configuration.GetConnectionString("connction_string")));
-        //    builder.Services.AddHangfireServer();
-        //}
+       
 
     }
 }
