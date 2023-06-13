@@ -377,7 +377,7 @@ namespace ISP.DAL.Migrations
                     b.Property<bool>("IsPercentageDiscount")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsPossibleToRasieOrLower")
+                    b.Property<bool?>("IsPossibleToRasieOrLower")
                         .HasColumnType("bit");
 
                     b.Property<bool>("Isfreefirst")

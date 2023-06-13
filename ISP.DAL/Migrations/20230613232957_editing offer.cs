@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ISP.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class intital : Migration
+    public partial class editingoffer : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -85,7 +85,7 @@ namespace ISP.DAL.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CancelFine = table.Column<double>(type: "float", nullable: false),
                     FineOfSuspensed = table.Column<double>(type: "float", nullable: false),
-                    IsPossibleToRasieOrLower = table.Column<bool>(type: "bit", nullable: false),
+                    IsPossibleToRasieOrLower = table.Column<bool>(type: "bit", nullable: true),
                     NumOfOfferMonth = table.Column<int>(type: "int", nullable: false),
                     NumOfFreeMonth = table.Column<int>(type: "int", nullable: false),
                     Isfreefirst = table.Column<bool>(type: "bit", nullable: false),
@@ -234,7 +234,6 @@ namespace ISP.DAL.Migrations
                     IsPaid = table.Column<bool>(type: "bit", nullable: false),
                     Amount = table.Column<double>(type: "float", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: true),
-                    PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     ClientSSn = table.Column<int>(type: "int", nullable: false)
                 },
@@ -365,13 +364,13 @@ namespace ISP.DAL.Migrations
                         column: x => x.BranchId,
                         principalTable: "Branches",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Clients_Centrals_CentralId",
                         column: x => x.CentralId,
                         principalTable: "Centrals",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Clients_Governarates_GovernarateCode",
                         column: x => x.GovernarateCode,
@@ -383,13 +382,13 @@ namespace ISP.DAL.Migrations
                         column: x => x.PackageId,
                         principalTable: "Packages",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Clients_Providers_ProviderId",
                         column: x => x.ProviderId,
                         principalTable: "Providers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Clients_User_DisstrubtorId",
                         column: x => x.DisstrubtorId,

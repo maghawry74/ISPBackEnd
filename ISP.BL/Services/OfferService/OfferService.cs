@@ -63,15 +63,14 @@ public class OfferService : IOfferService
 
         offerToEdit.Id = updataOfferDto.Id;
         offerToEdit.Name = updataOfferDto.Name;
-        offerToEdit.NumOfOfferMonth = updataOfferDto.NumOfOfferMonth;
-        offerToEdit.NumOfOfferMonth = updataOfferDto.NumOfFreeMonth;
+        offerToEdit.NumOfFreeMonth= updataOfferDto.NumberOfFreeMonths;
+        offerToEdit.NumOfOfferMonth = updataOfferDto.NumberOfMonths;
         offerToEdit.RouterPrice = updataOfferDto.RouterPrice;
-        offerToEdit.IsPercentageDiscount = updataOfferDto.IsPercentageDiscount;
-        offerToEdit.CancelFine = updataOfferDto.CancelFine;               
-        offerToEdit.Isfreefirst = updataOfferDto.Isfreefirst;
-        offerToEdit.DiscoutAmout = updataOfferDto.DiscoutAmout;
-        offerToEdit.HasRouter = updataOfferDto.HasRouter;
-        offerToEdit.IsPossibleToRasieOrLower = updataOfferDto.IsPossibleToRasieOrLower;
+        offerToEdit.IsPercentageDiscount = updataOfferDto.IsPercent;
+        offerToEdit.CancelFine = updataOfferDto.CancelFee;               
+        offerToEdit.Isfreefirst = updataOfferDto.FreeMonthsFirst;
+        offerToEdit.DiscoutAmout = updataOfferDto.CancelFee;
+        offerToEdit.HasRouter = updataOfferDto.FreeRouter;        
         offerToEdit.Status = true;
             
 

@@ -4,10 +4,10 @@ namespace ISP.BL
 {
     public class CentralWriteValidation:AbstractValidator<WriteCentralDTO>
     {
-        public CentralWriteValidation()
-        {
-            RuleFor(a => a.Name).MinimumLength(3);
-        }
+        //public CentralWriteValidation()
+        //{
+        //    RuleFor(a => a.Name).MinimumLength(3);
+        //}
            
     }
 }

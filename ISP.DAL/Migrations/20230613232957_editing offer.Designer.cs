@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ISP.DAL.Migrations
 {
     [DbContext(typeof(ISPContext))]
-    [Migration("20230613124747_third")]
-    partial class third
+    [Migration("20230613232957_editing offer")]
+    partial class editingoffer
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -380,7 +380,7 @@ namespace ISP.DAL.Migrations
                     b.Property<bool>("IsPercentageDiscount")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsPossibleToRasieOrLower")
+                    b.Property<bool?>("IsPossibleToRasieOrLower")
                         .HasColumnType("bit");
 
                     b.Property<bool>("Isfreefirst")

@@ -7,7 +7,7 @@ namespace ISP.DAL
     {
         public int Id { get; set; }
 
-        [StringLength(50)]
+        [StringLength(50)]        
         public string Name { get; set; }  = string.Empty;
         public bool Status { get; set; } = true;
 

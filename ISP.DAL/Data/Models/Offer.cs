@@ -1,10 +1,4 @@
-﻿using ISP.DAL;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ISP.DAL
 {
@@ -17,8 +11,7 @@ namespace ISP.DAL
 
         public double FineOfSuspensed { get; set; }
 
-        public bool IsPossibleToRasieOrLower { get; set; }
-
+        public bool? IsPossibleToRasieOrLower { get; set; }
 
 
         public int NumOfOfferMonth { get; set; }

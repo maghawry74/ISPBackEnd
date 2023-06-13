@@ -32,9 +32,58 @@ namespace ISP.BL
             //Provider
             CreateMap<Provider , ReadProviderDTO>().ReverseMap();
             CreateMap<Provider , WriteProviderDTO>().ReverseMap();
-            CreateMap<Provider , UpdateProviderDTO>().ReverseMap();
-          
             CreateMap<ReadProviderDTO, UpdateProviderDTO>().ReverseMap();
+
+            //Offer
+            CreateMap<Offer, UpdataOfferDto>()
+                .ForMember(o => o.IsPercent, opt => opt.MapFrom(src => src.IsPercentageDiscount))
+                .ForMember(o => o.FreeRouter, opt => opt.MapFrom(src => src.HasRouter))
+                .ForMember(o => o.RouterPrice, opt => opt.MapFrom(src => src.RouterPrice))
+                .ForMember(o => o.IsPercent, opt => opt.MapFrom(src => src.IsPercentageDiscount))
+                .ForMember(o => o.CancelFee, opt => opt.MapFrom(src => src.CancelFine))
+                .ForMember(o => o.ProviderId, opt => opt.MapFrom(src => src.ProviderId))
+                .ForMember(o => o.NumberOfMonths, opt => opt.MapFrom(src => src.NumOfOfferMonth))
+                .ForMember(o => o.Discount, opt => opt.MapFrom(src => src.DiscoutAmout))
+                .ForMember(o => o.IsPercent, opt => opt.MapFrom(src => src.IsPercentageDiscount))
+                .ForMember(o => o.FreeMonthsFirst, opt => opt.MapFrom(src => src.Isfreefirst))
+                .ForMember(o => o.NumberOfFreeMonths, opt => opt.MapFrom(src => src.NumOfFreeMonth))
+                .ForMember(o => o.CancelFee, opt => opt.MapFrom(src => src.CancelFine))
+                .ForMember(o => o.SuspendFee, opt => opt.MapFrom(src => src.FineOfSuspensed))
+                .ReverseMap();
+
+            CreateMap<Offer, WriteOfferDto>()
+               .ForMember(o => o.IsPercent, opt => opt.MapFrom(src => src.IsPercentageDiscount))
+               .ForMember(o => o.FreeRouter, opt => opt.MapFrom(src => src.HasRouter))
+               .ForMember(o => o.RouterPrice, opt => opt.MapFrom(src => src.RouterPrice))
+               .ForMember(o => o.IsPercent, opt => opt.MapFrom(src => src.IsPercentageDiscount))
+               .ForMember(o => o.CancelFee, opt => opt.MapFrom(src => src.CancelFine))
+               .ForMember(o => o.ProviderId, opt => opt.MapFrom(src => src.ProviderId))
+               .ForMember(o => o.NumberOfMonths, opt => opt.MapFrom(src => src.NumOfOfferMonth))
+               .ForMember(o => o.Discount, opt => opt.MapFrom(src => src.DiscoutAmout))
+               .ForMember(o => o.IsPercent, opt => opt.MapFrom(src => src.IsPercentageDiscount))
+               .ForMember(o => o.FreeMonthsFirst, opt => opt.MapFrom(src => src.Isfreefirst))
+               .ForMember(o => o.NumberOfFreeMonths, opt => opt.MapFrom(src => src.NumOfFreeMonth))
+               .ForMember(o => o.CancelFee, opt => opt.MapFrom(src => src.CancelFine))
+               .ForMember(o => o.SuspendFee, opt => opt.MapFrom(src => src.FineOfSuspensed))
+               .ReverseMap();
+
+            CreateMap<Offer, ReadOfferDto>()
+               .ForMember(o => o.IsPercent, opt => opt.MapFrom(src => src.IsPercentageDiscount))
+               .ForMember(o => o.FreeRouter, opt => opt.MapFrom(src => src.HasRouter))
+               .ForMember(o => o.RouterPrice, opt => opt.MapFrom(src => src.RouterPrice))
+               .ForMember(o => o.IsPercent, opt => opt.MapFrom(src => src.IsPercentageDiscount))
+               .ForMember(o => o.CancelFee, opt => opt.MapFrom(src => src.CancelFine))
+               .ForMember(o => o.Provider, opt => opt.MapFrom(src => src.Provider.Id))
+               .ForMember(o => o.NumberOfMonths, opt => opt.MapFrom(src => src.NumOfOfferMonth))
+               .ForMember(o => o.Discount, opt => opt.MapFrom(src => src.DiscoutAmout))
+               .ForMember(o => o.IsPercent, opt => opt.MapFrom(src => src.IsPercentageDiscount))
+               .ForMember(o => o.FreeMonthsFirst, opt => opt.MapFrom(src => src.Isfreefirst))
+               .ForMember(o => o.NumberOfFreeMonths, opt => opt.MapFrom(src => src.NumOfFreeMonth))
+               .ForMember(o => o.CancelFee, opt => opt.MapFrom(src => src.CancelFine))
+               .ForMember(o => o.SuspendFee, opt => opt.MapFrom(src => src.FineOfSuspensed))
+               .ReverseMap();
+
+
 
 
             //Package
@@ -54,8 +103,6 @@ namespace ISP.BL
             //    .ForSourceMember(x => x.Clients, opt => opt.DoNotValidate())
             //    .ReverseMap();
 
-            CreateMap<Offer, UpdataOfferDto>().ReverseMap();
-            
 
             //Role
             CreateMap<Role, ReadRoleDto>().ReverseMap();
