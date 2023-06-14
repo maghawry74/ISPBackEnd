@@ -26,9 +26,9 @@ namespace ISPBackEnd.Tests.Controller
             var providerexpectedlist = new List<ReadProviderDTO>
             {
 
-                new ReadProviderDTO {Name = "we"  , IsActive = true},
-                new ReadProviderDTO {Name = "etsilat"  , IsActive = true},
-                new ReadProviderDTO {Name = "vodafone"  , IsActive = false}
+                new ReadProviderDTO {Name = "we"  },
+                new ReadProviderDTO {Name = "etsilat"  },
+                new ReadProviderDTO {Name = "vodafone" }
 
             };
 
@@ -56,7 +56,7 @@ namespace ISPBackEnd.Tests.Controller
         public async Task GovernaratesController_GetGovernaratesByID_ReturnsOk()
         {
             int id = 5;
-            var expectedprovider = new ReadProviderDTO() { Name = "we", IsActive = false };
+            var expectedprovider = new ReadProviderDTO() { Name = "we"};
 
             var fakeProviderService = A.Fake<IProviderService>();
 
@@ -85,7 +85,7 @@ namespace ISPBackEnd.Tests.Controller
             //arrange
 
             WriteProviderDTO writeProviderDTO = new WriteProviderDTO { Name = "we" };
-            ReadProviderDTO expectedProvider = new ReadProviderDTO { Name = "we", IsActive = true };
+            ReadProviderDTO expectedProvider = new ReadProviderDTO { Name = "we"};
 
             var fakeproviderService = A.Fake<IProviderService>();
 
@@ -130,9 +130,9 @@ namespace ISPBackEnd.Tests.Controller
         {
             // arrange
             int id = 5;
-            UpdateProviderDTO updateProviderDTO = new UpdateProviderDTO { Id = 5, Name = "ma", IsActive = true };
+            UpdateProviderDTO updateProviderDTO = new UpdateProviderDTO { Id = 5, Name = "ma" };
 
-            var expectedProviderDto = new ReadProviderDTO { Name = "ma", IsActive = true };
+            var expectedProviderDto = new ReadProviderDTO { Name = "ma" };
 
 
             //create fake iproviderservice
@@ -159,7 +159,7 @@ namespace ISPBackEnd.Tests.Controller
         {
             // Arrange
             var Id = 5 ;
-            var expectedReadproviderDTO = new ReadProviderDTO {  Name = "we", IsActive = true };
+            var expectedReadproviderDTO = new ReadProviderDTO {  Name = "we" };
 
             var fakeProviderService = A.Fake<IProviderService>();
             A.CallTo(() => fakeProviderService.Remove(Id)).Returns(expectedReadproviderDTO);
@@ -174,8 +174,7 @@ namespace ISPBackEnd.Tests.Controller
             var readproviderDTO = Assert.IsType<ReadProviderDTO>(okObjectResult.Value);
 
             Assert.Equal(expectedReadproviderDTO.Name , readproviderDTO.Name);
-            Assert.Equal(expectedReadproviderDTO.IsActive , readproviderDTO.IsActive);
-   
+         
        
         }
 

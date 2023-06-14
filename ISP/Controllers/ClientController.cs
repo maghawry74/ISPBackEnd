@@ -50,10 +50,10 @@ namespace ISP.API.Controllers
 
 
         [HttpPut]
-        [Route("{Code}")]
+        [Route("{SSn}")]
         public async Task<ActionResult<ReadClientDTO>> Edit(int SSn, UpdateClientDTO updateClientDTO)
         {
-            if (SSn != updateClientDTO.SSn)
+            if (SSn != updateClientDTO.SSID)
             {
                 return Problem(detail: "the object To Edit dees not exsits", statusCode: 404,
                    title: "error", type: "null reference");
