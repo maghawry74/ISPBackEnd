@@ -22,7 +22,7 @@ namespace ISP.BL
         public required bool IsActive { get; set; }
 
         [Required]
-        public required int ProviderId { get; set; }
+        public required string ProviderName { get; set; }
 
 
     }

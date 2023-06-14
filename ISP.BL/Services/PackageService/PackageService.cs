@@ -69,7 +69,6 @@ namespace ISP.BL
             PackageToEdit.Note= updatePackageDTO.Note;
             PackageToEdit.Price= updatePackageDTO.Price;
             PackageToEdit.Type= updatePackageDTO.Type;
-            PackageToEdit.IsActive= updatePackageDTO.IsActive;
             PackageToEdit.ProviderId= updatePackageDTO.ProviderId;
             PackageRepository.Update(PackageToEdit);
 

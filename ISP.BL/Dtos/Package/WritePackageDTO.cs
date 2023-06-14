@@ -16,7 +16,6 @@ namespace ISP.BL
         public required double Price { get; set; }
         public string Note { get; set; } = string.Empty;
 
-        public required bool IsActive { get; set; }
 
 
         [Required]

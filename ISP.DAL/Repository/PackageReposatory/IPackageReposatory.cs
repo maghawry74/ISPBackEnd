@@ -9,5 +9,6 @@ namespace ISP.DAL
 {
     public interface IPackageReposatory:IGenericRepository<Package>
     {
+
     }
 }
