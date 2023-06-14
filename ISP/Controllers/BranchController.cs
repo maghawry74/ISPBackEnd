@@ -14,7 +14,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpGet]
-        [ResponseCache(Duration = 60)]
+  
         public async Task<ActionResult<List<ReadBranchDTO>>> GetAll()
         {
             var BranchList = await branchService.GetAll();
@@ -24,7 +24,7 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        [ResponseCache(Duration = 60)]
+
         public async Task<ActionResult<ReadBranchDTO> >GetById(int id)
         {
             var Branch = await branchService.GetById(id);

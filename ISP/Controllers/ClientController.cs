@@ -14,7 +14,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpGet]
-        [ResponseCache(Duration = 60)]
+
         public async Task<ActionResult<List<ReadClientDTO>>> GetAll()
         {
             var ClientList = await clientservice.GetAll();
@@ -24,7 +24,7 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("{SSn}")]
-        [ResponseCache(Duration = 60)]
+
         public async Task<ActionResult<ReadClientDTO>> GetById(int SSn)
         {
             var client = await clientservice.GetById(SSn);

@@ -12,7 +12,7 @@ namespace ISP.API.Controllers
             this.PackageService = PackageService;
         }
         [HttpGet]
-        [ResponseCache(Duration = 60)]
+
         public async Task<ActionResult<List<ReadPackageDTO>>> GetAll()
         {
             var PackageList = await PackageService.GetAll();
@@ -23,7 +23,6 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        [ResponseCache(Duration = 60)]
         public async Task<ActionResult<ReadPackageDTO>> GetById(int id)
         {
             var Package= await PackageService.GetById(id);
