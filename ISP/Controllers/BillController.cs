@@ -15,11 +15,13 @@ namespace ISP.API.Controllers
             this.billService = billService;
         }
 
-        //[HttpPost]
+        //   [HttpPost]         
+
         //public IActionResult ScheduleJob()
         //{
+        
+           //     return Ok();
           
-        //    return Ok();
         //}
 
 
