@@ -18,7 +18,6 @@ namespace ISP.API.Controllers
         }
 
         [HttpGet]
-        [ResponseCache(Duration = 60)]
         public async Task<ActionResult<List<ReadRoleDto>>> GetAll()
         {
             return await roleService.GetAll();          
@@ -27,7 +26,6 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("{Id}")]
-        [ResponseCache(Duration = 60)]
         public async Task<ActionResult<ReadRoleDto>> GetById(int Id)
         {
             var getRole = await roleService.GetById(Id);

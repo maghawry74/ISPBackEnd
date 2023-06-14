@@ -16,7 +16,6 @@ namespace ISP.API.Controllers
         }
 
         [HttpGet]
-        [ResponseCache(Duration = 60)]
         public async Task<ActionResult<List<ReadProviderDTO>>> GetAll()
         {
             var ProviderList = await providerService.GetAll();
@@ -26,7 +25,6 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("{Id}")]
-        [ResponseCache(Duration = 60)]
         public async Task<ActionResult<ReadProviderDTO>> GetById(int Id)
         {
             var Provider= await providerService.GetById(Id);

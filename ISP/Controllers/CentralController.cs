@@ -15,7 +15,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpGet]
-        [ResponseCache(Duration =60)]
+
         public async Task<ActionResult<List<ReadCentralDTO>>> GetAll()
         {
             var CentralList = await centalService.GetAll();
@@ -25,7 +25,7 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("getallwithgov")]
-        [ResponseCache(Duration = 60)]
+
         public async Task<ActionResult<List<ReadCentralWithGovernarateDTO>>> getallwithgov()
         {
             var CentralList = await centalService.GetAllWithGov();

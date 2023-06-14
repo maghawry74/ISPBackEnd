@@ -16,7 +16,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpGet]
-        // [ResponseCache(Duration = 60)]
+    
         public async Task<ActionResult<List<ReadGovernarateDTO>>> GetAll()
         {
             var GovernarateList = await governarateService.GetAll();
@@ -26,7 +26,7 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("{Code}")]
-        [ResponseCache(Duration = 60)]
+  
         public async Task<ActionResult<ReadGovernarateDTO>> GetById(int Code)
         {
             var Governarate = await governarateService.GetById(Code);
