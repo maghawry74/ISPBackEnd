@@ -9,35 +9,46 @@ namespace ISP.BL
     {
         public AutoMapperProfile()
         {
+            #region Branch
             //Branch
             CreateMap<Branch , ReadBranchDTO>().ReverseMap();
             CreateMap<Branch , WriteBranchDTO>().ReverseMap();            
             CreateMap<Branch , UpdateBranchDTO>().ReverseMap();
-            CreateMap<ReadBranchDTO, UpdateProviderDTO>().ReverseMap();
+            #endregion
 
+            #region Goernorate
             //Governarate
             CreateMap<Governarate , ReadGovernarateDTO>().ReverseMap();
             CreateMap<Governarate , WriteGovernarateDTO>().ReverseMap();
             CreateMap<Governarate , UpdateGovernarateDTO>().ReverseMap();
-   
+            #endregion
 
+            #region Central
             //Central
             CreateMap<Central , ReadCentralDTO>().ReverseMap();
             CreateMap<Central , WriteCentralDTO>().ReverseMap();
             CreateMap<Central , UpdateCentralDTO>().ReverseMap();
+<<<<<<< HEAD
             CreateMap<Central , ReadCentralWithGovernarateDTO>().ReverseMap();
 
 
   
 
 
+=======
+            CreateMap<Central ,ReadCentralWithGovernarateDTO>().ReverseMap();
+            #endregion
+>>>>>>> 157559ea409efc9a037ddf81b70b52e43f0cc964
 
 
+            #region Provider
             //Provider
             CreateMap<Provider , ReadProviderDTO>().ReverseMap();
             CreateMap<Provider , WriteProviderDTO>().ReverseMap();
-            CreateMap<ReadProviderDTO, UpdateProviderDTO>().ReverseMap();
 
+            #endregion
+
+            #region Offer
             //Offer
             CreateMap<Offer, UpdataOfferDto>()
                 .ForMember(o => o.IsPercent, opt => opt.MapFrom(src => src.IsPercentageDiscount))
@@ -87,6 +98,7 @@ namespace ISP.BL
                .ForMember(o => o.SuspendFee, opt => opt.MapFrom(src => src.FineOfSuspensed))
                .ReverseMap();
 
+            #endregion
 
             //client
             CreateMap<Client, ReadClientDTO>()
@@ -104,6 +116,9 @@ namespace ISP.BL
                 .ForMember(c => c.UserName, cmt => cmt.MapFrom(src => src.userName))
                 .ForMember(c => c.Password, cmt => cmt.MapFrom(src => src.Password))
                 .ReverseMap();
+
+
+            #region Package
 
             CreateMap<Client, UpdateClientDTO>()
               .ForMember(c => c.SSID, cmt => cmt.MapFrom(src => src.SSn))
@@ -143,30 +158,50 @@ namespace ISP.BL
 
           
 
+
             //Package
             CreateMap<Package, ReadPackageDTO>().ReverseMap();
             CreateMap<Package, WritePackageDTO>().ReverseMap();
             CreateMap<Package, UpdatePackageDTO>().ReverseMap();
 
+            #endregion
 
-           
-            
 
-       
+
+
+            //Offer
+            //CreateMap<Offer, ReadOfferDto>()
+            //    .ForSourceMember(x => x.Clients, opt => opt.DoNotValidate())
+            //    .ReverseMap();
+            //CreateMap<Offer, WriteOfferDto>()
+            //    .ForSourceMember(x => x.Clients, opt => opt.DoNotValidate())
+            //    .ReverseMap();
+
+            #region Role  
+
 
             //Role
             CreateMap<Role, ReadRoleDto>().ReverseMap();
-            CreateMap<Role, WriteRoleDto>().ReverseMap();
-            CreateMap<Role, UpdateRoleDto>().ReverseMap();
+            CreateMap<Role, WriteRoleDto>().ReverseMap();           
+            #endregion
 
-
+            #region Client
             //client
+
+            CreateMap<Client , ReadClientDTO>().ReverseMap();
+            CreateMap<Client , WriteClientDTO>().ReverseMap();
+            CreateMap<Client , UpdateClientDTO>().ReverseMap();
+            #endregion
+
             //CreateMap<Client , ReadClientDTO>().ReverseMap();
             //CreateMap<Client , WriteClientDTO>().ReverseMap();
             //CreateMap<Client , UpdateClientDTO>().ReverseMap();
 
+            #region Bill
             // bill
             CreateMap<Bill , ReadBillDTO>().ReverseMap();
+            #endregion
+
 
         }
 

@@ -1,12 +1,12 @@
-﻿namespace ISP.BL.Dtos.Role
+﻿
+namespace ISP.BL.Dtos.Role
 {
     public class WriteRoleDto
-    {
-        
-        public string Name { get; set; } = string.Empty;       
-        //public bool IsAdmin { get; set; }
-        //public bool IsClientsOrder { get; set; }
-        //public bool IsSearch { get; set; }
-        //public bool IsAddNewClient { get; set; }
+    {       
+        public string Name { get; set; } = string.Empty;
+        public List<string> RolePermissions { get; set; } = new List<string>();
+
+
+        //public List<ReadRolePermissions> RolePermissions { get; set; } = new List<ReadRolePermissions>();
     }
 }

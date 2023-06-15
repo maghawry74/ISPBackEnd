@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Identity;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Runtime.CompilerServices;
+
 using System.Text;
 
 
@@ -55,10 +55,10 @@ builder.Services.AddDbContext<ISPContext>(
 
 #endregion
 
-#region Identity Services
+#region IdentityRole Services
 
 builder.Services
-    .AddIdentity<User, IdentityRole>(options =>
+    .AddIdentity<User, Role>(options =>
     {
         options.Password.RequireUppercase = false;
         options.Password.RequireNonAlphanumeric = false;
@@ -66,9 +66,12 @@ builder.Services
         options.Password.RequiredLength = 4;
         options.User.RequireUniqueEmail = true;
     })
-    .AddEntityFrameworkStores<ISPContext>();
+    
+    .AddEntityFrameworkStores<ISPContext>()
+    .AddDefaultTokenProviders();
 
 #endregion
+
 
 #region Automapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
