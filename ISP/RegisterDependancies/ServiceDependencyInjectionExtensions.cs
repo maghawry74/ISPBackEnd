@@ -1,8 +1,8 @@
 ﻿using ISP.BL.Services.OfferService;
 using ISP.BL.Services.RoleService;
 using ISP.BL;
-using Hangfire;
-using ISP.DAL;
+using ISP.BL.Services.UserPermissionsService;
+using ISP.BL.Services.RolePermissionsService;
 
 namespace ISP.API.RedisterDependancies
 {
@@ -15,14 +15,15 @@ namespace ISP.API.RedisterDependancies
             services.AddScoped<IBranchService, BranchService>();
             services.AddScoped<IGovernarateService, GovernarateService>();
             services.AddScoped<ICentalService, CentalService>();
-           services.AddScoped<IProviderService, ProviderService>();
-
-            services.AddScoped<IPackageService, PackageService>();
-
-           services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IProviderService, ProviderService>();
+            services.AddScoped<IPackageService, PackageService>();          
+            services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IOfferService, OfferService>();
             services.AddScoped<IClientservice, ClientService>();
             services.AddScoped<IBillService , BillService>();
+
+            services.AddScoped<IUserPermissionsService, UserPermissionsService>();
+            services.AddScoped<IRolePermissionService, RolePermissionService>();
 
 
 

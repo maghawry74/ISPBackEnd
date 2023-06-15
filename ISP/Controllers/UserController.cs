@@ -1,13 +1,11 @@
-﻿using ISP.API.Helpers;
-using ISP.BL.Dtos.Users;
-using ISP.BL.Services.RoleService;
+﻿using ISP.BL.Dtos.Users;
+using ISP.BL.Services.UserPermissionsService;
 using ISP.DAL;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
+using static ISP.API.Helpers.Helper;
+
 
 namespace ISP.API.Controllers
 {
@@ -15,23 +13,21 @@ namespace ISP.API.Controllers
     [ApiController]
     public class UserController : Controller
     {
-        private readonly IConfiguration configuration;
+        
         private readonly UserManager<User> userManager;
         private readonly RoleManager<Role> roleManager;
-        private readonly IRoleService roleService;
-        public UserController(UserManager<User> userManager, IConfiguration configuration,
-            IRoleService roleService, RoleManager<Role> roleManager)
+        private readonly IUserPermissionsService userPermissions;       
+        public UserController(UserManager<User> userManager,RoleManager<Role> roleManager , IUserPermissionsService userPermissions)
         {
-            this.userManager = userManager;
-            this.configuration = configuration;
-            this.roleService = roleService;
+            this.userManager = userManager;                  
             this.roleManager = roleManager;
+            this.userPermissions = userPermissions;
         }
 
-        #region Admin Register 
+        #region SuperAdmin Register 
         [HttpPost]
-        [Route("AdminRegister")]
-        public async Task<ActionResult> AdminRegister(AdminRegisterDto adminRegisterDto)
+        [Route("SuperAdminRegister")]
+        public async Task<ActionResult> SuperAdminRegister(AdminRegisterDto adminRegisterDto)
         {
             var user = new User
             {
@@ -39,32 +35,44 @@ namespace ISP.API.Controllers
                 Email = adminRegisterDto.Email,
                 Status = true,
                 PhoneNumber = adminRegisterDto.PhoneNumber,          
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                BranchId = adminRegisterDto.BranchId,
 
             };
-            
 
+            //Check User Email
             var getUser = await userManager.FindByEmailAsync(adminRegisterDto.Email);
+            if (getUser != null)
+                return BadRequest("This Email is Exist!");
 
-            if (getUser == null)
-            {
-                var created = await userManager.CreateAsync(user, adminRegisterDto.Password);
-                if (!created.Succeeded)
+
+            //Create User
+            var created =  userManager.CreateAsync(user, adminRegisterDto.Password);
+                if (!created.Result.Succeeded)
                 {
-                    return BadRequest(created.Errors);
+                    return BadRequest(created.Result.Errors);
                 }
+              
+            //Add Role To User
+            var addedRole = userManager.AddToRoleAsync(user, Roles.SuperAdmin.ToString());
+            if (!addedRole.Result.Succeeded)
+                return BadRequest("Error acording add to role!  " + created.Result.Errors);
 
-                await userManager.AddToRoleAsync(user, "SuperAdmin");
-                user.RoleId = user.Role?.Id;                              
+            var role = await roleManager.FindByNameAsync(Roles.SuperAdmin.ToString());
 
-            }
+
+            //Add Claims To Role 
+            var isSeddedClaims = await userPermissions.SeedClaimsAsync(Roles.SuperAdmin.ToString());
+            if (!isSeddedClaims)
+                return BadRequest("Invalid Seeding Claims, Check Your Role Name!");
+
 
             var claims = new List<Claim>
             {
 
-            new Claim(ClaimTypes.NameIdentifier, user.Id),
-            new Claim(ClaimTypes.Name, user.UserName),
-            new Claim(ClaimTypes.Role, user.Role?.Name)
+               new Claim(ClaimTypes.NameIdentifier, user.Id),
+               new Claim(ClaimTypes.Name, user.UserName),
+               new Claim(ClaimTypes.Role, role.Id)
             };
 
             await userManager.AddClaimsAsync(user, claims);
@@ -72,49 +80,9 @@ namespace ISP.API.Controllers
             return Ok();
         }
         #endregion
+               
 
-        #region Login
-        [HttpPost]
-        [Route("Login")]
-        public async Task<ActionResult<TokenDto>> Login(LoginDto loginData)
-        {
-            var user = await userManager.FindByNameAsync(loginData.UserName);
-
-            if (user == null)
-            {
-                return Unauthorized();
-            }
-
-            var isAuthenticated = await userManager.CheckPasswordAsync(user, loginData.Password);
-
-            if (isAuthenticated == false)
-            {
-                return Unauthorized();
-            }
-
-            var claims = await userManager.GetClaimsAsync(user);
-
-            // Secret Key
-            var secretKeyString = configuration.GetValue<string>("SecretKey");
-            var secretyKeyInBytes = Encoding.ASCII.GetBytes(secretKeyString ?? string.Empty);
-            var secretKey = new SymmetricSecurityKey(secretyKeyInBytes);
-
-
-            // Create secretKey, Algorithm 
-            var signingCredentials = new SigningCredentials(secretKey,
-                SecurityAlgorithms.HmacSha256Signature);
-
-
-            var expireDate = DateTime.Now.AddDays(1);
-            var token = new JwtSecurityToken(claims: claims, expires: expireDate, signingCredentials: signingCredentials);
-
-            // Casting Token 
-            var tokenHandler = new JwtSecurityTokenHandler();
-
-            return new TokenDto(tokenHandler.WriteToken(token), expireDate);
-        }
-
-        #endregion
+        
         #region User Register 
         [HttpPost]
         [Route("UserRegister")]
@@ -124,27 +92,51 @@ namespace ISP.API.Controllers
             {
                 UserName = registerDto.UserName,
                 Email = registerDto.Email,
-                Status =true,
+                Status = true,
                 PhoneNumber = registerDto.PhoneNumber,
+                EmailConfirmed = true,
                 BranchId = registerDto.BranchId,
-                RoleId = registerDto.RoleId,
-                EmailConfirmed = true
+                
             };
-            var created = await userManager.CreateAsync(user, registerDto.Password);
 
-            if (!created.Succeeded)
+
+            //Check User Role
+            var checkRole = await roleManager.FindByNameAsync(registerDto.RoleName);
+            if (checkRole == null)
+                return BadRequest("This Role Name does Exist!");
+
+            //Check User Email
+            var getUser = await userManager.FindByEmailAsync(registerDto.Email);
+            if (getUser != null )            
+                return BadRequest("This Email is Exist!");
+
+            //Create User
+            var created = userManager.CreateAsync(user, registerDto.Password);
+            if (!created.Result.Succeeded)
             {
-                return BadRequest(created.Errors);
+                return BadRequest(created.Result.Errors);
             }
 
-            var role = roleService.GetRoleNameByID(registerDto.RoleId);
+            //Add Role To User
+            var addedRole = userManager.AddToRoleAsync(user, registerDto.RoleName);
+            if (!addedRole.Result.Succeeded)            
+                return BadRequest("Error acording add to role!  "+created.Result.Errors);
+
+            var role = await roleManager.FindByNameAsync(Roles.SuperAdmin.ToString());
+
+
+            //Add Claims To Role 
+            var isSeddedClaims = await userPermissions.SeedClaimsAsync(registerDto.RoleName);
+            if (!isSeddedClaims)
+                return BadRequest("Invalid Seeding Claims, Check Your Role Name!");
+
 
             var claims = new List<Claim>
             {
 
             new Claim(ClaimTypes.NameIdentifier, user.Id),
             new Claim(ClaimTypes.Name, user.UserName),
-            new Claim(ClaimTypes.Role,role)
+            new Claim(ClaimTypes.Role, role.Id)
             };
 
             await userManager.AddClaimsAsync(user, claims);
