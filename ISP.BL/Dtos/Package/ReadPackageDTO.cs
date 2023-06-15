@@ -21,7 +21,13 @@ namespace ISP.BL
 
         public required bool IsActive { get; set; }
 
+
         [Required]
         public required string ProviderName { get; set; }
+
+       
+        public ReadProviderDTO provider { get; set; }
+
+
     }
 }

@@ -45,7 +45,7 @@ namespace ISP.BL
                 return null;
             }
 
-            ClientToEdit.ProviderId = updateClientDTO.PackageId;
+            ClientToEdit.PackageId = updateClientDTO.PackageId;
             ClientToEdit.Isactive = true;
         
             clientRepository.Update(ClientToEdit);

@@ -45,7 +45,7 @@ namespace ISP.DAL
         public Central? Central { get; set; }
 
         public int? IpPackage { get; set; }
-         /// -------->
+        
 
 
         public DateTime Contractdate { get; set; }
@@ -61,16 +61,20 @@ namespace ISP.DAL
         public int BranchId { get; set; }
         public Branch? Branch { get; set; }
 
+
+ 
+
+
         public string RouterSerial { get; set; } = string.Empty;
 
         public int? OrderNumber { get; set; }
 
         public int? PortSlot { get; set; }
 
-
+      
         public int? PortBlock { get; set; }
 
-        [StringLength(50)]
+    
         public string userName { get; set; } = string.Empty;
         [Required]
         public string Password { get; set; } = string.Empty;
@@ -79,7 +83,6 @@ namespace ISP.DAL
         public int? VCI { get; set; }
 
         public int? OrderWorkNumber { get; set; }
-
 
         public DateTime Orderworkdate { get; set; }
 
