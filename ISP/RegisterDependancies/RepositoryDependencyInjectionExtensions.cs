@@ -11,7 +11,7 @@ namespace ISP.API.RedisterDependancies
         public static void AddRepositories(this IServiceCollection services)
         {
             services.AddScoped<IBranchRepository, BranchRepository>();
-            services.AddScoped<IGovernarateRepository, GovernarateRepository>();
+            services.AddScoped<IGovernorateRepository, GovernorateRepository>();
             services.AddScoped<ICentralRepository, CentralRepository>();
             services.AddScoped<IProviderRepository, ProviderRepository>();
             services.AddScoped<IPackageReposatory, PackageReposatory>();

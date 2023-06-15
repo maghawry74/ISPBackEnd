@@ -18,9 +18,9 @@ namespace ISP.BL
 
             #region Goernorate
             //Governarate
-            CreateMap<Governarate , ReadGovernarateDTO>().ReverseMap();
-            CreateMap<Governarate , WriteGovernarateDTO>().ReverseMap();
-            CreateMap<Governarate , UpdateGovernarateDTO>().ReverseMap();
+            CreateMap<Governorate , ReadGovernarateDTO>().ReverseMap();
+            CreateMap<Governorate , WriteGovernarateDTO>().ReverseMap();
+            CreateMap<Governorate , UpdateGovernarateDTO>().ReverseMap();
             #endregion
 
             #region Central

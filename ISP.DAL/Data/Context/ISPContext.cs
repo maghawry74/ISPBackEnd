@@ -16,7 +16,7 @@ namespace ISP.DAL
 
        
         public DbSet<Branch> Branches =>  Set<Branch>();
-        public DbSet<Governarate> Governarates =>  Set<Governarate>();
+        public DbSet<Governorate> Governorates =>  Set<Governorate>();
         public DbSet<Central> Centrals =>  Set<Central>();
         public DbSet<Provider> Providers => Set<Provider>();
         public DbSet<Offer> Offers =>  Set<Offer>();
@@ -46,7 +46,7 @@ namespace ISP.DAL
                   builder.Entity<Branch>()
                          .HasAlternateKey(e => e.Mobile2);
 
-            builder.Entity<Governarate>()
+            builder.Entity<Governorate>()
                          .HasAlternateKey(e => e.Name);
 
 
@@ -66,7 +66,7 @@ namespace ISP.DAL
 
            // builder.Entity<Bill>().HasQueryFilter(p => p.Status);
             builder.Entity<Branch>().HasQueryFilter(p => p.Status );
-            builder.Entity<Governarate>().HasQueryFilter(p => p.Status);
+            builder.Entity<Governorate>().HasQueryFilter(p => p.Status);
             builder.Entity<Central>().HasQueryFilter(p => p.Status);
             builder.Entity<Client>().HasQueryFilter(p => p.Isactive);
             builder.Entity<Offer>().HasQueryFilter(p => p.Status);

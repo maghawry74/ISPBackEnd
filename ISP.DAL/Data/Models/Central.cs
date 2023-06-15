@@ -14,8 +14,8 @@ namespace ISP.DAL
         public bool Status { get; set; } = true;
 
         [ForeignKey("Governarate")]
-        public int GovernarateCode { get; set; }
-        public Governarate? Governarate { get; set; }
+        public int GovernorateCode { get; set; }
+        public Governorate? Governorate { get; set; }
 
         public ICollection<Provider> Providers { get; set; } = new HashSet<Provider>();
 

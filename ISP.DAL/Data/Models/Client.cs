@@ -23,7 +23,7 @@ namespace ISP.DAL
 
         [ForeignKey("Governarate")]
         public int GovernarateCode  { get; set; }
-        public Governarate? Governarate { get; set; }
+        public Governorate? Governarate { get; set; }
 
         [StringLength(100)]
         public string Address { get; set; } = string.Empty;

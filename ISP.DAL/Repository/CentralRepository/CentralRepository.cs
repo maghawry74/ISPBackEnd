@@ -19,7 +19,7 @@ namespace ISP.DAL
 
         public async Task<List<Central>> getAllCentralwithGovernarate()
         {
-            return await context.Set<Central>().Include(a => a.Governarate).ToListAsync();
+            return await context.Set<Central>().Include(a => a.Governorate).ToListAsync();
         }
 
         public async Task<Central?> GetBYNameAsync(string Name)

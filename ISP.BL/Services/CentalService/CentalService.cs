@@ -63,7 +63,7 @@ namespace ISP.BL
             }
 
             CentalToEdit.Name = updateCentralDTO.Name;
-            CentalToEdit.GovernarateCode = updateCentralDTO.GovernorateCode;
+            CentalToEdit.GovernorateCode = updateCentralDTO.GovernorateCode;
             CentalToEdit.Status = true;
 
 

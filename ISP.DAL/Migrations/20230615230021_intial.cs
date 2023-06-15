@@ -1,17 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace ISP.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class editingoffer : Migration
+    public partial class intial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Governarates",
+                name: "Governorates",
                 columns: table => new
                 {
                     Code = table.Column<int>(type: "int", nullable: false),
@@ -20,8 +21,8 @@ namespace ISP.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Governarates", x => x.Code);
-                    table.UniqueConstraint("AK_Governarates_Name", x => x.Name);
+                    table.PrimaryKey("PK_Governorates", x => x.Code);
+                    table.UniqueConstraint("AK_Governorates_Name", x => x.Name);
                 });
 
             migrationBuilder.CreateTable(
@@ -62,15 +63,15 @@ namespace ISP.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
-                    GovernarateCode = table.Column<int>(type: "int", nullable: false)
+                    GovernorateCode = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Centrals", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Centrals_Governarates_GovernarateCode",
-                        column: x => x.GovernarateCode,
-                        principalTable: "Governarates",
+                        name: "FK_Centrals_Governorates_GovernorateCode",
+                        column: x => x.GovernorateCode,
+                        principalTable: "Governorates",
                         principalColumn: "Code",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -231,10 +232,11 @@ namespace ISP.DAL.Migrations
                     ToDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsPaid = table.Column<bool>(type: "bit", nullable: false),
-                    Amount = table.Column<double>(type: "float", nullable: false),
+                    Amount = table.Column<float>(type: "real", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: true),
+                    PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    ClientSSn = table.Column<int>(type: "int", nullable: false)
+                    ClientSSn = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -256,7 +258,7 @@ namespace ISP.DAL.Migrations
                     Phone2 = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
                     Mobile1 = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
                     Mobile2 = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
-                    GovernarateCode = table.Column<int>(type: "int", nullable: true)
+                    GovernorateCode = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -266,9 +268,9 @@ namespace ISP.DAL.Migrations
                     table.UniqueConstraint("AK_Branches_Phone1", x => x.Phone1);
                     table.UniqueConstraint("AK_Branches_Phone2", x => x.Phone2);
                     table.ForeignKey(
-                        name: "FK_Branches_Governarates_GovernarateCode",
-                        column: x => x.GovernarateCode,
-                        principalTable: "Governarates",
+                        name: "FK_Branches_Governorates_GovernorateCode",
+                        column: x => x.GovernorateCode,
+                        principalTable: "Governorates",
                         principalColumn: "Code");
                 });
 
@@ -342,7 +344,7 @@ namespace ISP.DAL.Migrations
                     OrderNumber = table.Column<int>(type: "int", nullable: true),
                     PortSlot = table.Column<int>(type: "int", nullable: true),
                     PortBlock = table.Column<int>(type: "int", nullable: true),
-                    userName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    userName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     VPI = table.Column<int>(type: "int", nullable: true),
                     VCI = table.Column<int>(type: "int", nullable: true),
@@ -371,9 +373,9 @@ namespace ISP.DAL.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
-                        name: "FK_Clients_Governarates_GovernarateCode",
+                        name: "FK_Clients_Governorates_GovernarateCode",
                         column: x => x.GovernarateCode,
-                        principalTable: "Governarates",
+                        principalTable: "Governorates",
                         principalColumn: "Code",
                         onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
@@ -413,7 +415,7 @@ namespace ISP.DAL.Migrations
                         column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -468,9 +470,9 @@ namespace ISP.DAL.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Branches_GovernarateCode",
+                name: "IX_Branches_GovernorateCode",
                 table: "Branches",
-                column: "GovernarateCode");
+                column: "GovernorateCode");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Branches_ManagerId",
@@ -483,9 +485,9 @@ namespace ISP.DAL.Migrations
                 column: "ProvidersId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Centrals_GovernarateCode",
+                name: "IX_Centrals_GovernorateCode",
                 table: "Centrals",
-                column: "GovernarateCode");
+                column: "GovernorateCode");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ClientOffers_OfferId",
@@ -612,8 +614,7 @@ namespace ISP.DAL.Migrations
                 table: "Bills",
                 column: "ClientSSn",
                 principalTable: "Clients",
-                principalColumn: "SSn",
-                onDelete: ReferentialAction.Cascade);
+                principalColumn: "SSn");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Bills_User_UserId",
@@ -695,7 +696,7 @@ namespace ISP.DAL.Migrations
                 name: "Packages");
 
             migrationBuilder.DropTable(
-                name: "Governarates");
+                name: "Governorates");
 
             migrationBuilder.DropTable(
                 name: "Providers");

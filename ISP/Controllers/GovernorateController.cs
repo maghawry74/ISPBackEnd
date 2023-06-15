@@ -6,11 +6,11 @@ using System.ComponentModel.DataAnnotations;
 namespace ISP.API.Controllers
 {
     
-    public class GovernarateController : CustomControllerBase
+    public class GovernorateController : CustomControllerBase
     {
         private readonly IGovernarateService governarateService;
 
-        public GovernarateController(IGovernarateService governarateService)
+        public GovernorateController(IGovernarateService governarateService)
         {
             this.governarateService = governarateService;
         }
