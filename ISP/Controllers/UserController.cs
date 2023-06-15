@@ -3,7 +3,11 @@ using ISP.BL.Services.UserPermissionsService;
 using ISP.DAL;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
 using static ISP.API.Helpers.Helper;
 
 
@@ -16,12 +20,15 @@ namespace ISP.API.Controllers
         
         private readonly UserManager<User> userManager;
         private readonly RoleManager<Role> roleManager;
-        private readonly IUserPermissionsService userPermissions;       
-        public UserController(UserManager<User> userManager,RoleManager<Role> roleManager , IUserPermissionsService userPermissions)
+        private readonly IUserPermissionsService userPermissions; 
+        private readonly IConfiguration configuration;
+        public UserController(UserManager<User> userManager,RoleManager<Role> roleManager ,
+            IUserPermissionsService userPermissions, IConfiguration configuration)
         {
             this.userManager = userManager;                  
             this.roleManager = roleManager;
             this.userPermissions = userPermissions;
+            this.configuration = configuration;
         }
 
         #region SuperAdmin Register 
@@ -143,6 +150,58 @@ namespace ISP.API.Controllers
 
             return Ok();
         }
+        #endregion
+
+        #region Login
+        [HttpPost]
+        [Route("Login")]
+        public async Task<ActionResult<TokenDto>> Login(LoginDto loginData)
+        {
+            var user = await userManager.FindByNameAsync(loginData.UserName);
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            var isAuthenticated = await userManager.CheckPasswordAsync(user, loginData.Password);
+
+            if (isAuthenticated == false)
+            {
+                return Unauthorized();
+            }
+
+            
+            var claims = await userManager.GetClaimsAsync(user);
+            List<ClaimDto> result = new List<ClaimDto>(); 
+
+            foreach(var claim in claims)
+            {
+                result.Add(new ClaimDto { claimType = claim.Type, Value = claim.Value });
+            }
+
+
+            // Secret Key
+            var secretKeyString = configuration.GetValue<string>("SecretKey");
+            var secretyKeyInBytes = Encoding.ASCII.GetBytes(secretKeyString ?? string.Empty);
+            var secretKey = new SymmetricSecurityKey(secretyKeyInBytes);
+
+
+            // Create secretKey, Algorithm 
+            var signingCredentials = new SigningCredentials(secretKey,
+                SecurityAlgorithms.HmacSha256Signature);
+
+
+            var expireDate = DateTime.Now.AddDays(1);
+            var token = new JwtSecurityToken(claims: claims, expires: expireDate, signingCredentials: signingCredentials);
+           
+
+            // Casting Token 
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            return new TokenDto(tokenHandler.WriteToken(token), expireDate, result);
+        }
+
         #endregion
 
     }
