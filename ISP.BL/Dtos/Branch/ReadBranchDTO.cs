@@ -1,4 +1,5 @@
-﻿using ISP.DAL;
+﻿using AutoMapper;
+using ISP.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ISP.BL
 {
+    //[AutoMap(typeof(Branch))]
     public class ReadBranchDTO
     {
         public int Id { get; set; }

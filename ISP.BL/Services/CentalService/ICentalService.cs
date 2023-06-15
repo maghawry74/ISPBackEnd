@@ -9,7 +9,7 @@ namespace ISP.BL
     public interface ICentalService
     {
         Task<List<ReadCentralDTO>> GetAll();
-        Task<List<ReadCentralWithGovernarateDTO>> GetAllWithGov();
+        Task<List<ReadCentralWithGovernarateDTO>> GetAllwithgov();
         Task<ReadCentralDTO?> GetById(int id);
         Task<ReadCentralDTO?> GetByName(string Name);
 
