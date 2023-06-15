@@ -1,4 +1,5 @@
-﻿using ISP.DAL;
+﻿using AutoMapper;
+using ISP.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,12 @@ namespace ISP.BL
     public class BillService : IBillService
     {
         private readonly IBillRepository billRepository;
+        private readonly IMapper mapper;
 
-        public BillService(IBillRepository billRepository)
+        public BillService(IBillRepository billRepository  ,  IMapper mapper)
         {
             this.billRepository = billRepository;
+            this.mapper = mapper;
         }
 
         public int BillGenerationSP()
@@ -21,6 +24,12 @@ namespace ISP.BL
             
             return billRepository.BillGenerationSP();
 
+        }
+
+        public ReadBillDTO? GetNextMonthBill(int Nmonth, int ClientId)
+        {
+            var billfromdb =  billRepository.GetNextMonthBill(Nmonth, ClientId);
+            return mapper.Map<ReadBillDTO>(billfromdb);
         }
     }
 }

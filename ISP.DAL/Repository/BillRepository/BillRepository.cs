@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,22 @@ namespace ISP.DAL
         {
             var bill = context.Database.ExecuteSqlRaw("sp_generateBills");
             return bill;
+        }
+
+        public Bill? GetNextMonthBill(int Nmonth, int ClientId)
+        {
+            var billparams = new[]
+             {
+                   new SqlParameter("@NextMonth",Nmonth),
+                   new SqlParameter("@ClientId", ClientId),
+
+             };
+
+            var billobj = context.Bills.FromSqlRaw("sp_GetNextMonthBill @NextMonth,@ClientId", billparams)
+                .AsEnumerable()
+                .FirstOrDefault();
+
+            return billobj;
         }
     }
 }

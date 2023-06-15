@@ -62,8 +62,7 @@ namespace ISPBackEnd.Tests.Services
             // assert
             Assert.IsType<ReadProviderDTO>(result);
             Assert.Equal(providerobj.Name, result.Name);
-            Assert.Equal(providerobj.IsActive, result.IsActive);
-
+          
             A.CallTo(() => _providerRepository.GetByID(id)).MustHaveHappenedOnceExactly();
 
 
@@ -103,7 +102,7 @@ namespace ISPBackEnd.Tests.Services
             // Arrange
             var providerToEdit = new Provider { Id = 1, Name = "Provider 1", IsActive = false };
 
-            var updateProviderDTO = new UpdateProviderDTO { Id = 1 , Name = "we"  , IsActive = true};
+            var updateProviderDTO = new UpdateProviderDTO { Id = 1 , Name = "we"  };
 
             var expectedProvider = new Provider { Id = 1, Name = "we", IsActive = true };
 
@@ -119,7 +118,7 @@ namespace ISPBackEnd.Tests.Services
             // Assert
               Assert.NotNull(result);
              Assert.Equal(expectedReadProviderDTO.Name, result.Name);
-            Assert.Equal(expectedReadProviderDTO.IsActive, result.IsActive);
+          
 
             // Verify that the GetByID method was called once on the provider repository with the correct ID
             A.CallTo(() => _providerRepository.GetByID(providerToEdit.Id)).MustHaveHappenedOnceExactly();
@@ -135,7 +134,7 @@ namespace ISPBackEnd.Tests.Services
             // Arrange
             var invalidProviderId = 999;
 
-            var updateProviderDTO = new UpdateProviderDTO  { Id = 1 ,  Name = "Edited Provider 1", IsActive = true };
+            var updateProviderDTO = new UpdateProviderDTO  { Id = 1 ,  Name = "Edited Provider 1"};
 
             A.CallTo(() => _providerRepository.GetByID(invalidProviderId)).Returns<Provider?>(null);
 
@@ -174,7 +173,7 @@ namespace ISPBackEnd.Tests.Services
             Assert.NotNull(result);
           //  Assert.Equal(expectedReadProviderDTO.Id, result.Id);
             Assert.Equal(expectedReadProviderDTO.Name, result.Name);
-            Assert.Equal(expectedReadProviderDTO.IsActive, result.IsActive);
+           
 
             // Verify that the GetByID method was called once on the provider repository with the correct ID
             A.CallTo(() => _providerRepository.GetByID(Id)).MustHaveHappenedOnceExactly();

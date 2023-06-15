@@ -13,6 +13,6 @@ namespace ISP.BL
 
         [Required(ErrorMessage ="Provider Name can not be empty")]
         public  string Name { get; set; } = string.Empty;
-        public  bool IsActive { get; set; }
+      
     }
 }

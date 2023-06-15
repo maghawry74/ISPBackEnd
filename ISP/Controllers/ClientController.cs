@@ -14,7 +14,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpGet]
-        [ResponseCache(Duration = 60)]
+
         public async Task<ActionResult<List<ReadClientDTO>>> GetAll()
         {
             var ClientList = await clientservice.GetAll();
@@ -24,7 +24,7 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("{SSn}")]
-        [ResponseCache(Duration = 60)]
+
         public async Task<ActionResult<ReadClientDTO>> GetById(int SSn)
         {
             var client = await clientservice.GetById(SSn);
@@ -50,10 +50,10 @@ namespace ISP.API.Controllers
 
 
         [HttpPut]
-        [Route("{Code}")]
+        [Route("{SSn}")]
         public async Task<ActionResult<ReadClientDTO>> Edit(int SSn, UpdateClientDTO updateClientDTO)
         {
-            if (SSn != updateClientDTO.SSn)
+            if (SSn != updateClientDTO.SSID)
             {
                 return Problem(detail: "the object To Edit dees not exsits", statusCode: 404,
                    title: "error", type: "null reference");

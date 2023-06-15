@@ -29,7 +29,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpGet]
-        [ResponseCache(Duration = 60)]
+
         public async Task<ActionResult<List<ReadOfferDto>>> GetAll()
         {
             return await offerService.GetAll();
@@ -37,7 +37,7 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("{Id}")]
-        [ResponseCache(Duration = 60)]
+
         public async Task<ActionResult<ReadOfferDto>> GetById(int Id)
         {
             var offer = await offerService.GetById(Id);

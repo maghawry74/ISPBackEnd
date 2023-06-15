@@ -10,27 +10,19 @@ namespace ISP.BL
     public class ReadClientDTO
     {
 
-        public int SSn { get; set; }
-        public  string Name { get; set; } = string.Empty;
 
-
+        public int SSID { get; set; } 
+        public string Name { get; set; } = string.Empty;
+        public string Tel{ get; set; } = string.Empty;
+        public string? GovernorateName { get; set; } = string.Empty;
+        public string Address { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string? ProviderName { get; set; } = string.Empty;
+        public string? PackageName { get; set; } = string.Empty;
+        public string? CentralName { get; set; } = string.Empty;
+        public string? BranchName { get; set; } = string.Empty;
         public string Phone { get; set; } = string.Empty;
-
-        public string? Status { get; set; }
-
-        public int PackageId { get; set; }
-
-        public int? IpPackage { get; set; }
-
-        public int BranchId { get; set; }
-        public int ProviderId { get; set; }
-        public string? DisstrubtorId { get; set; }
-
-        public int OfferId { get; set; }
-
-        public int CentralId { get; set; }
-        public string userName { get; set; } = string.Empty;
-
+        public string UserName { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
 
     }

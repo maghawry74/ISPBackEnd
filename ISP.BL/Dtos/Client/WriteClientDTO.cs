@@ -12,92 +12,64 @@ namespace ISP.BL
     public class WriteClientDTO
     {
 
-        [Required(ErrorMessage ="the client ssn must not be empty")]
-        [MaxLength(14)]
-        
-        public  int SSn { get; set; }
+  
+        public  int ssid { get; set; }
 
         [StringLength(50 , ErrorMessage ="client name must not exceed 50 character")]
-        public required string Name { get; set; } = string.Empty;
-
-        public string Status { get; set; }
-
-        [MaxLength(10)]
-        public required string Phone { get; set; } = string.Empty;
+        public required string name { get; set; } = string.Empty;
 
 
-        public int GovernarateCode { get; set; }
+        [MaxLength(11)]
+        public  string tel { get; set; } = string.Empty;
+        public int governorateCode { get; set; }
 
 
         [StringLength(100)]
-        public string Address { get; set; } = string.Empty;
+        public string address { get; set; } = string.Empty;
 
         [EmailAddress]
-        public string Email { get; set; } = string.Empty;
+        public string email { get; set; } = string.Empty;
 
 
-        public int ProviderId { get; set; }
+        public int providerId { get; set; }
+        public int packageId { get; set; }
+      
+        public int centralId { get; set; }
 
-        public int OfferId { get; set; }
-
-
-        public int PackageId { get; set; }
-
-
-
-        public int CentralId { get; set; }
-
-
-        public int? IpPackage { get; set; }
-        /// -------->
-
-
-        public DateTime Contractdate { get; set; }
-
-        [RegularExpression(@"^01[012][0-9]{11}$")]
-        public string Mobile1 { get; set; } = string.Empty;
-
-        [RegularExpression(@"^01[012][0-9]{11}$")]
-        public string Mobile2 { get; set; } = string.Empty;
-
-        public string LineOwner { get; set; } = string.Empty;
-
-        public string Note { get; set; } = string.Empty;
-
-        public int BranchId { get; set; }
+        public int branchId { get; set; } 
+        public int packageIp { get; set; }
 
         [RegularExpression(@"^[a-zA-Z0-9]+$")]
-        public string RouterSerial { get; set; } = string.Empty;
+        public string routerSerial { get; set; } = string.Empty;
 
-        public int? OrderNumber { get; set; }
+        [RegularExpression(@"^01[012][0-9]{11}$")]
+        public string phone { get; set; } = string.Empty;
+        public int? orderNumber { get; set; }
 
-        public int? PortSlot { get; set; }
+        public int? portSlot { get; set; }
 
-
-        public int? PortBlock { get; set; }
-
+        public int? slot { get; set; }
+        public int? portBlock { get; set; }
+        public int? block { get; set; }
         [StringLength(50)]
         public string userName { get; set; } = string.Empty;
         [Required]
-        public string Password { get; set; } = string.Empty;
-
-        public int? VPI { get; set; }
-        public int? VCI { get; set; }
-
-        public int? OrderWorkNumber { get; set; }
+        public string password { get; set; } = string.Empty;
+        public int? vpi { get; set; }
+        public int? vci { get; set; }
+        public int? operationOrderNumber { get; set; }
 
 
-        public DateTime Orderworkdate { get; set; }
+        public DateTime operationOrderDate { get; set; }
 
-        public double PrePaid { get; set; }
+        public double prePaid { get; set; }
 
         public required double installationFee { get; set; }
-        public required double ContractFee { get; set; }
+        public required double contractFee { get; set; }
 
-        public int? Slotnum { get; set; }
+ 
 
 
-        public int? Blocknum { get; set; }
-
+        
     }
 }

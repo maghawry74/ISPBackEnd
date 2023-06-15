@@ -21,7 +21,7 @@ namespace ISP.DAL
         public string Note { get; set; } = string.Empty;
 
 
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
 
         [ForeignKey("Provider")]
         public int ProviderId { get; set; }

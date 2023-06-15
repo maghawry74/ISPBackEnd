@@ -17,8 +17,6 @@ namespace ISP.BL
         public double Price { get; set; }
         public string Note { get; set; } = string.Empty;
 
-        public bool IsActive { get; set; }
-
         public int ProviderId{ get; set; }
     }
 }

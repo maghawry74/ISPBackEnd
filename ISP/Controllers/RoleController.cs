@@ -41,10 +41,12 @@ namespace ISP.API.Controllers
             return await roleService.GetAll();
         }
 
-
+             
+        
         [HttpGet]
-        [Route("{Id}")]        
+        [Route("{Id}")]
         public async Task<ActionResult<ReadRoleDto>> GetById(string Id)
+
         {
             var getRole = await roleService.GetRoleById(Id);
             if (getRole == null)
