@@ -23,7 +23,5 @@ namespace ISP.BL
 
         [Required]
         public required string ProviderName { get; set; }
-
-
     }
 }

@@ -9,5 +9,6 @@ namespace ISP.DAL
     public interface IBillRepository
     {
         int BillGenerationSP();
+        Bill? GetNextMonthBill(int Nmonth , int ClientId);
     }
 }

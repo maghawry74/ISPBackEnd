@@ -15,15 +15,21 @@ namespace ISP.API.Controllers
             this.billService = billService;
         }
 
-        //   [HttpPost]         
 
-        //public IActionResult ScheduleJob()
-        //{
-        
-           //     return Ok();
-          
-        //}
+        [HttpGet]
+        [Route("{NMonth}/{clientId}")]
+        public IActionResult GetNextMonthBill(int NMonth, int clientId)
+        {
+            var billobj  = billService.GetNextMonthBill(NMonth, clientId);
+            return Ok(billobj);
+        }
+
+
 
 
     }
+        
+
+
+   
 }

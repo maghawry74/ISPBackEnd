@@ -115,6 +115,9 @@ namespace ISP.BL
             CreateMap<Client , WriteClientDTO>().ReverseMap();
             CreateMap<Client , UpdateClientDTO>().ReverseMap();
 
+            // bill
+            CreateMap<Bill , ReadBillDTO>().ReverseMap();
+
         }
 
     }
