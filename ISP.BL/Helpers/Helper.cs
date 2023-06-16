@@ -22,7 +22,8 @@
             Package,
             Provider,
             Role,
-            User
+            User,
+            RolePermissions
 
         }
 

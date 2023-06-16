@@ -1,11 +1,9 @@
-﻿using Hangfire;
-using ISP.BL;
-using Microsoft.AspNetCore.Http;
+﻿using ISP.BL;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ISP.API.Controllers
 {
-    
+
     public class BillController : CustomControllerBase
     {
         private readonly IBillService billService;
@@ -18,6 +16,7 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("{NMonth}/{clientId}")]
+     
         public IActionResult GetNextMonthBill(int NMonth, int clientId)
         {
             var billobj  = billService.GetNextMonthBill(NMonth, clientId);

@@ -1,11 +1,10 @@
 ﻿using ISP.BL;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
 namespace ISP.API.Controllers
 {
-   
+    //[Authorize(Permissions.Provider.View)]
     public class ProviderController : CustomControllerBase
     {
         private readonly IProviderService providerService;
@@ -16,6 +15,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpGet]
+       // [Authorize(Permissions.Provider.View)]
         public async Task<ActionResult<List<ReadProviderDTO>>> GetAll()
         {
             var ProviderList = await providerService.GetAll();
@@ -25,6 +25,7 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("{Id}")]
+        //[Authorize(Permissions.Provider.View)]
         public async Task<ActionResult<ReadProviderDTO>> GetById(int Id)
         {
             var Provider= await providerService.GetById(Id);
@@ -37,7 +38,7 @@ namespace ISP.API.Controllers
 
 
         [HttpPost]
-
+        //[Authorize(Permissions.Provider.Create)]
         public async Task<ActionResult<ReadProviderDTO>> Add([Required] WriteProviderDTO writeProviderDTO)
         {
             if (!ModelState.IsValid)
@@ -52,6 +53,7 @@ namespace ISP.API.Controllers
 
         [HttpPut]
         [Route("{Id}")]
+        //[Authorize(Permissions.Provider.Edit)]
         public async Task<ActionResult<ReadProviderDTO>> Edit(int Id, UpdateProviderDTO updateProviderDTO)
         {
             if (Id != updateProviderDTO.Id)
@@ -69,12 +71,11 @@ namespace ISP.API.Controllers
 
             return NoContent();
 
-            // return CreatedAtAction(actionName: "GetById", routeValues: new { Id = updateProviderDTO.Id }, value: "Updated Successfully");
-
-
+           
         }
 
-        [HttpDelete("{id}")]      
+        [HttpDelete("{id}")]
+        //[Authorize(Permissions.Provider.Delete)]
         public async Task<ActionResult<ReadProviderDTO>> Delete(int id)
         {
             var Providertodelete = await providerService.Remove(id);

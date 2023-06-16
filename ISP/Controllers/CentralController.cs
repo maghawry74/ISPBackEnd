@@ -1,4 +1,6 @@
-﻿using ISP.BL;
+﻿using ISP.API.Constants;
+using ISP.BL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
@@ -15,7 +17,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpGet]
-
+    
         public async Task<ActionResult<List<ReadCentralDTO>>> GetAll()
         {
             var CentralList = await centalService.GetAll();
@@ -25,7 +27,7 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("getallwithgov")]
-
+        
         public async Task<ActionResult<List<ReadCentralWithGovernarateDTO>>> getallwithgov()
         {
             var CentralList = await centalService.GetAllWithGov();

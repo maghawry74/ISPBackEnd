@@ -1,5 +1,4 @@
-﻿using ISP.BL.Dtos.Offer;
-using ISP.BL.Dtos.Permission;
+﻿using ISP.BL.Dtos.Permission;
 using ISP.BL.Services.RolePermissionsService;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +6,7 @@ namespace ISP.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize(Permissions.RolePermissions.View)]
     public class RolePermissionsController : ControllerBase
     {
         private readonly IRolePermissionService rolePermissionService;
@@ -17,7 +17,8 @@ namespace ISP.API.Controllers
 
 
         [HttpGet]
-        [Route("{Id}")]       
+        [Route("{Id}")]
+       // [Authorize(Permissions.RolePermissions.View)]
         public async Task<ActionResult<ReadRolePermissions>> GetRolePermissionsById(string Id)
         {
             var permissions = await rolePermissionService.GetPermissionByRoleId(Id);
@@ -29,7 +30,8 @@ namespace ISP.API.Controllers
         }
 
 
-        [HttpPut]        
+        [HttpPut]
+        //[Authorize(Permissions.RolePermissions.Edit)]
         public async Task<ActionResult> EditRolePermissions(ReadPermissions readPermissions)
         {
             await rolePermissionService.UpdatePermissionsOfRole(readPermissions);

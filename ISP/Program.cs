@@ -70,6 +70,12 @@ builder.Services
     .AddEntityFrameworkStores<ISPContext>()
     .AddDefaultTokenProviders();
 
+
+builder.Services.Configure<SecurityStampValidatorOptions>(options =>
+{
+    options.ValidationInterval = TimeSpan.Zero;
+});
+
 #endregion
 
 

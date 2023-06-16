@@ -1,9 +1,12 @@
-﻿using ISP.BL;
+﻿using ISP.API.Constants;
+using ISP.BL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
 namespace ISP.API.Controllers
 {
+    //[Authorize(Permissions.Client.View)]
     public class ClientController : CustomControllerBase
     {
         private readonly IClientservice clientservice;
@@ -14,6 +17,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpGet]
+        //[Authorize(Permissions.Client.View)]
 
         public async Task<ActionResult<List<ReadClientDTO>>> GetAll()
         {
@@ -24,7 +28,7 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("{SSn}")]
-
+        //[Authorize(Permissions.Client.View)]
         public async Task<ActionResult<ReadClientDTO>> GetById(int SSn)
         {
             var client = await clientservice.GetById(SSn);
@@ -36,7 +40,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpPost]
-
+        //[Authorize(Permissions.Client.Create)]
         public async Task<ActionResult<ReadClientDTO>> Add([Required] WriteClientDTO writeClientDTO)
         {
             if (!ModelState.IsValid)
@@ -51,6 +55,7 @@ namespace ISP.API.Controllers
 
         [HttpPut]
         [Route("{SSn}")]
+        //[Authorize(Permissions.Client.Edit)]
         public async Task<ActionResult<ReadClientDTO>> Edit(int SSn, UpdateClientDTO updateClientDTO)
         {
             if (SSn != updateClientDTO.SSID)
@@ -67,6 +72,7 @@ namespace ISP.API.Controllers
 
 
         [HttpDelete("{SSn}")]
+        //[Authorize(Permissions.Client.Delete)]
         public async Task<ActionResult<ReadClientDTO>> Delete(int SSn)
         {
             var getClient = await clientservice.DeleteClient(SSn);

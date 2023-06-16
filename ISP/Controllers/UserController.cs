@@ -1,9 +1,9 @@
 ﻿using ISP.BL.Dtos.Users;
 using ISP.BL.Services.UserPermissionsService;
 using ISP.DAL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -15,6 +15,7 @@ namespace ISP.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class UserController : Controller
     {
         
@@ -34,6 +35,7 @@ namespace ISP.API.Controllers
         #region SuperAdmin Register 
         [HttpPost]
         [Route("SuperAdminRegister")]
+        [AllowAnonymous]
         public async Task<ActionResult> SuperAdminRegister(AdminRegisterDto adminRegisterDto)
         {
             var user = new User
@@ -93,6 +95,7 @@ namespace ISP.API.Controllers
         #region User Register 
         [HttpPost]
         [Route("UserRegister")]
+        [AllowAnonymous]
         public async Task<ActionResult> UserRegister(RegisterDto registerDto)
         {
             var user = new User
@@ -155,6 +158,7 @@ namespace ISP.API.Controllers
         #region Login
         [HttpPost]
         [Route("Login")]
+        [AllowAnonymous]
         public async Task<ActionResult<TokenDto>> Login(LoginDto loginData)
         {
             var user = await userManager.FindByNameAsync(loginData.UserName);
