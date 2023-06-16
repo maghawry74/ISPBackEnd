@@ -95,6 +95,7 @@ namespace ISP.BL
 
             #endregion
 
+            #region Client
             //client
             CreateMap<Client, ReadClientDTO>()
                 .ForMember(c => c.SSID, cmt => cmt.MapFrom(src => src.SSn))
@@ -112,6 +113,7 @@ namespace ISP.BL
                 .ForMember(c => c.Password, cmt => cmt.MapFrom(src => src.Password))
                 .ReverseMap();
 
+            #endregion
 
             #region Package
 
@@ -164,14 +166,7 @@ namespace ISP.BL
 
 
 
-            //Offer
-            //CreateMap<Offer, ReadOfferDto>()
-            //    .ForSourceMember(x => x.Clients, opt => opt.DoNotValidate())
-            //    .ReverseMap();
-            //CreateMap<Offer, WriteOfferDto>()
-            //    .ForSourceMember(x => x.Clients, opt => opt.DoNotValidate())
-            //    .ReverseMap();
-
+        
             #region Role  
 
 
@@ -179,18 +174,6 @@ namespace ISP.BL
             CreateMap<Role, ReadRoleDto>().ReverseMap();
             CreateMap<Role, WriteRoleDto>().ReverseMap();           
             #endregion
-
-            #region Client
-            //client
-
-            CreateMap<Client , ReadClientDTO>().ReverseMap();
-            CreateMap<Client , WriteClientDTO>().ReverseMap();
-            CreateMap<Client , UpdateClientDTO>().ReverseMap();
-            #endregion
-
-            //CreateMap<Client , ReadClientDTO>().ReverseMap();
-            //CreateMap<Client , WriteClientDTO>().ReverseMap();
-            //CreateMap<Client , UpdateClientDTO>().ReverseMap();
 
             #region Bill
             // bill
