@@ -9,6 +9,7 @@ namespace ISP.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize(Permissions.Branch.View)]
+    [AllowAnonymous]
     public class BranchController : CustomControllerBase
     {
         private readonly IBranchService branchService;

@@ -13,7 +13,7 @@ namespace ISP.DAL.Repository.RoleRepository
 
         public async Task<IEnumerable<Role>> GetAll()
         {
-            return await Context.Set<Role>().Where(r => r.Status == true).AsNoTracking().ToListAsync();
+            return await Context.Set<Role>().Where(r => r.Status == true).ToListAsync();
         }
 
         public async Task<Role?> GetByID(string id)

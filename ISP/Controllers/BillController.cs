@@ -1,9 +1,10 @@
 ﻿using ISP.BL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ISP.API.Controllers
 {
-
+    [AllowAnonymous]
     public class BillController : CustomControllerBase
     {
         private readonly IBillService billService;

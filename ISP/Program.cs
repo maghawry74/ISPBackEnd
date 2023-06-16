@@ -66,15 +66,18 @@ builder.Services
         options.Password.RequiredLength = 4;
         options.User.RequireUniqueEmail = true;
     })
-    
-    .AddEntityFrameworkStores<ISPContext>()
-    .AddDefaultTokenProviders();
+
+    .AddEntityFrameworkStores<ISPContext>();
+
+      //.AddDefaultTokenProviders();
 
 
-//builder.Services.Configure<SecurityStampValidatorOptions>(options =>
-//{
-//    options.ValidationInterval = TimeSpan.Zero;
-//});
+
+
+builder.Services.Configure<SecurityStampValidatorOptions>(options =>
+{
+    options.ValidationInterval = TimeSpan.Zero;
+});
 
 #endregion
 

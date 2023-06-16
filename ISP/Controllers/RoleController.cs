@@ -1,12 +1,14 @@
 ﻿using ISP.BL.Dtos.Role;
 using ISP.BL.Services.RoleService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ISP.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-   // [Authorize(Permissions.Role.View)]
+    // [Authorize(Permissions.Role.View)]
+    [AllowAnonymous]
     public class RoleController : ControllerBase
     {        
 
@@ -28,7 +30,8 @@ namespace ISP.API.Controllers
             }
 
             var isAdded = await roleService.Insert(writeRoleDto);
-            if (isAdded == null) 
+            await roleService.Insert(writeRoleDto);
+            if (isAdded == null)
                 return BadRequest();
 
             return Ok(isAdded);
