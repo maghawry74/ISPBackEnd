@@ -18,9 +18,9 @@ namespace ISP.BL
 
             #region Goernorate
             //Governarate
-            CreateMap<Governarate , ReadGovernarateDTO>().ReverseMap();
-            CreateMap<Governarate , WriteGovernarateDTO>().ReverseMap();
-            CreateMap<Governarate , UpdateGovernarateDTO>().ReverseMap();
+            CreateMap<Governorate , ReadGovernarateDTO>().ReverseMap();
+            CreateMap<Governorate , WriteGovernarateDTO>().ReverseMap();
+            CreateMap<Governorate , UpdateGovernarateDTO>().ReverseMap();
             #endregion
 
             #region Central
@@ -28,8 +28,12 @@ namespace ISP.BL
             CreateMap<Central , ReadCentralDTO>().ReverseMap();
             CreateMap<Central , WriteCentralDTO>().ReverseMap();
             CreateMap<Central , UpdateCentralDTO>().ReverseMap();
-            CreateMap<Central ,ReadCentralWithGovernarateDTO>().ReverseMap();
+            CreateMap<Central , ReadCentralWithGovernarateDTO>().ReverseMap();
+
+
+
             #endregion
+
 
 
             #region Provider

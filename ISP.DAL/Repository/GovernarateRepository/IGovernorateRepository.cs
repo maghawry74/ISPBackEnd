@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ISP.DAL
 {
-   public interface IGovernarateRepository:IGenericRepository<Governarate>
+   public interface IGovernorateRepository:IGenericRepository<Governorate>
     {
-        public void Delete(Governarate governarate);
+        public void Delete(Governorate governarate);
     }
 }

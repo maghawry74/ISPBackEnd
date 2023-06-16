@@ -38,7 +38,7 @@ namespace ISPBackEnd.Tests.Controller
             // configure the mock object 
             A.CallTo(() => fakeGovernarateService.GetAll()).Returns(expectedGovernaratesList);
 
-            var controller = new GovernarateController(fakeGovernarateService);
+            var controller = new GovernorateController(fakeGovernarateService);
 
             // Act
             var result = await controller.GetAll();
@@ -67,7 +67,7 @@ namespace ISPBackEnd.Tests.Controller
             var fakeGovernarateService = A.Fake<IGovernarateService>();
             A.CallTo(() => fakeGovernarateService.GetById(expectedGovernarate.Code)).Returns(expectedGovernarate);
 
-            var controller = new GovernarateController(fakeGovernarateService);
+            var controller = new GovernorateController(fakeGovernarateService);
 
             // Act
             var result = await controller.GetById(expectedGovernarate.Code);
@@ -94,7 +94,7 @@ namespace ISPBackEnd.Tests.Controller
             var fakeGovernarateService = A.Fake<IGovernarateService>();
             A.CallTo(() => fakeGovernarateService.AddGovernarate(writeGovernarateDTO)).Returns(expectedGovernarate);
 
-            var controller = new GovernarateController(fakeGovernarateService);
+            var controller = new GovernorateController(fakeGovernarateService);
 
             // Act
             var result = await controller.Add(writeGovernarateDTO);
@@ -113,7 +113,7 @@ namespace ISPBackEnd.Tests.Controller
             var writeGovernarateDTO = new WriteGovernarateDTO {  Code= 55 ,Name = "" };
 
             var fakeGovernarateService = A.Fake<IGovernarateService>();
-            var controller = new GovernarateController(fakeGovernarateService);
+            var controller = new GovernorateController(fakeGovernarateService);
             controller.ModelState.AddModelError("Name", "The Name field is required.");
 
             // Act
@@ -136,7 +136,7 @@ namespace ISPBackEnd.Tests.Controller
             var fakeGovernarateService = A.Fake<IGovernarateService>();
             A.CallTo(() => fakeGovernarateService.UpdateGovernarate(code, updateGovernarateDTO)).Returns(expectedReadGovernarateDTO);
 
-            var controller = new GovernarateController(fakeGovernarateService);
+            var controller = new GovernorateController(fakeGovernarateService);
 
             // Act
             var result = await controller.Edit(code, updateGovernarateDTO);
@@ -160,7 +160,7 @@ namespace ISPBackEnd.Tests.Controller
             var fakeGovernarateService = A.Fake<IGovernarateService>();
             A.CallTo(() => fakeGovernarateService.DeleteGovernarate(Code)).Returns(expectedReadGovernarateDTO);
 
-            var controller = new GovernarateController(fakeGovernarateService);
+            var controller = new GovernorateController(fakeGovernarateService);
 
             // Act
             var result = await controller.Delete(Code);

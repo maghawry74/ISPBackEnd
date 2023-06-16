@@ -45,10 +45,10 @@ namespace ISP.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<double>("Amount")
-                        .HasColumnType("float");
+                    b.Property<float>("Amount")
+                        .HasColumnType("real");
 
-                    b.Property<int>("ClientSSn")
+                    b.Property<int?>("ClientSSn")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("FromDate")
@@ -59,6 +59,9 @@ namespace ISP.DAL.Migrations
 
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("PaymentDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool?>("Status")
                         .HasColumnType("bit");
@@ -94,7 +97,7 @@ namespace ISP.DAL.Migrations
                     b.Property<int?>("Fax")
                         .HasColumnType("int");
 
-                    b.Property<int?>("GovernarateCode")
+                    b.Property<int?>("GovernorateCode")
                         .HasColumnType("int");
 
                     b.Property<string>("ManagerId")
@@ -138,7 +141,7 @@ namespace ISP.DAL.Migrations
 
                     b.HasAlternateKey("Phone2");
 
-                    b.HasIndex("GovernarateCode");
+                    b.HasIndex("GovernorateCode");
 
                     b.HasIndex("ManagerId");
 
@@ -153,7 +156,7 @@ namespace ISP.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("GovernarateCode")
+                    b.Property<int>("GovernorateCode")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -166,7 +169,7 @@ namespace ISP.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GovernarateCode");
+                    b.HasIndex("GovernorateCode");
 
                     b.ToTable("Centrals");
                 });
@@ -287,8 +290,7 @@ namespace ISP.DAL.Migrations
 
                     b.Property<string>("userName")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SSn");
 
@@ -334,7 +336,7 @@ namespace ISP.DAL.Migrations
                     b.ToTable("ClientOffers");
                 });
 
-            modelBuilder.Entity("ISP.DAL.Governarate", b =>
+            modelBuilder.Entity("ISP.DAL.Governorate", b =>
                 {
                     b.Property<int>("Code")
                         .HasColumnType("int");
@@ -351,7 +353,7 @@ namespace ISP.DAL.Migrations
 
                     b.HasAlternateKey("Name");
 
-                    b.ToTable("Governarates");
+                    b.ToTable("Governorates");
                 });
 
             modelBuilder.Entity("ISP.DAL.Offer", b =>
@@ -719,9 +721,7 @@ namespace ISP.DAL.Migrations
                 {
                     b.HasOne("ISP.DAL.Client", "Client")
                         .WithMany()
-                        .HasForeignKey("ClientSSn")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ClientSSn");
 
                     b.HasOne("ISP.DAL.User", "User")
                         .WithMany()
@@ -734,28 +734,28 @@ namespace ISP.DAL.Migrations
 
             modelBuilder.Entity("ISP.DAL.Branch", b =>
                 {
-                    b.HasOne("ISP.DAL.Governarate", "Governarate")
+                    b.HasOne("ISP.DAL.Governorate", "Governorate")
                         .WithMany("Branches")
-                        .HasForeignKey("GovernarateCode");
+                        .HasForeignKey("GovernorateCode");
 
                     b.HasOne("ISP.DAL.User", "Manager")
                         .WithMany()
                         .HasForeignKey("ManagerId");
 
-                    b.Navigation("Governarate");
+                    b.Navigation("Governorate");
 
                     b.Navigation("Manager");
                 });
 
             modelBuilder.Entity("ISP.DAL.Central", b =>
                 {
-                    b.HasOne("ISP.DAL.Governarate", "Governarate")
+                    b.HasOne("ISP.DAL.Governorate", "Governorate")
                         .WithMany("Centrals")
-                        .HasForeignKey("GovernarateCode")
+                        .HasForeignKey("GovernorateCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Governarate");
+                    b.Navigation("Governorate");
                 });
 
             modelBuilder.Entity("ISP.DAL.Client", b =>
@@ -776,7 +776,7 @@ namespace ISP.DAL.Migrations
                         .WithMany()
                         .HasForeignKey("DisstrubtorId");
 
-                    b.HasOne("ISP.DAL.Governarate", "Governarate")
+                    b.HasOne("ISP.DAL.Governorate", "Governarate")
                         .WithMany("Clients")
                         .HasForeignKey("GovernarateCode")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -930,7 +930,7 @@ namespace ISP.DAL.Migrations
                     b.Navigation("Clients");
                 });
 
-            modelBuilder.Entity("ISP.DAL.Governarate", b =>
+            modelBuilder.Entity("ISP.DAL.Governorate", b =>
                 {
                     b.Navigation("Branches");
 

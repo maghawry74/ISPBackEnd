@@ -4,10 +4,10 @@ namespace ISP.BL
 {
     public class GovernarateService : IGovernarateService
     {
-        private readonly IGovernarateRepository governarateRepository;
+        private readonly IGovernorateRepository governarateRepository;
         private readonly IMapper mapper;
 
-        public GovernarateService(IGovernarateRepository governarateRepository , IMapper mapper)
+        public GovernarateService(IGovernorateRepository governarateRepository , IMapper mapper)
         {
             this.governarateRepository = governarateRepository;
             this.mapper = mapper;
@@ -27,7 +27,7 @@ namespace ISP.BL
 
         public async Task<ReadGovernarateDTO> AddGovernarate(WriteGovernarateDTO writeGovernarateDTO)
         {
-            var GovernarateToAdd = mapper.Map<Governarate>(writeGovernarateDTO);
+            var GovernarateToAdd = mapper.Map<Governorate>(writeGovernarateDTO);
             await governarateRepository.Add(GovernarateToAdd);
             governarateRepository.SaveChange();
             return mapper.Map<ReadGovernarateDTO>(GovernarateToAdd);
@@ -42,7 +42,7 @@ namespace ISP.BL
             }
 
 
-            var updatedGovernarate = new Governarate
+            var updatedGovernarate = new Governorate
             {
                 Code = updateGovernarateDTO.Code,
                 Name = updateGovernarateDTO.Name,

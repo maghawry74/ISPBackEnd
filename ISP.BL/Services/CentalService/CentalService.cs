@@ -27,6 +27,12 @@ namespace ISP.BL
             return mapper.Map<List<ReadCentralDTO>>(CentralListFromDB);
         }
 
+        public async Task<List<ReadCentralWithGovernarateDTO>> GetAllwithgov()
+        {
+            var CentralListFromDB = await centralRepository.getAllCentralwithGovernarate();
+            return mapper.Map<List<ReadCentralWithGovernarateDTO>>(CentralListFromDB);
+        }
+
         public async Task<ReadCentralDTO?> GetById(int id)
         {
             var CentalFromDB = await centralRepository.GetByID(id);
@@ -57,7 +63,7 @@ namespace ISP.BL
             }
 
             CentalToEdit.Name = updateCentralDTO.Name;
-            CentalToEdit.GovernarateCode = updateCentralDTO.GovernorateCode;
+            CentalToEdit.GovernorateCode = updateCentralDTO.GovernorateCode;
             CentalToEdit.Status = true;
 
 
@@ -87,12 +93,6 @@ namespace ISP.BL
 
         }
 
-        public async Task<List<ReadCentralWithGovernarateDTO>> GetAllWithGov()
-        {
-              var cenfromdb =   await centralRepository.getAllCentralwithGovernarate();
-
-            return mapper.Map<List<ReadCentralWithGovernarateDTO>>(cenfromdb);
-                
-        }
+        
     }
 }

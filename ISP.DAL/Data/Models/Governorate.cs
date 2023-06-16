@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ISP.DAL
 {
-    public class Governarate
+    public class Governorate
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
