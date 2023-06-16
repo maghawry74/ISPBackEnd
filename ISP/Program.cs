@@ -69,10 +69,10 @@ builder.Services
     .AddDefaultTokenProviders();
 
 
-builder.Services.Configure<SecurityStampValidatorOptions>(options =>
-{
-    options.ValidationInterval = TimeSpan.Zero;
-});
+//builder.Services.Configure<SecurityStampValidatorOptions>(options =>
+//{
+//    options.ValidationInterval = TimeSpan.Zero;
+//});
 
 #endregion
 
