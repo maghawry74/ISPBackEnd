@@ -14,6 +14,7 @@ namespace ISP.BL
         public string Type { get; set; } = string.Empty;
 
         public required double Price { get; set; }
+        public double purchasePrice { get; set; }
         public string Note { get; set; } = string.Empty;
 
 
