@@ -18,7 +18,6 @@ namespace ISP.API.Controllers
 
 
         [HttpGet]
-    
         public async Task<ActionResult<List<ReadCentralDTO>>> GetAll()
         {
             var CentralList = await centalService.GetAll();
@@ -26,8 +25,6 @@ namespace ISP.API.Controllers
         }
 
         //[HttpGet]
-
-
         //public async Task<ActionResult<List<ReadCentralDTO>>> GetAll()
         //{
         //    var CentralList = await centalService.GetAll();
@@ -36,10 +33,6 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("getallwithgov")]
-        
-
-
-
         public async Task<ActionResult<List<ReadCentralWithGovernarateDTO>>> getallwithgov()
         {
             var CentralList = await centalService.GetAllwithgov();
@@ -64,8 +57,6 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("GetByName/{Name}")]
-
-
         public async Task<ActionResult<ReadCentralDTO>> GetByName(String Name)
         {
             var Cental = await centalService.GetByName(Name);
@@ -108,7 +99,6 @@ namespace ISP.API.Controllers
         }
 
         [HttpDelete("{id}")]
-     
         public async Task<ActionResult<ReadCentralDTO>> Delete(int id)
         {
             var getCentral = await centalService.Delete(id);            
@@ -120,5 +110,7 @@ namespace ISP.API.Controllers
             
             return getCentral;
         }
+
+
     }
 }
