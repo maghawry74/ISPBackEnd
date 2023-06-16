@@ -1,11 +1,13 @@
 ﻿using ISP.BL.Dtos.Permission;
 using ISP.BL.Services.RolePermissionsService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ISP.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     //[Authorize(Permissions.RolePermissions.View)]
     public class RolePermissionsController : ControllerBase
     {

@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 namespace ISP.API.Controllers
 {
     //[Authorize(Permissions.Client.View)]
+    [AllowAnonymous]
     public class ClientController : CustomControllerBase
     {
         private readonly IClientservice clientservice;

@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ISP.API.Controllers
 {
+    [AllowAnonymous]
     
     public class CentralController : CustomControllerBase
     {

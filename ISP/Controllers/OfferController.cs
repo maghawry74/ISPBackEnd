@@ -1,5 +1,6 @@
 ﻿using ISP.BL.Dtos.Offer;
 using ISP.BL.Services.OfferService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
@@ -8,6 +9,7 @@ namespace ISP.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize(Permissions.Offer.View)]
+   [AllowAnonymous]
     public class OfferController : ControllerBase
     {
         private readonly IOfferService offerService;

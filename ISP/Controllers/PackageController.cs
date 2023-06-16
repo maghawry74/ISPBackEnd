@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 namespace ISP.API.Controllers
 {
     //[Authorize(Permissions.Package.View)]
+    [AllowAnonymous]
     public class PackageController : CustomControllerBase
     {
         private readonly IPackageService PackageService;

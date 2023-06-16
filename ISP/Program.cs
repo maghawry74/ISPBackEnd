@@ -65,9 +65,8 @@ builder.Services
         options.User.RequireUniqueEmail = true;
     })
 
-    .AddEntityFrameworkStores<ISPContext>();
-
-      //.AddDefaultTokenProviders();
+    .AddEntityFrameworkStores<ISPContext>()
+    .AddDefaultTokenProviders();
 
 
 

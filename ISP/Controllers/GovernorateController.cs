@@ -1,4 +1,5 @@
 ﻿using ISP.BL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
@@ -6,7 +7,7 @@ namespace ISP.API.Controllers
 {
 
     // [Authorize(Permissions.Governarate.View)]
- 
+    [AllowAnonymous]
     public class GovernorateController : CustomControllerBase
 
     {

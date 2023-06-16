@@ -1,10 +1,12 @@
 ﻿using ISP.BL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
 namespace ISP.API.Controllers
 {
     //[Authorize(Permissions.Provider.View)]
+    [AllowAnonymous]
     public class ProviderController : CustomControllerBase
     {
         private readonly IProviderService providerService;
