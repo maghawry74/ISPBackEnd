@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ISP.DAL.Migrations
 {
     [DbContext(typeof(ISPContext))]
-    [Migration("20230615230021_intial")]
+    [Migration("20230616134757_intial")]
     partial class intial
     {
         /// <inheritdoc />
@@ -442,6 +442,9 @@ namespace ISP.DAL.Migrations
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("purchasePrice")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 

@@ -133,7 +133,7 @@ app.UseCors("MyPolicy");
  
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+ app.UseAuthorization();
 
 app.UseHangfireDashboard("/dash");  //
 

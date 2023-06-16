@@ -4,13 +4,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ISP.API.Controllers
 {
-<<<<<<< HEAD:ISP/Controllers/GovernarateController.cs
+
     // [Authorize(Permissions.Governarate.View)]
-    public class GovernarateController : CustomControllerBase
-=======
-    
+ 
     public class GovernorateController : CustomControllerBase
->>>>>>> b79b305d4ebb83e64f14a0e7a74aa6b3756e6a20:ISP/Controllers/GovernorateController.cs
+
     {
         private readonly IGovernarateService governarateService;
 

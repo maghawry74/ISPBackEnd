@@ -89,9 +89,7 @@ namespace ISP.API.Controllers
             return Ok();
         }
         #endregion
-               
-
-        
+                                                                     
         #region User Register 
         [HttpPost]
         [Route("UserRegister")]
