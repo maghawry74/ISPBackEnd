@@ -60,8 +60,6 @@ namespace ISP.API.Controllers
 
             await PackageService.UpdatePackage(id, updatePackageDTO);
             return NoContent();
-
-
         }
 
         [HttpDelete("{id}")]

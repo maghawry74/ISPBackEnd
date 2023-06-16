@@ -2,11 +2,9 @@ using Ecommerce.API.MiddleWare;
 using FluentValidation.AspNetCore;
 using Hangfire;
 using ISP.API.RedisterDependancies;
-
 using ISP.BL;
 using ISP.DAL;
 using Microsoft.AspNetCore.Identity;
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -133,7 +131,8 @@ app.UseCors("MyPolicy");
  
 app.UseHttpsRedirection();
 
- app.UseAuthorization();
+// app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseHangfireDashboard("/dash");  //
 

@@ -35,7 +35,6 @@ namespace ISP.DAL
         {                         
             base.OnModelCreating(builder);
 
-         
             builder.Entity<User>().ToTable("User");
             builder.Entity<IdentityRole>().ToTable("Role");            
             builder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
@@ -69,13 +68,6 @@ namespace ISP.DAL
             builder.Entity<Package>().HasQueryFilter(p => p.IsActive );
             builder.Entity<Provider>().HasQueryFilter(p => p.IsActive );
             builder.Entity<User>().HasQueryFilter(p => p.Status);          
-        
-       
-
-
-       
-
-       
         }
    }
 }
