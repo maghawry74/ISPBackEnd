@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ISP.BL.Dtos.Offer;
 using ISP.BL.Dtos.Role;
+using ISP.BL.Dtos.Users;
 using ISP.DAL;
 
 namespace ISP.BL
@@ -180,6 +181,18 @@ namespace ISP.BL
             CreateMap<Bill , ReadBillDTO>().ReverseMap();
             #endregion
 
+            #region User
+
+            CreateMap<User, ReadUserDto>()
+                .ForMember(u => u.Role, s => s.MapFrom(src => src.Role.Name))
+                .ForMember(u => u.Branch, s => s.MapFrom(src => src.Branch.Name))
+                .ForMember(u => u.UserName, s => s.MapFrom(src => src.UserName))
+                .ForMember(u => u.Email, s => s.MapFrom(src => src.Email))
+                .ForMember(u => u.Status, s => s.MapFrom(src => src.Status))
+                .ForMember(u => u.PhoneNumber, s => s.MapFrom(src => src.PhoneNumber))
+                
+                .ReverseMap();
+            #endregion
 
         }
 

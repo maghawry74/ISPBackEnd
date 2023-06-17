@@ -1,6 +1,5 @@
 ﻿using ISP.BL.Dtos.Permission;
 using ISP.BL.Dtos.Role;
-using ISP.BL.Services.RolePermissionsService;
 using ISP.BL.Services.RoleService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,18 +9,16 @@ namespace ISP.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     // [Authorize(Permissions.Role.View)]
-    //[AllowAnonymous]
+    [AllowAnonymous]
     public class RoleController : ControllerBase
     {        
 
-        private readonly IRoleService roleService;
-        private readonly IRolePermissionService rolePermissionService;
+        private readonly IRoleService roleService;       
 
-        public RoleController(IRoleService roleService ,IRolePermissionService rolePermissionService) 
+        public RoleController(IRoleService roleService ) 
         {
             this.roleService = roleService;
-            this.rolePermissionService = rolePermissionService;
-           
+            
         }
 
         [HttpPost]
@@ -116,11 +113,10 @@ namespace ISP.API.Controllers
         // [Authorize(Permissions.RolePermissions.View)]
         public async Task<ActionResult<ReadRolePermissions>> GetRolePermissionsById(string Id)
         {
-            var permissions = await rolePermissionService.GetPermissionByRoleId(Id);
-            if (permissions == null)
-            {
+            var permissions = await roleService.GetPermissionByRoleId(Id);
+            if (permissions == null)            
                 return NotFound();
-            }
+          
             return Ok(permissions);
         }
 
@@ -130,9 +126,19 @@ namespace ISP.API.Controllers
         //[Authorize(Permissions.RolePermissions.Edit)]
         public async Task<ActionResult> EditRolePermissions(ReadPermissions readPermissions)
         {
-            await rolePermissionService.UpdatePermissionsOfRole(readPermissions);
+           var isUbdated =  await roleService.UpdatePermissionsOfRole(readPermissions);
+            if (!isUbdated)
+                return BadRequest();
+
             return Ok();
         }
 
+
+        [HttpGet]
+        [Route("GetAllPermissions")]
+        public async Task<ActionResult<List<string>>> GetAllPermissionsGetAll()
+        {
+            return await roleService.GetAllPermissions();
+        }
     }
 }

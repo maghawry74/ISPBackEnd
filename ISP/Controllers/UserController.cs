@@ -1,4 +1,5 @@
-﻿using ISP.BL.Dtos.Users;
+﻿using ISP.BL;
+using ISP.BL.Dtos.Users;
 using ISP.BL.Services.UserPermissionsService;
 using ISP.DAL;
 using Microsoft.AspNetCore.Authorization;
@@ -20,14 +21,14 @@ namespace ISP.API.Controllers
         
         private readonly UserManager<User> userManager;
         private readonly RoleManager<Role> roleManager;
-        private readonly IUserService userPermissions; 
+        private readonly IUserService userService; 
         private readonly IConfiguration configuration;
         public UserController(UserManager<User> userManager,RoleManager<Role> roleManager ,
-            IUserService userPermissions, IConfiguration configuration)
+            IUserService userService, IConfiguration configuration)
         {
             this.userManager = userManager;                  
             this.roleManager = roleManager;
-            this.userPermissions = userPermissions;
+            this.userService = userService;
             this.configuration = configuration;
         }
 
@@ -51,7 +52,8 @@ namespace ISP.API.Controllers
             //Check User Email
             var getUser = await userManager.FindByEmailAsync(adminRegisterDto.Email);
             if (getUser != null)
-                return BadRequest("This Email is Exist!");
+                return Problem(detail: "This Email is Exist!", statusCode: 404,
+                  title: "error", type: "null reference");
 
 
             //Create User
@@ -64,15 +66,23 @@ namespace ISP.API.Controllers
             //Add Role To User
             var addedRole = userManager.AddToRoleAsync(user,Roles.SuperAdmin.ToString());
             if (!addedRole.Result.Succeeded)
-                return BadRequest("Error acording add to role!  " + created.Result.Errors);
+                return Problem(detail: "Error acording add to role!", statusCode: 404,
+                   title: "error", type: "null reference");
+
+
+
 
             var role = await roleManager.FindByNameAsync(Roles.SuperAdmin.ToString());
+            if (role == null)
+                return Problem(detail: "Error acording adding role!", statusCode: 404,
+                  title: "error", type: "null reference");
 
 
             //Add Claims To Role 
-            var isSeddedClaims = await userPermissions.SeedClaimsAsync(Roles.SuperAdmin.ToString());
-            if (!isSeddedClaims)
-                return BadRequest("Invalid Seeding Claims, Check Your Role Name!");
+            var isSeddedClaims = await userService.SeedAdminClaimsAsync(Roles.SuperAdmin.ToString());
+            if (!isSeddedClaims)                
+                return Problem(detail: "Invalid Seeding Claims, Check Your Role Name!", statusCode: 404,
+                  title: "error", type: "null reference");
 
 
             var claims = new List<Claim>
@@ -110,12 +120,15 @@ namespace ISP.API.Controllers
             //Check User Role
             var checkRole = await roleManager.FindByNameAsync(registerDto.RoleName);
             if (checkRole == null)
-                return BadRequest("This Role Name does Exist!");
+                 return Problem(detail: "This Role Name does Exist!", statusCode: 404,
+                   title: "error", type: "null reference");
 
             //Check User Email
             var getUser = await userManager.FindByEmailAsync(registerDto.Email);
-            if (getUser != null )            
-                return BadRequest("This Email is Exist!");
+            if (getUser != null )
+                return Problem(detail: "This Email is Exist!", statusCode: 404,
+                  title: "error", type: "null reference");
+            
 
             //Create User
             var created = userManager.CreateAsync(user, registerDto.Password);
@@ -126,16 +139,15 @@ namespace ISP.API.Controllers
 
             //Add Role To User
             var addedRole = userManager.AddToRoleAsync(user, registerDto.RoleName);
-            if (!addedRole.Result.Succeeded)            
-                return BadRequest("Error acording add to role!  "+created.Result.Errors);
+            if (!addedRole.Result.Succeeded)
+                return Problem(detail: "Error acording add to role!", statusCode: 404,
+                  title: "error", type: "null reference");
+            
 
-            var role = await roleManager.FindByNameAsync(Roles.SuperAdmin.ToString());
-
-
-            //Add Claims To Role 
-            var isSeddedClaims = await userPermissions.SeedClaimsAsync(registerDto.RoleName);
-            if (!isSeddedClaims)
-                return BadRequest("Invalid Seeding Claims, Check Your Role Name!");
+            var role = await roleManager.FindByNameAsync(registerDto.RoleName);
+            if (role == null)
+                return Problem(detail: "Error acording adding role!", statusCode: 404,
+                   title: "error", type: "null reference");
 
 
             var claims = new List<Claim>
@@ -223,6 +235,15 @@ namespace ISP.API.Controllers
         }
 
         #endregion
+
+        //[HttpGet]
+        //[Route("GetAll")]
+        //[AllowAnonymous]
+        //public async Task<ActionResult<List<ReadUserDto>>> GetAll()
+        //{
+        //    return await userService.GetAll();
+           
+        //}
 
     }
 }

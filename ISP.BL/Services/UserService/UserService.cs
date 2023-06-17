@@ -1,36 +1,32 @@
-﻿using ISP.API.Constants;
+﻿using AutoMapper;
+using ISP.API.Constants;
+using ISP.BL.Dtos.Users;
 using ISP.DAL;
+using ISP.DAL.Repository.UserRepository;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
-using static ISP.BL.Constants.Helper;
 
 namespace ISP.BL.Services.UserPermissionsService
 {
     public class UserService : IUserService
     {
         private readonly RoleManager<Role> roleManager;
-        public UserService(RoleManager<Role> roleManager)
+        private readonly IUserRepository userRepository;
+        private readonly IMapper mapper;
+        public UserService(RoleManager<Role> roleManager, IUserRepository userRepository, IMapper mapper)
         {
             this.roleManager = roleManager;
+            this.userRepository = userRepository;
+            this.mapper = mapper;
         }
 
 
-
-        public async Task<bool> SeedClaimsAsync(string roleName)
+        public async Task<List<ReadUserDto>> GetAll()
         {
-            var adminRole = await roleManager.FindByNameAsync(roleName);
-            if (adminRole == null)
-                return false;
-
-            var modules = Enum.GetValues(typeof(PermissionsModuleName));
-            foreach (var module in modules)
-                await AddPermissionsClaimsAsync(module.ToString(), adminRole);
-
-            return true;
-
+           
+            var users = await userRepository.GetAllUsers();
+            return mapper.Map<List<ReadUserDto>>(users);
         }
-
-
 
 
         public async Task AddPermissionsClaimsAsync(string module, Role role)
@@ -43,5 +39,24 @@ namespace ISP.BL.Services.UserPermissionsService
                     await roleManager.AddClaimAsync(role, new Claim("Permission", permission));
 
         }
+
+       
+        public async Task<bool> SeedAdminClaimsAsync(string roleName)
+        {
+            var getRole = await roleManager.FindByNameAsync(roleName);
+            if (getRole == null)
+                return false;
+
+            var modules = Enum.GetValues(typeof(Permissions.PermissionsModuleName));
+            
+            foreach (var module in modules)
+                await AddPermissionsClaimsAsync(module.ToString(), getRole);
+
+            return true;
+
+        }
+
+      
+
     }
 }

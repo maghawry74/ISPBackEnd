@@ -1,12 +1,30 @@
 ﻿
-using static ISP.BL.Constants.Helper;
 
 namespace ISP.API.Constants
 {
     public static class Permissions
     {
-                 
 
+        public enum Roles
+        {
+            Admin,
+            SuperAdmin
+        }
+        public enum PermissionsModuleName
+        {
+            //Controllers Permissins
+            Bill,
+            Branch,
+            Central,
+            Client,
+            Governorate,
+            Offer,
+            Package,
+            Provider,
+            Role,
+            User,
+
+        }
         public static List<string> GeneratePermissionsOfModule(string module)
         {
             return new List<string>
@@ -17,8 +35,6 @@ namespace ISP.API.Constants
                 $"Permission.{module}.Delete",
             };
         }
-
-
 
         public static List<string> PermissionsList()
         {
@@ -61,12 +77,12 @@ namespace ISP.API.Constants
             public const string Edit = "Permission.Client.Edit";
             public const string Delete = "Permission.Client.Delete";
         }
-        public static class Governarate
+        public static class Governorate
         {
-            public const string View = "Permission.Governarate.View";
-            public const string Create = "Permission.Governarate.Create";
-            public const string Edit = "Permission.Governarate.Edit";
-            public const string Delete = "Permission.Governarate.Delete";
+            public const string View = "Permission.Governorate.View";
+            public const string Create = "Permission.Governorate.Create";
+            public const string Edit = "Permission.Governorate.Edit";
+            public const string Delete = "Permission.Governorate.Delete";
         }
         public static class Offer
         {
@@ -105,13 +121,7 @@ namespace ISP.API.Constants
             public const string Delete = "Permission.User.Delete";
         }
 
-        public static class RolePermissions
-        {
-            public const string View = "Permission.RolePermissions.View";
-            public const string Create = "Permission.RolePermissions.Create";
-            public const string Edit = "Permission.RolePermissions.Edit";
-            public const string Delete = "Permission.RolePermissions.Delete";
-        }
+        
 
     }
 }

@@ -2,7 +2,6 @@
 using ISP.BL.Services.RoleService;
 using ISP.BL;
 using ISP.BL.Services.UserPermissionsService;
-using ISP.BL.Services.RolePermissionsService;
 using Microsoft.AspNetCore.Authorization;
 using ISP.BL.Permission;
 
@@ -24,8 +23,7 @@ namespace ISP.API.RedisterDependancies
             services.AddScoped<IClientservice, ClientService>();
             services.AddScoped<IBillService , BillService>();
 
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IRolePermissionService, RolePermissionService>();
+            services.AddScoped<IUserService, UserService>();            
             services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
             services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
 

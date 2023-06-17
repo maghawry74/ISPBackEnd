@@ -14,21 +14,6 @@ namespace ISP.BL.Constants
             SuperAdmin
         }
 
-        // create names of permissions
-        public enum PermissionsModuleName
-        {
-            //Controllers Permissins
-            Bill,
-            Branch,
-            Central,
-            Client,
-            Governarate,
-            Offer,
-            Package,
-            Provider,
-            Role,
-            User,
 
-        }
     }
 }

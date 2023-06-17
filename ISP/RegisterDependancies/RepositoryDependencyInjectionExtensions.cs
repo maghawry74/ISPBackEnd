@@ -3,6 +3,7 @@ using ISP.DAL.Repository.CentralRepository;
 using ISP.DAL.Repository.OfferRepository;
 using ISP.DAL.Repository.RoleRepository;
 using ISP.DAL;
+using ISP.DAL.Repository.UserRepository;
 
 namespace ISP.API.RedisterDependancies
 {
@@ -19,6 +20,7 @@ namespace ISP.API.RedisterDependancies
             services.AddScoped<IOfferRepository, OfferRepository>();
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<IBillRepository , BillRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
         }
     }
 }

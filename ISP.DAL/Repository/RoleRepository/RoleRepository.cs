@@ -14,6 +14,7 @@ namespace ISP.DAL.Repository.RoleRepository
         public async Task<IEnumerable<Role>> GetAll()
         {
             return await Context.Set<Role>().Where(r => r.Status == true).ToListAsync();
+           
         }
 
         public async Task<Role?> GetByID(string id)
@@ -30,6 +31,6 @@ namespace ISP.DAL.Repository.RoleRepository
 
             return role.Name;
         }
-
+        
     }
 }
