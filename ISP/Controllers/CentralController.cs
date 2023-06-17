@@ -1,9 +1,12 @@
-﻿using ISP.BL;
+﻿using ISP.API.Constants;
+using ISP.BL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
 namespace ISP.API.Controllers
 {
+    [AllowAnonymous]
     
     public class CentralController : CustomControllerBase
     {
@@ -14,8 +17,15 @@ namespace ISP.API.Controllers
             this.centalService = centalService;
         }
 
-        //[HttpGet]
 
+        [HttpGet]
+        public async Task<ActionResult<List<ReadCentralDTO>>> GetAll()
+        {
+            var CentralList = await centalService.GetAll();
+            return CentralList;
+        }
+
+        //[HttpGet]
         //public async Task<ActionResult<List<ReadCentralDTO>>> GetAll()
         //{
         //    var CentralList = await centalService.GetAll();
@@ -23,7 +33,7 @@ namespace ISP.API.Controllers
         //}
 
         [HttpGet]
-
+        [Route("getallwithgov")]
         public async Task<ActionResult<List<ReadCentralWithGovernarateDTO>>> getallwithgov()
         {
             var CentralList = await centalService.GetAllwithgov();
@@ -33,7 +43,7 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("{Id}")]
-        [ResponseCache(Duration = 60)]
+
         public async Task<ActionResult<ReadCentralDTO>> GetById(int Id)
         {
             var Cental = await centalService.GetById(Id);
@@ -48,8 +58,6 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("GetByName/{Name}")]
-
-        [ResponseCache(Duration = 60)]
         public async Task<ActionResult<ReadCentralDTO>> GetByName(String Name)
         {
             var Cental = await centalService.GetByName(Name);
@@ -92,7 +100,6 @@ namespace ISP.API.Controllers
         }
 
         [HttpDelete("{id}")]
-     
         public async Task<ActionResult<ReadCentralDTO>> Delete(int id)
         {
             var getCentral = await centalService.Delete(id);            
@@ -104,5 +111,7 @@ namespace ISP.API.Controllers
             
             return getCentral;
         }
+
+
     }
 }

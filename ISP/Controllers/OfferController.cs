@@ -1,7 +1,6 @@
-﻿using ISP.BL;
-using ISP.BL.Dtos.Offer;
+﻿using ISP.BL.Dtos.Offer;
 using ISP.BL.Services.OfferService;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
@@ -9,6 +8,8 @@ namespace ISP.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize(Permissions.Offer.View)]
+   [AllowAnonymous]
     public class OfferController : ControllerBase
     {
         private readonly IOfferService offerService;
@@ -19,6 +20,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpPost]
+       // [Authorize(Permissions.Offer.View)]
         public async Task<ActionResult<ReadOfferDto>> Add([Required] WriteOfferDto writeOfferDto)
         {
             if (!ModelState.IsValid)
@@ -29,7 +31,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpGet]
-
+        //[Authorize(Permissions.Offer.View)]
         public async Task<ActionResult<List<ReadOfferDto>>> GetAll()
         {
             return await offerService.GetAll();
@@ -37,7 +39,7 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("{Id}")]
-
+        //[Authorize(Permissions.Offer.View)]
         public async Task<ActionResult<ReadOfferDto>> GetById(int Id)
         {
             var offer = await offerService.GetById(Id);
@@ -50,6 +52,7 @@ namespace ISP.API.Controllers
 
         [HttpPut]
         [Route("{Id}")]
+        //[Authorize(Permissions.Offer.Edit)]
         public async Task<ActionResult<ReadOfferDto>> Edit(int Id, UpdataOfferDto updataOfferDto)
         {
             if (Id != updataOfferDto.Id)
@@ -61,7 +64,8 @@ namespace ISP.API.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]        
+        [HttpDelete("{id}")]
+        //[Authorize(Permissions.Offer.Delete)]
         public async Task<ActionResult<ReadOfferDto>> Delete(int id)
         {
             var deletedOffer = await offerService.Delete(id);

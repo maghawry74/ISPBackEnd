@@ -1,9 +1,13 @@
-﻿using ISP.BL;
+﻿using ISP.API.Constants;
+using ISP.BL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
 namespace ISP.API.Controllers
 {
+    //[Authorize(Permissions.Package.View)]
+    [AllowAnonymous]
     public class PackageController : CustomControllerBase
     {
         private readonly IPackageService PackageService;
@@ -12,7 +16,7 @@ namespace ISP.API.Controllers
             this.PackageService = PackageService;
         }
         [HttpGet]
-
+        [Authorize(Permissions.Package.View)]
         public async Task<ActionResult<List<ReadPackageDTO>>> GetAll()
         {
             var PackageList = await PackageService.GetAll();
@@ -23,6 +27,7 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("{id}")]
+        //[Authorize(Permissions.Package.View)]
         public async Task<ActionResult<ReadPackageDTO>> GetById(int id)
         {
             var Package= await PackageService.GetById(id);
@@ -35,7 +40,7 @@ namespace ISP.API.Controllers
 
 
         [HttpPost]
-
+        //[Authorize(Permissions.Package.Create)]
         public async Task<ActionResult<ReadPackageDTO>> Add([Required] WritePackageDTO writePackageDTO)
         {
             
@@ -45,6 +50,7 @@ namespace ISP.API.Controllers
 
         [HttpPut]
         [Route("{id}")]
+        //[Authorize(Permissions.Package.Edit)]
         public async Task<ActionResult<ReadPackageDTO>> Edit(int id, UpdatePackageDTO updatePackageDTO)
         {
             if (id != updatePackageDTO.Id)
@@ -55,11 +61,10 @@ namespace ISP.API.Controllers
 
             await PackageService.UpdatePackage(id, updatePackageDTO);
             return NoContent();
-
-
         }
 
         [HttpDelete("{id}")]
+        //[Authorize(Permissions.Package.Delete)]
         public async Task<ActionResult<ReadPackageDTO>> Delete(int id)
         {
             var Packagetodelete = await PackageService.DeletePackage(id);

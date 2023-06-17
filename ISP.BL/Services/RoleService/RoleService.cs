@@ -35,7 +35,7 @@ namespace ISP.BL.Services.RoleService
             await roleManager.CreateAsync(role);
 
             //Add Claims To Role 
-            var isSeddedClaims = await rolePermissionService.CreatePermissionsToRole(writeRoleDto.RolePermissions,writeRoleDto.Name);
+            var isSeddedClaims = await rolePermissionService.CreatePermissionsToRole(writeRoleDto.RolePermissions, writeRoleDto.Name);
 
             if (!isSeddedClaims)
                 return null;

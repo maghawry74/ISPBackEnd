@@ -1,7 +1,10 @@
 ﻿using ISP.DAL;
+
+using ISP.DAL.Data.Models.ModelsCongiguration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 using System.Reflection.Emit;
 
 namespace ISP.DAL
@@ -32,27 +35,19 @@ namespace ISP.DAL
         {                         
             base.OnModelCreating(builder);
 
-
             builder.Entity<User>().ToTable("User");
             builder.Entity<IdentityRole>().ToTable("Role");            
             builder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
 
-                  builder.Entity<Branch>()
-                          .HasAlternateKey(e => e.Phone1);
-                  builder.Entity<Branch>()
-                          .HasAlternateKey(e => e.Phone2);
-                  builder.Entity<Branch>()
-                          .HasAlternateKey(e => e.Mobile1);
-                  builder.Entity<Branch>()
-                         .HasAlternateKey(e => e.Mobile2);
+            //can find all your configuration classes that inherit IEntityTypeConfiguration<T> and run them all for you
+            // builder.ApplyConfigurationsFromAssembly(
+            //Assembly.GetExecutingAssembly());
 
-            builder.Entity<Governorate>()
-                         .HasAlternateKey(e => e.Name);
+            builder.ApplyConfiguration(new BranchConfig());
+            builder.ApplyConfiguration(new ClientConfig());
+            builder.ApplyConfiguration(new GovernorateConfig());
 
-
-           builder.Entity<Client>()
-            .HasIndex(o => new { o.Mobile1, o.Mobile2 })
-            .IsUnique();
+             
 
             //Shdow Propreties
             //builder.Entity<User>().Property<bool>("Status");
@@ -73,17 +68,6 @@ namespace ISP.DAL
             builder.Entity<Package>().HasQueryFilter(p => p.IsActive );
             builder.Entity<Provider>().HasQueryFilter(p => p.IsActive );
             builder.Entity<User>().HasQueryFilter(p => p.Status);          
-        
-       
-
-
-            // builder.Entity<Branch>().HasMany(p => p.Phones).WithOne().HasForeignKey(a => a.Id);
-            // builder.Entity<Branch>().HasMany(p => p.Mobiles).WithOne().HasForeignKey(a => a.Id);
-
-            builder.Entity<Client>()
-           .HasIndex(c=>c.Phone)
-           .IsUnique();
-
         }
    }
 }

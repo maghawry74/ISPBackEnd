@@ -1,9 +1,15 @@
-﻿using ISP.BL;
+﻿using ISP.API.Constants;
+using ISP.BL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
 namespace ISP.API.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
+    //[Authorize(Permissions.Branch.View)]
+    [AllowAnonymous]
     public class BranchController : CustomControllerBase
     {
         private readonly IBranchService branchService;
@@ -14,7 +20,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpGet]
-  
+       // [Authorize(Permissions.Branch.View)]
         public async Task<ActionResult<List<ReadBranchDTO>>> GetAll()
         {
             var BranchList = await branchService.GetAll();
@@ -24,7 +30,7 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("{id}")]
-
+        //[Authorize(Permissions.Branch.View)]
         public async Task<ActionResult<ReadBranchDTO> >GetById(int id)
         {
             var Branch = await branchService.GetById(id);
@@ -36,7 +42,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpPost]
-     
+        //[Authorize(Permissions.Branch.Create)]
         public async Task<ActionResult<ReadBranchDTO>> Add( [Required] WriteBranchDTO writeBranchDTO)
         {
             if (!ModelState.IsValid)
@@ -51,6 +57,7 @@ namespace ISP.API.Controllers
 
         [HttpPut]
         [Route("{id}")]
+        //[Authorize(Permissions.Branch.Edit)]
         public async Task<ActionResult<ReadBranchDTO>> Edit(int id , UpdateBranchDTO updateBranchDTO)
         {
             if (id !=updateBranchDTO.Id)
@@ -62,14 +69,12 @@ namespace ISP.API.Controllers
              await branchService.UpdateBranch(id, updateBranchDTO);
 
             return NoContent(); 
-            // return CreatedAtAction(actionName: "GetById", routeValues: new { id = updateBranchDTO.Id }, 
-               //  value: "Updated Successfully");
-
-
+            
         }
 
         [HttpDelete]
         [Route("{id}")]
+        //[Authorize(Permissions.Branch.Delete)]
         public async Task<ActionResult<ReadBranchDTO>> Delete(int id)
         {
             var getBranch = await branchService.DeleteBranch(id);

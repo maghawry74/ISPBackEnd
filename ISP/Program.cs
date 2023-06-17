@@ -2,11 +2,9 @@ using Ecommerce.API.MiddleWare;
 using FluentValidation.AspNetCore;
 using Hangfire;
 using ISP.API.RedisterDependancies;
-
 using ISP.BL;
 using ISP.DAL;
 using Microsoft.AspNetCore.Identity;
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -66,9 +64,17 @@ builder.Services
         options.Password.RequiredLength = 4;
         options.User.RequireUniqueEmail = true;
     })
-    
+
     .AddEntityFrameworkStores<ISPContext>()
     .AddDefaultTokenProviders();
+
+
+
+
+builder.Services.Configure<SecurityStampValidatorOptions>(options =>
+{
+    options.ValidationInterval = TimeSpan.Zero;
+});
 
 #endregion
 
@@ -127,6 +133,7 @@ app.UseCors("MyPolicy");
  
 app.UseHttpsRedirection();
 
+// app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseHangfireDashboard("/dash");  //
