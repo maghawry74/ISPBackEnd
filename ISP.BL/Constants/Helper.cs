@@ -1,16 +1,21 @@
-﻿namespace ISP.API.Helpers
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ISP.BL.Constants
 {
-    public class Helper
+    public static class Helper
     {
-      //Default Roles
-      public enum Roles
+        public enum Roles
         {
             Admin,
             SuperAdmin
         }
 
-       // create names of permissions
-      public enum PermissionsModuleName
+        // create names of permissions
+        public enum PermissionsModuleName
         {
             //Controllers Permissins
             Bill,
@@ -23,9 +28,7 @@
             Provider,
             Role,
             User,
-            RolePermissions
 
         }
-
     }
 }

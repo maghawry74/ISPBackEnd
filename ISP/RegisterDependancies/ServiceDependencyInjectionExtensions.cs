@@ -24,7 +24,7 @@ namespace ISP.API.RedisterDependancies
             services.AddScoped<IClientservice, ClientService>();
             services.AddScoped<IBillService , BillService>();
 
-            services.AddScoped<IUserPermissionsService, UserPermissionsService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRolePermissionService, RolePermissionService>();
             services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
             services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();

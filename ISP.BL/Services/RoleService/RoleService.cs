@@ -4,6 +4,7 @@ using ISP.BL.Services.RolePermissionsService;
 using ISP.DAL;
 using ISP.DAL.Repository.RoleRepository;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace ISP.BL.Services.RoleService
 {
@@ -24,33 +25,36 @@ namespace ISP.BL.Services.RoleService
             this.rolePermissionService = rolePermissionService;
         }
 
-        public async Task<ReadRoleDto> Insert(WriteRoleDto writeRoleDto)
+        public async Task<ReadRoleDto> Insert(string roleName)
         {
-            var isRoleExist = roleManager.FindByIdAsync(writeRoleDto.Name);
-            if (isRoleExist != null)
+            var isExist = await roleManager.FindByNameAsync(roleName);
+            if (isExist != null)
                 return null;
 
-            var role = mapper.Map<Role>(writeRoleDto);
+
+            var role = new Role{Name = roleName};
            
-            await roleManager.CreateAsync(role);
-
-            //Add Claims To Role 
-            var isSeddedClaims = await rolePermissionService.CreatePermissionsToRole(writeRoleDto.RolePermissions, writeRoleDto.Name);
-
-            if (!isSeddedClaims)
-                return null;
+            await roleManager.CreateAsync(role);       
 
 
             return mapper.Map<ReadRoleDto>(role);
         }
 
-        public async Task<List<ReadRoleDto>> GetAll()
+        public async Task<bool> CreateRoleClaims(WriteRoleDto writeRoleDto)
         {
-            //RoleStore<Role> roleStore = new RoleStore<Role>(context);
-            //RoleManager<Role> roleMngr = new RoleManager<Role>(roleStore); 
-            //List<Role> roles = roleMngr.Roles.ToList();
 
-            //return  mapper.Map<List<ReadRoleDto>>(roles);
+            var role = await roleManager.FindByNameAsync(writeRoleDto.Name);
+            if (role == null)
+                return false;
+
+
+            foreach (var claim in writeRoleDto.RolePermissions)
+                await roleManager.AddClaimAsync(role, new Claim("Permission", claim));
+
+            return true;
+        }
+        public async Task<List<ReadRoleDto>> GetAll()
+        {        
 
             var rolesList = await roleRepository.GetAll();
             return mapper.Map<List<ReadRoleDto>>(rolesList);           

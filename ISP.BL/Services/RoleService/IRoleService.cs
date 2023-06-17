@@ -6,9 +6,11 @@ namespace ISP.BL.Services.RoleService
     {
         Task<ReadRoleDto?> GetRoleById(string id);
         public Task<string?> GetRoleNameByID(string id);
-        Task<ReadRoleDto> Insert(WriteRoleDto writeRoleDto);
+        Task<ReadRoleDto> Insert(string roleName);
         Task<List<ReadRoleDto>> GetAll();      
         Task<ReadRoleDto> Delete( string id);
+
+        public Task<bool> CreateRoleClaims(WriteRoleDto writeRoleDto);
 
     }
 }

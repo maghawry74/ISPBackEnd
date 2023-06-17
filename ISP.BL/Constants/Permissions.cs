@@ -1,9 +1,12 @@
-﻿using static ISP.API.Helpers.Helper;
+﻿
+using static ISP.BL.Constants.Helper;
 
 namespace ISP.API.Constants
 {
     public static class Permissions
     {
+                 
+
         public static List<string> GeneratePermissionsOfModule(string module)
         {
             return new List<string>

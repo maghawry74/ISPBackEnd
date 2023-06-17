@@ -1,4 +1,6 @@
-﻿using ISP.BL.Dtos.Role;
+﻿using ISP.BL.Dtos.Permission;
+using ISP.BL.Dtos.Role;
+using ISP.BL.Services.RolePermissionsService;
 using ISP.BL.Services.RoleService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,39 +10,55 @@ namespace ISP.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     // [Authorize(Permissions.Role.View)]
-    [AllowAnonymous]
+    //[AllowAnonymous]
     public class RoleController : ControllerBase
     {        
 
         private readonly IRoleService roleService;
-       
-        public RoleController(IRoleService roleService) 
+        private readonly IRolePermissionService rolePermissionService;
+
+        public RoleController(IRoleService roleService ,IRolePermissionService rolePermissionService) 
         {
             this.roleService = roleService;
+            this.rolePermissionService = rolePermissionService;
            
         }
 
         [HttpPost]
-       // [Authorize(Permissions.Role.Create)]
+        // [Authorize(Permissions.Role.Create)]
+        [AllowAnonymous]
         public async Task<ActionResult<ReadRoleDto>> Add(WriteRoleDto writeRoleDto)
         {
-            if (!ModelState.IsValid)
-            {
+            if (!ModelState.IsValid)            
                 return BadRequest(ModelState);
-            }
+            
 
-            var isAdded = await roleService.Insert(writeRoleDto);
-            await roleService.Insert(writeRoleDto);
-            if (isAdded == null)
-                return BadRequest();
+            var isAddedRole = await roleService.Insert(writeRoleDto.Name);            
 
-            return Ok(isAdded);
+            if (isAddedRole == null)
+
+                return Problem(detail: "Errror in Create Role", statusCode: 404,
+                   title: "error", type: "null reference");
+
+
+
+            var isAddedClaims = await roleService.CreateRoleClaims(writeRoleDto);
+
+            if (!isAddedClaims)
+                return Problem(detail: "Errror in Adding Claims to Role", statusCode: 404,
+                  title: "error", type: "null reference");
+
+
+            return Ok();
         }
 
 
 
         [HttpGet]
         //[Authorize(Permissions.Role.View)]
+        //[Authorize]
+        [Authorize(Roles = "SuperAdmin")]
+        
         public async Task<ActionResult<List<ReadRoleDto>>> GetAll()
         {
             return await roleService.GetAll();
@@ -89,6 +107,31 @@ namespace ISP.API.Controllers
                     title: "error", type: "null reference");
             }            
             return getRole;
+        }
+
+
+
+        [HttpGet]
+        [Route("GetRolePermissionsById/{Id}")]
+        // [Authorize(Permissions.RolePermissions.View)]
+        public async Task<ActionResult<ReadRolePermissions>> GetRolePermissionsById(string Id)
+        {
+            var permissions = await rolePermissionService.GetPermissionByRoleId(Id);
+            if (permissions == null)
+            {
+                return NotFound();
+            }
+            return Ok(permissions);
+        }
+
+
+        [HttpPut]
+        [Route("EditRolePermissions")]
+        //[Authorize(Permissions.RolePermissions.Edit)]
+        public async Task<ActionResult> EditRolePermissions(ReadPermissions readPermissions)
+        {
+            await rolePermissionService.UpdatePermissionsOfRole(readPermissions);
+            return Ok();
         }
 
     }

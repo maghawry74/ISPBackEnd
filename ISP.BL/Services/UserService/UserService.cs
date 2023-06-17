@@ -1,16 +1,15 @@
-﻿
-using ISP.API.Constants;
+﻿using ISP.API.Constants;
 using ISP.DAL;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
-using static ISP.API.Helpers.Helper;
+using static ISP.BL.Constants.Helper;
 
 namespace ISP.BL.Services.UserPermissionsService
 {
-    public class UserPermissionsService : IUserPermissionsService
+    public class UserService : IUserService
     {
         private readonly RoleManager<Role> roleManager;
-        public UserPermissionsService(RoleManager<Role> roleManager)
+        public UserService(RoleManager<Role> roleManager)
         {
             this.roleManager = roleManager;
         }

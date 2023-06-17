@@ -2,7 +2,7 @@
 
 namespace ISP.BL.Services.UserPermissionsService
 {
-    public interface IUserPermissionsService
+    public interface IUserService
     {
         public Task<bool> SeedClaimsAsync(string roleName);
         public Task AddPermissionsClaimsAsync(string module, Role role);

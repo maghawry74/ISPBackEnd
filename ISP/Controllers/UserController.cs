@@ -8,8 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using static ISP.API.Helpers.Helper;
-
+using static ISP.BL.Constants.Helper;
 
 namespace ISP.API.Controllers
 {
@@ -21,10 +20,10 @@ namespace ISP.API.Controllers
         
         private readonly UserManager<User> userManager;
         private readonly RoleManager<Role> roleManager;
-        private readonly IUserPermissionsService userPermissions; 
+        private readonly IUserService userPermissions; 
         private readonly IConfiguration configuration;
         public UserController(UserManager<User> userManager,RoleManager<Role> roleManager ,
-            IUserPermissionsService userPermissions, IConfiguration configuration)
+            IUserService userPermissions, IConfiguration configuration)
         {
             this.userManager = userManager;                  
             this.roleManager = roleManager;
@@ -63,7 +62,7 @@ namespace ISP.API.Controllers
                 }
               
             //Add Role To User
-            var addedRole = userManager.AddToRoleAsync(user, Roles.SuperAdmin.ToString());
+            var addedRole = userManager.AddToRoleAsync(user,Roles.SuperAdmin.ToString());
             if (!addedRole.Result.Succeeded)
                 return BadRequest("Error acording add to role!  " + created.Result.Errors);
 
@@ -173,13 +172,32 @@ namespace ISP.API.Controllers
                 return Unauthorized();
             }
 
-            
-            var claims = await userManager.GetClaimsAsync(user);
-            List<ClaimDto> result = new List<ClaimDto>(); 
+            //Get User Claims
+            var getUserClaims = await userManager.GetClaimsAsync(user);
+            List<ClaimDto> userClaims = new List<ClaimDto>(); 
 
-            foreach(var claim in claims)
+            foreach(var claim in getUserClaims)
             {
-                result.Add(new ClaimDto { claimType = claim.Type, Value = claim.Value });
+                userClaims.Add(new ClaimDto { claimType = claim.Type, Value = claim.Value });
+            }
+
+
+            //Get Role Claims
+            var roleName = userManager.GetRolesAsync(user).Result.FirstOrDefault();
+            var role = await roleManager.FindByNameAsync(roleName);
+
+            if (role == null)
+                return Problem(detail: "Role is null", statusCode: 404,
+                   title: "error", type: "null reference");
+
+
+            var getRoleClaims = await roleManager.GetClaimsAsync(role);
+            
+            List<string> roleClaims = new List<string>();
+
+            foreach (var claim in getRoleClaims)
+            {
+                roleClaims.Add(claim.Value);
             }
 
 
@@ -195,13 +213,13 @@ namespace ISP.API.Controllers
 
 
             var expireDate = DateTime.Now.AddDays(1);
-            var token = new JwtSecurityToken(claims: claims, expires: expireDate, signingCredentials: signingCredentials);
+            var token = new JwtSecurityToken(claims: getUserClaims, expires: expireDate, signingCredentials: signingCredentials);
            
 
             // Casting Token 
             var tokenHandler = new JwtSecurityTokenHandler();
 
-            return new TokenDto(tokenHandler.WriteToken(token), expireDate, result);
+            return new TokenDto(tokenHandler.WriteToken(token), expireDate, userClaims , roleClaims);
         }
 
         #endregion

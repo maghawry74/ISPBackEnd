@@ -54,9 +54,11 @@ namespace ISP.BL.Services.RolePermissionsService
 
         public async Task<bool> CreatePermissionsToRole(List<string> claimsList, string roleName)
         {
-            var role = await roleManager.FindByNameAsync(roleName);            
+            var role = await roleManager.FindByNameAsync(roleName);
+            if (role == null)
+                return false;
 
-           
+
             foreach (var claim in claimsList)
                 await roleManager.AddClaimAsync(role, new Claim("Permission", claim));
 
