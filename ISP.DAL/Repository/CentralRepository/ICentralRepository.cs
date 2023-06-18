@@ -10,5 +10,7 @@ namespace ISP.DAL.Repository.CentralRepository
     {
         Task<Central?> GetBYNameAsync(string Name);
         Task<List<Central>> getAllCentralwithGovernarate();
+        Task<Central?> GetcentralByIdWithGovernarate(int id);
+       
     }
 }

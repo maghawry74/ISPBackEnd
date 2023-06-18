@@ -18,12 +18,12 @@ namespace ISP.API.Controllers
         }
 
 
-        [HttpGet]
-        public async Task<ActionResult<List<ReadCentralDTO>>> GetAll()
-        {
-            var CentralList = await centalService.GetAll();
-            return CentralList;
-        }
+        //[HttpGet]
+        //public async Task<ActionResult<List<ReadCentralDTO>>> GetAll()
+        //{
+        //    var CentralList = await centalService.GetAll();
+        //    return CentralList;
+        //}
 
         //[HttpGet]
         //public async Task<ActionResult<List<ReadCentralDTO>>> GetAll()
@@ -32,8 +32,8 @@ namespace ISP.API.Controllers
         //    return CentralList;
         //}
 
-        [HttpGet]
-        [Route("getallwithgov")]
+         [HttpGet]
+     //   [Route("getallwithgov")]
         public async Task<ActionResult<List<ReadCentralWithGovernarateDTO>>> getallwithgov()
         {
             var CentralList = await centalService.GetAllwithgov();
