@@ -35,7 +35,7 @@ namespace ISP.BL
 
         public async Task<ReadCentralDTO?> GetById(int id)
         {
-            var CentalFromDB = await centralRepository.GetByID(id);
+            var CentalFromDB = await centralRepository.GetcentralByIdWithGovernarate(id);
             return mapper.Map<ReadCentralDTO>(CentalFromDB);
         }
 

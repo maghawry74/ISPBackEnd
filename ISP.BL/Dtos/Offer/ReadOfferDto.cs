@@ -12,7 +12,7 @@ public class ReadOfferDto
     public int NumberOfMonths { get; set; }
     public bool FreeMonthsFirst { get; set; }
     public bool FreeRouter { get; set; }
-    public double SuspendFee { get; set; }
+   // public double SuspendFee { get; set; }
     public float RouterPrice { get; set; }
 
 }
