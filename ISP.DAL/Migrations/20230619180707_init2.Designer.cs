@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ISP.DAL.Migrations
 {
     [DbContext(typeof(ISPContext))]
-    [Migration("20230616211036_init")]
-    partial class init
+    [Migration("20230619180707_init2")]
+    partial class init2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -482,9 +482,6 @@ namespace ISP.DAL.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BillId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("BranchId")
                         .HasColumnType("int");
 
@@ -522,9 +519,6 @@ namespace ISP.DAL.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -540,8 +534,6 @@ namespace ISP.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BillId");
-
                     b.HasIndex("BranchId");
 
                     b.HasIndex("NormalizedEmail")
@@ -551,8 +543,6 @@ namespace ISP.DAL.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.HasIndex("RoleId");
 
                     b.ToTable("User", (string)null);
                 });
@@ -614,7 +604,7 @@ namespace ISP.DAL.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims", (string)null);
+                    b.ToTable("RoleClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -856,23 +846,11 @@ namespace ISP.DAL.Migrations
 
             modelBuilder.Entity("ISP.DAL.User", b =>
                 {
-                    b.HasOne("ISP.DAL.Bill", "Bill")
-                        .WithMany()
-                        .HasForeignKey("BillId");
-
                     b.HasOne("ISP.DAL.Branch", "Branch")
                         .WithMany()
                         .HasForeignKey("BranchId");
 
-                    b.HasOne("ISP.DAL.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId");
-
-                    b.Navigation("Bill");
-
                     b.Navigation("Branch");
-
-                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

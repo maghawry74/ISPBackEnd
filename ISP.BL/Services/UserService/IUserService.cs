@@ -8,5 +8,6 @@ namespace ISP.BL.Services.UserPermissionsService
         Task<List<ReadUserDto>> GetAll();
         Task<bool> SeedAdminClaimsAsync(string roleName);
         Task AddPermissionsClaimsAsync(string module, Role role);
+        Task SuperAdminRegister();
     }
 }

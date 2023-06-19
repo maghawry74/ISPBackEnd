@@ -184,7 +184,7 @@ namespace ISP.BL
             #region User
 
             CreateMap<User, ReadUserDto>()
-                .ForMember(u => u.Role, s => s.MapFrom(src => src.Role.Name))
+                //.ForMember(u => u.Role, s => s.MapFrom(src => src.Role.Name))
                 .ForMember(u => u.Branch, s => s.MapFrom(src => src.Branch.Name))
                 .ForMember(u => u.UserName, s => s.MapFrom(src => src.UserName))
                 .ForMember(u => u.Email, s => s.MapFrom(src => src.Email))

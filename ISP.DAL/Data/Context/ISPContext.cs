@@ -1,15 +1,12 @@
-﻿using ISP.DAL;
-
+﻿using ISP.DAL.Data.Models;
 using ISP.DAL.Data.Models.ModelsCongiguration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
-using System.Reflection.Emit;
 
 namespace ISP.DAL
 {
-   public class ISPContext:IdentityDbContext<User>
+    public class ISPContext:IdentityDbContext<User>
     {
         
         public ISPContext(DbContextOptions<ISPContext> contextOptions):base(contextOptions)
@@ -28,6 +25,9 @@ namespace ISP.DAL
         public DbSet<ClientOffers> ClientOffers => Set<ClientOffers>();
 
         public DbSet<Bill> Bills => Set<Bill>();
+        public DbSet<User> Users => Set<User>();
+        public DbSet<Role> Roles => Set<Role>();
+        public DbSet<Role> RoleClaims => Set<Role>();
 
 
 
@@ -38,6 +38,7 @@ namespace ISP.DAL
             builder.Entity<User>().ToTable("User");
             builder.Entity<IdentityRole>().ToTable("Role");            
             builder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
+            builder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims");
 
             //can find all your configuration classes that inherit IEntityTypeConfiguration<T> and run them all for you
             // builder.ApplyConfigurationsFromAssembly(
@@ -58,8 +59,7 @@ namespace ISP.DAL
 
 
             //Global Filters
-
-           // builder.Entity<Bill>().HasQueryFilter(p => p.Status);
+            
             builder.Entity<Branch>().HasQueryFilter(p => p.Status );
             builder.Entity<Governorate>().HasQueryFilter(p => p.Status);
             builder.Entity<Central>().HasQueryFilter(p => p.Status);
@@ -67,7 +67,9 @@ namespace ISP.DAL
             builder.Entity<Offer>().HasQueryFilter(p => p.Status);
             builder.Entity<Package>().HasQueryFilter(p => p.IsActive );
             builder.Entity<Provider>().HasQueryFilter(p => p.IsActive );
-            builder.Entity<User>().HasQueryFilter(p => p.Status);          
+            //builder.Entity<User>().HasQueryFilter(p => p.Status);          
+
+           
         }
    }
 }

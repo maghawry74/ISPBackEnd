@@ -44,8 +44,6 @@ namespace ISP.DAL.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<bool>(type: "bit", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -282,8 +280,6 @@ namespace ISP.DAL.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
                     BranchId = table.Column<int>(type: "int", nullable: true),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    BillId = table.Column<int>(type: "int", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -303,19 +299,9 @@ namespace ISP.DAL.Migrations
                 {
                     table.PrimaryKey("PK_User", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_User_Bills_BillId",
-                        column: x => x.BillId,
-                        principalTable: "Bills",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_User_Branches_BranchId",
                         column: x => x.BranchId,
                         principalTable: "Branches",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_User_Role_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "Role",
                         principalColumn: "Id");
                 });
 
@@ -560,19 +546,9 @@ namespace ISP.DAL.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_BillId",
-                table: "User",
-                column: "BillId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_User_BranchId",
                 table: "User",
                 column: "BranchId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_User_RoleId",
-                table: "User",
-                column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
@@ -636,20 +612,8 @@ namespace ISP.DAL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_User_Role_RoleId",
-                table: "User");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Bills_User_UserId",
-                table: "Bills");
-
-            migrationBuilder.DropForeignKey(
                 name: "FK_Branches_User_ManagerId",
                 table: "Branches");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Clients_User_DisstrubtorId",
-                table: "Clients");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -664,6 +628,9 @@ namespace ISP.DAL.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Bills");
+
+            migrationBuilder.DropTable(
                 name: "CentralProvider");
 
             migrationBuilder.DropTable(
@@ -673,22 +640,13 @@ namespace ISP.DAL.Migrations
                 name: "UserClaims");
 
             migrationBuilder.DropTable(
-                name: "Offers");
-
-            migrationBuilder.DropTable(
                 name: "Role");
-
-            migrationBuilder.DropTable(
-                name: "User");
-
-            migrationBuilder.DropTable(
-                name: "Bills");
 
             migrationBuilder.DropTable(
                 name: "Clients");
 
             migrationBuilder.DropTable(
-                name: "Branches");
+                name: "Offers");
 
             migrationBuilder.DropTable(
                 name: "Centrals");
@@ -697,10 +655,16 @@ namespace ISP.DAL.Migrations
                 name: "Packages");
 
             migrationBuilder.DropTable(
-                name: "Governorates");
+                name: "Providers");
 
             migrationBuilder.DropTable(
-                name: "Providers");
+                name: "User");
+
+            migrationBuilder.DropTable(
+                name: "Branches");
+
+            migrationBuilder.DropTable(
+                name: "Governorates");
         }
     }
 }
