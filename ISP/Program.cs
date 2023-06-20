@@ -142,10 +142,7 @@ app.UseHangfireDashboard("/dash");  //
 app.UseAuthentication();
 app.UseAuthorization();
 
-<<<<<<< HEAD
-=======
- 
->>>>>>> 8309075f0b8a9b3c61d05e2515bcc78bcfd8302e
+
 
 app.MapControllers();
 

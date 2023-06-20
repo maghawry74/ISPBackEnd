@@ -26,15 +26,14 @@ namespace ISP.DAL
         public DbSet<Client> Clients => Set<Client>();
         public DbSet<ClientOffers> ClientOffers => Set<ClientOffers>();
         public DbSet<Bill> Bills => Set<Bill>();
-<<<<<<< HEAD
-=======
+
         public DbSet<User> Users => Set<User>();
         public DbSet<Role> Roles => Set<Role>();
         public DbSet<Role> RoleClaims => Set<Role>();
 
 
 
->>>>>>> 8309075f0b8a9b3c61d05e2515bcc78bcfd8302e
+
         protected override void OnModelCreating(ModelBuilder builder)
         {                         
             base.OnModelCreating(builder);
@@ -106,7 +105,7 @@ namespace ISP.DAL
 
        
 
-<<<<<<< HEAD
+
             //Shdow Propreties
             //builder.Entity<User>().Property<bool>("Status");
 
@@ -118,11 +117,10 @@ namespace ISP.DAL
             //Global Filters
 
             // builder.Entity<Bill>().HasQueryFilter(p => p.Status);
-=======
+
            
             //Global Filters
-            
->>>>>>> 8309075f0b8a9b3c61d05e2515bcc78bcfd8302e
+
             builder.Entity<Branch>().HasQueryFilter(p => p.Status );
             builder.Entity<Governorate>().HasQueryFilter(p => p.Status);
             builder.Entity<Central>().HasQueryFilter(p => p.Status);

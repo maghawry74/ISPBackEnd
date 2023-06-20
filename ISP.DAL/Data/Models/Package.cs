@@ -25,7 +25,7 @@ namespace ISP.DAL
 
         public bool IsActive { get; set; } = true;
 
-<<<<<<< HEAD
+
         [ForeignKey("Provider")]
         public int ProviderId { get; set; }
 
@@ -37,18 +37,6 @@ namespace ISP.DAL
 
     }
 }
-=======
-        [ForeignKey("Provider")]
-        public int ProviderId { get; set; }
-
-       
-        public Provider? Provider { get; set; }
-
-        public  ICollection<Client> Clients { get; set; } = new HashSet<Client>();
 
 
 
-
-    }
-}
->>>>>>> 8309075f0b8a9b3c61d05e2515bcc78bcfd8302e
