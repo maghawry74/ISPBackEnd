@@ -1,4 +1,5 @@
-﻿using ISP.BL.Dtos.Permission;
+﻿using ISP.API.Constants;
+using ISP.BL.Dtos.Permission;
 using ISP.BL.Dtos.Role;
 using ISP.BL.Services.RoleService;
 using Microsoft.AspNetCore.Authorization;
@@ -53,9 +54,6 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         //[Authorize(Permissions.Role.View)]
-        //[Authorize]
-        [Authorize(Roles = "SuperAdmin")]
-        
         public async Task<ActionResult<List<ReadRoleDto>>> GetAll()
         {
             return await roleService.GetAll();
@@ -66,6 +64,7 @@ namespace ISP.API.Controllers
         [HttpGet]
         [Route("{Id}")]
         //[Authorize(Permissions.Role.View)]
+        //[AllowAnonymous]
         public async Task<ActionResult<ReadRoleDto>> GetById(string Id)
 
         {

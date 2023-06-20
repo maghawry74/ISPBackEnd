@@ -47,6 +47,7 @@ namespace ISP.BL
             #region Offer
             //Offer
             CreateMap<Offer, UpdataOfferDto>()
+
                 .ForMember(o => o.Name, opt => opt.MapFrom(src => src.Name))
                 .ForMember(o => o.ProviderId, opt => opt.MapFrom(src => src.ProviderId))
                 .ForMember(o => o.Discount, opt => opt.MapFrom(src => src.DiscoutAmout))
@@ -84,7 +85,11 @@ namespace ISP.BL
                .ForMember(o => o.FreeRouter, opt => opt.MapFrom(src => src.HasRouter))
                .ForMember(o => o.SuspendFee, opt => opt.MapFrom(src => src.FineOfSuspensed))
                .ForMember(o => o.RouterPrice, opt => opt.MapFrom(src => src.RouterPrice))
-               .ReverseMap();
+                 .ReverseMap();
+
+
+
+
 
             #endregion
 
@@ -174,7 +179,7 @@ namespace ISP.BL
             #region User
 
             CreateMap<User, ReadUserDto>()
-                .ForMember(u => u.Role, s => s.MapFrom(src => src.Role.Name))
+                //.ForMember(u => u.Role, s => s.MapFrom(src => src.Role.Name))
                 .ForMember(u => u.Branch, s => s.MapFrom(src => src.Branch.Name))
                 .ForMember(u => u.UserName, s => s.MapFrom(src => src.UserName))
                 .ForMember(u => u.Email, s => s.MapFrom(src => src.Email))

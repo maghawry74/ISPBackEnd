@@ -4,6 +4,7 @@ using ISP.BL.Dtos.Users;
 using ISP.DAL;
 using ISP.DAL.Repository.UserRepository;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace ISP.BL.Services.UserPermissionsService
@@ -12,12 +13,15 @@ namespace ISP.BL.Services.UserPermissionsService
     {
         private readonly RoleManager<Role> roleManager;
         private readonly IUserRepository userRepository;
+        private readonly UserManager<User> userManager;
+
         private readonly IMapper mapper;
-        public UserService(RoleManager<Role> roleManager, IUserRepository userRepository, IMapper mapper)
+        public UserService(RoleManager<Role> roleManager, IUserRepository userRepository, IMapper mapper, UserManager<User> userManager)
         {
             this.roleManager = roleManager;
             this.userRepository = userRepository;
             this.mapper = mapper;
+            this.userManager = userManager;
         }
 
 
@@ -25,6 +29,7 @@ namespace ISP.BL.Services.UserPermissionsService
         {
            
             var users = await userRepository.GetAllUsers();
+
             return mapper.Map<List<ReadUserDto>>(users);
         }
 
@@ -56,7 +61,30 @@ namespace ISP.BL.Services.UserPermissionsService
 
         }
 
-      
+        public async Task SuperAdminRegister()
+        {
+            var user = new User
+            {
+                UserName ="Reem",
+                Email = "reem12@gmail.com",
+                PhoneNumber = "01278689712",
+                EmailConfirmed = true,
+                BranchId = null,
+                Status = true
+
+            };
+                  
+            //Create User
+          await userManager.CreateAsync(user, "reem123Yasser");            
+
+
+            //Add Role To User
+          await userManager.AddToRoleAsync(user, "SuperAdmin");
+            
+
+
+            
+        }
 
     }
 }

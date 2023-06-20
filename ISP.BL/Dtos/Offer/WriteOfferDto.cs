@@ -6,7 +6,7 @@ namespace ISP.BL.Dtos.Offer
     public class WriteOfferDto
     {   
              
-           
+
         public string Name { get; set; } = string.Empty;
 
         [Range(1, Int32.MaxValue, ErrorMessage = "Provider Id is Required and Must be Bigger than Zero")]

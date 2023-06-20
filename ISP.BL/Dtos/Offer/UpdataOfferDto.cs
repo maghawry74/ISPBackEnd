@@ -3,7 +3,7 @@
 namespace ISP.BL.Dtos.Offer;
 public class UpdataOfferDto
 {
-    [Range(1, Int32.MaxValue, ErrorMessage = "Offer Id is Required and Must be Bigger than Zero")]
+    //[Range(1, Int32.MaxValue, ErrorMessage = "Offer Id is Required and Must be Bigger than Zero")]
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;
     [Range(1, Int32.MaxValue, ErrorMessage = "Provider Id is Required and Must be Bigger than Zero")]

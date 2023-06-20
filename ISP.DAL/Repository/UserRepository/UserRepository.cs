@@ -1,5 +1,8 @@
 ﻿
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace ISP.DAL.Repository.UserRepository
 {
@@ -15,10 +18,8 @@ namespace ISP.DAL.Repository.UserRepository
 
         public async Task<List<User>> GetAllUsers()
         {
-            return await context.Set<User>()
-                .Include(a => a.Role)
-                .Include(b => b.Branch)
-                .ToListAsync();
+            return await context.Set<User>().Include(b => b.Branch).ToListAsync();
+            
         }
 
 
