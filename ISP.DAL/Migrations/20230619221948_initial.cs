@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ISP.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -89,6 +89,7 @@ namespace ISP.DAL.Migrations
                     NumOfOfferMonth = table.Column<int>(type: "int", nullable: false),
                     NumOfFreeMonth = table.Column<int>(type: "int", nullable: false),
                     Isfreefirst = table.Column<bool>(type: "bit", nullable: false),
+                    IsTotalBill = table.Column<bool>(type: "bit", nullable: false),
                     IsPercentageDiscount = table.Column<bool>(type: "bit", nullable: false),
                     DiscoutAmout = table.Column<double>(type: "float", nullable: false),
                     HasRouter = table.Column<bool>(type: "bit", nullable: false),
@@ -416,7 +417,7 @@ namespace ISP.DAL.Migrations
                         column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -426,7 +427,8 @@ namespace ISP.DAL.Migrations
                     ClientSSn = table.Column<int>(type: "int", nullable: false),
                     OfferId = table.Column<int>(type: "int", nullable: false),
                     MonthsLeft = table.Column<int>(type: "int", nullable: false),
-                    FreeMonthsLeft = table.Column<int>(type: "int", nullable: false)
+                    FreeMonthsLeft = table.Column<int>(type: "int", nullable: false),
+                    RouterPrice = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -444,6 +446,11 @@ namespace ISP.DAL.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Governorates",
+                columns: new[] { "Code", "Name", "Status" },
+                values: new object[] { 66, "cairo", true });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

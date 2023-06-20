@@ -34,7 +34,5 @@ namespace ISP.DAL
         public  ICollection<Client> Clients { get; set; } = new HashSet<Client>();
 
 
-
-
     }
 }

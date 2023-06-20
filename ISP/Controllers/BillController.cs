@@ -9,18 +9,19 @@ namespace ISP.API.Controllers
     {
         private readonly IBillService billService;
 
-        public BillController(IBillService billService )
+        public BillController(IBillService billService)
         {
             this.billService = billService;
         }
 
 
         [HttpGet]
-        [Route("{NMonth}/{clientId}")]
-     
-        public IActionResult GetNextMonthBill(int NMonth, int clientId)
+        [Route("next-month-bill")]
+        public IActionResult GetNextMonthBill([FromQuery(Name = "NMonth")] int NMonth,
+            [FromQuery(Name = "clientId")] int clientId
+            )
         {
-            var billobj  = billService.GetNextMonthBill(NMonth, clientId);
+            var billobj = billService.GetNextMonthBill(NMonth, clientId);
             return Ok(billobj);
         }
 

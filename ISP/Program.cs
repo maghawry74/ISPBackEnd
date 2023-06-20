@@ -133,10 +133,12 @@ app.UseCors("MyPolicy");
  
 app.UseHttpsRedirection();
 
+
+app.UseHangfireDashboard("/dash");  //
+
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseHangfireDashboard("/dash");  //
 
 app.MapControllers();
 

@@ -20,6 +20,7 @@ namespace ISP.DAL
         public int NumOfFreeMonth { get; set; }
 
         public bool Isfreefirst { get; set; }
+        public bool IsTotalBill { get; set; }
 
 
         public bool IsPercentageDiscount { get; set; }

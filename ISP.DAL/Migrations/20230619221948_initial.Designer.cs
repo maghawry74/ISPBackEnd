@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ISP.DAL.Migrations
 {
     [DbContext(typeof(ISPContext))]
-    [Migration("20230616211036_init")]
-    partial class init
+    [Migration("20230619221948_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -332,6 +332,9 @@ namespace ISP.DAL.Migrations
                     b.Property<int>("MonthsLeft")
                         .HasColumnType("int");
 
+                    b.Property<double>("RouterPrice")
+                        .HasColumnType("float");
+
                     b.HasKey("ClientSSn", "OfferId");
 
                     b.HasIndex("OfferId");
@@ -357,6 +360,14 @@ namespace ISP.DAL.Migrations
                     b.HasAlternateKey("Name");
 
                     b.ToTable("Governorates");
+
+                    b.HasData(
+                        new
+                        {
+                            Code = 66,
+                            Name = "cairo",
+                            Status = true
+                        });
                 });
 
             modelBuilder.Entity("ISP.DAL.Offer", b =>
@@ -383,6 +394,9 @@ namespace ISP.DAL.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool?>("IsPossibleToRasieOrLower")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsTotalBill")
                         .HasColumnType("bit");
 
                     b.Property<bool>("Isfreefirst")
