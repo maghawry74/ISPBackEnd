@@ -11,7 +11,7 @@ public class UpdataOfferDto
     public double Discount { get; set; }
     public bool IsPercent { get; set; }
     public double CancelFee { get; set; }
-   // public double SuspendFee { get; set; }
+    public double SuspendFee { get; set; }
     public int NumberOfFreeMonths { get; set; }
     public int NumberOfMonths { get; set; }
     public bool FreeMonthsFirst { get; set; }
