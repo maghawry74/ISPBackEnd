@@ -91,25 +91,7 @@ namespace ISP.BL.Services.RoleService
         {
             var role = await roleManager.FindByIdAsync(roleId);
             var claims = roleManager.GetClaimsAsync(role).Result.Select(c => c.Value).ToList();
-            //var allPermissions = Permissions.PermissionsList().Select(c => new ReadRolePermissions { Type = c }).ToList();
-
-
-            //foreach (var permission in allPermissions)
-            //{
-            //    if (claims.Any(c => c == permission.Type))
-            //    {
-            //        permission.Value = true;
-            //        permissions.Add(permission);
-            //    }
-            //}
-
-
-            //return new ReadPermissions
-            //{
-            //    RoleId = roleId,
-            //    RoleName = role.Name,
-            //    RolePermissions = allPermissions
-            //};
+            
             List<ReadRolePermissions> permissions = new List<ReadRolePermissions>();
             foreach (var claim in claims)
             {
@@ -144,7 +126,7 @@ namespace ISP.BL.Services.RoleService
 
         public async Task<List<string>> GetAllPermissions()
         {
-            return  Permissions.PermissionsList();
+            return DAL.PermissionsData.Permissions.PermissionsList();
         }
     }
 }

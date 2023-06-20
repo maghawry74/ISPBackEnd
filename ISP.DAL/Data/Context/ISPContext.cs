@@ -1,8 +1,10 @@
-﻿using ISP.DAL.Data.Models;
+﻿
 using ISP.DAL.Data.Models.ModelsCongiguration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using ISP.DAL.PermissionsData;
+using ISP.DAL.Data.Models;
 
 namespace ISP.DAL
 {
@@ -40,6 +42,57 @@ namespace ISP.DAL
             builder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
             builder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims");
 
+            #region Seed Data
+            //Create SuperAdmin Role
+
+            builder.Entity<Role>().HasData(new Role { Id = "1", Name = "SuperAdmin" });
+
+            //Create SuperAdmin
+
+            builder.Entity<User>().HasData(new User
+            {
+               Id = "1",
+               UserName = "Reem",
+               Email = "reematman15@gmail.com",
+               EmailConfirmed = true,
+               BranchId = null,
+               Status = true,
+               PasswordHash = new PasswordHasher<User>().HashPassword(null!,"reem123R")
+            });
+
+            //Add Role to User
+            builder.Entity <IdentityUserRole<string>>().HasData(new IdentityUserRole<string>()
+            {
+                RoleId = "1",
+                UserId = "1"
+
+            });
+
+            //Create Permissions 
+            var permissionsList = Permissions.PermissionsList();
+            var claimsList = new List<RoleClaims<string>>();
+
+            for(var item = 0; item < permissionsList.Count;item++ )
+            {
+                claimsList.Add(new RoleClaims<string>()
+                {
+                    Id = item+1,
+                    RoleId = "1",
+                    ClaimType= "Permission",
+                    ClaimValue = permissionsList[item]
+
+                });
+            }
+
+
+            builder.Entity<RoleClaims<string>>().HasData(claimsList);
+            
+
+            #endregion
+
+
+
+
             //can find all your configuration classes that inherit IEntityTypeConfiguration<T> and run them all for you
             // builder.ApplyConfigurationsFromAssembly(
             //Assembly.GetExecutingAssembly());
@@ -50,14 +103,7 @@ namespace ISP.DAL
 
              
 
-            //Shdow Propreties
-            //builder.Entity<User>().Property<bool>("Status");
            
-            //builder.Entity<Provider>()
-            //    .HasQueryFilter(p => p.IsActive == true)
-            //    .Property<bool>("IsActive");                
-
-
             //Global Filters
             
             builder.Entity<Branch>().HasQueryFilter(p => p.Status );
@@ -66,8 +112,10 @@ namespace ISP.DAL
             builder.Entity<Client>().HasQueryFilter(p => p.Isactive);
             builder.Entity<Offer>().HasQueryFilter(p => p.Status);
             builder.Entity<Package>().HasQueryFilter(p => p.IsActive );
-            builder.Entity<Provider>().HasQueryFilter(p => p.IsActive );
-            //builder.Entity<User>().HasQueryFilter(p => p.Status);          
+            //builder.Entity<Provider>().HasQueryFilter(p => p.IsActive );
+                  
+
+
 
            
         }

@@ -6,8 +6,6 @@ namespace ISP.BL.Services.UserPermissionsService
     public interface IUserService
     {
         Task<List<ReadUserDto>> GetAll();
-        Task<bool> SeedAdminClaimsAsync(string roleName);
-        Task AddPermissionsClaimsAsync(string module, Role role);
-        Task SuperAdminRegister();
+        
     }
 }

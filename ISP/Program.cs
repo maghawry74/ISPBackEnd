@@ -145,8 +145,6 @@ app.MapControllers();
 
 RecurringJob.AddOrUpdate<IBillService>("MyJob", s=>s.BillGenerationSP() , "35 18 * * *");
 
-RecurringJob.AddOrUpdate<IUserService>("MyJob2", u => u.SuperAdminRegister(), "44 18 * * *");
-
 app.Run();
 
 

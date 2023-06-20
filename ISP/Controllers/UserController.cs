@@ -146,7 +146,9 @@ namespace ISP.API.Controllers
 
             if (isAuthenticated == false)
             {
-                return Unauthorized();
+                
+                return Problem(detail: "This Passwored is not valid!", statusCode: 404,
+                 title: "error", type: "Unauthorized");
             }
                         
             //Get User Claims
