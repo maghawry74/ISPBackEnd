@@ -87,30 +87,26 @@ namespace ISP.BL.Services.RoleService
             return true;
         }
 
-        public async Task<ReadPermissions> GetPermissionByRoleId(string roleId)
+        public async Task<List<ReadRolePermissions>> GetPermissionByRoleId(string roleId)
         {
             var role = await roleManager.FindByIdAsync(roleId);
             var claims = roleManager.GetClaimsAsync(role).Result.Select(c => c.Value).ToList();
-            var allPermissions = Permissions.PermissionsList().Select(c => new ReadRolePermissions { Value = c }).ToList();
-
-            foreach (var permission in allPermissions)
+            
+            List<ReadRolePermissions> permissions = new List<ReadRolePermissions>();
+            foreach (var claim in claims)
             {
-                if (claims.Any(c => c == permission.Value))
-                    permission.Selected = true;
+                permissions.Add(new ReadRolePermissions
+                {
+                    Type = claim,
+                    Value = true
+                }); 
             }
-
-
-            return new ReadPermissions
-            {
-                RoleId = roleId,
-                RoleName = role.Name,
-                RolePermissions = allPermissions
-            };
+            return permissions;
         }
 
-        public async Task<bool> UpdatePermissionsOfRole(ReadPermissions readPermissions)
+        public async Task<bool> UpdatePermissionsOfRole(string id, List<string> permissionsList)
         {
-            var role = await roleManager.FindByIdAsync(readPermissions.RoleId);
+            var role = await roleManager.FindByIdAsync(id);
             if (role == null)
                 return false;
             
@@ -118,12 +114,11 @@ namespace ISP.BL.Services.RoleService
 
 
             foreach (var claim in claims)
-                await roleManager.RemoveClaimAsync(role, claim);
-
-
-            var selectedClaims = readPermissions.RolePermissions.Where(readPermissions => readPermissions.Selected).ToList();
-            foreach (var claim in selectedClaims)
-                await roleManager.AddClaimAsync(role, new Claim("Permission", claim.Value));
+                await roleManager.RemoveClaimAsync(role, claim);                      
+            
+            
+            foreach (var claimValue in permissionsList)
+                await roleManager.AddClaimAsync(role, new Claim("Permission", claimValue));
 
             return true;
 
@@ -131,7 +126,7 @@ namespace ISP.BL.Services.RoleService
 
         public async Task<List<string>> GetAllPermissions()
         {
-            return Permissions.PermissionsList();
+            return DAL.PermissionsData.Permissions.PermissionsList();
         }
     }
 }

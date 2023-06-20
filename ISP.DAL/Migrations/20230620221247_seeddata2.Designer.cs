@@ -4,6 +4,7 @@ using ISP.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ISP.DAL.Migrations
 {
     [DbContext(typeof(ISPContext))]
-    partial class ISPContextModelSnapshot : ModelSnapshot
+    [Migration("20230620221247_seeddata2")]
+    partial class seeddata2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -329,9 +332,6 @@ namespace ISP.DAL.Migrations
                     b.Property<int>("MonthsLeft")
                         .HasColumnType("int");
 
-                    b.Property<double>("RouterPrice")
-                        .HasColumnType("float");
-
                     b.HasKey("ClientSSn", "OfferId");
 
                     b.HasIndex("OfferId");
@@ -357,14 +357,6 @@ namespace ISP.DAL.Migrations
                     b.HasAlternateKey("Name");
 
                     b.ToTable("Governorates");
-
-                    b.HasData(
-                        new
-                        {
-                            Code = 66,
-                            Name = "cairo",
-                            Status = true
-                        });
                 });
 
             modelBuilder.Entity("ISP.DAL.Offer", b =>
@@ -391,9 +383,6 @@ namespace ISP.DAL.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool?>("IsPossibleToRasieOrLower")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsTotalBill")
                         .HasColumnType("bit");
 
                     b.Property<bool>("Isfreefirst")

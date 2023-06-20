@@ -10,7 +10,7 @@ namespace ISP.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize(Permissions.Offer.View)]
-   [AllowAnonymous]
+    [AllowAnonymous]
     public class OfferController : ControllerBase
     {
         private readonly IOfferService offerService;
@@ -32,7 +32,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Permissions.Offer.View)]
+       [Authorize(Permissions.Offer.View)]
         public async Task<ActionResult<List<ReadOfferDto>>> GetAll()
         {
             return await offerService.GetAll();

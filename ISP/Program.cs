@@ -3,6 +3,7 @@ using FluentValidation.AspNetCore;
 using Hangfire;
 using ISP.API.RedisterDependancies;
 using ISP.BL;
+using ISP.BL.Services.UserPermissionsService;
 using ISP.DAL;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -132,6 +133,8 @@ else
 app.UseCors("MyPolicy");
  
 app.UseHttpsRedirection();
+app.UseHangfireDashboard("/dash");
+
 
 
 app.UseHangfireDashboard("/dash");  //
@@ -139,6 +142,10 @@ app.UseHangfireDashboard("/dash");  //
 app.UseAuthentication();
 app.UseAuthorization();
 
+<<<<<<< HEAD
+=======
+ 
+>>>>>>> 8309075f0b8a9b3c61d05e2515bcc78bcfd8302e
 
 app.MapControllers();
 

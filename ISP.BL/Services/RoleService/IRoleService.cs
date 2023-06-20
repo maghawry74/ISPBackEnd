@@ -12,8 +12,8 @@ namespace ISP.BL.Services.RoleService
         Task<ReadRoleDto> Delete( string id);
 
         Task<bool> CreateRoleClaims(WriteRoleDto writeRoleDto);
-        Task<ReadPermissions> GetPermissionByRoleId(string roleId);
-        Task<bool> UpdatePermissionsOfRole(ReadPermissions readPermissions);
+        Task<List<ReadRolePermissions>> GetPermissionByRoleId(string roleId);
+        Task<bool> UpdatePermissionsOfRole(string id ,List<string> permissionsList);
 
         
         Task<List<string>> GetAllPermissions();

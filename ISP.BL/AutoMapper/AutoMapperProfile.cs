@@ -47,52 +47,49 @@ namespace ISP.BL
             #region Offer
             //Offer
             CreateMap<Offer, UpdataOfferDto>()
-               // .ForMember(o => o.IsPercent, opt => opt.MapFrom(src => src.IsPercentageDiscount))
-               // .ForMember(o => o.FreeRouter, opt => opt.MapFrom(src => src.HasRouter))
-               // .ForMember(o => o.RouterPrice, opt => opt.MapFrom(src => src.RouterPrice))
-               // .ForMember(o => o.IsPercent, opt => opt.MapFrom(src => src.IsPercentageDiscount))
-               // .ForMember(o => o.CancelFee, opt => opt.MapFrom(src => src.CancelFine))
-               // .ForMember(o => o.ProviderId, opt => opt.MapFrom(src => src.ProviderId))
-               // .ForMember(o => o.NumberOfMonths, opt => opt.MapFrom(src => src.NumOfOfferMonth))
-               // .ForMember(o => o.Discount, opt => opt.MapFrom(src => src.DiscoutAmout))
-               // .ForMember(o => o.IsPercent, opt => opt.MapFrom(src => src.IsPercentageDiscount))
-               // .ForMember(o => o.FreeMonthsFirst, opt => opt.MapFrom(src => src.Isfreefirst))
-               // .ForMember(o => o.NumberOfFreeMonths, opt => opt.MapFrom(src => src.NumOfFreeMonth))
-               // .ForMember(o => o.CancelFee, opt => opt.MapFrom(src => src.CancelFine))
-               //// .ForMember(o => o.SuspendFee, opt => opt.MapFrom(src => src.FineOfSuspensed))
+
+                .ForMember(o => o.Name, opt => opt.MapFrom(src => src.Name))
+                .ForMember(o => o.ProviderId, opt => opt.MapFrom(src => src.ProviderId))
+                .ForMember(o => o.Discount, opt => opt.MapFrom(src => src.DiscoutAmout))
+                .ForMember(o => o.IsPercent, opt => opt.MapFrom(src => src.IsPercentageDiscount))
+                .ForMember(o => o.CancelFee, opt => opt.MapFrom(src => src.CancelFine))
+                .ForMember(o => o.SuspendFee, opt => opt.MapFrom(src => src.FineOfSuspensed))
+                .ForMember(o => o.NumberOfFreeMonths, opt => opt.MapFrom(src => src.NumOfFreeMonth))
+                .ForMember(o => o.NumberOfMonths, opt => opt.MapFrom(src => src.NumOfOfferMonth))
+                .ForMember(o => o.FreeMonthsFirst, opt => opt.MapFrom(src => src.Isfreefirst))
+                .ForMember(o => o.RouterPrice, opt => opt.MapFrom(src => src.RouterPrice))
                 .ReverseMap();
 
             CreateMap<Offer, WriteOfferDto>()
-               //.ForMember(o => o.IsPercent, opt => opt.MapFrom(src => src.IsPercentageDiscount))
-               //.ForMember(o => o.FreeRouter, opt => opt.MapFrom(src => src.HasRouter))
-               //.ForMember(o => o.RouterPrice, opt => opt.MapFrom(src => src.RouterPrice))
-               //.ForMember(o => o.IsPercent, opt => opt.MapFrom(src => src.IsPercentageDiscount))
-               //.ForMember(o => o.CancelFee, opt => opt.MapFrom(src => src.CancelFine))
-               //.ForMember(o => o.ProviderId, opt => opt.MapFrom(src => src.ProviderId))
-               //.ForMember(o => o.NumberOfMonths, opt => opt.MapFrom(src => src.NumOfOfferMonth))
-               //.ForMember(o => o.Discount, opt => opt.MapFrom(src => src.DiscoutAmout))
-               //.ForMember(o => o.IsPercent, opt => opt.MapFrom(src => src.IsPercentageDiscount))
-               //.ForMember(o => o.FreeMonthsFirst, opt => opt.MapFrom(src => src.Isfreefirst))
-               //.ForMember(o => o.NumberOfFreeMonths, opt => opt.MapFrom(src => src.NumOfFreeMonth))
-               //.ForMember(o => o.CancelFee, opt => opt.MapFrom(src => src.CancelFine))
-               //.ForMember(o => o.SuspendFee, opt => opt.MapFrom(src => src.FineOfSuspensed))
+               .ForMember(o => o.Name, opt => opt.MapFrom(src => src.Name))
+               .ForMember(o => o.ProviderId, opt => opt.MapFrom(src => src.ProviderId))
+               .ForMember(o => o.Discount, opt => opt.MapFrom(src => src.DiscoutAmout))
+               .ForMember(o => o.IsPercent, opt => opt.MapFrom(src => src.IsPercentageDiscount))
+               .ForMember(o => o.CancelFee, opt => opt.MapFrom(src => src.CancelFine))
+               .ForMember(o => o.SuspendFee, opt => opt.MapFrom(src => src.FineOfSuspensed))
+               .ForMember(o => o.NumberOfFreeMonths, opt => opt.MapFrom(src => src.NumOfFreeMonth))
+               .ForMember(o => o.NumberOfMonths, opt => opt.MapFrom(src => src.NumOfOfferMonth))
+               .ForMember(o => o.FreeMonthsFirst, opt => opt.MapFrom(src => src.Isfreefirst))
+               .ForMember(o => o.FreeRouter, opt => opt.MapFrom(src => src.HasRouter))
+               .ForMember(o => o.RouterPrice, opt => opt.MapFrom(src => src.RouterPrice))
                .ReverseMap();
 
             CreateMap<Offer, ReadOfferDto>()
-               //.ForMember(o => o.IsPercent, opt => opt.MapFrom(src => src.IsPercentageDiscount))
-               //.ForMember(o => o.FreeRouter, opt => opt.MapFrom(src => src.HasRouter))
-               //.ForMember(o => o.RouterPrice, opt => opt.MapFrom(src => src.RouterPrice))
-               //.ForMember(o => o.IsPercent, opt => opt.MapFrom(src => src.IsPercentageDiscount))
-               //.ForMember(o => o.CancelFee, opt => opt.MapFrom(src => src.CancelFine))
-               //.ForMember(o => o.Provider, opt => opt.MapFrom(src => src.Provider.Id))
-               //.ForMember(o => o.NumberOfMonths, opt => opt.MapFrom(src => src.NumOfOfferMonth))
-               //.ForMember(o => o.Discount, opt => opt.MapFrom(src => src.DiscoutAmout))
-               //.ForMember(o => o.IsPercent, opt => opt.MapFrom(src => src.IsPercentageDiscount))
-               //.ForMember(o => o.FreeMonthsFirst, opt => opt.MapFrom(src => src.Isfreefirst))
-               //.ForMember(o => o.NumberOfFreeMonths, opt => opt.MapFrom(src => src.NumOfFreeMonth))
-               //.ForMember(o => o.CancelFee, opt => opt.MapFrom(src => src.CancelFine))
-               //.ForMember(o => o.SuspendFee, opt => opt.MapFrom(src => src.FineOfSuspensed))
-               .ReverseMap();
+               .ForMember(o => o.Name, opt => opt.MapFrom(src => src.Name))
+               .ForMember(o => o.Discount, opt => opt.MapFrom(src => src.DiscoutAmout))
+               .ForMember(o => o.IsPercent, opt => opt.MapFrom(src => src.IsPercentageDiscount))
+               .ForMember(o => o.CancelFee, opt => opt.MapFrom(src => src.CancelFine))
+               .ForMember(o => o.NumberOfFreeMonths, opt => opt.MapFrom(src => src.NumOfFreeMonth))
+               .ForMember(o => o.NumberOfMonths, opt => opt.MapFrom(src => src.NumOfOfferMonth))
+               .ForMember(o => o.FreeMonthsFirst, opt => opt.MapFrom(src => src.Isfreefirst))
+               .ForMember(o => o.FreeRouter, opt => opt.MapFrom(src => src.HasRouter))
+               .ForMember(o => o.SuspendFee, opt => opt.MapFrom(src => src.FineOfSuspensed))
+               .ForMember(o => o.RouterPrice, opt => opt.MapFrom(src => src.RouterPrice))
+                 .ReverseMap();
+
+
+
+
 
             #endregion
 
@@ -114,9 +111,7 @@ namespace ISP.BL
                 .ForMember(c => c.Password, cmt => cmt.MapFrom(src => src.Password))
                 .ReverseMap();
 
-            #endregion
-
-            #region Package
+  
 
             CreateMap<Client, UpdateClientDTO>()
               .ForMember(c => c.SSID, cmt => cmt.MapFrom(src => src.SSn))
@@ -153,10 +148,10 @@ namespace ISP.BL
             .ForMember(c => c.installationFee, cmt => cmt.MapFrom(src => src.installationFee))
             .ForMember(c => c.contractFee, cmt => cmt.MapFrom(src => src.ContractFee))
             .ReverseMap();
+            #endregion
 
-          
 
-
+            #region Package
             //Package
             CreateMap<Package, ReadPackageDTO>().ReverseMap();
             CreateMap<Package, WritePackageDTO>().ReverseMap();
@@ -184,7 +179,7 @@ namespace ISP.BL
             #region User
 
             CreateMap<User, ReadUserDto>()
-                .ForMember(u => u.Role, s => s.MapFrom(src => src.Role.Name))
+                //.ForMember(u => u.Role, s => s.MapFrom(src => src.Role.Name))
                 .ForMember(u => u.Branch, s => s.MapFrom(src => src.Branch.Name))
                 .ForMember(u => u.UserName, s => s.MapFrom(src => src.UserName))
                 .ForMember(u => u.Email, s => s.MapFrom(src => src.Email))

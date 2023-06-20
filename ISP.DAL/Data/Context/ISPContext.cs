@@ -1,15 +1,14 @@
-﻿using ISP.DAL;
-
+﻿
 using ISP.DAL.Data.Models.ModelsCongiguration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
-using System.Reflection.Emit;
+using ISP.DAL.PermissionsData;
+using ISP.DAL.Data.Models;
 
 namespace ISP.DAL
 {
-   public class ISPContext:IdentityDbContext<User>
+    public class ISPContext:IdentityDbContext<User>
     {
         
         public ISPContext(DbContextOptions<ISPContext> contextOptions):base(contextOptions)
@@ -27,6 +26,15 @@ namespace ISP.DAL
         public DbSet<Client> Clients => Set<Client>();
         public DbSet<ClientOffers> ClientOffers => Set<ClientOffers>();
         public DbSet<Bill> Bills => Set<Bill>();
+<<<<<<< HEAD
+=======
+        public DbSet<User> Users => Set<User>();
+        public DbSet<Role> Roles => Set<Role>();
+        public DbSet<Role> RoleClaims => Set<Role>();
+
+
+
+>>>>>>> 8309075f0b8a9b3c61d05e2515bcc78bcfd8302e
         protected override void OnModelCreating(ModelBuilder builder)
         {                         
             base.OnModelCreating(builder);
@@ -34,6 +42,58 @@ namespace ISP.DAL
             builder.Entity<User>().ToTable("User");
             builder.Entity<IdentityRole>().ToTable("Role");            
             builder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
+            builder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims");
+
+            #region Seed Data
+            //Create SuperAdmin Role
+
+            builder.Entity<Role>().HasData(new Role { Id = "1", Name = "SuperAdmin" });
+
+            //Create SuperAdmin
+
+            builder.Entity<User>().HasData(new User
+            {
+               Id = "1",
+               UserName = "Reem",
+               Email = "reematman15@gmail.com",
+               EmailConfirmed = true,
+               BranchId = null,
+               Status = true,
+               PasswordHash = new PasswordHasher<User>().HashPassword(null!,"reem123R")
+            });
+
+            //Add Role to User
+            builder.Entity <IdentityUserRole<string>>().HasData(new IdentityUserRole<string>()
+            {
+                RoleId = "1",
+                UserId = "1"
+
+            });
+
+            //Create Permissions 
+            var permissionsList = Permissions.PermissionsList();
+            var claimsList = new List<RoleClaims<string>>();
+
+            for(var item = 0; item < permissionsList.Count;item++ )
+            {
+                claimsList.Add(new RoleClaims<string>()
+                {
+                    Id = item+1,
+                    RoleId = "1",
+                    ClaimType= "Permission",
+                    ClaimValue = permissionsList[item]
+
+                });
+            }
+
+
+            builder.Entity<RoleClaims<string>>().HasData(claimsList);
+            
+
+            #endregion
+
+
+
 
            //// can find all your configuration classes that inherit IEntityTypeConfiguration<T> and run them all for you
            //  builder.ApplyConfigurationsFromAssembly(
@@ -46,6 +106,7 @@ namespace ISP.DAL
 
        
 
+<<<<<<< HEAD
             //Shdow Propreties
             //builder.Entity<User>().Property<bool>("Status");
 
@@ -57,14 +118,23 @@ namespace ISP.DAL
             //Global Filters
 
             // builder.Entity<Bill>().HasQueryFilter(p => p.Status);
+=======
+           
+            //Global Filters
+            
+>>>>>>> 8309075f0b8a9b3c61d05e2515bcc78bcfd8302e
             builder.Entity<Branch>().HasQueryFilter(p => p.Status );
             builder.Entity<Governorate>().HasQueryFilter(p => p.Status);
             builder.Entity<Central>().HasQueryFilter(p => p.Status);
             builder.Entity<Client>().HasQueryFilter(p => p.Isactive);
             builder.Entity<Offer>().HasQueryFilter(p => p.Status);
             builder.Entity<Package>().HasQueryFilter(p => p.IsActive );
-            builder.Entity<Provider>().HasQueryFilter(p => p.IsActive );
-            builder.Entity<User>().HasQueryFilter(p => p.Status);          
+            //builder.Entity<Provider>().HasQueryFilter(p => p.IsActive );
+                  
+
+
+
+           
         }
    }
 }
