@@ -206,14 +206,14 @@ namespace ISP.API.Controllers
 
         #endregion
 
-        //[HttpGet]
-        //[Route("GetAll")]
-        //[AllowAnonymous]
-        //public async Task<ActionResult<List<ReadUserDto>>> GetAll()
-        //{
-        //    return await userService.GetAll();
+        [HttpGet]
+        [Route("GetAll")]
+        [AllowAnonymous]
+        public async Task<ActionResult<List<ReadUserDto>>> GetAll()
+        {
+            return await userService.GetAll();
 
-        //}
+        }
 
     }
 }

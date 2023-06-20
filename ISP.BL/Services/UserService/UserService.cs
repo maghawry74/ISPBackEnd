@@ -5,6 +5,7 @@ using ISP.DAL;
 using ISP.DAL.Repository.UserRepository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Security.Claims;
 
 namespace ISP.BL.Services.UserPermissionsService
@@ -30,7 +31,23 @@ namespace ISP.BL.Services.UserPermissionsService
            
             var users = await userRepository.GetAllUsers();
 
-            return mapper.Map<List<ReadUserDto>>(users);
+            List<ReadUserDto> readUserDto = new List<ReadUserDto>();
+            foreach (var user in users)
+            {
+               var role = await userRepository.GetRoleNameByUserID(user.Id);
+                readUserDto.Add(new ReadUserDto
+                {
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    PhoneNumber = user.PhoneNumber,
+                    Email = user.Email,
+                    Branch = user.Branch?.Name ?? "",
+                    Status = user.Status,
+                    Role = role
+                });
+            }
+
+            return readUserDto;
         }
 
 
@@ -61,6 +78,8 @@ namespace ISP.BL.Services.UserPermissionsService
 
         }
 
+
+        //Register Admin
         public async Task SuperAdminRegister()
         {
             var user = new User
