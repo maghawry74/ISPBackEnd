@@ -15,5 +15,13 @@ namespace ISP.DAL.Repository.OfferRepository
             return await Context.Set<Offer>().Include(o => o.Provider)
                 .ToListAsync();
         }
+        public new async Task<Offer?> GetByID(int id)
+        {
+            return await Context.Set<Offer>().Include(o => o.Provider).FirstOrDefaultAsync(o => o.Id == id);
+        }
+        public new void Update(Offer Offer)
+        {
+            Context.Set<Offer>().Update(Offer);
+        }
     }
 }

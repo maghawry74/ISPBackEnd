@@ -4,6 +4,7 @@ public class ReadOfferDto
 {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;
+    
     public ReadProviderDTO? Provider { get; set; }
     public double Discount { get; set; }
     public bool IsPercent { get; set; }

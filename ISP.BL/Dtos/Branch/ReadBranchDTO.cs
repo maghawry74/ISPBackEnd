@@ -25,7 +25,7 @@ namespace ISP.BL
         public string Mobile2 { get; set; } = string.Empty;
 
         public int? Fax { get; set; }
-        public required string ManagerId { get; set; } = string.Empty;
+        public  string? ManagerId { get; set; } = string.Empty;
 
  
     }
