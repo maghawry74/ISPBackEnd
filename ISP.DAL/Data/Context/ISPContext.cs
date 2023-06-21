@@ -25,11 +25,12 @@ namespace ISP.DAL
         public DbSet<Package> Packages => Set<Package>();
         public DbSet<Client> Clients => Set<Client>();
         public DbSet<ClientOffers> ClientOffers => Set<ClientOffers>();
-
         public DbSet<Bill> Bills => Set<Bill>();
+
         public DbSet<User> Users => Set<User>();
         public DbSet<Role> Roles => Set<Role>();
         public DbSet<Role> RoleClaims => Set<Role>();
+
 
 
 
@@ -94,19 +95,33 @@ namespace ISP.DAL
 
 
 
-            //can find all your configuration classes that inherit IEntityTypeConfiguration<T> and run them all for you
-            // builder.ApplyConfigurationsFromAssembly(
-            //Assembly.GetExecutingAssembly());
+           //// can find all your configuration classes that inherit IEntityTypeConfiguration<T> and run them all for you
+           //  builder.ApplyConfigurationsFromAssembly(
+           // Assembly.GetExecutingAssembly());
+
 
             builder.ApplyConfiguration(new BranchConfig());
             builder.ApplyConfiguration(new ClientConfig());
             builder.ApplyConfiguration(new GovernorateConfig());
 
-             
+       
+
+
+            //Shdow Propreties
+            //builder.Entity<User>().Property<bool>("Status");
+
+            //builder.Entity<Provider>()
+            //    .HasQueryFilter(p => p.IsActive == true)
+            //    .Property<bool>("IsActive");                
+
+
+            //Global Filters
+
+            // builder.Entity<Bill>().HasQueryFilter(p => p.Status);
 
            
             //Global Filters
-            
+
             builder.Entity<Branch>().HasQueryFilter(p => p.Status );
             builder.Entity<Governorate>().HasQueryFilter(p => p.Status);
             builder.Entity<Central>().HasQueryFilter(p => p.Status);

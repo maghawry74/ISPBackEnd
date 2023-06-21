@@ -13,7 +13,7 @@ namespace ISPBackEnd.Tests.Controller
 
         public ProviderControllerTest()
         {
-            _ProviderService = A.Fake<IProviderService>();
+          _ProviderService = A.Fake<IProviderService>();
         }
 
 
@@ -53,7 +53,7 @@ namespace ISPBackEnd.Tests.Controller
 
         [Fact]
 
-        public async Task GovernaratesController_GetGovernaratesByID_ReturnsOk()
+        public async Task providerController_GetproviderByID_ReturnsOk()
         {
             int id = 5;
             var expectedprovider = new ReadProviderDTO() { Name = "we"};
@@ -80,7 +80,7 @@ namespace ISPBackEnd.Tests.Controller
 
 
         [Fact]
-        public async Task GovernarateController_Add_ReturnsOk()
+        public async Task providerController_Add_ReturnsOk()
         {
             //arrange
 

@@ -20,7 +20,10 @@ namespace ISP.BL
         public string mobile2 { get; set; } = string.Empty;
 
         public int? Fax { get; set; }
-        public  string? ManagerId { get; set; } = string.Empty;
+
+        public  string ManagerId { get; set; } = string.Empty;
+
+
         public int GovernarateCode { get; set; }
     }
 }

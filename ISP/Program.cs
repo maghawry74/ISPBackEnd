@@ -136,10 +136,13 @@ app.UseHttpsRedirection();
 app.UseHangfireDashboard("/dash");
 
 
+
+app.UseHangfireDashboard("/dash");  //
+
 app.UseAuthentication();
 app.UseAuthorization();
 
- 
+
 
 app.MapControllers();
 

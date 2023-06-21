@@ -13,6 +13,7 @@ namespace ISP.DAL.Data.Models.ModelsCongiguration
         public void Configure(EntityTypeBuilder<Governorate> entity)
         {
             entity.HasAlternateKey(e => e.Name);
+            entity.HasData(new { Code = 66, Name = "cairo" , Status = true });
         }
     }
 }
