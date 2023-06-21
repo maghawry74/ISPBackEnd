@@ -45,7 +45,7 @@ namespace ISP.DAL
             #region Seed Data
             //Create SuperAdmin Role
 
-            builder.Entity<Role>().HasData(new Role { Id = "1", Name = "SuperAdmin" });
+            builder.Entity<Role>().HasData(new Role { Id = "1", Name = "SuperAdmin",NormalizedName ="SUPERADMIN" });
 
             //Create SuperAdmin
 
@@ -53,6 +53,7 @@ namespace ISP.DAL
             {
                Id = "1",
                UserName = "Reem",
+               NormalizedUserName ="REEM",
                Email = "reematman15@gmail.com",
                EmailConfirmed = true,
                BranchId = null,

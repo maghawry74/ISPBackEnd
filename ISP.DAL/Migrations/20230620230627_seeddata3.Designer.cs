@@ -4,6 +4,7 @@ using ISP.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ISP.DAL.Migrations
 {
     [DbContext(typeof(ISPContext))]
-    partial class ISPContextModelSnapshot : ModelSnapshot
+    [Migration("20230620230627_seeddata3")]
+    partial class seeddata3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -548,14 +551,13 @@ namespace ISP.DAL.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cb2e62e4-8869-4691-b76f-ba16b713a748",
+                            ConcurrencyStamp = "1e1d3bd5-ce91-418c-9862-10489040a8fe",
                             Email = "reematman15@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            NormalizedUserName = "REEM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJp7C055x1yo/1tZgGnuYkIWEHcv/6r/+Qyy1aj9wUK8Paew+Kd+5t9cOUbvtakuJQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECOJ60IzC+oR0tw/68GQryf/Taq1WufJmfijtgbv1Vee1Gx3lWUEVTdlAL45gr6Y4w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6d51ff86-1440-40c9-b1ab-d41a5a16dd7e",
+                            SecurityStamp = "3ca0b25e-97eb-4bb4-a774-43d152170fa4",
                             Status = true,
                             TwoFactorEnabled = false,
                             UserName = "Reem"

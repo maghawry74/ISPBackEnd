@@ -166,6 +166,10 @@ namespace ISP.API.Controllers
 
             //Get Role claims
             var roleClaims = await roleManager.GetClaimsAsync(role);
+            List<string> permissions = new List<string>();
+            foreach (var permission in roleClaims)
+                permissions.Add(permission.Value);
+
 
             var claims = new List<Claim>
             {
@@ -200,10 +204,9 @@ namespace ISP.API.Controllers
             // Casting Token 
             var tokenHandler = new JwtSecurityTokenHandler();
 
-            return new TokenDto(tokenHandler.WriteToken(token), expireDate);
+            return new TokenDto(tokenHandler.WriteToken(token), expireDate, permissions.ToList());
 
-            //return new TokenDto(tokenHandler.WriteToken(token), expireDate, userClaims.ToList());
-
+            
         }
 
         #endregion
