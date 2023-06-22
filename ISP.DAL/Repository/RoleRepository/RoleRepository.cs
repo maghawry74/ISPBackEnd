@@ -12,7 +12,7 @@ namespace ISP.DAL.Repository.RoleRepository
 
         public async Task<IEnumerable<Role>> GetAll()
         {
-            return await Context.Set<Role>().Where(r => r.Status == true).ToListAsync();
+            return await Context.Set<Role>().Where(r => r.Status == true && r.Name != "SuperAdmin").ToListAsync();
            
         }
 

@@ -60,22 +60,6 @@ namespace ISP.API.Controllers
         }
 
              
-        
-        [HttpGet]
-        [Route("{Id}")]
-        //[Authorize(Permissions.Role.View)]
-        //[AllowAnonymous]
-        public async Task<ActionResult<ReadRoleDto>> GetById(string Id)
-
-        {
-            var getRole = await roleService.GetRoleById(Id);
-            if (getRole == null)
-            {
-                return NotFound();
-            }
-            return getRole;
-        }
-
 
         [HttpGet]
         [Route("GetRoleName/{Id}")]
@@ -107,10 +91,10 @@ namespace ISP.API.Controllers
 
 
 
-        [HttpGet]
-        [Route("GetRolePermissionsById/{Id}")]
+        [HttpGet("{Id}")]
+        
         // [Authorize(Permissions.RolePermissions.View)]
-        public async Task<ActionResult<ReadRolePermissions>> GetRolePermissionsById(string Id)
+        public async Task<ActionResult<ReadRolePermissions>> GetById(string Id)
         {
             var permissions = await roleService.GetPermissionByRoleId(Id);
             if (permissions == null)            
