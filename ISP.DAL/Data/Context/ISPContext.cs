@@ -128,12 +128,8 @@ namespace ISP.DAL
             builder.Entity<Client>().HasQueryFilter(p => p.Isactive);
             builder.Entity<Offer>().HasQueryFilter(p => p.Status);
             builder.Entity<Package>().HasQueryFilter(p => p.IsActive );
-            //builder.Entity<Provider>().HasQueryFilter(p => p.IsActive );
-                  
+            builder.Entity<Provider>().HasQueryFilter(p => p.IsActive==true);
 
-
-
-           
         }
    }
 }
