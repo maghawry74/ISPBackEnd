@@ -16,7 +16,7 @@ namespace ISP.API.Controllers
             this.PackageService = PackageService;
         }
         [HttpGet]
-        [Authorize(Permissions.Package.View)]
+       // [Authorize(Permissions.Package.View)]
         public async Task<ActionResult<List<ReadPackageDTO>>> GetAll()
         {
             var PackageList = await PackageService.GetAll();

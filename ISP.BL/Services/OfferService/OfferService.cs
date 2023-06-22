@@ -69,7 +69,7 @@ public class OfferService : IOfferService
         offerToEdit.IsPercentageDiscount = updataOfferDto.IsPercent;
         offerToEdit.CancelFine = updataOfferDto.CancelFee;               
         offerToEdit.Isfreefirst = updataOfferDto.FreeMonthsFirst;
-        offerToEdit.DiscoutAmout = updataOfferDto.CancelFee;
+        offerToEdit.DiscoutAmout = updataOfferDto.Discount;
         offerToEdit.HasRouter = updataOfferDto.FreeRouter;        
         offerToEdit.Status = true;
             
