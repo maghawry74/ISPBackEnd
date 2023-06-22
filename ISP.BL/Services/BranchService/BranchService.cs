@@ -63,7 +63,6 @@ namespace ISP.BL
             }
 
             BranchToEdit.Name = updateBranchDTO.Name;
-            BranchToEdit.Address = updateBranchDTO.address;
             BranchToEdit.Phone1 = updateBranchDTO.phone1;
             BranchToEdit.Phone2= updateBranchDTO.phone2;
             BranchToEdit.Mobile1= updateBranchDTO.mobile1;
