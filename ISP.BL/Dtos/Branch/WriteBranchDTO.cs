@@ -6,8 +6,7 @@ namespace ISP.BL
         [StringLength(50 , ErrorMessage ="Name must not exceeds 50 characters")]
         public required string Name { get; set; } = string.Empty;
 
-        [StringLength(100 , ErrorMessage = "Address must not exceeds 50 characters")]
-        public required string address { get; set; } = string.Empty;
+       
         [MaxLength(10)]
         public string phone1 { get; set; } = string.Empty;
 

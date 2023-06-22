@@ -13,8 +13,6 @@ namespace ISP.BL
     {
         public int Id { get; set; }
         public required string Name { get; set; } = string.Empty;
-        public required string Address { get; set; } = string.Empty;
-
 
         public string Phone1 { get; set; } = string.Empty;
 
@@ -25,8 +23,8 @@ namespace ISP.BL
         public string Mobile2 { get; set; } = string.Empty;
 
         public int? Fax { get; set; }
-        public  string? ManagerId { get; set; } = string.Empty;
+       
+        public  string? ManagerName { get; set; }
 
- 
     }
 }

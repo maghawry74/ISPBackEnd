@@ -17,13 +17,13 @@ namespace ISP.DAL
         [StringLength(50)]
         public string Name { get; set; } = string.Empty;
         [StringLength(100)]
-        public string Address { get; set; } = string.Empty;
+        public string? Address { get; set; } = string.Empty;
 
         public int? Fax { get; set; }
         public bool Status { get; set; } = true;
 
         [ForeignKey("Manager")]
-        public string? ManagerId { get; set; }
+        public string? ManagerId { get; set; } = string.Empty;
 
         // Navigation property
         public User? Manager { get; set; }
