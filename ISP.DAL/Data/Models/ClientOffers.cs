@@ -20,5 +20,7 @@ namespace ISP.DAL
         public Offer? Offer { get; set; }
         public int MonthsLeft { get; set; }
         public int FreeMonthsLeft { get; set; }
+
+        public double RouterPrice { get; set; }
     }
 }

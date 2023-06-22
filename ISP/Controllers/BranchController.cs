@@ -58,7 +58,7 @@ namespace ISP.API.Controllers
         [HttpPut]
         [Route("{id}")]
         //[Authorize(Permissions.Branch.Edit)]
-        public async Task<ActionResult<ReadBranchDTO>> Edit(int id , UpdateBranchDTO updateBranchDTO)
+        public async Task<IActionResult> Edit(int id , UpdateBranchDTO updateBranchDTO)
         {
             if (id !=updateBranchDTO.Id)
             {
@@ -66,9 +66,14 @@ namespace ISP.API.Controllers
                    title: "error", type: "null reference");
             }
 
-             await branchService.UpdateBranch(id, updateBranchDTO);
+           var updatedbranch =   await branchService.UpdateBranch(id, updateBranchDTO);
+            if (updatedbranch == null)
+            {
 
-            return NoContent(); 
+                return NotFound();
+            }
+
+            return  NoContent(); 
             
         }
 
@@ -83,7 +88,7 @@ namespace ISP.API.Controllers
                 return Problem(detail: "the object dees not exsits", statusCode: 404,
                     title: "error", type: "null reference");
             }           
-            return getBranch;
+            return Ok(getBranch);
         }
 
 

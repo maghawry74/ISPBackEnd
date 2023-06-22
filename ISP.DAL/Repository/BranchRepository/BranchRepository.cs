@@ -16,12 +16,12 @@ namespace ISP.DAL.Repository.BranchRepository
         }
         public new async Task<IEnumerable<Branch>> GetAll()
         {
-            return await Context.Set<Branch>().Include(b=>b.Manager)
+            return await Context.Set<Branch>().Include(b => b.Governorate).Include(b=>b.User)
                 .ToListAsync();
         }
-        //public new async Task<Package?> GetByID(int id)
+        //public new async Task<Branch?> GetByID(int id)
         //{
-        //    return await Context.Set<Package>().Include(P => P.Provider).FirstOrDefaultAsync(p => p.Id == id);
+        //    return await Context.Set<Branch>().Include(b => b.Governorate).Include(b=> b.User).FirstOrDefaultAsync(p => p.Id == id);
         //}
 
     }

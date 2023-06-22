@@ -23,8 +23,17 @@ namespace ISP.BL
         public string Mobile2 { get; set; } = string.Empty;
 
         public int? Fax { get; set; }
+
        
         public  string? ManagerName { get; set; }
+
+        public ReadGovernarateDTO Governorate { get; set; }
+
+
+
+
+
+
 
     }
 }

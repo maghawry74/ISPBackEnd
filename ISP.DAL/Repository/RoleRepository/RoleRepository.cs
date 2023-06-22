@@ -1,5 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace ISP.DAL.Repository.RoleRepository
 {
@@ -31,6 +30,7 @@ namespace ISP.DAL.Repository.RoleRepository
 
             return role.Name;
         }
+
         
     }
 }

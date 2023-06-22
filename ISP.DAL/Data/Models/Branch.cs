@@ -22,11 +22,9 @@ namespace ISP.DAL
         public int? Fax { get; set; }
         public bool Status { get; set; } = true;
 
-        [ForeignKey("Manager")]
+        [ForeignKey("User")]
         public string? ManagerId { get; set; } = string.Empty;
-
-        // Navigation property
-        public User? Manager { get; set; }
+        public User? User { get; set; }
 
         [StringLength(14)]
         public string Phone1 { get; set; } = string.Empty;
