@@ -104,10 +104,9 @@ namespace ISP.API.Controllers
         }
 
 
-        [HttpPut]
-        [Route("EditRolePermissions/{id}")]
+        [HttpPut("{id}")]        
         //[Authorize(Permissions.RolePermissions.Edit)]
-        public async Task<ActionResult> EditRolePermissions(string id, List<string> permissionsList)
+        public async Task<ActionResult> Edit(string id, List<string> permissionsList)
         {
            var isUbdated =  await roleService.UpdatePermissionsOfRole( id,permissionsList);
             if (!isUbdated)
