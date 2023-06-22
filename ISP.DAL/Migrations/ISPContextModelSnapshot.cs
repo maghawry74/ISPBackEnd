@@ -329,6 +329,9 @@ namespace ISP.DAL.Migrations
                     b.Property<int>("MonthsLeft")
                         .HasColumnType("int");
 
+                    b.Property<double>("RouterPrice")
+                        .HasColumnType("float");
+
                     b.HasKey("ClientSSn", "OfferId");
 
                     b.HasIndex("OfferId");
@@ -354,6 +357,14 @@ namespace ISP.DAL.Migrations
                     b.HasAlternateKey("Name");
 
                     b.ToTable("Governorates");
+
+                    b.HasData(
+                        new
+                        {
+                            Code = 66,
+                            Name = "cairo",
+                            Status = true
+                        });
                 });
 
             modelBuilder.Entity("ISP.DAL.Offer", b =>
@@ -380,6 +391,9 @@ namespace ISP.DAL.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool?>("IsPossibleToRasieOrLower")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsTotalBill")
                         .HasColumnType("bit");
 
                     b.Property<bool>("Isfreefirst")
@@ -548,14 +562,14 @@ namespace ISP.DAL.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cb2e62e4-8869-4691-b76f-ba16b713a748",
+                            ConcurrencyStamp = "3790c0bb-3874-4943-bed7-29659d9fa8d0",
                             Email = "reematman15@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "REEM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJp7C055x1yo/1tZgGnuYkIWEHcv/6r/+Qyy1aj9wUK8Paew+Kd+5t9cOUbvtakuJQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIgNTsKAHpiA/5zFsTtypRkwRQUwfb5jNYoAf3x3b9UNvFUzxWxdtgGiubi2ywkCOQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6d51ff86-1440-40c9-b1ab-d41a5a16dd7e",
+                            SecurityStamp = "6f45d9cc-acc8-4282-9020-2bbb3de1be26",
                             Status = true,
                             TwoFactorEnabled = false,
                             UserName = "Reem"
