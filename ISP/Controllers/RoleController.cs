@@ -64,15 +64,15 @@ namespace ISP.API.Controllers
         [HttpGet]
         [Route("GetRoleName/{Id}")]
         //[Authorize(Permissions.Role.View)]
-        public async Task<ActionResult<string>> GetRoleName(string Id)
-        {
-            var roleName = await roleService.GetRoleNameByID(Id);
-            if (roleName == null)
-            {
-                return NotFound();
-            }
-            return roleName;
-        }
+        //public async Task<ActionResult<string>> GetRoleName(string Id)
+        //{
+        //    var roleName = await roleService.GetRoleNameByID(Id);
+        //    if (roleName == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return roleName;
+        //}
 
 
         
@@ -91,16 +91,24 @@ namespace ISP.API.Controllers
 
 
 
-        [HttpGet("{Id}")]
+        [HttpGet("{id}")]
         
         // [Authorize(Permissions.RolePermissions.View)]
-        public async Task<ActionResult<ReadRolePermissions>> GetById(string Id)
+        public async Task<ActionResult<ReadRolePermissions>> GetById(string id)
         {
-            var permissions = await roleService.GetPermissionByRoleId(Id);
-            if (permissions == null)            
+            var roleName = await roleService.GetRoleNameByID(id);
+            if (roleName == null)           
                 return NotFound();
-          
-            return Ok(permissions);
+            
+            var permissions = await roleService.GetPermissionByRoleId(id);
+
+
+            return new ReadRolePermissions
+            {
+                claims = permissions,
+                name = roleName,
+                id = id,
+            };
         }
 
 
