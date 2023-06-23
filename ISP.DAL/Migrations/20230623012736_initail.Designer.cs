@@ -4,6 +4,7 @@ using ISP.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ISP.DAL.Migrations
 {
     [DbContext(typeof(ISPContext))]
-    partial class ISPContextModelSnapshot : ModelSnapshot
+    [Migration("20230623012736_initail")]
+    partial class initail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -132,32 +135,18 @@ namespace ISP.DAL.Migrations
 
                     b.HasKey("Id");
 
-<<<<<<< HEAD
-                    b.HasAlternateKey("Mobile1");
-
-                    b.HasAlternateKey("Mobile2");
-
-                    b.HasAlternateKey("Phone1");
-
-                    b.HasAlternateKey("Phone2");
-
-=======
->>>>>>> 83cd150b5fb911952dc5ac225aa735a4dbd285f6
                     b.HasIndex("GovernorateCode");
 
                     b.HasIndex("ManagerId")
                         .IsUnique()
                         .HasFilter("[ManagerId] IS NOT NULL");
 
-<<<<<<< HEAD
-=======
                     b.HasIndex("Mobile1", "Mobile2")
                         .IsUnique();
 
                     b.HasIndex("Phone1", "Phone2")
                         .IsUnique();
 
->>>>>>> 83cd150b5fb911952dc5ac225aa735a4dbd285f6
                     b.ToTable("Branches");
                 });
 
@@ -575,24 +564,14 @@ namespace ISP.DAL.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-<<<<<<< HEAD
-                            ConcurrencyStamp = "28d893ed-9822-4c44-b859-a01eaba09309",
-=======
                             ConcurrencyStamp = "080dcbf4-0073-423d-8235-05e290593d5e",
->>>>>>> 83cd150b5fb911952dc5ac225aa735a4dbd285f6
                             Email = "reematman15@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "REEM",
-<<<<<<< HEAD
-                            PasswordHash = "AQAAAAIAAYagAAAAENNCX6ArIYY77ZesUs7rmIVZaa0nvSxHCYJ5HT8cB86Ky71z1fpjAvehaJfU5AOPZw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "bc1aa144-d526-4114-b4c7-8c52271f9f39",
-=======
                             PasswordHash = "AQAAAAIAAYagAAAAEPfDDpadB9Asi1lto9HZ40U6b9q6a1+BiUXFiE+pESPBqWHfgMn09rLujm4y6v+cMw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "9b81c69a-a8d9-4fb3-84a0-927fc2cfa162",
->>>>>>> 83cd150b5fb911952dc5ac225aa735a4dbd285f6
                             Status = true,
                             TwoFactorEnabled = false,
                             UserName = "Reem"

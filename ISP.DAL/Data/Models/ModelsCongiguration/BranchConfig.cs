@@ -12,14 +12,21 @@ namespace ISP.DAL.Data.Models.ModelsCongiguration
     {
         public void Configure(EntityTypeBuilder<Branch> entity)
         {
-            entity
-                 .HasAlternateKey(e => e.Phone1);
-            entity
-             .HasAlternateKey(e => e.Phone2);
-            entity
-            .HasAlternateKey(e => e.Mobile1);
-            entity
-            .HasAlternateKey(e => e.Mobile2);
+            //entity
+            //     .HasAlternateKey(e => e.Phone1);
+            //entity
+            // .HasAlternateKey(e => e.Phone2);
+            //entity
+            //.HasAlternateKey(e => e.Mobile1);
+            //entity
+            //.HasAlternateKey(e => e.Mobile2);
+
+
+            entity.HasIndex(o => new { o.Mobile1, o.Mobile2 })
+            .IsUnique();
+
+            entity.HasIndex(o => new { o.Phone1, o.Phone2 })
+            .IsUnique();
 
         }
 
