@@ -33,6 +33,7 @@ namespace ISP.BL
         public async Task<ReadBranchDTO> AddBranch(WriteBranchDTO writeBranchDTO)
         {
             var BranchToAdd = mapper.Map<Branch>(writeBranchDTO);
+
             await branchRepository.Add(BranchToAdd);
             branchRepository.SaveChange();
             return mapper.Map<ReadBranchDTO>(BranchToAdd);
