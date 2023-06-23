@@ -44,7 +44,7 @@ namespace ISP.API.Controllers
 
        // [HttpGet("CentralAndBranches/{Codee}")]
         [HttpGet("{Code}/Centrals&Branches")]
-        public async Task<ActionResult<List<GovernorateCentralsAndBranches>>> GetCentralsAndBranches(int Code)
+        public async Task<ActionResult<GovernorateCentralsAndBranches>> GetCentralsAndBranches(int Code)
         {
             var CentralBranches = await governarateService.GetCentralsAndBranches(Code);
             return CentralBranches;

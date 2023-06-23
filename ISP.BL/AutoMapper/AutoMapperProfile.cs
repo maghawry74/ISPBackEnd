@@ -146,7 +146,7 @@ namespace ISP.BL
               .ReverseMap();
 
             CreateMap<Client, WriteClientDTO>()
-            .ForMember(c => c.ssid, cmt => cmt.MapFrom(src => src.SSn))
+            .ForMember(c => c.SSID, cmt => cmt.MapFrom(src => src.SSn))
             .ForMember(c => c.name, cmt => cmt.MapFrom(src => src.Name))
             .ForMember(c => c.tel, cmt => cmt.MapFrom(src => src.Phone))
             .ForMember(c => c.governorateCode, cmt => cmt.MapFrom(src => src.GovernarateCode))

@@ -30,7 +30,7 @@ namespace ISP.API.Controllers
         [HttpGet]
         [Route("{SSn}")]
         //[Authorize(Permissions.Client.View)]
-        public async Task<ActionResult<ReadClientDTO>> GetById(int SSn)
+        public async Task<ActionResult<ReadClientDTO>> GetById(string SSn)
         {
             var client = await clientservice.GetById(SSn);
             if (client == null)
@@ -57,7 +57,7 @@ namespace ISP.API.Controllers
         [HttpPut]
         [Route("{SSn}")]
         //[Authorize(Permissions.Client.Edit)]
-        public async Task<ActionResult<ReadClientDTO>> Edit(int SSn, UpdateClientDTO updateClientDTO)
+        public async Task<ActionResult<ReadClientDTO>> Edit(string SSn, UpdateClientDTO updateClientDTO)
         {
             if (SSn != updateClientDTO.SSID)
             {
@@ -74,7 +74,7 @@ namespace ISP.API.Controllers
 
         [HttpDelete("{SSn}")]
         //[Authorize(Permissions.Client.Delete)]
-        public async Task<ActionResult<ReadClientDTO>> Delete(int SSn)
+        public async Task<ActionResult<ReadClientDTO>> Delete(string SSn)
         {
             var getClient = await clientservice.DeleteClient(SSn);
 
