@@ -12,9 +12,17 @@ namespace ISP.BL
         {
             #region Branch
             //Branch
-            CreateMap<Branch , ReadBranchDTO>().ReverseMap();
             CreateMap<Branch , WriteBranchDTO>().ReverseMap();            
             CreateMap<Branch , UpdateBranchDTO>().ReverseMap();
+            CreateMap<Branch, ReadBranchDTO>()
+                .ForMember(u => u.tel1, s => s.MapFrom(src => src.Phone1))
+                .ForMember(u => u.tel2, s => s.MapFrom(src => src.Phone2))
+                .ForMember(u => u.Phone1, s => s.MapFrom(src => src.Mobile1))
+                .ForMember(u => u.Phone2, s => s.MapFrom(src => src.Mobile2)).ReverseMap();
+
+
+
+
             #endregion
 
             #region Goernorate
@@ -41,6 +49,8 @@ namespace ISP.BL
             //Provider
             CreateMap<Provider , ReadProviderDTO>().ReverseMap();
             CreateMap<Provider , WriteProviderDTO>().ReverseMap();
+            CreateMap<Provider, ReadProviderwithoffer_govDTO>().ReverseMap();
+           
 
             #endregion
 

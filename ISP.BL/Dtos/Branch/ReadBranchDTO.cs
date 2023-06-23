@@ -18,9 +18,8 @@ namespace ISP.BL
 
         public string Phone2 { get; set; } = string.Empty;
 
-        public string Mobile1 { get; set; } = string.Empty;
-
-        public string Mobile2 { get; set; } = string.Empty;
+        public string tel1 { get; set; } = string.Empty;
+        public string tel2 { get; set; } = string.Empty;
 
         public int? Fax { get; set; }
 
@@ -28,12 +27,6 @@ namespace ISP.BL
         public  string? ManagerName { get; set; }
 
         public ReadGovernarateDTO Governorate { get; set; }
-
-
-
-
-
-
 
     }
 }

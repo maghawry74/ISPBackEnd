@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ISP.DAL;
+
 namespace ISP.BL;
 
 public class ProviderService : IProviderService
@@ -73,4 +74,9 @@ public class ProviderService : IProviderService
 
     }
 
+    public ReadProviderwithoffer_govDTO? GetProviderswithoffer_package(int id)
+    {
+        var providerfromdb = providerRepository.GetProviderswithoffer_package(id);
+        return mapper.Map<ReadProviderwithoffer_govDTO>(providerfromdb);
+    }
 }
