@@ -64,10 +64,10 @@ namespace ISP.BL
             }
 
             BranchToEdit.Name = updateBranchDTO.Name;
-            BranchToEdit.Phone1 = updateBranchDTO.phone1;
-            BranchToEdit.Phone2= updateBranchDTO.phone2;
-            BranchToEdit.Mobile1= updateBranchDTO.tel1;
-            BranchToEdit.Mobile2= updateBranchDTO.tel2;
+            BranchToEdit.Phone1 = updateBranchDTO.tel1;
+            BranchToEdit.Phone2= updateBranchDTO.tel2;
+            BranchToEdit.Mobile1= updateBranchDTO.phone1;
+            BranchToEdit.Mobile2= updateBranchDTO.phone2;
             BranchToEdit.ManagerId= updateBranchDTO.ManagerId;
             BranchToEdit.Fax= updateBranchDTO.Fax;
             BranchToEdit.Status = true;
