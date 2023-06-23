@@ -114,9 +114,9 @@ namespace ISP.API.Controllers
 
         [HttpPut("{id}")]        
         //[Authorize(Permissions.RolePermissions.Edit)]
-        public async Task<ActionResult> Edit(string id, List<string> permissionsList)
+        public async Task<ActionResult> Edit(string id, updateRoleDto updateRole)
         {
-           var isUbdated =  await roleService.UpdatePermissionsOfRole( id,permissionsList);
+           var isUbdated =  await roleService.UpdatePermissionsOfRole( id, updateRole.claims);
             if (!isUbdated)
                 return BadRequest();
 

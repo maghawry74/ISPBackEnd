@@ -81,7 +81,7 @@ namespace ISP.BL.Services.RoleService
                 return false;
 
 
-            foreach (var claim in writeRoleDto.RolePermissions)
+            foreach (var claim in writeRoleDto.claims)
                 await roleManager.AddClaimAsync(role, new Claim("Permission", claim));
 
             return true;
