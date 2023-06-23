@@ -1,4 +1,5 @@
 ﻿using ISP.BL;
+using ISP.BL.Dtos.Governarate;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
@@ -40,6 +41,16 @@ namespace ISP.API.Controllers
             }
             return Governarate;
         }
+
+       // [HttpGet("CentralAndBranches/{Codee}")]
+        [HttpGet("{Code}/Centrals&Branches")]
+        public async Task<ActionResult<List<GovernorateCentralsAndBranches>>> GetCentralsAndBranches(int Code)
+        {
+            var CentralBranches = await governarateService.GetCentralsAndBranches(Code);
+            return CentralBranches;
+        }
+
+
 
         [HttpPost]
        // [Authorize(Permissions.Governarate.Create)]

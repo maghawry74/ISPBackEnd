@@ -26,6 +26,20 @@ namespace ISP.API.Controllers
 
 
         [HttpGet]
+        [Route(("{id}/Offers&Packages"))]
+        // [Authorize(Permissions.Provider.View)]
+        public  ActionResult<ReadProviderwithoffer_govDTO> GetAllwithoff_gov(int id)
+        {
+            var Provider = providerService.GetProviderswithoffer_package(id);
+            if (Provider ==null)
+            {
+                return NotFound();
+            }
+            return Provider;
+        }
+
+
+        [HttpGet]
         [Route("{Id}")]
         //[Authorize(Permissions.Provider.View)]
         public async Task<ActionResult<ReadProviderDTO>> GetById(int Id)

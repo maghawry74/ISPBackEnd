@@ -1,4 +1,6 @@
-﻿namespace ISP.BL
+﻿using ISP.BL.Dtos.Governarate;
+
+namespace ISP.BL
 {
     public interface IGovernarateService
     {
@@ -10,6 +12,8 @@
         Task<ReadGovernarateDTO> UpdateGovernarate(int Code, UpdateGovernarateDTO updateGovernarateDTO);
 
         Task<ReadGovernarateDTO> DeleteGovernarate(int code);
-        
+        Task<List<GovernorateCentralsAndBranches>> GetCentralsAndBranches(int Code);
+
+
     }
 }

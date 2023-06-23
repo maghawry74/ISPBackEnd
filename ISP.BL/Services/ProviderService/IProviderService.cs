@@ -6,6 +6,8 @@ namespace ISP.BL
         Task<List<ReadProviderDTO>> GetAll();
         Task<ReadProviderDTO?> GetById(int id);
 
+        ReadProviderwithoffer_govDTO? GetProviderswithoffer_package(int id);
+
         Task<ReadProviderDTO> Insert(WriteProviderDTO writeProviderDTO);
 
         Task<ReadProviderDTO> Edit(int id, UpdateProviderDTO updateProviderDTO);
