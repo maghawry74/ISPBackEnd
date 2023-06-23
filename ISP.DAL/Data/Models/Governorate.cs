@@ -19,5 +19,7 @@ namespace ISP.DAL
         public ICollection<Central> Centrals { get; set; } = new HashSet<Central>();
 
         public ICollection<Client> Clients { get; set; } = new HashSet<Client>();
+
+       
     } 
 }

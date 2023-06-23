@@ -9,5 +9,6 @@ namespace ISP.DAL
    public interface IGovernorateRepository:IGenericRepository<Governorate>
     {
         public void Delete(Governorate governarate);
+        public Task<IEnumerable<Governorate>> GetCentralsAndBranches(int Code);
     }
 }

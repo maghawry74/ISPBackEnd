@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ISP.BL.Dtos.Governarate;
 using ISP.BL.Dtos.Offer;
 using ISP.BL.Dtos.Role;
 using ISP.BL.Dtos.Users;
@@ -30,6 +31,7 @@ namespace ISP.BL
             CreateMap<Governorate , ReadGovernarateDTO>().ReverseMap();
             CreateMap<Governorate , WriteGovernarateDTO>().ReverseMap();
             CreateMap<Governorate , UpdateGovernarateDTO>().ReverseMap();
+            CreateMap<Governorate,GovernorateCentralsAndBranches>().ReverseMap();
             #endregion
 
             #region Central

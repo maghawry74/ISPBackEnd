@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,4 +19,11 @@ public class GovernorateRepository : GenericRepository<Governorate>, IGovernorat
     {
         context.Remove(governarate);
     }
+    public new async Task<IEnumerable<Governorate>> GetCentralsAndBranches(int Code)
+    {
+        return await context.Set<Governorate>().Include(g=>g.Centrals).Include(g => g.Branches)
+            .Where(g=>g.Code==Code).ToListAsync();
+
+    }
+   
 }
