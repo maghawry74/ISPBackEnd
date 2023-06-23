@@ -18,10 +18,10 @@ namespace ISP.BL
        
         public string tel2 { get; set; } = string.Empty;
 
-        [RegularExpression(@"^01[012][0-9]{11}$")]
+        [RegularExpression(@"^01[012][0-9]{8}$")]
         public string phone1 { get; set; } = string.Empty;
 
-        [RegularExpression(@"^01[012][0-9]{11}$")]
+        [RegularExpression(@"^01[012][0-9]{8}$")]
         public string phone2 { get; set; } = string.Empty;
  
         public int? Fax { get; set; }
