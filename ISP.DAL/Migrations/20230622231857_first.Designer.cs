@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ISP.DAL.Migrations
 {
     [DbContext(typeof(ISPContext))]
-    [Migration("20230622134707_dd")]
-    partial class dd
+    [Migration("20230622231857_first")]
+    partial class first
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -145,7 +145,9 @@ namespace ISP.DAL.Migrations
 
                     b.HasIndex("GovernorateCode");
 
-                    b.HasIndex("ManagerId");
+                    b.HasIndex("ManagerId")
+                        .IsUnique()
+                        .HasFilter("[ManagerId] IS NOT NULL");
 
                     b.ToTable("Branches");
                 });
@@ -331,6 +333,9 @@ namespace ISP.DAL.Migrations
                     b.Property<int>("MonthsLeft")
                         .HasColumnType("int");
 
+                    b.Property<double>("RouterPrice")
+                        .HasColumnType("float");
+
                     b.HasKey("ClientSSn", "OfferId");
 
                     b.HasIndex("OfferId");
@@ -356,6 +361,14 @@ namespace ISP.DAL.Migrations
                     b.HasAlternateKey("Name");
 
                     b.ToTable("Governorates");
+
+                    b.HasData(
+                        new
+                        {
+                            Code = 66,
+                            Name = "cairo",
+                            Status = true
+                        });
                 });
 
             modelBuilder.Entity("ISP.DAL.Offer", b =>
@@ -382,6 +395,9 @@ namespace ISP.DAL.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool?>("IsPossibleToRasieOrLower")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsTotalBill")
                         .HasColumnType("bit");
 
                     b.Property<bool>("Isfreefirst")
@@ -544,6 +560,24 @@ namespace ISP.DAL.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("User", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "b4fa7235-56a9-49bd-a66c-e1bff9cbf98c",
+                            Email = "reematman15@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "REEM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEM0jQfowrQdo2j2Lqxx0H2AFKemYzhbrH+qPPQkYGgL3J+uJIOb8E0Z35hI7A649Hg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "1037b2f1-8a55-436e-bcb7-ce09a4be15c8",
+                            Status = true,
+                            TwoFactorEnabled = false,
+                            UserName = "Reem"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -595,6 +629,10 @@ namespace ISP.DAL.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("RoleId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -604,6 +642,10 @@ namespace ISP.DAL.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("RoleClaims", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityRoleClaim<string>");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -666,6 +708,13 @@ namespace ISP.DAL.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "1",
+                            RoleId = "1"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -695,6 +744,304 @@ namespace ISP.DAL.Migrations
                         .HasColumnType("bit");
 
                     b.HasDiscriminator().HasValue("Role");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            Name = "SuperAdmin",
+                            NormalizedName = "SUPERADMIN",
+                            Status = true
+                        });
+                });
+
+            modelBuilder.Entity("ISP.DAL.Data.Models.RoleClaims<string>", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>");
+
+                    b.HasDiscriminator().HasValue("RoleClaims<string>");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Bill.View",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Bill.Create",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Bill.Edit",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Bill.Delete",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Branch.View",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Branch.Create",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Branch.Edit",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Branch.Delete",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Central.View",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Central.Create",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Central.Edit",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Central.Delete",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Client.View",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Client.Create",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Client.Edit",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Client.Delete",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Governorate.View",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Governorate.Create",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Governorate.Edit",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Governorate.Delete",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Offer.View",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Offer.Create",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Offer.Edit",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Offer.Delete",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Package.View",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 26,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Package.Create",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 27,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Package.Edit",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 28,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Package.Delete",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 29,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Provider.View",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 30,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Provider.Create",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 31,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Provider.Edit",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 32,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Provider.Delete",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 33,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Role.View",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 34,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Role.Create",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 35,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Role.Edit",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 36,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.Role.Delete",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 37,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.User.View",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 38,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.User.Create",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 39,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.User.Edit",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            Id = 40,
+                            ClaimType = "Permission",
+                            ClaimValue = "Permission.User.Delete",
+                            RoleId = "1"
+                        });
                 });
 
             modelBuilder.Entity("CentralProvider", b =>
@@ -733,13 +1080,13 @@ namespace ISP.DAL.Migrations
                         .WithMany("Branches")
                         .HasForeignKey("GovernorateCode");
 
-                    b.HasOne("ISP.DAL.User", "Manager")
-                        .WithMany()
-                        .HasForeignKey("ManagerId");
+                    b.HasOne("ISP.DAL.User", "User")
+                        .WithOne()
+                        .HasForeignKey("ISP.DAL.Branch", "ManagerId");
 
                     b.Navigation("Governorate");
 
-                    b.Navigation("Manager");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ISP.DAL.Central", b =>

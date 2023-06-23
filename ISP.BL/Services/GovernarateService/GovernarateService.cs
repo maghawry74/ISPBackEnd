@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ISP.BL.Dtos.Governarate;
 using ISP.DAL;
 namespace ISP.BL
 {
@@ -24,7 +25,11 @@ namespace ISP.BL
             var GovernarateFromDB = await governarateRepository.GetByID(Code);
             return mapper.Map<ReadGovernarateDTO>(GovernarateFromDB);
         }
-
+        public async Task<List<GovernorateCentralsAndBranches>> GetCentralsAndBranches(int Code)
+        {
+            var BranchAndCentral = await governarateRepository.GetCentralsAndBranches(Code);
+            return mapper.Map<List<GovernorateCentralsAndBranches>>(BranchAndCentral);
+        }
         public async Task<ReadGovernarateDTO> AddGovernarate(WriteGovernarateDTO writeGovernarateDTO)
         {
             var GovernarateToAdd = mapper.Map<Governorate>(writeGovernarateDTO);

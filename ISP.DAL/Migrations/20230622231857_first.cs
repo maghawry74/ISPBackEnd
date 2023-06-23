@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace ISP.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class dd : Migration
+    public partial class first : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -89,6 +91,7 @@ namespace ISP.DAL.Migrations
                     NumOfOfferMonth = table.Column<int>(type: "int", nullable: false),
                     NumOfFreeMonth = table.Column<int>(type: "int", nullable: false),
                     Isfreefirst = table.Column<bool>(type: "bit", nullable: false),
+                    IsTotalBill = table.Column<bool>(type: "bit", nullable: false),
                     IsPercentageDiscount = table.Column<bool>(type: "bit", nullable: false),
                     DiscoutAmout = table.Column<double>(type: "float", nullable: false),
                     HasRouter = table.Column<bool>(type: "bit", nullable: false),
@@ -140,7 +143,8 @@ namespace ISP.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -414,7 +418,8 @@ namespace ISP.DAL.Migrations
                     ClientSSn = table.Column<int>(type: "int", nullable: false),
                     OfferId = table.Column<int>(type: "int", nullable: false),
                     MonthsLeft = table.Column<int>(type: "int", nullable: false),
-                    FreeMonthsLeft = table.Column<int>(type: "int", nullable: false)
+                    FreeMonthsLeft = table.Column<int>(type: "int", nullable: false),
+                    RouterPrice = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -431,6 +436,73 @@ namespace ISP.DAL.Migrations
                         principalTable: "Offers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Governorates",
+                columns: new[] { "Code", "Name", "Status" },
+                values: new object[] { 66, "cairo", true });
+
+            migrationBuilder.InsertData(
+                table: "Role",
+                columns: new[] { "Id", "ConcurrencyStamp", "Discriminator", "Name", "NormalizedName", "Status" },
+                values: new object[] { "1", null, "Role", "SuperAdmin", "SUPERADMIN", true });
+
+            migrationBuilder.InsertData(
+                table: "User",
+                columns: new[] { "Id", "AccessFailedCount", "BranchId", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "1", 0, null, "b4fa7235-56a9-49bd-a66c-e1bff9cbf98c", "reematman15@gmail.com", true, false, null, null, "REEM", "AQAAAAIAAYagAAAAEM0jQfowrQdo2j2Lqxx0H2AFKemYzhbrH+qPPQkYGgL3J+uJIOb8E0Z35hI7A649Hg==", null, false, "1037b2f1-8a55-436e-bcb7-ce09a4be15c8", true, false, "Reem" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "1", "1" });
+
+            migrationBuilder.InsertData(
+                table: "RoleClaims",
+                columns: new[] { "Id", "ClaimType", "ClaimValue", "Discriminator", "RoleId" },
+                values: new object[,]
+                {
+                    { 1, "Permission", "Permission.Bill.View", "RoleClaims<string>", "1" },
+                    { 2, "Permission", "Permission.Bill.Create", "RoleClaims<string>", "1" },
+                    { 3, "Permission", "Permission.Bill.Edit", "RoleClaims<string>", "1" },
+                    { 4, "Permission", "Permission.Bill.Delete", "RoleClaims<string>", "1" },
+                    { 5, "Permission", "Permission.Branch.View", "RoleClaims<string>", "1" },
+                    { 6, "Permission", "Permission.Branch.Create", "RoleClaims<string>", "1" },
+                    { 7, "Permission", "Permission.Branch.Edit", "RoleClaims<string>", "1" },
+                    { 8, "Permission", "Permission.Branch.Delete", "RoleClaims<string>", "1" },
+                    { 9, "Permission", "Permission.Central.View", "RoleClaims<string>", "1" },
+                    { 10, "Permission", "Permission.Central.Create", "RoleClaims<string>", "1" },
+                    { 11, "Permission", "Permission.Central.Edit", "RoleClaims<string>", "1" },
+                    { 12, "Permission", "Permission.Central.Delete", "RoleClaims<string>", "1" },
+                    { 13, "Permission", "Permission.Client.View", "RoleClaims<string>", "1" },
+                    { 14, "Permission", "Permission.Client.Create", "RoleClaims<string>", "1" },
+                    { 15, "Permission", "Permission.Client.Edit", "RoleClaims<string>", "1" },
+                    { 16, "Permission", "Permission.Client.Delete", "RoleClaims<string>", "1" },
+                    { 17, "Permission", "Permission.Governorate.View", "RoleClaims<string>", "1" },
+                    { 18, "Permission", "Permission.Governorate.Create", "RoleClaims<string>", "1" },
+                    { 19, "Permission", "Permission.Governorate.Edit", "RoleClaims<string>", "1" },
+                    { 20, "Permission", "Permission.Governorate.Delete", "RoleClaims<string>", "1" },
+                    { 21, "Permission", "Permission.Offer.View", "RoleClaims<string>", "1" },
+                    { 22, "Permission", "Permission.Offer.Create", "RoleClaims<string>", "1" },
+                    { 23, "Permission", "Permission.Offer.Edit", "RoleClaims<string>", "1" },
+                    { 24, "Permission", "Permission.Offer.Delete", "RoleClaims<string>", "1" },
+                    { 25, "Permission", "Permission.Package.View", "RoleClaims<string>", "1" },
+                    { 26, "Permission", "Permission.Package.Create", "RoleClaims<string>", "1" },
+                    { 27, "Permission", "Permission.Package.Edit", "RoleClaims<string>", "1" },
+                    { 28, "Permission", "Permission.Package.Delete", "RoleClaims<string>", "1" },
+                    { 29, "Permission", "Permission.Provider.View", "RoleClaims<string>", "1" },
+                    { 30, "Permission", "Permission.Provider.Create", "RoleClaims<string>", "1" },
+                    { 31, "Permission", "Permission.Provider.Edit", "RoleClaims<string>", "1" },
+                    { 32, "Permission", "Permission.Provider.Delete", "RoleClaims<string>", "1" },
+                    { 33, "Permission", "Permission.Role.View", "RoleClaims<string>", "1" },
+                    { 34, "Permission", "Permission.Role.Create", "RoleClaims<string>", "1" },
+                    { 35, "Permission", "Permission.Role.Edit", "RoleClaims<string>", "1" },
+                    { 36, "Permission", "Permission.Role.Delete", "RoleClaims<string>", "1" },
+                    { 37, "Permission", "Permission.User.View", "RoleClaims<string>", "1" },
+                    { 38, "Permission", "Permission.User.Create", "RoleClaims<string>", "1" },
+                    { 39, "Permission", "Permission.User.Edit", "RoleClaims<string>", "1" },
+                    { 40, "Permission", "Permission.User.Delete", "RoleClaims<string>", "1" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -461,7 +533,9 @@ namespace ISP.DAL.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Branches_ManagerId",
                 table: "Branches",
-                column: "ManagerId");
+                column: "ManagerId",
+                unique: true,
+                filter: "[ManagerId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CentralProvider_ProvidersId",
