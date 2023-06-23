@@ -60,35 +60,19 @@ namespace ISP.API.Controllers
         }
 
              
-        
-        [HttpGet]
-        [Route("{Id}")]
-        //[Authorize(Permissions.Role.View)]
-        //[AllowAnonymous]
-        public async Task<ActionResult<ReadRoleDto>> GetById(string Id)
-
-        {
-            var getRole = await roleService.GetRoleById(Id);
-            if (getRole == null)
-            {
-                return NotFound();
-            }
-            return getRole;
-        }
-
 
         [HttpGet]
         [Route("GetRoleName/{Id}")]
         //[Authorize(Permissions.Role.View)]
-        public async Task<ActionResult<string>> GetRoleName(string Id)
-        {
-            var roleName = await roleService.GetRoleNameByID(Id);
-            if (roleName == null)
-            {
-                return NotFound();
-            }
-            return roleName;
-        }
+        //public async Task<ActionResult<string>> GetRoleName(string Id)
+        //{
+        //    var roleName = await roleService.GetRoleNameByID(Id);
+        //    if (roleName == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return roleName;
+        //}
 
 
         
@@ -107,23 +91,30 @@ namespace ISP.API.Controllers
 
 
 
-        [HttpGet]
-        [Route("GetRolePermissionsById/{Id}")]
+        [HttpGet("{id}")]
+        
         // [Authorize(Permissions.RolePermissions.View)]
-        public async Task<ActionResult<ReadRolePermissions>> GetRolePermissionsById(string Id)
+        public async Task<ActionResult<ReadRolePermissions>> GetById(string id)
         {
-            var permissions = await roleService.GetPermissionByRoleId(Id);
-            if (permissions == null)            
+            var roleName = await roleService.GetRoleNameByID(id);
+            if (roleName == null)           
                 return NotFound();
-          
-            return Ok(permissions);
+            
+            var permissions = await roleService.GetPermissionByRoleId(id);
+
+
+            return new ReadRolePermissions
+            {
+                claims = permissions,
+                name = roleName,
+                id = id,
+            };
         }
 
 
-        [HttpPut]
-        [Route("EditRolePermissions/{id}")]
+        [HttpPut("{id}")]        
         //[Authorize(Permissions.RolePermissions.Edit)]
-        public async Task<ActionResult> EditRolePermissions(string id, List<string> permissionsList)
+        public async Task<ActionResult> Edit(string id, List<string> permissionsList)
         {
            var isUbdated =  await roleService.UpdatePermissionsOfRole( id,permissionsList);
             if (!isUbdated)

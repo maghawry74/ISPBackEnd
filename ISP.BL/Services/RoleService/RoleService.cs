@@ -87,18 +87,18 @@ namespace ISP.BL.Services.RoleService
             return true;
         }
 
-        public async Task<List<ReadRolePermissions>> GetPermissionByRoleId(string roleId)
+        public async Task<List<ReadPermissions>> GetPermissionByRoleId(string id)
         {
-            var role = await roleManager.FindByIdAsync(roleId);
+            var role = await roleManager.FindByIdAsync(id);
             var claims = roleManager.GetClaimsAsync(role).Result.Select(c => c.Value).ToList();
             
-            List<ReadRolePermissions> permissions = new List<ReadRolePermissions>();
+            List<ReadPermissions> permissions = new List<ReadPermissions>();
             foreach (var claim in claims)
             {
-                permissions.Add(new ReadRolePermissions
+                permissions.Add(new ReadPermissions
                 {
-                    Type = claim,
-                    Value = true
+                    type = claim,
+                    value = true
                 }); 
             }
             return permissions;
