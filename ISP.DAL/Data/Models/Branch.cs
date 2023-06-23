@@ -23,7 +23,7 @@ namespace ISP.DAL
         public bool Status { get; set; } = true;
 
         [ForeignKey("User")]
-        public string? ManagerId { get; set; } = string.Empty;
+        public string? ManagerId { get; set; } = null;
         public User? User { get; set; }
 
         [StringLength(14)]

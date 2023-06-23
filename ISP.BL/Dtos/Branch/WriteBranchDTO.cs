@@ -26,6 +26,6 @@ namespace ISP.BL
         public  string? ManagerId { get; set; } 
 
 
-        public int GovernarateCode { get; set; }
+        public int GovernorateCode { get; set; }
     }
 }
