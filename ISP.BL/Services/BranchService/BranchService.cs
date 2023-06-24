@@ -49,7 +49,7 @@ namespace ISP.BL
                 BranchFromDB.Status = false;
                 branchRepository.Update(BranchFromDB);
                 branchRepository.SaveChange();            
-            
+
             return mapper.Map<ReadBranchDTO>(BranchFromDB);
 
         }
