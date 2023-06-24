@@ -36,7 +36,6 @@ namespace ISP.API.Controllers
                                                    
         #region User Register 
         [HttpPost]
-        [Route("UserRegister")]
         [AllowAnonymous]
         public async Task<ActionResult> UserRegister(RegisterDto registerDto)
         {
@@ -70,7 +69,6 @@ namespace ISP.API.Controllers
         #endregion
 
         [HttpGet]
-        [Route("GetAll")]
         [AllowAnonymous]
         public async Task<ActionResult<List<ReadUserDto>>> GetAll()
         {
