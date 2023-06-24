@@ -11,7 +11,7 @@ namespace ISP.BL
     {
 
 
-        public int SSID { get; set; } 
+        public string SSID { get; set; } 
         public string Name { get; set; } = string.Empty;
         public string Tel{ get; set; } = string.Empty;
         public string? GovernorateName { get; set; } = string.Empty;

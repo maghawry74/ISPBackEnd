@@ -12,7 +12,7 @@ namespace ISP.DAL
     public class ClientOffers
     {
         [ForeignKey("Client")]
-        public int ClientSSn { get; set; }
+        public string ClientSSn { get; set; }
         [ForeignKey("Offer")]
         public int OfferId { get; set; }
 

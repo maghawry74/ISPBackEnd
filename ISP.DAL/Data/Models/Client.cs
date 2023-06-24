@@ -12,7 +12,7 @@ namespace ISP.DAL
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int SSn { get; set; }
+        public string SSn { get; set; }
 
         [StringLength(50)]
         public string Name { get; set; } = string.Empty;

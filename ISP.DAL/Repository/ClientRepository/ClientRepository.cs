@@ -24,7 +24,7 @@ namespace ISP.DAL
                 .Include(c => c.Branch)
                 .ToListAsync();
         }
-        public new async Task<Client?> GetByID(int ssn)
+        public new async Task<Client?> GetByID(string ssn)
         {
             return await Context.Set<Client>().Include(P => P.Provider)
                 .Include(c => c.Package)

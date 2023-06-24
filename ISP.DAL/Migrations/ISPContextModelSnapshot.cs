@@ -48,8 +48,8 @@ namespace ISP.DAL.Migrations
                     b.Property<float>("Amount")
                         .HasColumnType("real");
 
-                    b.Property<int?>("ClientSSn")
-                        .HasColumnType("int");
+                    b.Property<string>("ClientSSn")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("FromDate")
                         .HasColumnType("datetime2");
@@ -175,8 +175,8 @@ namespace ISP.DAL.Migrations
 
             modelBuilder.Entity("ISP.DAL.Client", b =>
                 {
-                    b.Property<int>("SSn")
-                        .HasColumnType("int");
+                    b.Property<string>("SSn")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -316,8 +316,8 @@ namespace ISP.DAL.Migrations
 
             modelBuilder.Entity("ISP.DAL.ClientOffers", b =>
                 {
-                    b.Property<int>("ClientSSn")
-                        .HasColumnType("int");
+                    b.Property<string>("ClientSSn")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("OfferId")
                         .HasColumnType("int");
@@ -561,14 +561,14 @@ namespace ISP.DAL.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "080dcbf4-0073-423d-8235-05e290593d5e",
+                            ConcurrencyStamp = "a7fb4263-89b8-4c53-90dc-cf43fb06697d",
                             Email = "reematman15@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "REEM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPfDDpadB9Asi1lto9HZ40U6b9q6a1+BiUXFiE+pESPBqWHfgMn09rLujm4y6v+cMw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEA981xm8tLB6fxokc/a14W/TJEntABw2yGS7kTkpJqgH+YztiJX61AZ+c5gk8wkHmA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9b81c69a-a8d9-4fb3-84a0-927fc2cfa162",
+                            SecurityStamp = "6c2da05d-27b6-431d-93e2-474d02fb9431",
                             Status = true,
                             TwoFactorEnabled = false,
                             UserName = "Reem"

@@ -19,10 +19,10 @@ public class GovernorateRepository : GenericRepository<Governorate>, IGovernorat
     {
         context.Remove(governarate);
     }
-    public new async Task<IEnumerable<Governorate>> GetCentralsAndBranches(int Code)
+    public new async Task<Governorate> GetCentralsAndBranches(int Code)
     {
         return await context.Set<Governorate>().Include(g=>g.Centrals).Include(g => g.Branches)
-            .Where(g=>g.Code==Code).ToListAsync();
+            .Where(g=>g.Code==Code).FirstOrDefaultAsync();
 
     }
    

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ISP.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class initail : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -241,7 +241,7 @@ namespace ISP.DAL.Migrations
                     Status = table.Column<bool>(type: "bit", nullable: true),
                     PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    ClientSSn = table.Column<int>(type: "int", nullable: true)
+                    ClientSSn = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -311,7 +311,7 @@ namespace ISP.DAL.Migrations
                 name: "Clients",
                 columns: table => new
                 {
-                    SSn = table.Column<int>(type: "int", nullable: false),
+                    SSn = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Isactive = table.Column<bool>(type: "bit", nullable: false),
@@ -411,7 +411,7 @@ namespace ISP.DAL.Migrations
                 name: "ClientOffers",
                 columns: table => new
                 {
-                    ClientSSn = table.Column<int>(type: "int", nullable: false),
+                    ClientSSn = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     OfferId = table.Column<int>(type: "int", nullable: false),
                     MonthsLeft = table.Column<int>(type: "int", nullable: false),
                     FreeMonthsLeft = table.Column<int>(type: "int", nullable: false),
@@ -447,7 +447,7 @@ namespace ISP.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "AccessFailedCount", "BranchId", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "1", 0, null, "080dcbf4-0073-423d-8235-05e290593d5e", "reematman15@gmail.com", true, false, null, null, "REEM", "AQAAAAIAAYagAAAAEPfDDpadB9Asi1lto9HZ40U6b9q6a1+BiUXFiE+pESPBqWHfgMn09rLujm4y6v+cMw==", null, false, "9b81c69a-a8d9-4fb3-84a0-927fc2cfa162", true, false, "Reem" });
+                values: new object[] { "1", 0, null, "a7fb4263-89b8-4c53-90dc-cf43fb06697d", "reematman15@gmail.com", true, false, null, null, "REEM", "AQAAAAIAAYagAAAAEA981xm8tLB6fxokc/a14W/TJEntABw2yGS7kTkpJqgH+YztiJX61AZ+c5gk8wkHmA==", null, false, "6c2da05d-27b6-431d-93e2-474d02fb9431", true, false, "Reem" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

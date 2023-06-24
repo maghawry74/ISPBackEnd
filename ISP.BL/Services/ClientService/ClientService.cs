@@ -23,7 +23,7 @@ namespace ISP.BL
 
         }
 
-        public async Task<ReadClientDTO?> GetById(int SSn)
+        public async Task<ReadClientDTO?> GetById(string SSn)
         {
             var clientFromDB = await clientRepository.GetByID(SSn);
             return mapper.Map<ReadClientDTO>(clientFromDB);
@@ -37,7 +37,7 @@ namespace ISP.BL
             return mapper.Map<ReadClientDTO>(clientToAdd);
         }
 
-        public async Task<ReadClientDTO> UpdateClient(int SSn, UpdateClientDTO updateClientDTO)
+        public async Task<ReadClientDTO> UpdateClient(string SSn, UpdateClientDTO updateClientDTO)
         {
             var ClientToEdit = await clientRepository.GetByID(SSn);
             if (ClientToEdit == null)
@@ -55,7 +55,7 @@ namespace ISP.BL
             return mapper.Map<ReadClientDTO>(ClientToEdit);
         }
 
-        public async Task<ReadClientDTO> DeleteClient(int SSn)
+        public async Task<ReadClientDTO> DeleteClient(string SSn)
         {
             var ClientTodeleted = await clientRepository.GetByID(SSn);
             if (ClientTodeleted == null)
