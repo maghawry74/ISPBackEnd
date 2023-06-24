@@ -14,7 +14,7 @@ namespace ISP.BL
             #region Branch
             //Branch
             CreateMap<Branch , WriteBranchDTO>()
-                     .ForMember(u => u.tel1, s => s.MapFrom(src => src.Phone1))
+                .ForMember(u => u.tel1, s => s.MapFrom(src => src.Phone1))
                 .ForMember(u => u.tel2, s => s.MapFrom(src => src.Phone2))
                 .ForMember(u => u.phone1, s => s.MapFrom(src => src.Mobile1))
                 .ForMember(u => u.phone2, s => s.MapFrom(src => src.Mobile2))
@@ -126,13 +126,10 @@ namespace ISP.BL
                 .ForMember(c => c.SSID, cmt => cmt.MapFrom(src => src.SSn))
                 .ForMember(c => c.Name, cmt => cmt.MapFrom(src => src.Name))
                 .ForMember(c => c.Tel, cmt => cmt.MapFrom(src => src.Phone))
-                .ForMember(c => c.GovernorateName, cmt => cmt.MapFrom(src => src.Governarate.Name))
+                
                 .ForMember(c => c.Address, cmt => cmt.MapFrom(src => src.Address))
                 .ForMember(c => c.Email, cmt => cmt.MapFrom(src => src.Email))
-                .ForMember(c => c.ProviderName, cmt => cmt.MapFrom(src => src.Provider.Name))
-                .ForMember(c => c.PackageName, cmt => cmt.MapFrom(src => src.Package.Name))
-                .ForMember(c => c.CentralName, cmt => cmt.MapFrom(src => src.Central.Name))
-                .ForMember(c => c.BranchName, cmt => cmt.MapFrom(src => src.Branch.Name))
+            
                 .ForMember(c => c.Phone, cmt => cmt.MapFrom(src => src.Mobile1))
                 .ForMember(c => c.UserName, cmt => cmt.MapFrom(src => src.userName))
                 .ForMember(c => c.Password, cmt => cmt.MapFrom(src => src.Password))
@@ -155,7 +152,7 @@ namespace ISP.BL
             .ForMember(c => c.providerId, cmt => cmt.MapFrom(src => src.ProviderId))
             .ForMember(c => c.packageId, cmt => cmt.MapFrom(src => src.PackageId))
             .ForMember(c => c.branchId, cmt => cmt.MapFrom(src => src.BranchId))
-            //.ForMember(c => c.offerId, cmt => cmt.MapFrom(src => src.offerId))
+           // .ForMember(c => c.OfferId, cmt => cmt.MapFrom(src => src.OfferId))
             .ForMember(c => c.centralId, cmt => cmt.MapFrom(src => src.CentralId))
             .ForMember(c => c.packageIp, cmt => cmt.MapFrom(src => src.IpPackage))
             .ForMember(c => c.routerSerial, cmt => cmt.MapFrom(src => src.RouterSerial))
