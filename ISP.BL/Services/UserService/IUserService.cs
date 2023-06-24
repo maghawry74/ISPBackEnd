@@ -12,7 +12,7 @@ namespace ISP.BL.Services.UserPermissionsService
         Task<Role> GetRole(User user);
         Task<bool> Update(string id, UpdateUserDto updateUserDto);
         Task<bool> Delete(string id);
-        Task<bool> UserRegister(RegisterDto registerDto);
+        Task<int> UserRegister(RegisterDto registerDto);
         Task<TokenDto> Login(LoginDto loginData);
 
     }

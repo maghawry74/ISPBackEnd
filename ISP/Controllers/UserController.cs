@@ -20,17 +20,12 @@ namespace ISP.API.Controllers
     {
         #region Con
 
-        private readonly UserManager<User> userManager;
-        private readonly RoleManager<Role> roleManager;
+       
         private readonly IUserService userService; 
-        private readonly IConfiguration configuration;
-        public UserController(UserManager<User> userManager,RoleManager<Role> roleManager ,
-            IUserService userService, IConfiguration configuration)
+    
+        public UserController(IUserService userService)
         {
-            this.userManager = userManager;                  
-            this.roleManager = roleManager;
             this.userService = userService;
-            this.configuration = configuration;
         }
         #endregion
                                                    
@@ -40,8 +35,21 @@ namespace ISP.API.Controllers
         public async Task<ActionResult> UserRegister(RegisterDto registerDto)
         {
            var isRegister = await userService.UserRegister(registerDto);
-            if (isRegister == false)
-                return BadRequest(ModelState);
+            if (isRegister == 1)
+                return Problem(detail: "Error in checkRole", statusCode: 404,
+                   title: "error", type: "null reference");
+
+            if (isRegister == 2)
+                return Problem(detail: "Error in getUser(Email is Existing!) ", statusCode: 404,
+                  title: "error", type: "null reference");
+
+            if (isRegister == 3)
+                return Problem(detail: "Error in Ceeading Password!", statusCode: 404,
+                  title: "error", type: "null reference");
+
+            if (isRegister == 4)
+                return Problem(detail: "Error in Adding Role! ", statusCode: 404,
+                  title: "error", type: "null reference");
 
             return Ok();
         }

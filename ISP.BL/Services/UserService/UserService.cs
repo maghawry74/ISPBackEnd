@@ -209,7 +209,7 @@ namespace ISP.BL.Services.UserPermissionsService
             return true;
         }
 
-        public async Task<bool> UserRegister(RegisterDto registerDto)
+        public async Task<int> UserRegister(RegisterDto registerDto)
         {
             var user = new User
             {
@@ -226,25 +226,25 @@ namespace ISP.BL.Services.UserPermissionsService
             //Check User Role
             var checkRole = await roleManager.FindByIdAsync(registerDto.RoleId);
             if (checkRole == null)
-                return false;
+                return 1;
 
             //Check User Email
             var getUser = await userManager.FindByEmailAsync(registerDto.Email);
             if (getUser != null)
-                return false;
+                return 2;
 
 
             //Create User
             var created = userManager.CreateAsync(user, registerDto.Password);
             if (!created.Result.Succeeded)
-                return false;
+                return 3;
 
             //Add Role To User
             var addedRole = userManager.AddToRoleAsync(user, checkRole.Name);
             if (!addedRole.Result.Succeeded)
-                return false;
+                return 4;
 
-            return true;
+            return 0;
         }
 
         public async Task<TokenDto> Login(LoginDto loginData)
