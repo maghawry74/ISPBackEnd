@@ -22,14 +22,16 @@ namespace ISP.DAL
                 .Include(c => c.Package)
                 .Include(c => c.Central)
                 .Include(c => c.Branch)
+                .Include(c=>c.Offer)
                 .ToListAsync();
         }
-        public new async Task<Client?> GetByID(int ssn)
+        public new async Task<Client?> GetByID(string ssn)
         {
             return await Context.Set<Client>().Include(P => P.Provider)
                 .Include(c => c.Package)
                 .Include(c => c.Central)
                 .Include(c => c.Branch)
+                .Include(c => c.Offer)
                 .FirstOrDefaultAsync(c=>c.SSn==ssn);
         }
         public new void Update(Client Client)

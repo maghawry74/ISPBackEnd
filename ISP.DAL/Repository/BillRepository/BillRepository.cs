@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace ISP.DAL
 {
-    public class BillRepository : IBillRepository
+    public class BillRepository : GenericRepository<Bill>,IBillRepository
     {
         private readonly ISPContext context;
 
-        public BillRepository(ISPContext context)
+        public BillRepository(ISPContext Context):base(Context)
         {
-            this.context = context;
+            context = Context;
         }
         public int BillGenerationSP()
         {
@@ -36,6 +36,13 @@ namespace ISP.DAL
                 .FirstOrDefault();
 
             return billobj;
+        }
+
+        public void paidBill(int id)
+        {
+            var billtopaid = context.Bills.Where(a => a.Id == id).FirstOrDefault();
+            billtopaid.IsPaid = true;
+            context.SaveChanges();
         }
     }
 }

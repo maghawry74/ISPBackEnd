@@ -13,7 +13,7 @@ namespace ISP.BL
     {
 
   
-        public  int ssid { get; set; }
+        public  string SSID { get; set; }
 
         [StringLength(50 , ErrorMessage ="client name must not exceed 50 character")]
         public required string name { get; set; } = string.Empty;
@@ -31,18 +31,19 @@ namespace ISP.BL
         public string email { get; set; } = string.Empty;
 
 
-        public int providerId { get; set; }
-        public int packageId { get; set; }
+        public int? providerId { get; set; }
+        public int? packageId { get; set; }
       
-        public int centralId { get; set; }
+        public int? centralId { get; set; }
 
-        public int branchId { get; set; } 
+        public int? branchId { get; set; }
+        public int? OfferId { get; set; }
         public int packageIp { get; set; }
 
         [RegularExpression(@"^[a-zA-Z0-9]+$")]
         public string routerSerial { get; set; } = string.Empty;
 
-        [RegularExpression(@"^01[012][0-9]{11}$")]
+        [RegularExpression(@"^01[012][0-9]{8}$")]
         public string phone { get; set; } = string.Empty;
         public int? orderNumber { get; set; }
 

@@ -12,7 +12,7 @@ namespace ISP.DAL
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int SSn { get; set; }
+        public string SSn { get; set; }
 
         [StringLength(50)]
         public string Name { get; set; } = string.Empty;
@@ -39,6 +39,12 @@ namespace ISP.DAL
         [ForeignKey("Package")]
         public int PackageId { get; set; }
         public Package? Package { get; set; }
+
+
+        [ForeignKey("Offer")]
+        public int OfferId { get; set; }
+        public Offer? Offer { get; set; }
+
 
         [ForeignKey("Central")]
         public int CentralId { get; set; }
@@ -67,7 +73,7 @@ namespace ISP.DAL
 
         public string RouterSerial { get; set; } = string.Empty;
 
-        public int? OrderNumber { get; set; }
+        public string? OrderNumber { get; set; }
 
         public int? PortSlot { get; set; }
 
@@ -82,14 +88,14 @@ namespace ISP.DAL
         public int? VPI { get; set; }
         public int? VCI { get; set; }
 
-        public int? OrderWorkNumber { get; set; }
+        public string? OrderWorkNumber { get; set; }
 
         public DateTime Orderworkdate { get; set; }
 
-        public double PrePaid { get; set; }
+        public float PrePaid { get; set; }
 
-        public double installationFee { get; set; }
-        public double ContractFee { get; set; }
+        public float installationFee { get; set; }
+        public float ContractFee { get; set; }
 
         public int? Slotnum { get; set; }
 

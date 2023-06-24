@@ -22,7 +22,7 @@ namespace ISP.DAL
         public User? User  { get; set; } 
 
         [ForeignKey("Client")]
-        public int? ClientSSn { get; set; }
+        public string? ClientSSn { get; set; }
         public Client? Client { get; set; }
 
     }

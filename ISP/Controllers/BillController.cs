@@ -25,6 +25,15 @@ namespace ISP.API.Controllers
             return Ok(billobj);
         }
 
+        [HttpPut]
+
+        [Route("payBill/{id}")]
+        public IActionResult payBill(int id)
+        {
+            billService.paidBill(id); 
+            return NoContent();
+        }
+
 
     }
         

@@ -11,5 +11,6 @@ namespace ISP.BL
     {
         int BillGenerationSP();
         ReadBillDTO? GetNextMonthBill(int Nmonth, int ClientId);
+        void paidBill(int id);
     }
 }
