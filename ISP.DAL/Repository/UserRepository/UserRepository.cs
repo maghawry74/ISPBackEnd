@@ -32,7 +32,7 @@ namespace ISP.DAL.Repository.UserRepository
 
         public async Task<User> GetUserById(string id)
         {
-            return await context.Set<User>().Include(b => b.Branch).FirstOrDefaultAsync(u => u.Id != "1");
+            return await context.Set<User>().Include(p => p.Branch).FirstOrDefaultAsync(p => p.Id == id);
         }
 
        

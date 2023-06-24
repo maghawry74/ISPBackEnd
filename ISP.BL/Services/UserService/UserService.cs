@@ -76,7 +76,7 @@ namespace ISP.BL.Services.UserPermissionsService
         {
             var user = await userRepository.GetUserById(id);
             if (user == null)
-                return null!;
+                return null;
 
 
             var role = await GetRole(user);
@@ -85,7 +85,7 @@ namespace ISP.BL.Services.UserPermissionsService
 
             return new ReadUserDto
             {
-                Id = user!.Id,
+                Id = user.Id,
                 UserName = user.UserName!,
                 PhoneNumber = user.PhoneNumber!,
                 Email = user.Email!,
@@ -133,6 +133,9 @@ namespace ISP.BL.Services.UserPermissionsService
         {
             var user = await userRepository.GetUserById(id);
             if (user == null)
+                return false;
+
+            if (user.Status == false)
                 return false;
 
             user.Id = id;
