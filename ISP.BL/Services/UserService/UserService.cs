@@ -58,9 +58,35 @@ namespace ISP.BL.Services.UserPermissionsService
             return readUserDto;
         }
 
-        public Task<ReadUserDto> GetById()
+        public async Task<ReadUserDto> GetById( string id)
         {
-            throw new NotImplementedException();
+            var user = await userManager.FindByIdAsync(id);    
+
+         
+            
+                var getRoleName = userManager.GetRolesAsync(user).Result.FirstOrDefault();
+                var role = await roleManager.FindByNameAsync(getRoleName);
+                var roleClaims = await GetRoleClaims(role);
+
+                ReadRoleByUser readRole = new ReadRoleByUser
+                {
+                    Id = role.Id,
+                    Name = role.Name,
+                    Claims = roleClaims
+                };
+   
+
+            return new ReadUserDto
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                PhoneNumber = user.PhoneNumber,
+                Email = user.Email,
+                Branch = user.Branch,
+                Status = user.Status,
+                Role = readRole
+
+            };
         }
 
         public async Task<List<string>> GetRoleClaims(Role role)

@@ -175,5 +175,17 @@ namespace ISP.API.Controllers
 
         }
 
+        [HttpGet]
+        [Route("{Id}")]
+
+        public async Task<ActionResult<ReadUserDto>> GetById(string Id)
+        {
+            var user = await userService.GetById(Id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return user;
+        }
     }
 }
