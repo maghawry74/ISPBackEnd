@@ -43,7 +43,11 @@ namespace ISP.API.Controllers
         //[Authorize(Permissions.Package.Create)]
         public async Task<ActionResult<ReadPackageDTO>> Add([Required] WritePackageDTO writePackageDTO)
         {
-            
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             return await PackageService.AddPackage(writePackageDTO);
         }
 

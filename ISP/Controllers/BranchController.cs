@@ -88,7 +88,7 @@ namespace ISP.API.Controllers
                 return Problem(detail: "the object dees not exsits", statusCode: 404,
                     title: "error", type: "null reference");
             }           
-            return Ok(getBranch);
+            return getBranch;
         }
 
 

@@ -1,357 +1,191 @@
-﻿////using FakeItEasy;
-////using FluentAssertions;
-////using ISP.API.Controllers;
-////using ISP.BL;
-////using Microsoft.AspNetCore.Http.HttpResults;
-////using Microsoft.AspNetCore.Mvc;
-////using System;
-////using System.Collections.Generic;
-////using System.Linq;
-////using System.Text;
-////using System.Threading.Tasks;
+﻿using FakeItEasy;
+using FluentAssertions;
+using ISP.API.Controllers;
+using ISP.BL;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-////namespace ISPBackEnd.Tests.Controller
-////{
-////    public class BranchControllerTests
-////    {
-////        private IBranchService _BranchService;
-////        public BranchControllerTests()
-////        {
-////            _BranchService = A.Fake<IBranchService>();  
-////        }
+namespace ISPBackEnd.Tests.Controller;
 
+public class BranchControllerTests
+{
+    private IBranchService _BranchService;
+    public BranchControllerTests()
+    {
+        _BranchService = A.Fake<IBranchService>();
+    }
 
-////        [Fact]
 
-////        public async Task BranchController_GetBranches_ReturnsOk()
-////        {
-////            //arrange
-////            var expectedBranchlist = new List<ReadBranchDTO>
-////            //{
-////            {
-////                new ReadBranchDTO{Id =  1, Name ="branch1" , Address = "cairo"},
-////                new ReadBranchDTO{Id =  2, Name ="branch2" , Address = "benha"}
+    [Fact]
 
-////            };
+    public async Task BranchController_GetBranches_ReturnsOk()
+    {
+        //arrange
+        var expectedBranchlist = new List<ReadBranchDTO>
+        //{
+        {
+            new ReadBranchDTO{Id =  1, Name ="branch1" },
+            new ReadBranchDTO{Id =  2, Name ="branch2" }
 
-////            var fakebranchservice = A.Fake<IBranchService>();
+        };
 
-////            //congigure the mock object
-////            A.CallTo(() => fakebranchservice.GetAll()).Returns(expectedBranchlist);
+        var fakebranchservice = A.Fake<IBranchService>();
 
-////            var controller = new BranchController(fakebranchservice);
+        //congigure the mock object
+        A.CallTo(() => fakebranchservice.GetAll()).Returns(expectedBranchlist);
 
-////            //act
-////            var result = await controller.GetAll(); 
+        var controller = new BranchController(fakebranchservice);
 
-////            // assert
-////            var okObjectResult  = Assert.IsAssignableFrom<ActionResult<List<ReadBranchDTO>>>(result); 
-////            var actualbranchlist = Assert.IsAssignableFrom<List<ReadBranchDTO>>(okObjectResult.Value);
+        //act
+        var result = await controller.GetAll();
 
-////            actualbranchlist.Should().BeEquivalentTo(expectedBranchlist);
+        // assert
+        var okObjectResult = Assert.IsAssignableFrom<ActionResult<List<ReadBranchDTO>>>(result);
+        var actualbranchlist = Assert.IsAssignableFrom<List<ReadBranchDTO>>(okObjectResult.Value);
 
+        actualbranchlist.Should().BeEquivalentTo(expectedBranchlist);
 
-////        }
 
-////        [Fact]
+    }
 
-////        public async Task BranchController_GetBranchByID_ReturnsOk()
-////        {
-////            int id = 5;
-////            var expectedBranch = new ReadBranchDTO { Id = 1, Name = "branch1", Address = "cairo" };
+    [Fact]
 
-////            var fakeBranchService = A.Fake<IBranchService>();
+    public async Task BranchController_GetBranchByID_ReturnsOk()
+    {
+        int id = 5;
+        var expectedBranch = new ReadBranchDTO { Id = 1, Name = "branch1" };
 
+        var fakeBranchService = A.Fake<IBranchService>();
 
-////            //configure the mock object
-////            A.CallTo(() => fakeBranchService.GetById(id)).Returns(expectedBranch);
 
-////            var controller = new BranchController(fakeBranchService);
+        //configure the mock object
+        A.CallTo(() => fakeBranchService.GetById(id)).Returns(expectedBranch);
 
-////            //act
-////            var result = await controller.GetById(id);
+        var controller = new BranchController(fakeBranchService);
 
-////            // assert
+        //act
+        var result = await controller.GetById(id);
 
-////            var okobject = Assert.IsAssignableFrom<ActionResult<ReadBranchDTO>>(result);
+        // assert
 
-////            var actualBranch = Assert.IsAssignableFrom<ReadBranchDTO>(okobject.Value);
+        var okobject = Assert.IsAssignableFrom<ActionResult<ReadBranchDTO>>(result);
 
-////            actualBranch.Should().BeEquivalentTo(expectedBranch);
-////        }
+        var actualBranch = Assert.IsAssignableFrom<ReadBranchDTO>(okobject.Value);
 
+        actualBranch.Should().BeEquivalentTo(expectedBranch);
+    }
 
 
-////        [Fact]
-////        public async Task BranchController_Add_ReturnsOk()
-////        {
-////            //arrange
 
-////            WriteBranchDTO writeBranchDTO = new WriteBranchDTO { address = "cairo" , Name = "branch3"   };
-////            ReadBranchDTO expectedBranch = new ReadBranchDTO { Name = "branch3" , Address = "cairo" };
+    [Fact]
+    public async Task BranchController_Add_ReturnsOk()
+    {
+        //arrange
 
-////            var fakeBranchService = A.Fake<IBranchService>();
+        WriteBranchDTO writeBranchDTO = new WriteBranchDTO { Name = "branch3" };
+        ReadBranchDTO expectedBranch = new ReadBranchDTO { Name = "branch3" };
 
-////            A.CallTo(() => fakeBranchService.AddBranch(writeBranchDTO)).Returns(expectedBranch);
+        var fakeBranchService = A.Fake<IBranchService>();
 
-////            var controller = new BranchController(fakeBranchService);
+        A.CallTo(() => fakeBranchService.AddBranch(writeBranchDTO)).Returns(expectedBranch);
 
+        var controller = new BranchController(fakeBranchService);
 
-////            // act
-////            var result = await controller.Add(writeBranchDTO);
 
-////            // assert
+        // act
+        var result = await controller.Add(writeBranchDTO);
 
-////            var Okobjectresult = Assert.IsType<ActionResult<ReadBranchDTO>>(result);
+        // assert
 
-////            var actualresault = Assert.IsAssignableFrom<ReadBranchDTO>(Okobjectresult.Value);
+        var Okobjectresult = Assert.IsType<ActionResult<ReadBranchDTO>>(result);
 
-////            actualresault.Should().BeEquivalentTo(expectedBranch);
+        var actualresault = Assert.IsAssignableFrom<ReadBranchDTO>(Okobjectresult.Value);
 
-////        }
+        actualresault.Should().BeEquivalentTo(expectedBranch);
 
-////        [Fact]
-////        public async Task BranchController_Add_ReturnsBadRequest()
-////        {
-////            // Arrange
-////            WriteBranchDTO writeBranchDTO = new WriteBranchDTO { Name = null , address = "cairo" };
+    }
 
-////            var fakeBranchService = A.Fake<IBranchService>();
-////            var controller = new BranchController(fakeBranchService);
+    [Fact]
+    public async Task BranchController_Add_ReturnsBadRequest()
+    {
+        // Arrange
+        WriteBranchDTO writeBranchDTO = new WriteBranchDTO { Name = null };
 
-////            controller.ModelState.AddModelError("Name", "The Name field is required.");
+        var fakeBranchService = A.Fake<IBranchService>();
+        var controller = new BranchController(fakeBranchService);
 
-////            // Act
-////            var result = await controller.Add(writeBranchDTO);
+        controller.ModelState.AddModelError("Name", "The Name field is required.");
 
-////            // Assert
-////            Assert.IsType<BadRequestObjectResult>(result.Result);
-////        }
+        // Act
+        var result = await controller.Add(writeBranchDTO);
 
-////        [Fact]
-////        public async Task BranchController_Edit_ReturnsNoContentResult()
-////        {
-////            // arrange
-////            int id = 5;
-////            UpdateBranchDTO updateBranchDTO = new UpdateBranchDTO { Id = 1 , Name ="branch1" , address="cairo" };
+        // Assert
+        Assert.IsType<BadRequestObjectResult>(result.Result);
+    }
 
-////            var expectedBranchDto = new ReadBranchDTO { Name = "branch2" , Address="cairo" };
+    [Fact]
+    public async Task BranchController_Edit_ReturnsObjectresultResult()
+    {
+        // arrange
+        int id = 5;
+        UpdateBranchDTO updateBranchDTO = new UpdateBranchDTO { Id = 1, Name = "branch1" };
 
+        var expectedBranchDto = new ReadBranchDTO { Name = "branch2" };
 
-////            //create fake iBranchservice
-////            var fakeBranchService = A.Fake<IBranchService>();
 
-////            //configure the mock object
+        //create fake iBranchservice
+        var fakeBranchService = A.Fake<IBranchService>();
 
-////            A.CallTo(() => fakeBranchService.UpdateBranch(id, updateBranchDTO)).Returns(expectedBranchDto);
+        //configure the mock object
 
-////            var controller = new BranchController(fakeBranchService);
+        A.CallTo(() => fakeBranchService.UpdateBranch(id, updateBranchDTO)).Returns(expectedBranchDto);
 
-////            //act
-////            var result = await controller.Edit(id, updateBranchDTO);
+        var controller = new BranchController(fakeBranchService);
 
-////            // assert
-////            Assert.IsType<NoContentResult>(result);
+        //act
+        var result = await controller.Edit(id, updateBranchDTO);
 
-////        }
+        // assert
+        Assert.IsType<ObjectResult>(result);
 
+    }
 
 
-////        [Fact]
-////        public async Task Delete_ReturnsOkObjectResult_When_ObjectExists()
-////        {
-////            // Arrange
-////            var Id = 1;
-////            var expectedReadBranchDTO = new ReadBranchDTO { Name = "branch1" , Address = "benha" };
 
-////            var fakeBranchService = A.Fake<IBranchService>();
-////            A.CallTo(() => fakeBranchService.DeleteBranch(Id)).Returns(expectedReadBranchDTO);
+    [Fact]
+    public async Task Delete_ReturnsOkObjectResult_When_ObjectExists()
+    {
+        // Arrange
+        var Id = 1;
+        var expectedReadBranchDTO = new ReadBranchDTO { Name = "branch1" };
 
-////            var controller = new BranchController(fakeBranchService);
+        var fakeBranchService = A.Fake<IBranchService>();
+        A.CallTo(() => fakeBranchService.DeleteBranch(Id)).Returns(expectedReadBranchDTO);
 
-////            // Act
-////            var result = await controller.Delete(Id);
+        var controller = new BranchController(fakeBranchService);
 
-////            // Assert
-////            var okObjectResult = Assert.IsType<OkObjectResult>(result.Result);
-////            var readBranchDTO = Assert.IsType<ReadBranchDTO>(okObjectResult.Value);
+        // Act
+        var result = await controller.Delete(Id);
 
-////            Assert.Equal(expectedReadBranchDTO.Name, readBranchDTO.Name);
+        // Assert
+        var okObjectResult = Assert.IsAssignableFrom<ActionResult<ReadBranchDTO>>(result);
 
+        var actualbranchList = Assert.IsAssignableFrom<ReadBranchDTO>(okObjectResult.Value);
 
-////        }
-//<<<<<<< HEAD
-//=======
-//=======
-//        //[Fact]
-//>>>>>>> fb1a701599ae4832dc790bacba5389b0b6988654
+        actualbranchList.Should().BeEquivalentTo(expectedReadBranchDTO);
 
-//        //public async Task BranchController_GetBranches_ReturnsOk()
-//        //{
-//        //    //arrange
-//        //    var expectedBranchlist = new List<ReadBranchDTO>
-//        //    {
-//        //        new ReadBranchDTO{Id =  1, Name ="branch1" , Address = "cairo"},
-//        //        new ReadBranchDTO{Id =  2, Name ="branch2" , Address = "benha"}
+    }
 
-//        //    };
 
-//        //    var fakebranchservice = A.Fake<IBranchService>();
 
-//        //    //congigure the mock object
-//        //    A.CallTo(() => fakebranchservice.GetAll()).Returns(expectedBranchlist);
 
-//        //    var controller = new BranchController(fakebranchservice);
+}
 
-//        //    //act
-//        //    var result = await controller.GetAll(); 
 
-//<<<<<<< HEAD
-//=======
-//        //    // assert
-//        //    var okObjectResult  = Assert.IsAssignableFrom<ActionResult<List<ReadBranchDTO>>>(result); 
-//        //    var actualbranchlist = Assert.IsAssignableFrom<List<ReadBranchDTO>>(okObjectResult.Value);
+        
 
-//        //    actualbranchlist.Should().BeEquivalentTo(expectedBranchlist);
-
-
-//        //}
-
-//        //[Fact]
-
-//        //public async Task BranchController_GetBranchByID_ReturnsOk()
-//        //{
-//        //    int id = 5;
-//        //    var expectedBranch = new ReadBranchDTO { Id = 1, Name = "branch1", Address = "cairo" };
-
-//        //    var fakeBranchService = A.Fake<IBranchService>();
-
-
-//        //    //configure the mock object
-//        //    A.CallTo(() => fakeBranchService.GetById(id)).Returns(expectedBranch);
-
-//        //    var controller = new BranchController(fakeBranchService);
-
-//        //    //act
-//        //    var result = await controller.GetById(id);
-
-//        //    // assert
-
-//        //    var okobject = Assert.IsAssignableFrom<ActionResult<ReadBranchDTO>>(result);
-
-//        //    var actualBranch = Assert.IsAssignableFrom<ReadBranchDTO>(okobject.Value);
-
-//        //    actualBranch.Should().BeEquivalentTo(expectedBranch);
-//        //}
-
-
-
-//        //[Fact]
-//        //public async Task BranchController_Add_ReturnsOk()
-//        //{
-//        //    //arrange
-
-//        //    WriteBranchDTO writeBranchDTO = new WriteBranchDTO { address = "cairo" , Name = "branch3"   };
-//        //    ReadBranchDTO expectedBranch = new ReadBranchDTO { Name = "branch3" , Address = "cairo" };
-
-//        //    var fakeBranchService = A.Fake<IBranchService>();
-
-//        //    A.CallTo(() => fakeBranchService.AddBranch(writeBranchDTO)).Returns(expectedBranch);
-
-//        //    var controller = new BranchController(fakeBranchService);
-
-
-//        //    // act
-//        //    var result = await controller.Add(writeBranchDTO);
-
-//        //    // assert
-
-//        //    var Okobjectresult = Assert.IsType<ActionResult<ReadBranchDTO>>(result);
-
-//        //    var actualresault = Assert.IsAssignableFrom<ReadBranchDTO>(Okobjectresult.Value);
-
-//        //    actualresault.Should().BeEquivalentTo(expectedBranch);
-
-//        //}
-
-//        //[Fact]
-//        //public async Task BranchController_Add_ReturnsBadRequest()
-//        //{
-//        //    // Arrange
-//        //    WriteBranchDTO writeBranchDTO = new WriteBranchDTO { Name = null , address = "cairo" };
-
-//        //    var fakeBranchService = A.Fake<IBranchService>();
-//        //    var controller = new BranchController(fakeBranchService);
-
-//        //    controller.ModelState.AddModelError("Name", "The Name field is required.");
-
-//        //    // Act
-//        //    var result = await controller.Add(writeBranchDTO);
-
-//        //    // Assert
-//        //    Assert.IsType<BadRequestObjectResult>(result.Result);
-//        //}
-
-//        //[Fact]
-//        //public async Task BranchController_Edit_ReturnsNoContentResult()
-//        //{
-//        //    // arrange
-//        //    int id = 5;
-//        //    UpdateBranchDTO updateBranchDTO = new UpdateBranchDTO { Id = 1 , Name ="branch1" , address="cairo" };
-
-//        //    var expectedBranchDto = new ReadBranchDTO { Name = "branch2" , Address="cairo" };
-
-
-//        //    //create fake iBranchservice
-//        //    var fakeBranchService = A.Fake<IBranchService>();
-
-//        //    //configure the mock object
-
-//        //    A.CallTo(() => fakeBranchService.UpdateBranch(id, updateBranchDTO)).Returns(expectedBranchDto);
-
-//        //    var controller = new BranchController(fakeBranchService);
-
-//        //    //act
-//        //    var result = await controller.Edit(id, updateBranchDTO);
-
-//        //    // assert
-//        //    Assert.IsType<NoContentResult>(result);
-
-//        //}
-
-
-
-//        //[Fact]
-//        //public async Task Delete_ReturnsOkObjectResult_When_ObjectExists()
-//        //{
-//        //    // Arrange
-//        //    var Id = 1;
-//        //    var expectedReadBranchDTO = new ReadBranchDTO { Name = "branch1" , Address = "benha" };
-
-//        //    var fakeBranchService = A.Fake<IBranchService>();
-//        //    A.CallTo(() => fakeBranchService.DeleteBranch(Id)).Returns(expectedReadBranchDTO);
-
-//        //    var controller = new BranchController(fakeBranchService);
-
-//        //    // Act
-//        //    var result = await controller.Delete(Id);
-
-//        //    // Assert
-//        //    var okObjectResult = Assert.IsType<OkObjectResult>(result.Result);
-//        //    var readBranchDTO = Assert.IsType<ReadBranchDTO>(okObjectResult.Value);
-
-//        //    Assert.Equal(expectedReadBranchDTO.Name, readBranchDTO.Name);
-
-
-//        //}
-//>>>>>>> 80c10beacf9e52fcf1a6f375ff7430898209d673
-
-
-
-
-
-
-
-//>>>>>>> fb1a701599ae4832dc790bacba5389b0b6988654
-////    }
-////}
