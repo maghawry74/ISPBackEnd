@@ -33,52 +33,7 @@ namespace ISP.API.Controllers
             this.configuration = configuration;
         }
         #endregion
-
-
-        #region SuperAdmin Register 
-        [HttpPost]
-        [Route("SuperAdminRegister")]
-        [AllowAnonymous]
-        public async Task<ActionResult> SuperAdminRegister(AdminRegisterDto adminRegisterDto)
-        {
-            var user = new User
-            {
-                UserName = adminRegisterDto.UserName,
-                Email = adminRegisterDto.Email,                
-                PhoneNumber = adminRegisterDto.PhoneNumber,          
-                EmailConfirmed = true,
-                BranchId = adminRegisterDto.BranchId,
-                Status = true
-
-            };
-
-            //Check User Email
-            var getUser = await userManager.FindByEmailAsync(adminRegisterDto.Email);
-            if (getUser != null)
-                return Problem(detail: "This Email is Exist!", statusCode: 404,
-                  title: "error", type: "null reference");
-
-
-            //Create User
-            var created =  userManager.CreateAsync(user, adminRegisterDto.Password);
-                if (!created.Result.Succeeded)
-                {
-                    return BadRequest(created.Result.Errors);
-                }
-              
-
-            //Add Role To User
-            var addedRole = userManager.AddToRoleAsync(user,"SuperAdmin");
-            if (!addedRole.Result.Succeeded)
-                return Problem(detail: "Error acording add to role!", statusCode: 404,
-                   title: "error", type: "null reference");
-
-
-            
-            return Ok();
-        }
-        #endregion
-                                                                     
+                                                   
         #region User Register 
         [HttpPost]
         [Route("UserRegister")]

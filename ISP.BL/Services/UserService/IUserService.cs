@@ -6,6 +6,8 @@ namespace ISP.BL.Services.UserPermissionsService
     public interface IUserService
     {
         Task<List<ReadUserDto>> GetAll();
-        
+        Task <ReadUserDto> GetById();
+        Task<List<string>> GetRoleClaims(Role role);
+
     }
 }

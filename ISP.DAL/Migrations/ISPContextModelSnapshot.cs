@@ -132,32 +132,18 @@ namespace ISP.DAL.Migrations
 
                     b.HasKey("Id");
 
-<<<<<<< HEAD
-                    b.HasAlternateKey("Mobile1");
-
-                    b.HasAlternateKey("Mobile2");
-
-                    b.HasAlternateKey("Phone1");
-
-                    b.HasAlternateKey("Phone2");
-
-=======
->>>>>>> 83cd150b5fb911952dc5ac225aa735a4dbd285f6
                     b.HasIndex("GovernorateCode");
 
                     b.HasIndex("ManagerId")
                         .IsUnique()
                         .HasFilter("[ManagerId] IS NOT NULL");
 
-<<<<<<< HEAD
-=======
                     b.HasIndex("Mobile1", "Mobile2")
                         .IsUnique();
 
                     b.HasIndex("Phone1", "Phone2")
                         .IsUnique();
 
->>>>>>> 83cd150b5fb911952dc5ac225aa735a4dbd285f6
                     b.ToTable("Branches");
                 });
 
@@ -575,24 +561,14 @@ namespace ISP.DAL.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-<<<<<<< HEAD
-                            ConcurrencyStamp = "28d893ed-9822-4c44-b859-a01eaba09309",
-=======
-                            ConcurrencyStamp = "080dcbf4-0073-423d-8235-05e290593d5e",
->>>>>>> 83cd150b5fb911952dc5ac225aa735a4dbd285f6
+                            ConcurrencyStamp = "f6383417-aef3-4888-9369-d10805b722f2",
                             Email = "reematman15@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "REEM",
-<<<<<<< HEAD
-                            PasswordHash = "AQAAAAIAAYagAAAAENNCX6ArIYY77ZesUs7rmIVZaa0nvSxHCYJ5HT8cB86Ky71z1fpjAvehaJfU5AOPZw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPsQkE1/RE8CQ86BcAY5KGTWzKOw4IyaHKkaC2zLRJUDJI/6RWv+EngBQfim/vks4A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bc1aa144-d526-4114-b4c7-8c52271f9f39",
-=======
-                            PasswordHash = "AQAAAAIAAYagAAAAEPfDDpadB9Asi1lto9HZ40U6b9q6a1+BiUXFiE+pESPBqWHfgMn09rLujm4y6v+cMw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "9b81c69a-a8d9-4fb3-84a0-927fc2cfa162",
->>>>>>> 83cd150b5fb911952dc5ac225aa735a4dbd285f6
+                            SecurityStamp = "c81f26ba-fc2e-441f-b6fd-3d8a084e8249",
                             Status = true,
                             TwoFactorEnabled = false,
                             UserName = "Reem"

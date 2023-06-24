@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ISP.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class updatedatabase : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -268,10 +268,6 @@ namespace ISP.DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Branches", x => x.Id);
-                    table.UniqueConstraint("AK_Branches_Mobile1", x => x.Mobile1);
-                    table.UniqueConstraint("AK_Branches_Mobile2", x => x.Mobile2);
-                    table.UniqueConstraint("AK_Branches_Phone1", x => x.Phone1);
-                    table.UniqueConstraint("AK_Branches_Phone2", x => x.Phone2);
                     table.ForeignKey(
                         name: "FK_Branches_Governorates_GovernorateCode",
                         column: x => x.GovernorateCode,
@@ -358,31 +354,31 @@ namespace ISP.DAL.Migrations
                         column: x => x.BranchId,
                         principalTable: "Branches",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Clients_Centrals_CentralId",
                         column: x => x.CentralId,
                         principalTable: "Centrals",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Clients_Governorates_GovernarateCode",
                         column: x => x.GovernarateCode,
                         principalTable: "Governorates",
                         principalColumn: "Code",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Clients_Packages_PackageId",
                         column: x => x.PackageId,
                         principalTable: "Packages",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Clients_Providers_ProviderId",
                         column: x => x.ProviderId,
                         principalTable: "Providers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Clients_User_DisstrubtorId",
                         column: x => x.DisstrubtorId,
@@ -408,7 +404,7 @@ namespace ISP.DAL.Migrations
                         column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -451,7 +447,7 @@ namespace ISP.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "AccessFailedCount", "BranchId", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "1", 0, null, "28d893ed-9822-4c44-b859-a01eaba09309", "reematman15@gmail.com", true, false, null, null, "REEM", "AQAAAAIAAYagAAAAENNCX6ArIYY77ZesUs7rmIVZaa0nvSxHCYJ5HT8cB86Ky71z1fpjAvehaJfU5AOPZw==", null, false, "bc1aa144-d526-4114-b4c7-8c52271f9f39", true, false, "Reem" });
+                values: new object[] { "1", 0, null, "f6383417-aef3-4888-9369-d10805b722f2", "reematman15@gmail.com", true, false, null, null, "REEM", "AQAAAAIAAYagAAAAEPsQkE1/RE8CQ86BcAY5KGTWzKOw4IyaHKkaC2zLRJUDJI/6RWv+EngBQfim/vks4A==", null, false, "c81f26ba-fc2e-441f-b6fd-3d8a084e8249", true, false, "Reem" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -536,6 +532,18 @@ namespace ISP.DAL.Migrations
                 column: "ManagerId",
                 unique: true,
                 filter: "[ManagerId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Branches_Mobile1_Mobile2",
+                table: "Branches",
+                columns: new[] { "Mobile1", "Mobile2" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Branches_Phone1_Phone2",
+                table: "Branches",
+                columns: new[] { "Phone1", "Phone2" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_CentralProvider_ProvidersId",

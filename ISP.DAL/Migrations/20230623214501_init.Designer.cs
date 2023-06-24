@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ISP.DAL.Migrations
 {
     [DbContext(typeof(ISPContext))]
-    [Migration("20230623012158_update-database")]
-    partial class updatedatabase
+    [Migration("20230623214501_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -135,19 +135,17 @@ namespace ISP.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasAlternateKey("Mobile1");
-
-                    b.HasAlternateKey("Mobile2");
-
-                    b.HasAlternateKey("Phone1");
-
-                    b.HasAlternateKey("Phone2");
-
                     b.HasIndex("GovernorateCode");
 
                     b.HasIndex("ManagerId")
                         .IsUnique()
                         .HasFilter("[ManagerId] IS NOT NULL");
+
+                    b.HasIndex("Mobile1", "Mobile2")
+                        .IsUnique();
+
+                    b.HasIndex("Phone1", "Phone2")
+                        .IsUnique();
 
                     b.ToTable("Branches");
                 });
@@ -566,14 +564,14 @@ namespace ISP.DAL.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "28d893ed-9822-4c44-b859-a01eaba09309",
+                            ConcurrencyStamp = "f6383417-aef3-4888-9369-d10805b722f2",
                             Email = "reematman15@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "REEM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENNCX6ArIYY77ZesUs7rmIVZaa0nvSxHCYJ5HT8cB86Ky71z1fpjAvehaJfU5AOPZw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPsQkE1/RE8CQ86BcAY5KGTWzKOw4IyaHKkaC2zLRJUDJI/6RWv+EngBQfim/vks4A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bc1aa144-d526-4114-b4c7-8c52271f9f39",
+                            SecurityStamp = "c81f26ba-fc2e-441f-b6fd-3d8a084e8249",
                             Status = true,
                             TwoFactorEnabled = false,
                             UserName = "Reem"
