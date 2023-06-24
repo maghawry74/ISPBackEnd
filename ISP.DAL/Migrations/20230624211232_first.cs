@@ -1,4 +1,4 @@
-﻿  using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ISP.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class Fiesr : Migration
+    public partial class first : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -321,7 +321,6 @@ namespace ISP.DAL.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProviderId = table.Column<int>(type: "int", nullable: false),
                     PackageId = table.Column<int>(type: "int", nullable: false),
-                    OfferId = table.Column<int>(type: "int", nullable: false),
                     CentralId = table.Column<int>(type: "int", nullable: false),
                     IpPackage = table.Column<int>(type: "int", nullable: true),
                     Contractdate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -367,12 +366,6 @@ namespace ISP.DAL.Migrations
                         column: x => x.GovernarateCode,
                         principalTable: "Governorates",
                         principalColumn: "Code",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_Clients_Offers_OfferId",
-                        column: x => x.OfferId,
-                        principalTable: "Offers",
-                        principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Clients_Packages_PackageId",
@@ -454,7 +447,7 @@ namespace ISP.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "AccessFailedCount", "BranchId", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "1", 0, null, "de27b6da-300b-43a9-ab22-f80dd79b5c5f", "reematman15@gmail.com", true, false, null, null, "REEM", "AQAAAAIAAYagAAAAEGBnLLMG2SnRWepdIcESiOwg6qDiQQDQUVvj3hKpeIIWWi3laFrWzyULd+MJvlgi9A==", null, false, "a0ab1899-bdd6-423e-9778-d4c27b96c072", true, false, "Reem" });
+                values: new object[] { "1", 0, null, "d2fac99d-fc2f-4e4e-986f-4394259e7137", "reematman15@gmail.com", true, false, null, null, "REEM", "AQAAAAIAAYagAAAAEN+f+jSiHjBPZ0neDQpjiELz7QvvNAWjP/5hGZKl+vQCH5PaoOaPp1bWQgkppVwnFQ==", null, false, "c33803d8-5506-407b-845b-cb9714c3b4c1", true, false, "Reem" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -592,11 +585,6 @@ namespace ISP.DAL.Migrations
                 table: "Clients",
                 columns: new[] { "Mobile1", "Mobile2" },
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Clients_OfferId",
-                table: "Clients",
-                column: "OfferId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Clients_PackageId",
@@ -739,13 +727,13 @@ namespace ISP.DAL.Migrations
                 name: "Clients");
 
             migrationBuilder.DropTable(
+                name: "Offers");
+
+            migrationBuilder.DropTable(
                 name: "Role");
 
             migrationBuilder.DropTable(
                 name: "Centrals");
-
-            migrationBuilder.DropTable(
-                name: "Offers");
 
             migrationBuilder.DropTable(
                 name: "Packages");

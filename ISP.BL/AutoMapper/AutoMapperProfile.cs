@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ISP.BL.Dtos.ClientOffer;
 using ISP.BL.Dtos.Governarate;
 using ISP.BL.Dtos.Offer;
 using ISP.BL.Dtos.Role;
@@ -120,6 +121,12 @@ namespace ISP.BL
 
             #endregion
 
+
+            #region ClientOffer
+            CreateMap<ClientOffers, ReadClientOfferDTO>().ReverseMap();
+                
+            #endregion
+
             #region Client
             //client
             CreateMap<Client, ReadClientDTO>()
@@ -133,6 +140,7 @@ namespace ISP.BL
                 .ForMember(c => c.Phone, cmt => cmt.MapFrom(src => src.Mobile1))
                 .ForMember(c => c.UserName, cmt => cmt.MapFrom(src => src.userName))
                 .ForMember(c => c.Password, cmt => cmt.MapFrom(src => src.Password))
+
                 .ReverseMap();
 
   

@@ -37,7 +37,7 @@ namespace ISP.BL
         public int? centralId { get; set; }
 
         public int? branchId { get; set; }
-        public int? OfferId { get; set; }
+    
         public int packageIp { get; set; }
 
         [RegularExpression(@"^[a-zA-Z0-9]+$")]

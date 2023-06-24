@@ -235,9 +235,6 @@ namespace ISP.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OfferId")
-                        .HasColumnType("int");
-
                     b.Property<string>("OrderNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -303,8 +300,6 @@ namespace ISP.DAL.Migrations
                     b.HasIndex("DisstrubtorId");
 
                     b.HasIndex("GovernarateCode");
-
-                    b.HasIndex("OfferId");
 
                     b.HasIndex("PackageId");
 
@@ -566,14 +561,14 @@ namespace ISP.DAL.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "de27b6da-300b-43a9-ab22-f80dd79b5c5f",
+                            ConcurrencyStamp = "d2fac99d-fc2f-4e4e-986f-4394259e7137",
                             Email = "reematman15@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "REEM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGBnLLMG2SnRWepdIcESiOwg6qDiQQDQUVvj3hKpeIIWWi3laFrWzyULd+MJvlgi9A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEN+f+jSiHjBPZ0neDQpjiELz7QvvNAWjP/5hGZKl+vQCH5PaoOaPp1bWQgkppVwnFQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a0ab1899-bdd6-423e-9778-d4c27b96c072",
+                            SecurityStamp = "c33803d8-5506-407b-845b-cb9714c3b4c1",
                             Status = true,
                             TwoFactorEnabled = false,
                             UserName = "Reem"
@@ -1124,12 +1119,6 @@ namespace ISP.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ISP.DAL.Offer", "Offer")
-                        .WithMany()
-                        .HasForeignKey("OfferId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ISP.DAL.Package", "Package")
                         .WithMany("Clients")
                         .HasForeignKey("PackageId")
@@ -1149,8 +1138,6 @@ namespace ISP.DAL.Migrations
                     b.Navigation("Distributer");
 
                     b.Navigation("Governarate");
-
-                    b.Navigation("Offer");
 
                     b.Navigation("Package");
 
