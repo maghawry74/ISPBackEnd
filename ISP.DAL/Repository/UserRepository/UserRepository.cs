@@ -15,6 +15,10 @@ namespace ISP.DAL.Repository.UserRepository
             context = Context;
         }
 
+        public int EmployeeCount()
+        {
+            return context.Users.Count();
+        }
 
         public async Task<List<User>> GetAllUsers()
         {

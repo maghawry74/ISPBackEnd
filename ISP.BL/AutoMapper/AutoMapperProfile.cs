@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ISP.BL.Dtos.Bill;
 using ISP.BL.Dtos.Governarate;
 using ISP.BL.Dtos.Offer;
 using ISP.BL.Dtos.Role;
@@ -198,6 +199,7 @@ namespace ISP.BL
             #region Bill
             // bill
             CreateMap<Bill , ReadBillDTO>().ReverseMap();
+            CreateMap<Bill , ReadBillwithClientDTO>().ReverseMap();
             #endregion
 
             #region User

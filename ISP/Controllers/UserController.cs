@@ -185,5 +185,15 @@ namespace ISP.API.Controllers
             }
             return user;
         }
+
+        [HttpGet]
+        [Route("EmployeeCount")]
+        //[Authorize(Permissions.Client.View)]
+        public IActionResult EmployeeCount()
+        {
+            var count = userService.EmployeeCount();
+            return Ok(count);
+        }
+
     }
 }

@@ -1,4 +1,4 @@
-﻿using ISP.BL.Dtos.Users;
+﻿    using ISP.BL.Dtos.Users;
 using ISP.DAL;
 
 namespace ISP.BL.Services.UserPermissionsService
@@ -8,6 +8,7 @@ namespace ISP.BL.Services.UserPermissionsService
         Task<List<ReadUserDto>> GetAll();
         Task <ReadUserDto> GetById(string id);
         Task<List<string>> GetRoleClaims(Role role);
+        public int EmployeeCount();
 
     }
 }

@@ -9,5 +9,6 @@ namespace ISP.DAL
     public interface IClientRepository:IGenericRepository<Client>
     {
          Task<Client?> GetByID(string ssn);
+        int ClientCount();
     }
 }

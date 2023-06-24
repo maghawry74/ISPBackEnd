@@ -1,4 +1,5 @@
-﻿using ISP.DAL;
+﻿using ISP.BL.Dtos.Bill;
+using ISP.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,10 @@ namespace ISP.BL
     {
         int BillGenerationSP();
         ReadBillDTO? GetNextMonthBill(int Nmonth, int ClientId);
+
+        IEnumerable<ReadBillwithClientDTO> GetNopaid_bilist();
         void paidBill(int id);
+
+        IEnumerable<ReadBillDTO> getClientBills(string Ssid, bool condition);
     }
 }

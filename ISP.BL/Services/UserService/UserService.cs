@@ -21,6 +21,10 @@ namespace ISP.BL.Services.UserPermissionsService
            
         }
 
+        public int EmployeeCount()
+        {
+            return userRepository.EmployeeCount();  
+        }
 
         public async Task<List<ReadUserDto>> GetAll()
         {

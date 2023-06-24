@@ -41,9 +41,6 @@ namespace ISP.DAL
         public Package? Package { get; set; }
 
 
-        [ForeignKey("Offer")]
-        public int OfferId { get; set; }
-        public Offer? Offer { get; set; }
 
 
         [ForeignKey("Central")]

@@ -22,7 +22,7 @@ namespace ISP.DAL
                 .Include(c => c.Package)
                 .Include(c => c.Central)
                 .Include(c => c.Branch)
-                .Include(c=>c.Offer)
+
                 .ToListAsync();
         }
         public new async Task<Client?> GetByID(string ssn)
@@ -31,7 +31,7 @@ namespace ISP.DAL
                 .Include(c => c.Package)
                 .Include(c => c.Central)
                 .Include(c => c.Branch)
-                .Include(c => c.Offer)
+
                 .FirstOrDefaultAsync(c=>c.SSn==ssn);
         }
         public new void Update(Client Client)
@@ -42,7 +42,11 @@ namespace ISP.DAL
         {
             await Context.Set<Client>().AddAsync(Client);
         }
-       
 
+        public int ClientCount()
+        {
+            return Context.Clients.Count();
+              
+        }
     }
 }

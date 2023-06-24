@@ -4,6 +4,7 @@ using ISP.BL;
 using ISP.BL.Services.UserPermissionsService;
 using Microsoft.AspNetCore.Authorization;
 using ISP.BL.Permission;
+using ISP.BL.Services.SharedService;
 
 namespace ISP.API.RedisterDependancies
 {
@@ -22,6 +23,9 @@ namespace ISP.API.RedisterDependancies
             services.AddScoped<IOfferService, OfferService>();
             services.AddScoped<IClientservice, ClientService>();
             services.AddScoped<IBillService , BillService>();
+            services.AddScoped<Ishardservice , Sharedservice>();
+
+            
 
             services.AddScoped<IUserService, UserService>();            
             services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();

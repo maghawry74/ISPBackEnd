@@ -12,5 +12,9 @@ namespace ISP.DAL
         Bill? GetNextMonthBill(int Nmonth , int ClientId);
 
         void paidBill(int id);
+
+        IEnumerable<Bill> GetNopaid_bilist();
+
+        IEnumerable<Bill> getClientBills(string Ssid, bool condition);
     }
 }

@@ -1,4 +1,6 @@
 ﻿
+
+
 namespace ISP.BL
 {
     public interface IClientservice
@@ -11,6 +13,8 @@ namespace ISP.BL
         Task<ReadClientDTO> UpdateClient(string SSn, UpdateClientDTO updateClientDTO);
 
         Task<ReadClientDTO> DeleteClient(string SSn);
+
+     
 
 
     }

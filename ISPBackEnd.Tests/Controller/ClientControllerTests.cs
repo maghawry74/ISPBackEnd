@@ -33,7 +33,6 @@ public class ClientControllerTests
 
                 new ReadClientDTO {Name = "client1" , SSID="12345678912"   },
 
-
             };
 
         var fakeClientService = A.Fake<IClientservice>();

@@ -6,7 +6,7 @@ namespace ISP.API.Controllers
     [ApiController]
     public class CustomControllerBase:ControllerBase
     {
-      
+         
         
     }
 }
