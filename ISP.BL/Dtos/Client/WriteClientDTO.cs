@@ -31,12 +31,13 @@ namespace ISP.BL
         public string email { get; set; } = string.Empty;
 
 
-        public int providerId { get; set; }
-        public int packageId { get; set; }
+        public int? providerId { get; set; }
+        public int? packageId { get; set; }
       
-        public int centralId { get; set; }
+        public int? centralId { get; set; }
 
-        public int branchId { get; set; } 
+        public int? branchId { get; set; }
+        public int? OfferId { get; set; }
         public int packageIp { get; set; }
 
         [RegularExpression(@"^[a-zA-Z0-9]+$")]
