@@ -17,12 +17,14 @@ namespace ISP.DAL
         }
         public new async Task<IEnumerable<Client>> GetAll()
         {
+
             return await Context.Set<Client>().Include(c => c.Governarate)
                 .Include(c => c.Provider)
                 .Include(c => c.Package)
                 .Include(c => c.Central)
                 .Include(c => c.Branch)
-                .Include(c=>c.Offer)
+                .Include(c=>c.ClientOffers).ThenInclude(o=>o.Offer)
+            
                 .ToListAsync();
         }
         public new async Task<Client?> GetByID(string ssn)
@@ -31,9 +33,13 @@ namespace ISP.DAL
                 .Include(c => c.Package)
                 .Include(c => c.Central)
                 .Include(c => c.Branch)
-                .Include(c => c.Offer)
+
+                .Include(c => c.ClientOffers).ThenInclude(o => o.Offer)
                 .FirstOrDefaultAsync(c=>c.SSn==ssn);
+
+       
         }
+     
         public new void Update(Client Client)
         {
             Context.Set<Client>().Update(Client);

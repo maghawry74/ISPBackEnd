@@ -1,4 +1,7 @@
-﻿using ISP.BL.Dtos.Offer;
+﻿
+using ISP.BL.Dtos.ClientOffer;
+using ISP.BL.Dtos.Offer;
+using ISP.DAL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,16 +14,15 @@ namespace ISP.BL
     public class ReadClientDTO
     {
 
-
         public string SSID { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
         public string Tel{ get; set; } = string.Empty;
         public ReadGovernarateDTO? Governarate { get; set; }
         public string Address { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
-        public ReadProviderDTO? Provider { get; set; }
+        public ReadProviderDTO Provider { get; set; }
         public ReadPackageDTO? Package { get; set; }
-        public  ReadOfferDto? Offer { get; set; }
+        public ReadClientOfferDTO? ClientOffers { get; set; }
         public ReadCentralDTO? Central { get; set; }
         public ReadBranchDTO? Branch { get; set; }
         public int? PackageIp { get; set; }
