@@ -26,10 +26,17 @@ namespace ISP.BL
 
         }
 
+    
+
         public ReadBillDTO? GetNextMonthBill(int Nmonth, int ClientId)
         {
             var billfromdb =  billRepository.GetNextMonthBill(Nmonth, ClientId);
             return mapper.Map<ReadBillDTO>(billfromdb);
+        }
+
+        public void paidBill(int id)
+        {
+            billRepository.paidBill(id);
         }
     }
 }

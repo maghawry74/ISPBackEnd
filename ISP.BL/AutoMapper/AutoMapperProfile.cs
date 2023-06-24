@@ -18,7 +18,7 @@ namespace ISP.BL
                 .ForMember(u => u.tel2, s => s.MapFrom(src => src.Phone2))
                 .ForMember(u => u.phone1, s => s.MapFrom(src => src.Mobile1))
                 .ForMember(u => u.phone2, s => s.MapFrom(src => src.Mobile2))
-                 .ForMember(u => u.GovernorateCode, s => s.MapFrom(src => src.GovernorateCode)).
+               .ForMember(u => u.GovernorateCode, s => s.MapFrom(src => src.GovernorateCode)).
                 ReverseMap();
 
             CreateMap<Branch , UpdateBranchDTO>()
