@@ -2,7 +2,10 @@
 namespace ISP.BL
 {
     public class WriteBranchDTO
+
+
     {
+        public int Id { get; set; }
         [StringLength(50 , ErrorMessage ="Name must not exceeds 50 characters")]
         public required string Name { get; set; } = string.Empty;
 

@@ -14,7 +14,7 @@ namespace ISP.BL
             #region Branch
             //Branch
             CreateMap<Branch , WriteBranchDTO>()
-                     .ForMember(u => u.tel1, s => s.MapFrom(src => src.Phone1))
+                .ForMember(u => u.tel1, s => s.MapFrom(src => src.Phone1))
                 .ForMember(u => u.tel2, s => s.MapFrom(src => src.Phone2))
                 .ForMember(u => u.phone1, s => s.MapFrom(src => src.Mobile1))
                 .ForMember(u => u.phone2, s => s.MapFrom(src => src.Mobile2))
