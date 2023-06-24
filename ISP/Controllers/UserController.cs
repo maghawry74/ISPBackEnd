@@ -67,6 +67,7 @@ namespace ISP.API.Controllers
         #endregion
 
         [HttpGet]
+
         [AllowAnonymous]
         public async Task<ActionResult<List<ReadUserDto>>> GetAll()
         {
@@ -74,7 +75,7 @@ namespace ISP.API.Controllers
 
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
        
         public async Task<ActionResult<ReadUserDto>> GetById(string id)
         {

@@ -269,7 +269,7 @@ namespace ISP.BL.Services.UserPermissionsService
             var roleName = userManager.GetRolesAsync(user).Result.FirstOrDefault();
             var role = await roleManager.FindByNameAsync(roleName);
             if (role == null)
-                return null;
+                return null!;
 
             //Get Role claims
             var roleClaims = await roleManager.GetClaimsAsync(role);
