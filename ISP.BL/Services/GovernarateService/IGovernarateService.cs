@@ -12,7 +12,7 @@ namespace ISP.BL
         Task<ReadGovernarateDTO> UpdateGovernarate(int Code, UpdateGovernarateDTO updateGovernarateDTO);
 
         Task<ReadGovernarateDTO> DeleteGovernarate(int code);
-        Task<List<GovernorateCentralsAndBranches>> GetCentralsAndBranches(int Code);
+        Task<GovernorateCentralsAndBranches> GetCentralsAndBranches(int Code);
 
 
     }

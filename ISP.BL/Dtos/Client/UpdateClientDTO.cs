@@ -7,7 +7,7 @@ namespace ISP.BL
 
         [Required(ErrorMessage = "the client ssn must not be empty")]
        // [MaxLength(14)]
-        public int SSID { get; set; } 
+        public string SSID { get; set; } 
         [Required]
      //   [Range(1,Int32.MaxValue,ErrorMessage ="Package is required and must be bigger than zero")]
         public int PackageId { get; set; }

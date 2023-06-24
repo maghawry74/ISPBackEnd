@@ -25,10 +25,10 @@ namespace ISP.BL
             var GovernarateFromDB = await governarateRepository.GetByID(Code);
             return mapper.Map<ReadGovernarateDTO>(GovernarateFromDB);
         }
-        public async Task<List<GovernorateCentralsAndBranches>> GetCentralsAndBranches(int Code)
+        public async Task<GovernorateCentralsAndBranches> GetCentralsAndBranches(int Code)
         {
             var BranchAndCentral = await governarateRepository.GetCentralsAndBranches(Code);
-            return mapper.Map<List<GovernorateCentralsAndBranches>>(BranchAndCentral);
+            return mapper.Map<GovernorateCentralsAndBranches>(BranchAndCentral);
         }
         public async Task<ReadGovernarateDTO> AddGovernarate(WriteGovernarateDTO writeGovernarateDTO)
         {
