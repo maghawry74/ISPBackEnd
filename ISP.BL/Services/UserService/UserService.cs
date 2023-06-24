@@ -311,7 +311,7 @@ namespace ISP.BL.Services.UserPermissionsService
             // Casting Token 
             var tokenHandler = new JwtSecurityTokenHandler();
 
-            return new TokenDto(tokenHandler.WriteToken(token), expireDate, permissions.ToList());
+            return new TokenDto(tokenHandler.WriteToken(token), expireDate, permissions.ToList(),user.UserName);
         }
     }
 }
