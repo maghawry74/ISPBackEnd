@@ -40,45 +40,9 @@ namespace ISP.API.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> UserRegister(RegisterDto registerDto)
         {
-            var user = new User
-            {
-                UserName = registerDto.UserName,
-                Email = registerDto.Email,                
-                PhoneNumber = registerDto.PhoneNumber,
-                EmailConfirmed = true,
-                BranchId = registerDto.BranchId,
-                Status = true,
-
-            };
-
-
-            //Check User Role
-            var checkRole = await roleManager.FindByIdAsync(registerDto.RoleId);
-            if (checkRole == null)
-                 return Problem(detail: "This Role Name does Exist!", statusCode: 404,
-                   title: "error", type: "null reference");
-
-            //Check User Email
-            var getUser = await userManager.FindByEmailAsync(registerDto.Email);
-            if (getUser != null )
-                return Problem(detail: "This Email is Exist!", statusCode: 404,
-                  title: "error", type: "null reference");
-            
-
-            //Create User
-            var created = userManager.CreateAsync(user, registerDto.Password);
-            if (!created.Result.Succeeded)
-            {
-                return BadRequest(created.Result.Errors);
-            }
-
-            //Add Role To User
-            var addedRole = userManager.AddToRoleAsync(user,checkRole.Name);
-            if (!addedRole.Result.Succeeded)
-                return Problem(detail: "Error acording add to role!", statusCode: 404,
-                  title: "error", type: "null reference");
-
-            
+           var isRegister = await userService.UserRegister(registerDto);
+            if (isRegister == false)
+                return BadRequest(ModelState);
 
             return Ok();
         }
@@ -90,76 +54,15 @@ namespace ISP.API.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<TokenDto>> Login(LoginDto loginData)
         {
-            var user = await userManager.FindByNameAsync(loginData.UserName);
+            var isLogin = await userService.Login(loginData);
 
-            if (user == null)
-            {
+            if (isLogin == null)            
                 return Unauthorized();
-            }
-
-            var isAuthenticated = await userManager.CheckPasswordAsync(user, loginData.Password);
-
-            if (isAuthenticated == false)
-            {
-                
-                return Problem(detail: "This Passwored is not valid!", statusCode: 404,
-                 title: "error", type: "Unauthorized");
-            }
-                        
-            //Get User Claims
-            var userClaims = await userManager.GetClaimsAsync(user);
-
-            //Delete User claims
-            await userManager.RemoveClaimsAsync(user, userClaims);
-
-            //Get Role   
-            var roleName = userManager.GetRolesAsync(user).Result.FirstOrDefault();
-            var role = await roleManager.FindByNameAsync(roleName);
-            if (role == null)
-                return Problem(detail: "Error according get role!", statusCode: 404,
-                   title: "error", type: "null reference");
-
-            //Get Role claims
-            var roleClaims = await roleManager.GetClaimsAsync(role);
-            List<string> permissions = new List<string>();
-            foreach (var permission in roleClaims)
-                permissions.Add(permission.Value);
 
 
-            var claims = new List<Claim>
-            {
+            return isLogin;
 
-                new Claim("Id", user.Id),
-                new Claim("Name", user.UserName),
-                new Claim("RoleName", roleName),
-
-            };
-
-            claims.AddRange(roleClaims);
-
-            await userManager.AddClaimsAsync(user, claims);
-
-
-
-            // Secret Key
-            var secretKeyString = configuration.GetValue<string>("SecretKey");
-            var secretyKeyInBytes = Encoding.ASCII.GetBytes(secretKeyString ?? string.Empty);
-            var secretKey = new SymmetricSecurityKey(secretyKeyInBytes);
-
-
-            // Create secretKey, Algorithm 
-            var signingCredentials = new SigningCredentials(secretKey,
-                SecurityAlgorithms.HmacSha256Signature);
-
-
-            var expireDate = DateTime.Now.AddDays(1);
-            var token = new JwtSecurityToken(claims: claims, expires: expireDate, signingCredentials: signingCredentials);
-           
-
-            // Casting Token 
-            var tokenHandler = new JwtSecurityTokenHandler();
-
-            return new TokenDto(tokenHandler.WriteToken(token), expireDate, permissions.ToList());
+          //  return new TokenDto(tokenHandler.WriteToken(token), expireDate, permissions.ToList());
 
             
         }
@@ -176,16 +79,51 @@ namespace ISP.API.Controllers
         }
 
         [HttpGet]
-        [Route("{Id}")]
-
-        public async Task<ActionResult<ReadUserDto>> GetById(string Id)
+       
+        public async Task<ActionResult<ReadUserDto>> GetById(string id)
         {
-            var user = await userService.GetById(Id);
+            var user = await userService.GetById(id);
             if (user == null)
             {
                 return NotFound();
             }
             return user;
         }
+
+
+        [HttpPut("{id}")]        
+        public async Task<ActionResult> Edit(string id, UpdateUserDto updateUserDto)
+        {
+            if (id != updateUserDto.Id)
+            {
+                return Problem(detail: "the object To Edit dees not exsits", statusCode: 404,
+                   title: "error", type: "null reference");
+            }
+
+            var updated = await userService.Update(id, updateUserDto);
+
+            if (updated == null)
+            {
+                return NotFound();
+            }
+
+            return Ok();
+
+        }
+
+        [HttpDelete("{id}")]        
+        public async Task<ActionResult> Delete(string id)
+        {
+            var deleteUser = await userService.Delete(id);
+
+            if (deleteUser == null)
+            {
+                return Problem(detail: "the object does not exsits", statusCode: 404,
+                   title: "error", type: "null reference");
+            }
+
+            return Ok();
+        }
+
     }
 }
