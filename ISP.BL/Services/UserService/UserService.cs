@@ -32,12 +32,7 @@ namespace ISP.BL.Services.UserPermissionsService
             this.mapper = mapper;
         }
 
-        public int EmployeeCount()
-        {
-            return userRepository.EmployeeCount();  
-        }
-
-
+        
         public async Task<List<ReadUserDto>> GetAll()
         {
 
@@ -325,13 +320,13 @@ namespace ISP.BL.Services.UserPermissionsService
             return new TokenDto(tokenHandler.WriteToken(token), expireDate, permissions.ToList(),user.UserName);
         }
 
-        public async Task<bool> CheckEmail(string email)
+        public async Task<ReadUserDto> CheckEmail(string email)
         {
             var getUser = await userManager.FindByEmailAsync(email);
             if (getUser == null)
-               return true;
+               return null!;
 
-            return false;
+            return mapper.Map<ReadUserDto>(getUser);
         }
 
         public async Task<List<ReadManagerDto>> GetAllManagers()
