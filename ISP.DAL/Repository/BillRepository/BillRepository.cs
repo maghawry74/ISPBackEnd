@@ -31,7 +31,7 @@ namespace ISP.DAL
             return billlist;
         }
 
-        public Bill? GetNextMonthBill(int Nmonth, int ClientId)
+        public Bill? GetNextMonthBill(int Nmonth, string ClientId)
         {
             var billparams = new[]
              {

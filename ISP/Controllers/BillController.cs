@@ -22,7 +22,7 @@ namespace ISP.API.Controllers
         [Route("next-month-bill")]
         [Authorize(Permissions.Bill.View)]
         public IActionResult GetNextMonthBill([FromQuery(Name = "NMonth")] int NMonth,
-            [FromQuery(Name = "clientId")] int clientId
+            [FromQuery(Name = "SSid")] string clientId
             )
         {
             var billobj = billService.GetNextMonthBill(NMonth, clientId);

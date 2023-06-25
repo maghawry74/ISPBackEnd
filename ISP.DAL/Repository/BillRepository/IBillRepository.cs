@@ -9,7 +9,7 @@ namespace ISP.DAL
     public interface IBillRepository: IGenericRepository<Bill>
     {
         int BillGenerationSP();
-        Bill? GetNextMonthBill(int Nmonth , int ClientId);
+        Bill? GetNextMonthBill(int Nmonth , string ClientId);
 
         void paidBill(int id);
 

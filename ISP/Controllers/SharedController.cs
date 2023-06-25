@@ -1,4 +1,5 @@
-﻿using ISP.BL;
+﻿using ISP.API.Constants;
+using ISP.BL;
 using ISP.BL.Services.SharedService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -18,8 +19,7 @@ namespace ISP.API.Controllers
 
 
         [HttpGet]
-        [Route("sysCount")]
-        //[Authorize(Permissions.Client.View)]
+       // [Authorize(Permissions.Client.View)]
         public IActionResult ClientCount()
         {
             var count = shardservice.countsystemuser();

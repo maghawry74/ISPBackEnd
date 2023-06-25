@@ -34,7 +34,7 @@ namespace ISP.BL
             return mapper.Map<List<ReadBillDTO>>(bill_list_fromdb);
         }
 
-        public ReadBillDTO? GetNextMonthBill(int Nmonth, int ClientId)
+        public ReadBillDTO? GetNextMonthBill(int Nmonth, string ClientId)
         {
             var billfromdb =  billRepository.GetNextMonthBill(Nmonth, ClientId);
             return mapper.Map<ReadBillDTO>(billfromdb);
