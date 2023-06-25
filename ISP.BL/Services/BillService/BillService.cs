@@ -12,11 +12,13 @@ namespace ISP.BL
     public class BillService : IBillService
     {
         private readonly IBillRepository billRepository;
+        private readonly IClientRepository clientRepository;
         private readonly IMapper mapper;
 
-        public BillService(IBillRepository billRepository  ,  IMapper mapper)
+        public BillService(IBillRepository billRepository  , IClientRepository clientRepository,  IMapper mapper)
         {
             this.billRepository = billRepository;
+            this.clientRepository = clientRepository;
             this.mapper = mapper;
         }
 
@@ -34,9 +36,18 @@ namespace ISP.BL
             return mapper.Map<List<ReadBillDTO>>(bill_list_fromdb);
         }
 
-        public ReadBillDTO? GetNextMonthBill(int Nmonth, int ClientId)
+        public  async Task<ReadBillDTO?> GetNextMonthBill(int Nmonth, string ClientId)
         {
+            var client = await clientRepository.GetByID(ClientId);
+
+            if (client is null)
+            {
+                throw new Exception();
+            }
             var billfromdb =  billRepository.GetNextMonthBill(Nmonth, ClientId);
+
+            billfromdb.Client = client;
+           
             return mapper.Map<ReadBillDTO>(billfromdb);
         }
 

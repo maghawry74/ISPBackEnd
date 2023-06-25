@@ -17,7 +17,7 @@ namespace ISP.BL.Dtos.Bill
         public bool IsPaid { get; set; }
 
         public string? UserId { get; set; } = string.Empty;
-        public int? ClientSSn { get; set; }
+        public string? ClientSSn { get; set; } = string.Empty;
 
         public string ClientName { get; set; } = string.Empty;
         public string ClientPhone { get; set; } = string.Empty;

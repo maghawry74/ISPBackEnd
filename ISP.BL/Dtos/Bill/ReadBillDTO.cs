@@ -21,7 +21,7 @@ namespace ISP.BL
         public DateTime? PaymentDate { get; set; } 
 
         public string? UserId { get; set; } = string.Empty;
-        public Client? Client { get; set; }
+        public ReadClientDTO? Client { get; set; }
 
     }
 }
