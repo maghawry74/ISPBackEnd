@@ -133,12 +133,12 @@ namespace ISP.API.Controllers
 
             return Ok();
           }
-        [HttpGet("CheckEmail/{email}")]
-        [AllowAnonymous]
-        //[Authorize(Permissions.Role.View)]
-        public async Task<ActionResult<bool>> CheckEmail(string email)
-        {
-            return await userService.CheckEmail(email);
-        }
+        //[HttpGet("CheckEmail/{email}")]
+        //[AllowAnonymous]
+        ////[Authorize(Permissions.Role.View)]
+        //public async Task<ActionResult<bool>> CheckEmail(string email)
+        //{
+        //    return await userService.CheckEmail(email);
+        //}
     }
 }

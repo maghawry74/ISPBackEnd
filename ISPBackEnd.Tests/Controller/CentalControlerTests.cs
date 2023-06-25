@@ -88,7 +88,7 @@ public class CentalControlerTests
 
     [Fact]
 
-    public async Task providerController_GetCentralByName_ReturnsOk()
+    public async Task CentralController_GetCentralByName_ReturnsOk()
     {
         string name = "cen1";
         var expectedCentral = new ReadCentralDTO() { Name = "central1" };
