@@ -9,6 +9,7 @@ using System.Security.Claims;
 using System.Text;
 using ISP.DAL;
 using AutoMapper;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace ISP.BL.Services.UserPermissionsService
 {
@@ -320,13 +321,13 @@ namespace ISP.BL.Services.UserPermissionsService
             return new TokenDto(tokenHandler.WriteToken(token), expireDate, permissions.ToList(),user.UserName);
         }
 
-        public async Task<ReadUserDto> CheckEmail(string email)
+        public async Task<bool> CheckEmail(string email)
         {
             var getUser = await userManager.FindByEmailAsync(email);
             if (getUser == null)
-               return null!;
+               return false!;
 
-            return mapper.Map<ReadUserDto>(getUser);
+            return true;
         }
 
         public async Task<List<ReadManagerDto>> GetAllManagers()

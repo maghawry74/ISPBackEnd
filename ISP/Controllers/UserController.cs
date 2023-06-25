@@ -136,7 +136,7 @@ namespace ISP.API.Controllers
         [HttpGet("CheckEmail/{email}")]
         [AllowAnonymous]
         //[Authorize(Permissions.Role.View)]
-        public async Task<ActionResult<ReadUserDto>> CheckEmail(string email)
+        public async Task<ActionResult<bool>> CheckEmail(string email)
         {
             return await userService.CheckEmail(email);
         }
