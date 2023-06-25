@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ISP.API.Controllers
 {
-    [Authorize(Permissions.Bill.View)]
+    //[Authorize(Permissions.Bill.View)]
+    [AllowAnonymous]
     public class BillController : CustomControllerBase
     {
         private readonly IBillService billService;
@@ -21,12 +22,16 @@ namespace ISP.API.Controllers
         [HttpGet]
         [Route("next-month-bill")]
         [Authorize(Permissions.Bill.View)]
-        public IActionResult GetNextMonthBill([FromQuery(Name = "NMonth")] int NMonth,
+        public async Task<ActionResult<ReadBillDTO>> GetNextMonthBill([FromQuery(Name = "NMonth")] int NMonth,
             [FromQuery(Name = "SSid")] string clientId
             )
         {
-            var billobj = billService.GetNextMonthBill(NMonth, clientId);
-            return Ok(billobj);
+            var billobj = await billService.GetNextMonthBill(NMonth, clientId);
+            if (billobj ==null)
+            {
+                return NotFound();
+            }
+            return billobj;
         }
 
 

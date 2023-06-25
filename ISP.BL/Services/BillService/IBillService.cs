@@ -11,7 +11,7 @@ namespace ISP.BL
     public interface IBillService
     {
         int BillGenerationSP();
-        ReadBillDTO? GetNextMonthBill(int Nmonth, string ClientId);
+       Task<ReadBillDTO?> GetNextMonthBill(int Nmonth, string ClientId);
 
         IEnumerable<ReadBillwithClientDTO> GetNopaid_bilist();
         void paidBill(int id);
