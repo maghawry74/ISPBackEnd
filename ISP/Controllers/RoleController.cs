@@ -25,7 +25,7 @@ namespace ISP.API.Controllers
         [HttpPost]
         [Authorize(Permissions.Role.Create)]
         [AllowAnonymous]
-        public async Task<ActionResult<ReadRoleDto>> Add(WriteRoleDto writeRoleDto)
+        public async Task<IActionResult> Add(WriteRoleDto writeRoleDto)
         {
             if (!ModelState.IsValid)            
                 return BadRequest(ModelState);
