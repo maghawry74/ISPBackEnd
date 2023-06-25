@@ -30,8 +30,15 @@ namespace ISP.BL
 
         public async Task<ReadClientDTO> AddClient(WriteClientDTO writeClientDTO)
         {
+
+
+
             var clientToAdd = mapper.Map<Client>(writeClientDTO);
             await clientRepository.Add(clientToAdd);
+             
+
+
+
             clientRepository.SaveChange();
             return mapper.Map<ReadClientDTO>(clientToAdd);
         }

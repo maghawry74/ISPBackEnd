@@ -44,6 +44,7 @@ namespace ISP.DAL
         }
         public new async Task Add(Client Client)
         {
+
             await Context.Set<Client>().AddAsync(Client);
         }
 
