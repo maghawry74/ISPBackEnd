@@ -17,7 +17,7 @@ namespace ISP.BL
         public string SSID { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
         public string Tel{ get; set; } = string.Empty;
-        public ReadGovernarateDTO? Governarate { get; set; }
+        public ReadGovernarateDTO? Governorate { get; set; }
         public string Address { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public ReadProviderDTO Provider { get; set; }

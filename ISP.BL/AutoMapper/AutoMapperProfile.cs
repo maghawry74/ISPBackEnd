@@ -144,6 +144,11 @@ namespace ISP.BL
                 .ForMember(c => c.Phone, cmt => cmt.MapFrom(src => src.Mobile1))
                 .ForMember(c => c.UserName, cmt => cmt.MapFrom(src => src.userName))
                 .ForMember(c => c.Password, cmt => cmt.MapFrom(src => src.Password))
+                .ForMember(c => c.Governorate, cmt => cmt.MapFrom(src => src.Governarate))
+                .ForMember(c => c.Slot, cmt => cmt.MapFrom(src => src.Slotnum))
+                .ForMember(c => c.Block, cmt => cmt.MapFrom(src => src.Blocknum))
+                .ForMember(c => c.OperationOrderNumber, cmt => cmt.MapFrom(src => src.OrderWorkNumber))
+                .ForMember(c => c.PackageIp, cmt => cmt.MapFrom(src => src.IpPackage))
 
                 .ReverseMap();
 
