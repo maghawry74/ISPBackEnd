@@ -6,8 +6,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ISP.API.Controllers
 {
-    [AllowAnonymous]
-    
+    [Authorize(Permissions.Central.View)]
+
     public class CentralController : CustomControllerBase
     {
         private readonly ICentalService centalService;
@@ -18,22 +18,10 @@ namespace ISP.API.Controllers
         }
 
 
-        //[HttpGet]
-        //public async Task<ActionResult<List<ReadCentralDTO>>> GetAll()
-        //{
-        //    var CentralList = await centalService.GetAll();
-        //    return CentralList;
-        //}
-
-        //[HttpGet]
-        //public async Task<ActionResult<List<ReadCentralDTO>>> GetAll()
-        //{
-        //    var CentralList = await centalService.GetAll();
-        //    return CentralList;
-        //}
-
+        
          [HttpGet]
-     //   [Route("getallwithgov")]
+         [Route("getallwithgov")]
+        [Authorize(Permissions.Central.View)]
         public async Task<ActionResult<List<ReadCentralWithGovernarateDTO>>> getallwithgov()
         {
             var CentralList = await centalService.GetAllwithgov();
@@ -43,7 +31,7 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("{Id}")]
-
+        [Authorize(Permissions.Central.View)]
         public async Task<ActionResult<ReadCentralDTO>> GetById(int Id)
         {
             var Cental = await centalService.GetById(Id);
@@ -58,6 +46,7 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("GetByName/{Name}")]
+        [Authorize(Permissions.Central.View)]
         public async Task<ActionResult<ReadCentralDTO>> GetByName(String Name)
         {
             var Cental = await centalService.GetByName(Name);
@@ -70,7 +59,7 @@ namespace ISP.API.Controllers
 
 
         [HttpPost]
-
+        [Authorize(Permissions.Central.Create)]
         public async Task<ActionResult<ReadCentralDTO>> Add([Required] WriteCentralDTO writeCentralDTO)
         {
             if (!ModelState.IsValid)
@@ -85,6 +74,7 @@ namespace ISP.API.Controllers
 
         [HttpPut]
         [Route("{Id}")]
+        [Authorize(Permissions.Central.Edit)]
         public async Task<ActionResult<ReadCentralDTO>> Edit(int Id, UpdateCentralDTO updateCentralDTO)
         {
             if (Id != updateCentralDTO.Id) { 
@@ -100,6 +90,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Permissions.Central.Delete)]
         public async Task<ActionResult<ReadCentralDTO>> Delete(int id)
         {
             var getCentral = await centalService.Delete(id);            

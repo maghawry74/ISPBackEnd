@@ -1,4 +1,5 @@
-﻿using ISP.BL;
+﻿using ISP.API.Constants;
+using ISP.BL;
 using ISP.BL.Dtos.Governarate;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace ISP.API.Controllers
 {
 
-    // [Authorize(Permissions.Governarate.View)]
+     [Authorize(Permissions.Governorate.View)]
     [AllowAnonymous]
     public class GovernorateController : CustomControllerBase
 
@@ -20,7 +21,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpGet]
-      //  [Authorize(Permissions.Governarate.View)]
+       [Authorize(Permissions.Governorate.View)]
 
         public async Task<ActionResult<List<ReadGovernarateDTO>>> GetAll()
         {
@@ -31,7 +32,7 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("{Code}")]
-        //[Authorize(Permissions.Governarate.View)]
+        [Authorize(Permissions.Governorate.View)]
         public async Task<ActionResult<ReadGovernarateDTO>> GetById(int Code)
         {
             var Governarate = await governarateService.GetById(Code);
@@ -42,8 +43,9 @@ namespace ISP.API.Controllers
             return Governarate;
         }
 
-       // [HttpGet("CentralAndBranches/{Codee}")]
+       
         [HttpGet("{Code}/Centrals&Branches")]
+        [Authorize(Permissions.Governorate.View)]
         public async Task<ActionResult<GovernorateCentralsAndBranches>> GetCentralsAndBranches(int Code)
         {
             var CentralBranches = await governarateService.GetCentralsAndBranches(Code);
@@ -53,7 +55,7 @@ namespace ISP.API.Controllers
 
 
         [HttpPost]
-       // [Authorize(Permissions.Governarate.Create)]
+        [Authorize(Permissions.Governorate.Create)]
         public async Task<ActionResult<ReadGovernarateDTO>> Add([Required] WriteGovernarateDTO writeGovernarateDTO)
         {
             if (!ModelState.IsValid)
@@ -68,7 +70,7 @@ namespace ISP.API.Controllers
 
         [HttpPut]
         [Route("{Code}")]
-        //[Authorize(Permissions.Governarate.Edit)]
+        [Authorize(Permissions.Governorate.Edit)]
         public async Task<ActionResult<ReadGovernarateDTO>> Edit(int Code, UpdateGovernarateDTO updateGovernarateDTO)
         {
             if (Code != updateGovernarateDTO.Code)
@@ -88,7 +90,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpDelete("{code}")]
-       // [Authorize(Permissions.Governarate.Delete)]
+        [Authorize(Permissions.Governorate.Delete)]
         public async Task<ActionResult<ReadGovernarateDTO>> Delete(int code)
         {
             var getGovernarate = await governarateService.DeleteGovernarate(code);

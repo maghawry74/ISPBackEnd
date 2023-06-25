@@ -9,8 +9,8 @@ namespace ISP.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    // [Authorize(Permissions.Role.View)]
-    [AllowAnonymous]
+    [Authorize(Permissions.Role.View)]
+   
     public class RoleController : ControllerBase
     {        
 
@@ -23,7 +23,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpPost]
-        // [Authorize(Permissions.Role.Create)]
+        [Authorize(Permissions.Role.Create)]
         [AllowAnonymous]
         public async Task<ActionResult<ReadRoleDto>> Add(WriteRoleDto writeRoleDto)
         {
@@ -53,31 +53,17 @@ namespace ISP.API.Controllers
 
 
         [HttpGet]
-        //[Authorize(Permissions.Role.View)]
+        [Authorize(Permissions.Role.View)]
         public async Task<ActionResult<List<ReadRoleDto>>> GetAll()
         {
             return await roleService.GetAll();
         }
 
-             
-
-        [HttpGet]
-        [Route("GetRoleName/{Id}")]
-        //[Authorize(Permissions.Role.View)]
-        //public async Task<ActionResult<string>> GetRoleName(string Id)
-        //{
-        //    var roleName = await roleService.GetRoleNameByID(Id);
-        //    if (roleName == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return roleName;
-        //}
-
+                 
 
         
         [HttpDelete("{id}")]
-        //[Authorize(Permissions.Role.Delete)]
+        [Authorize(Permissions.Role.Delete)]
         public async Task<ActionResult<ReadRoleDto>> Delete( string id)
         {
             var getRole = await roleService.Delete(id);
@@ -93,7 +79,7 @@ namespace ISP.API.Controllers
 
         [HttpGet("{id}")]
         
-        // [Authorize(Permissions.RolePermissions.View)]
+        [Authorize(Permissions.Role.View)]
         public async Task<ActionResult<ReadRolePermissions>> GetById(string id)
         {
             var roleName = await roleService.GetRoleNameByID(id);
@@ -113,7 +99,7 @@ namespace ISP.API.Controllers
 
 
         [HttpPut("{id}")]        
-        //[Authorize(Permissions.RolePermissions.Edit)]
+        [Authorize(Permissions.Role.Edit)]
         public async Task<ActionResult> Edit(string id, updateRoleDto updateRole)
         {
            var isUbdated =  await roleService.UpdatePermissionsOfRole( id, updateRole.claims);
@@ -124,11 +110,6 @@ namespace ISP.API.Controllers
         }
 
 
-        [HttpGet]
-        [Route("GetAllPermissions")]
-        public async Task<ActionResult<List<string>>> GetAllPermissionsGetAll()
-        {
-            return await roleService.GetAllPermissions();
-        }
+        
     }
 }

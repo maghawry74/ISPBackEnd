@@ -1,4 +1,5 @@
-﻿using ISP.BL.Dtos.Users;
+﻿using ISP.API.Constants;
+using ISP.BL.Dtos.Users;
 using ISP.BL.Services.UserPermissionsService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,7 @@ namespace ISP.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [AllowAnonymous]
+    [Authorize(Permissions.Role.View)]
     public class UserController : Controller
     {
         #region Con
@@ -24,7 +25,7 @@ namespace ISP.API.Controllers
                                                    
         #region User Register 
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Permissions.Role.Create)]
         public async Task<ActionResult> UserRegister(RegisterDto registerDto)
         {
            var isRegister = await userService.UserRegister(registerDto);
@@ -68,8 +69,7 @@ namespace ISP.API.Controllers
         #endregion
 
         [HttpGet]
-
-        [AllowAnonymous]
+        [Authorize(Permissions.Role.View)]
         public async Task<ActionResult<List<ReadUserDto>>> GetAll()
         {
             return await userService.GetAll();
@@ -77,7 +77,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpGet("{id}")]
-       
+        [Authorize(Permissions.Role.View)]
         public async Task<ActionResult<ReadUserDto>> GetById(string id)
         {
             var user = await userService.GetById(id);
@@ -89,7 +89,8 @@ namespace ISP.API.Controllers
         }
 
 
-        [HttpPut("{id}")]        
+        [HttpPut("{id}")]
+        [Authorize(Permissions.Role.Edit)]
         public async Task<ActionResult> Edit(string id, UpdateUserDto updateUserDto)
         {
             if (id != updateUserDto.Id)
@@ -109,7 +110,8 @@ namespace ISP.API.Controllers
 
         }
 
-        [HttpDelete("{id}")]        
+        [HttpDelete("{id}")]
+        [Authorize(Permissions.Role.Delete)]
         public async Task<ActionResult> Delete(string id)
         {
             var deleteUser = await userService.Delete(id);

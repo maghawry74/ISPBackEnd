@@ -8,8 +8,8 @@ namespace ISP.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(Permissions.Branch.View)]
-    [AllowAnonymous]
+    [Authorize(Permissions.Branch.View)]
+   
     public class BranchController : CustomControllerBase
     {
         private readonly IBranchService branchService;
@@ -20,7 +20,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpGet]
-       // [Authorize(Permissions.Branch.View)]
+        [Authorize(Permissions.Branch.View)]
         public async Task<ActionResult<List<ReadBranchDTO>>> GetAll()
         {
             var BranchList = await branchService.GetAll();
@@ -30,7 +30,7 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        //[Authorize(Permissions.Branch.View)]
+        [Authorize(Permissions.Branch.View)]
         public async Task<ActionResult<ReadBranchDTO> >GetById(int id)
         {
             var Branch = await branchService.GetById(id);
@@ -42,7 +42,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Permissions.Branch.Create)]
+        [Authorize(Permissions.Branch.Create)]
         public async Task<ActionResult<ReadBranchDTO>> Add( [Required] WriteBranchDTO writeBranchDTO)
         {
             if (!ModelState.IsValid)
@@ -57,7 +57,7 @@ namespace ISP.API.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        //[Authorize(Permissions.Branch.Edit)]
+        [Authorize(Permissions.Branch.Edit)]
         public async Task<IActionResult> Edit(int id , UpdateBranchDTO updateBranchDTO)
         {
             if (id !=updateBranchDTO.Id)
@@ -79,7 +79,7 @@ namespace ISP.API.Controllers
 
         [HttpDelete]
         [Route("{id}")]
-        //[Authorize(Permissions.Branch.Delete)]
+        [Authorize(Permissions.Branch.Delete)]
         public async Task<ActionResult<ReadBranchDTO>> Delete(int id)
         {
             var getBranch = await branchService.DeleteBranch(id);

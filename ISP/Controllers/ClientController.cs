@@ -6,8 +6,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ISP.API.Controllers
 {
-    //[Authorize(Permissions.Client.View)]
-    [AllowAnonymous]
+    [Authorize(Permissions.Client.View)]
+    
     public class ClientController : CustomControllerBase
     {
         private readonly IClientservice clientservice;
@@ -18,7 +18,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Permissions.Client.View)]
+        [Authorize(Permissions.Client.View)]
 
         public async Task<ActionResult<List<ReadClientDTO>>> GetAll()
         {
@@ -29,7 +29,7 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("{SSn}")]
-        //[Authorize(Permissions.Client.View)]
+        [Authorize(Permissions.Client.View)]
         public async Task<ActionResult<ReadClientDTO>> GetById(string SSn)
         {
             var client = await clientservice.GetById(SSn);
@@ -41,7 +41,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Permissions.Client.Create)]
+        [Authorize(Permissions.Client.Create)]
         public async Task<ActionResult<ReadClientDTO>> Add([Required] WriteClientDTO writeClientDTO)
         {
             if (!ModelState.IsValid)
@@ -56,7 +56,7 @@ namespace ISP.API.Controllers
 
         [HttpPut]
         [Route("{SSn}")]
-        //[Authorize(Permissions.Client.Edit)]
+        [Authorize(Permissions.Client.Edit)]
         public async Task<ActionResult<ReadClientDTO>> Edit(string SSn, UpdateClientDTO updateClientDTO)
         {
             if (SSn != updateClientDTO.SSID)
@@ -73,7 +73,7 @@ namespace ISP.API.Controllers
 
 
         [HttpDelete("{SSn}")]
-        //[Authorize(Permissions.Client.Delete)]
+        [Authorize(Permissions.Client.Delete)]
         public async Task<ActionResult<ReadClientDTO>> Delete(string SSn)
         {
             var getClient = await clientservice.DeleteClient(SSn);

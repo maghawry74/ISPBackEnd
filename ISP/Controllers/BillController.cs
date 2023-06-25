@@ -1,10 +1,11 @@
-﻿using ISP.BL;
+﻿using ISP.API.Constants;
+using ISP.BL;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ISP.API.Controllers
 {
-    [AllowAnonymous]
+    [Authorize(Permissions.Bill.View)]
     public class BillController : CustomControllerBase
     {
         private readonly IBillService billService;
@@ -17,6 +18,7 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("next-month-bill")]
+        [Authorize(Permissions.Bill.View)]
         public IActionResult GetNextMonthBill([FromQuery(Name = "NMonth")] int NMonth,
             [FromQuery(Name = "clientId")] int clientId
             )
@@ -25,9 +27,9 @@ namespace ISP.API.Controllers
             return Ok(billobj);
         }
 
-        [HttpPut]  
-
+        [HttpPut]
         [Route("payBill/{id}")]
+        [Authorize(Permissions.Bill.View)]
         public IActionResult payBill(int id)
         {
             billService.paidBill(id); 

@@ -1,12 +1,15 @@
-﻿using ISP.BL;
+﻿using ISP.API.Constants;
+using ISP.BL;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
 namespace ISP.API.Controllers
 {
-    //[Authorize(Permissions.Provider.View)]
-    [AllowAnonymous]
+    [Route("api/[controller]")]
+    [ApiController]
+    [Authorize(Permissions.Provider.View)]
+    
     public class ProviderController : CustomControllerBase
     {
         private readonly IProviderService providerService;
@@ -17,7 +20,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpGet]
-       // [Authorize(Permissions.Provider.View)]
+        [Authorize(Permissions.Provider.View)]
         public async Task<ActionResult<List<ReadProviderDTO>>> GetAll()
         {
             var ProviderList = await providerService.GetAll();
@@ -27,7 +30,7 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route(("{id}/Offers&Packages"))]
-        // [Authorize(Permissions.Provider.View)]
+        [Authorize(Permissions.Provider.View)]
         public  ActionResult<ReadProviderwithoffer_govDTO> GetAllwithoff_gov(int id)
         {
             var Provider = providerService.GetProviderswithoffer_package(id);
@@ -41,7 +44,7 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("{Id}")]
-        //[Authorize(Permissions.Provider.View)]
+        [Authorize(Permissions.Provider.View)]
         public async Task<ActionResult<ReadProviderDTO>> GetById(int Id)
         {
             var Provider= await providerService.GetById(Id);
@@ -54,7 +57,7 @@ namespace ISP.API.Controllers
 
 
         [HttpPost]
-        //[Authorize(Permissions.Provider.Create)]
+        [Authorize(Permissions.Provider.Create)]
         public async Task<ActionResult<ReadProviderDTO>> Add([Required] WriteProviderDTO writeProviderDTO)
         {
             if (!ModelState.IsValid)
@@ -69,7 +72,7 @@ namespace ISP.API.Controllers
 
         [HttpPut]
         [Route("{Id}")]
-        //[Authorize(Permissions.Provider.Edit)]
+        [Authorize(Permissions.Provider.Edit)]
         public async Task<ActionResult<ReadProviderDTO>> Edit(int Id, UpdateProviderDTO updateProviderDTO)
         {
             if (Id != updateProviderDTO.Id)
@@ -91,7 +94,7 @@ namespace ISP.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        //[Authorize(Permissions.Provider.Delete)]
+        [Authorize(Permissions.Provider.Delete)]
         public async Task<ActionResult<ReadProviderDTO>> Delete(int id)
         {
             var Providertodelete = await providerService.Remove(id);
