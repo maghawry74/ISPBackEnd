@@ -22,6 +22,15 @@ namespace ISP.DAL
             return bill;
         }
 
+        public IEnumerable<Bill> getClientBills(string Ssid, bool condition)
+        {
+            var billlist = context.Bills.
+                AsSingleQuery().
+                Include(c=>c.Client).
+                Where(s => s.ClientSSn == Ssid && s.IsPaid == condition).ToList();
+            return billlist;
+        }
+
         public Bill? GetNextMonthBill(int Nmonth, int ClientId)
         {
             var billparams = new[]
@@ -36,6 +45,15 @@ namespace ISP.DAL
                 .FirstOrDefault();
 
             return billobj;
+        }
+
+        public IEnumerable<Bill> GetNopaid_bilist()
+        {
+            return context.Bills.
+                AsSplitQuery().
+                Include(c => c.Client).
+                Where(a=>a.IsPaid==false)
+                .ToList();
         }
 
         public void paidBill(int id)

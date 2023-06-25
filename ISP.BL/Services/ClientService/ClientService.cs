@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-
 using ISP.DAL;
 using System.Runtime.Intrinsics.X86;
 
@@ -71,5 +70,7 @@ namespace ISP.BL
 
             return mapper.Map<ReadClientDTO>(ClientTodeleted);
         }
+
+        
     }
 }

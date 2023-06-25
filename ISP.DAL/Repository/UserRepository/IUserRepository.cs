@@ -6,5 +6,7 @@ namespace ISP.DAL.Repository.UserRepository
         Task<List<User>> GetAllUsers();
         Task<User> GetUserById(string id);
         Task<string?> GetRoleNameByUserID(string userId);
+
+      public int EmployeeCount();
     }
 }

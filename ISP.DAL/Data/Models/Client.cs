@@ -45,6 +45,7 @@ namespace ISP.DAL
         public int PackageId { get; set; }
         public Package? Package { get; set; }
 
+
         [ForeignKey("Central")]
         public int CentralId { get; set; }
         public Central? Central { get; set; }

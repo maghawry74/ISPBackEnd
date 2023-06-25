@@ -2,6 +2,7 @@
 using ISP.BL;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ActionConstraints;
 using System.ComponentModel.DataAnnotations;
 
 namespace ISP.API.Controllers
@@ -39,6 +40,9 @@ namespace ISP.API.Controllers
             }
             return client;
         }
+
+
+       
 
         [HttpPost]
         [Authorize(Permissions.Client.Create)]
