@@ -15,7 +15,7 @@ namespace ISP.BL.Services.UserPermissionsService
         Task<bool> Delete(string id);
         Task<int> UserRegister(RegisterDto registerDto);
         Task<TokenDto> Login(LoginDto loginData);
-        Task<ReadUserDto> CheckEmail(string email);
+        Task<bool> CheckEmail(string email);
 
     }
 }
