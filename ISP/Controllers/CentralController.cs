@@ -7,6 +7,10 @@ using System.ComponentModel.DataAnnotations;
 namespace ISP.API.Controllers
 {
     [Authorize(Permissions.Central.View)]
+<<<<<<< HEAD
+=======
+    //[AllowAnonymous]
+>>>>>>> 46c90defea84bec4588bfdd9357014984ba193a0
     public class CentralController : CustomControllerBase
     {
         private readonly ICentalService centalService;

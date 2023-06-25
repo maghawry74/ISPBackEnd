@@ -222,6 +222,7 @@ namespace ISP.BL.Services.UserPermissionsService
             {
                 UserName = registerDto.UserName,
                 Email = registerDto.Email,
+                NormalizedEmail = registerDto.Email.ToUpper(),
                 PhoneNumber = registerDto.PhoneNumber,
                 EmailConfirmed = true,
                 BranchId = registerDto.BranchId,
@@ -319,6 +320,15 @@ namespace ISP.BL.Services.UserPermissionsService
             var tokenHandler = new JwtSecurityTokenHandler();
 
             return new TokenDto(tokenHandler.WriteToken(token), expireDate, permissions.ToList(),user.UserName);
+        }
+
+        public async Task<bool> CheckEmail(string email)
+        {
+            var getUser = await userManager.FindByEmailAsync(email);
+            if (getUser == null)
+               return true;
+
+            return false;
         }
     }
 }
