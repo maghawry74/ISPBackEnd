@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ISP.DAL;
+using ISP.DAL.Repository.OfferRepository;
 using System.Runtime.Intrinsics.X86;
 
 namespace ISP.BL
@@ -34,14 +35,15 @@ namespace ISP.BL
         {
             var clientToAdd = mapper.Map<Client>(writeClientDTO);
             if(writeClientDTO.OfferId!=0){
-                var offer=await _offerRepository.GetByID(writeClientDTO.offerId)
-                clientToAdd.ClientOffers=new ClientOffers(){
-                    ClientSSn=writeClientDTO.SSID,
-                    OfferId=writeClientDTO.offerId,
-                    MonthsLeft=offer.NumOfOfferMonth-offer.NumOfFreeMonth,
-                    FreeMonthsLeft=offer.NumOfFreeMonth,
-                    RouterPrice=offer.RouterPrice
-                }
+                var offer = await _offerRepository.GetByID(writeClientDTO.OfferId);
+                clientToAdd.ClientOffers = new ClientOffers()
+                {
+                    ClientSSn = writeClientDTO.SSID,
+                    OfferId = writeClientDTO.OfferId,
+                    MonthsLeft = offer.NumOfOfferMonth - offer.NumOfFreeMonth,
+                    FreeMonthsLeft = offer.NumOfFreeMonth,
+                    RouterPrice = offer.RouterPrice
+                };
             }
             await clientRepository.Add(clientToAdd);
             clientRepository.SaveChange();

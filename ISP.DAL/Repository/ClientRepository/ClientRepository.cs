@@ -33,7 +33,7 @@ namespace ISP.DAL
                 .Include(c => c.Package)
                 .Include(c => c.Central)
                 .Include(c => c.Branch)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(c=>c.SSn==ssn);
 
  
         }

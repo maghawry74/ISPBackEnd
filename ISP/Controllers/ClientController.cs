@@ -30,7 +30,8 @@ namespace ISP.API.Controllers
 
         [HttpGet]
         [Route("{SSn}")]
-        [Authorize(Permissions.Client.View)]
+        [AllowAnonymous]
+        //[Authorize(Permissions.Client.View)]
         public async Task<ActionResult<ReadClientDTO>> GetById(string SSn)
         {
             var client = await clientservice.GetById(SSn);
