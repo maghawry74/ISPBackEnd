@@ -7,11 +7,13 @@ namespace ISP.BL
     public class ClientService : IClientservice
     {
         private readonly IClientRepository clientRepository;
+        private readonly IOfferRepository _offerRepository;
         private readonly IMapper mapper;
 
-        public ClientService(IClientRepository clientRepository , IMapper mapper)
+        public ClientService(IClientRepository clientRepository , IMapper mapper,IOfferRepository offerRepository)
         {
             this.clientRepository = clientRepository;
+            this._offerRepository = offerRepository;
             this.mapper = mapper;
         }
 
@@ -31,6 +33,16 @@ namespace ISP.BL
         public async Task<ReadClientDTO> AddClient(WriteClientDTO writeClientDTO)
         {
             var clientToAdd = mapper.Map<Client>(writeClientDTO);
+            if(writeClientDTO.OfferId!=0){
+                var offer=await _offerRepository.GetByID(writeClientDTO.offerId)
+                clientToAdd.ClientOffers=new ClientOffers(){
+                    ClientSSn=writeClientDTO.SSID,
+                    OfferId=writeClientDTO.offerId,
+                    MonthsLeft=offer.NumOfOfferMonth-offer.NumOfFreeMonth,
+                    FreeMonthsLeft=offer.NumOfFreeMonth,
+                    RouterPrice=offer.RouterPrice
+                }
+            }
             await clientRepository.Add(clientToAdd);
             clientRepository.SaveChange();
             return mapper.Map<ReadClientDTO>(clientToAdd);
