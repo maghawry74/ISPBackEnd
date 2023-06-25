@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -31,16 +32,18 @@ namespace ISP.DAL
         [EmailAddress]
         public string Email { get; set; } = string.Empty;
 
+
+        public ClientOffers? ClientOffers { get; set; }
+
+
         [ForeignKey("Provider")]
         public int ProviderId { get; set; }
         public Provider? Provider { get; set; }
-    
+
 
         [ForeignKey("Package")]
         public int PackageId { get; set; }
         public Package? Package { get; set; }
-
-
 
 
         [ForeignKey("Central")]
@@ -49,8 +52,6 @@ namespace ISP.DAL
 
         public int? IpPackage { get; set; }
         
-
-
         public DateTime Contractdate { get; set; }
         public string Mobile1 { get; set; } = string.Empty;
 
@@ -63,9 +64,6 @@ namespace ISP.DAL
         [ForeignKey("Branch")]
         public int BranchId { get; set; }
         public Branch? Branch { get; set; }
-
-
- 
 
 
         public string RouterSerial { get; set; } = string.Empty;

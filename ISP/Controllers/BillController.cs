@@ -47,7 +47,6 @@ namespace ISP.API.Controllers
         }
 
         [HttpPut]
-
         [Route("payBill/{id}")]
         public IActionResult payBill(int id)
         {

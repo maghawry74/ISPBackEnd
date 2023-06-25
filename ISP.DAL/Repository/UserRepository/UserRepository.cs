@@ -1,8 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-
-
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace ISP.DAL.Repository.UserRepository
 {
@@ -22,7 +18,7 @@ namespace ISP.DAL.Repository.UserRepository
 
         public async Task<List<User>> GetAllUsers()
         {
-            return await context.Set<User>().Include(b => b.Branch).ToListAsync();
+            return await context.Set<User>().Include(b => b.Branch).Where(u => u.Id != "1").ToListAsync();
             
         }
         public async Task<string?> GetRoleNameByUserID(string userId)
@@ -38,5 +34,11 @@ namespace ISP.DAL.Repository.UserRepository
             return role.Name;
         }
 
+        public async Task<User> GetUserById(string id)
+        {
+            return await context.Set<User>().Include(p => p.Branch).FirstOrDefaultAsync(p => p.Id == id);
+        }
+
+       
     }
 }
