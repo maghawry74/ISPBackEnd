@@ -7,7 +7,6 @@ using System.ComponentModel.DataAnnotations;
 namespace ISP.API.Controllers
 {
     [Authorize(Permissions.Central.View)]
-
     public class CentralController : CustomControllerBase
     {
         private readonly ICentalService centalService;
@@ -20,7 +19,6 @@ namespace ISP.API.Controllers
 
         
          [HttpGet]
-         [Route("getallwithgov")]
         [Authorize(Permissions.Central.View)]
         public async Task<ActionResult<List<ReadCentralWithGovernarateDTO>>> getallwithgov()
         {
