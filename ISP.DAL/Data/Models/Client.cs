@@ -51,8 +51,8 @@ namespace ISP.DAL
         public Central? Central { get; set; }
 
         public int? IpPackage { get; set; }
-        
-        public DateTime Contractdate { get; set; }
+
+        public DateTime Contractdate { get; set; } = DateTime.Now;
         public string Mobile1 { get; set; } = string.Empty;
 
         public  string Mobile2 { get; set; } = string.Empty;
