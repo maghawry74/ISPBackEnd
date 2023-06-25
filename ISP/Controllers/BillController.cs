@@ -22,11 +22,11 @@ namespace ISP.API.Controllers
         [HttpGet]
         [Route("next-month-bill")]
         [Authorize(Permissions.Bill.View)]
-        public async Task<ActionResult<ReadBillDTO>> GetNextMonthBill([FromQuery(Name = "NMonth")] int NMonth,
+        public async Task<ActionResult<ReadBillDTO>> GetNextMonthBill([FromQuery(Name = "monthNumber")] int monthNumber,
             [FromQuery(Name = "SSid")] string clientId
             )
         {
-            var billobj = await billService.GetNextMonthBill(NMonth, clientId);
+            var billobj = await billService.GetNextMonthBill(monthNumber, clientId);
             if (billobj ==null)
             {
                 return NotFound();
