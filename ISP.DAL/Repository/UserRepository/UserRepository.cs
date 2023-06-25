@@ -16,6 +16,12 @@ namespace ISP.DAL.Repository.UserRepository
             return context.Users.Count();
         }
 
+        public async Task<List<User>> GetAllManagers(int branchId)
+        {
+            //return await context.Set<User>().Include(b => b.Branch).Where(u => u.BranchId == branchId && ).ToListAsync();
+            return null;
+        }
+
         public async Task<List<User>> GetAllUsers()
         {
             return await context.Set<User>().Include(b => b.Branch).Where(u => u.Id != "1").ToListAsync();
