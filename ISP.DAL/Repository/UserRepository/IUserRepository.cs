@@ -8,6 +8,6 @@ namespace ISP.DAL.Repository.UserRepository
         Task<string?> GetRoleNameByUserID(string userId);
 
        int EmployeeCount();
-        Task<List<User>> GetAllManagers(int branchId);
+       
     }
 }

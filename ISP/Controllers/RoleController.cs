@@ -10,7 +10,7 @@ namespace ISP.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(Permissions.Role.View)]
-   
+    
     public class RoleController : ControllerBase
     {        
 

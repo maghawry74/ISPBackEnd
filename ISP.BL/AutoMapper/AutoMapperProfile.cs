@@ -216,7 +216,7 @@ namespace ISP.BL
             #region User
 
             CreateMap<User, ReadUserDto>()
-                //.ForMember(u => u.Role, s => s.MapFrom(src => src.Role.Name))
+               
                 .ForMember(u => u.Branch, s => s.MapFrom(src => src.Branch.Name))
                 .ForMember(u => u.UserName, s => s.MapFrom(src => src.UserName))
                 .ForMember(u => u.Email, s => s.MapFrom(src => src.Email))
@@ -224,6 +224,8 @@ namespace ISP.BL
                 .ForMember(u => u.PhoneNumber, s => s.MapFrom(src => src.PhoneNumber))
                 
                 .ReverseMap();
+
+            CreateMap<User, ReadManagerDto>().ReverseMap();
             #endregion
 
         }

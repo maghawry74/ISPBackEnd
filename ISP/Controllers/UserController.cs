@@ -10,6 +10,7 @@ namespace ISP.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(Permissions.Role.View)]
+   
     public class UserController : Controller
     {
         #region Con
@@ -73,6 +74,14 @@ namespace ISP.API.Controllers
         public async Task<ActionResult<List<ReadUserDto>>> GetAll()
         {
             return await userService.GetAll();
+
+        }
+        [HttpGet("GetAllManagers")]
+        //[Authorize(Permissions.Role.View)]
+        [AllowAnonymous]
+        public async Task<ActionResult<List<ReadManagerDto>>> GetAllManagers()
+        {
+            return await userService.GetAllManagers();
 
         }
 

@@ -8,7 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using ISP.DAL;
-
+using AutoMapper;
 
 namespace ISP.BL.Services.UserPermissionsService
 {
@@ -19,15 +19,17 @@ namespace ISP.BL.Services.UserPermissionsService
         private readonly UserManager<User> userManager;
         private readonly RoleManager<Role> roleManager;
         private readonly IConfiguration configuration;
+        private readonly IMapper mapper;
 
         public UserService(IUserRepository userRepository, UserManager<User> userManager,
-            RoleManager<Role> roleManager, IConfiguration configuration)
+            RoleManager<Role> roleManager, IConfiguration configuration, IMapper mapper)
         {
 
             this.userRepository = userRepository;
             this.userManager = userManager;
             this.roleManager = roleManager;
             this.configuration = configuration;
+            this.mapper = mapper;
         }
 
         public int EmployeeCount()
@@ -147,6 +149,7 @@ namespace ISP.BL.Services.UserPermissionsService
             user.NormalizedUserName = updateUserDto.UserName.ToUpper();
             user.BranchId = updateUserDto.Branch;
             user.Email = updateUserDto.Email;
+            user.NormalizedEmail = updateUserDto.Email.ToUpper();
             user.PhoneNumber = updateUserDto.PhoneNumber;
             user.PasswordHash = user.PasswordHash;
             user.Status = true;
@@ -329,6 +332,12 @@ namespace ISP.BL.Services.UserPermissionsService
                return true;
 
             return false;
+        }
+
+        public async Task<List<ReadManagerDto>> GetAllManagers()
+        {
+            var managers = await userManager.GetUsersInRoleAsync("Manager");
+            return mapper.Map<List<ReadManagerDto>>(managers);
         }
     }
 }
