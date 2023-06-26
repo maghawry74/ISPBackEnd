@@ -13,7 +13,7 @@ public class ReadOfferDto
     public int NumberOfMonths { get; set; }
     public bool FreeMonthsFirst { get; set; }
     public bool FreeRouter { get; set; }
-
+    public bool IsTotalBill { get; set; }
     public double SuspendFee { get; set; }
     public double RouterPrice { get; set; }
 
