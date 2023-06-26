@@ -59,7 +59,7 @@ namespace ISP.BL
         public int? vpi { get; set; }
         public int? vci { get; set; }
         public int? operationOrderNumber { get; set; }
-
+        public int OfferId { get; set; }
 
         public DateTime operationOrderDate { get; set; }
 

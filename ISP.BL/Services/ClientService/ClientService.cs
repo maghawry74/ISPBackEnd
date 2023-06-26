@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ISP.DAL;
+using ISP.DAL.Repository.OfferRepository;
 using System.Runtime.Intrinsics.X86;
 
 namespace ISP.BL
@@ -8,11 +9,12 @@ namespace ISP.BL
     {
         private readonly IClientRepository clientRepository;
         private readonly IMapper mapper;
-
-        public ClientService(IClientRepository clientRepository , IMapper mapper)
+        private readonly IOfferRepository _offerRepository;
+        public ClientService(IClientRepository clientRepository , IMapper mapper,IOfferRepository offerRepository)
         {
             this.clientRepository = clientRepository;
             this.mapper = mapper;
+            this._offerRepository= offerRepository;
         }
 
         public  async Task<List<ReadClientDTO>> GetAll()
@@ -34,6 +36,17 @@ namespace ISP.BL
 
 
             var clientToAdd = mapper.Map<Client>(writeClientDTO);
+            if(writeClientDTO.OfferId!=0){
+                var offer = await _offerRepository.GetByID(writeClientDTO.OfferId);
+                clientToAdd.ClientOffers = new ClientOffers()
+                {
+                    ClientSSn = writeClientDTO.SSID,
+                    OfferId = writeClientDTO.OfferId,
+                    MonthsLeft = offer.NumOfOfferMonth - offer.NumOfFreeMonth,
+                    FreeMonthsLeft = offer.NumOfFreeMonth,
+                    RouterPrice = offer.RouterPrice
+                };
+            }
             await clientRepository.Add(clientToAdd);
              
 

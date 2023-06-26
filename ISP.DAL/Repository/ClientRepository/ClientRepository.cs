@@ -34,10 +34,11 @@ namespace ISP.DAL
                 .Include(c => c.Package)
                 .Include(c => c.Central)
                 .Include(c => c.Branch)
-                .Include(g=>g.Governarate)
-                .Include(o=>o.ClientOffers)
-                .ThenInclude(o=>o.Offer)
-                .FirstOrDefaultAsync();
+
+                .Include(g => g.Governarate)
+                .Include(o => o.ClientOffers)
+                .ThenInclude(o => o.Offer)
+                .FirstOrDefaultAsync(c => c.SSn == ssn);
         }
      
         public new void Update(Client Client)
