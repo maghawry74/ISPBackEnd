@@ -18,6 +18,7 @@ namespace ISP.BL.Dtos.Offer
         public int NumberOfFreeMonths { get; set; }
         public int NumberOfMonths { get; set; }
         public bool FreeMonthsFirst { get; set; }
+        public bool IsTotalBill { get; set; }
         public bool FreeRouter { get; set; }
         public double RouterPrice { get; set; }
         //public double FineOfSuspensed { get; set; }   
